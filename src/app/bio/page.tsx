@@ -106,9 +106,24 @@ export default function Work() {
               </ul>
             </div>
             <div className="space-y-4">
-              <MediaCard key="Briana King Joins StockX" item={{ src: '/videos/StockXVideos/Briana_King_Joins_StockX.mp4', title: 'Briana King Joins StockX', description: 'Watch Briana King join StockX in this exciting video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
-              <MediaCard key="What Drives Brittney Elena" item={{ src: '/videos/StockXVideos/What_Drives_Brittney_Elena_StockX.mp4', title: 'What Drives Brittney Elena', description: 'Discover what drives Brittney Elena in this engaging video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
-              <MediaCard key="Behind the Streams with Sydeon" item={{ src: '/videos/StockXVideos/Behind_the_Streams_with_Sydeon_StockX.mp4', title: 'Behind the Streams with Sydeon', description: 'Explore behind the scenes with Sydeon.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
+              {media.stockx.map((item) => (
+                <MediaCard
+                  key={item.title}
+                  item={{
+                    ...item,
+                    src:
+                      item.title === 'Briana King Joins StockX'
+                        ? '/videos/StockXVideos/Briana_King_Joins_StockX.mp4'
+                        : item.title === 'What Drives Brittney Elena'
+                        ? '/videos/StockXVideos/What_Drives_Brittney_Elena_StockX.mp4'
+                        : '/videos/StockXVideos/Behind_the_Streams_with_Sydeon_StockX.mp4',
+                    title: item.title,
+                  }}
+                  type="video"
+                  size="small"
+                  showLink={false}
+                />
+              ))}
             </div>
           </div>
         </motion.section>
