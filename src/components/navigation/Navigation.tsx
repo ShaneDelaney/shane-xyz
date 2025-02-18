@@ -12,9 +12,9 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Bio', icon: '/assets/bio.png', path: '/bio' },
+    { name: 'Work', icon: '/assets/about.png', path: '/work' },
     { name: 'Home', icon: '/assets/home.png', path: '/' },
-    { name: 'Projects', icon: '/assets/projects.png', path: '/projects' },
+    { name: 'Bio', icon: '/assets/bio.png', path: '/about' },
   ];
 
   return (
@@ -29,16 +29,17 @@ const Navigation = () => {
           {navItems.map((item) => (
             <Tooltip key={item.name}>
               <TooltipTrigger asChild>
-                <Link href={item.path}>
+                <Link href={item.path} className="block w-10 h-10">
                   <Button
                     variant={pathname === item.path ? "secondary" : "ghost"}
                     size="icon"
                     className={`
-                      relative w-10 h-10 rounded-lg transition-all
+                      w-10 h-10 rounded-lg transition-colors duration-200
                       ${pathname === item.path 
-                        ? 'bg-white text-black hover:bg-white/90' 
-                        : 'text-white hover:bg-white/10'
+                        ? 'bg-white text-black hover:!bg-white/90' 
+                        : 'text-white hover:!bg-white/10'
                       }
+                      !p-0 !m-0 !border-0 transform-none hover:transform-none
                     `}
                   >
                     <Image
@@ -46,7 +47,8 @@ const Navigation = () => {
                       alt={item.name}
                       width={20}
                       height={20}
-                      className="w-5 h-5"
+                      className="w-5 h-5 pointer-events-none"
+                      draggable={false}
                     />
                   </Button>
                 </Link>

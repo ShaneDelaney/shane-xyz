@@ -8,14 +8,24 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15
+      duration: 0.3,
+      ease: [0.25, 0.1, 0.25, 1],
+      staggerChildren: 0.1,
+      delayChildren: 0.1
     }
   }
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 5 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
 };
 
 export default function Work() {
@@ -24,15 +34,16 @@ export default function Work() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="space-y-12 pt-20 pb-32 px-4 max-w-6xl mx-auto"
+      layout
+      className="space-y-12 pt-20 pb-32 px-4 max-w-6xl mx-auto min-h-screen"
     >
-      <motion.div variants={item} className="space-y-4">
+      <motion.div variants={item} layout className="space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Professional Journey</h1>
         <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
       </motion.div>
 
       <div className="space-y-12">
-        <motion.section variants={item} className="relative pl-8 pb-12 border-l-2 border-zinc-200">
+        <motion.section variants={item} layout className="relative pl-8 pb-12 border-l-2 border-zinc-200">
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
@@ -54,7 +65,7 @@ export default function Work() {
           </div>
         </motion.section>
 
-        <motion.section variants={item} className="relative pl-8 pb-12 border-l-2 border-zinc-200">
+        <motion.section variants={item} layout className="relative pl-8 pb-12 border-l-2 border-zinc-200">
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
@@ -85,7 +96,7 @@ export default function Work() {
           </div>
         </motion.section>
 
-        <motion.section variants={item} className="relative pl-8 pb-12 border-l-2 border-zinc-200">
+        <motion.section variants={item} layout className="relative pl-8 pb-12 border-l-2 border-zinc-200">
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
@@ -102,7 +113,7 @@ export default function Work() {
           </div>
         </motion.section>
 
-        <motion.section variants={item} className="relative pl-8 border-l-2 border-zinc-200">
+        <motion.section variants={item} layout className="relative pl-8 border-l-2 border-zinc-200">
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-gray-900">Freelance Email Copywriter at Cappuccino Man</h3>
@@ -117,7 +128,7 @@ export default function Work() {
         </motion.section>
       </div>
 
-      <motion.section variants={item} className="space-y-8">
+      <motion.section variants={item} layout className="space-y-8">
         <h3 className="text-2xl font-semibold text-black">Skills & Expertise</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div 
