@@ -38,7 +38,7 @@ export default function Work() {
       className="space-y-12 pt-32 pb-32 px-4 max-w-6xl mx-auto min-h-screen"
     >
       <motion.div variants={item} layout className="space-y-4">
-        <h1 className="text-4xl font-serif font-bold text-gray-800">My Professional Journey</h1>
+        <h1 className="text-4xl font-serif font-bold text-gray-800">My Journey</h1>
         <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
       </motion.div>
 

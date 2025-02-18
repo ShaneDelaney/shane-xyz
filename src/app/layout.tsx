@@ -29,12 +29,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/logo.png',
+      url: '/favicon.svg',
     },
   },
   viewport: {
