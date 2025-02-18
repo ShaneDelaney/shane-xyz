@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { MediaCard } from '@/components/media/MediaCard';
 
 const AboutMe = () => {
   return (

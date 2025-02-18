@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { MediaCard } from '@/components/media/MediaCard';
-import { media } from '@/data/media';
 import Image from 'next/image';
 
 const container = {
