@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { MediaCard } from '@/components/media/MediaCard';
 import { media } from '@/data/media';
+import Image from 'next/image';
 
 const container = {
   hidden: { opacity: 0 },
@@ -76,15 +77,15 @@ export default function Work() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <a href="https://collider.com/hardest-workers-in-succession-ranked/" className="block p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors" target="_blank" rel="noopener noreferrer">
-                <img src="/Collider Images/Succession.png" alt="Succession" className="w-full h-48 object-cover mb-4 rounded" />
+                <Image src="/Collider Images/Succession.png" alt="Succession" width={500} height={500} className="w-full h-48 object-cover mb-4 rounded" />
                 <h4 className="text-xl font-light mb-4 text-black">Hardest Workers in Succession Ranked</h4>
               </a>
               <a href="https://collider.com/actors-and-their-favorite-movies/" className="block p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors" target="_blank" rel="noopener noreferrer">
-                <img src="/Collider Images/ActorsFavMovies.png" alt="Actors" className="w-full h-48 object-cover mb-4 rounded" />
+                <Image src="/Collider Images/ActorsFavMovies.png" alt="Actors" width={500} height={500} className="w-full h-48 object-cover mb-4 rounded" />
                 <h4 className="text-xl font-light mb-4 text-black">Actors and Their Favorite Movies</h4>
               </a>
               <a href="https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/" className="block p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors" target="_blank" rel="noopener noreferrer">
-                <img src="/Collider Images/FallMovies.png" alt="Fall Movies" className="w-full h-48 object-cover mb-4 rounded" />
+                <Image src="/Collider Images/FallMovies.png" alt="Fall Movies" width={500} height={500} className="w-full h-48 object-cover mb-4 rounded" />
                 <h4 className="text-xl font-light mb-4 text-black">Sweater Weather Movies to Get You Ready for Fall</h4>
               </a>
             </div>
