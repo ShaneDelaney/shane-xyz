@@ -68,10 +68,10 @@ function Hero() {
               transition={{ delay: 0.3 }}
             >
               <span className="text-base landscape:text-sm sm:text-xl md:text-2xl lg:text-3xl font-mono tracking-tight relative select-none">
-                digital media + content strategy
+                Social Media Management & Digital Marketing
               </span>
               <span className="text-[rgb(var(--text-primary))] leading-relaxed text-sm landscape:text-xs sm:text-lg md:text-xl lg:text-2xl select-none">
-                crafting engaging narratives and building online communities
+                Elevating brands through strategic SEO, compelling copywriting, and effective content management.
               </span>
             </motion.div>
           </div>
