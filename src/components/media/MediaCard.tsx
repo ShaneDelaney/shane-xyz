@@ -34,6 +34,17 @@ export const MediaCard = ({ item, type, size = 'medium', showLink = true }: Medi
           unoptimized
           priority
         />
+      ) : item.src.includes('youtube.com') ? (
+        <Link href={item.link || item.src}>
+          <iframe
+            src={item.src.replace('/watch?v=', '/embed/')}
+            title={item.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full object-cover"
+          />
+        </Link>
       ) : (
         <video
           src={item.src}

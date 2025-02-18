@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { MediaCard } from '@/components/media/MediaCard';
 
 const AboutMe = () => {
   return (
@@ -16,13 +17,8 @@ const AboutMe = () => {
         </p>
       </div>
       <div className="md:w-1/3 flex justify-center">
-        <Image
-          src="/assets/Shanedelaney.png"
-          alt="About Me Image"
-          width={350}
-          height={525}
-          className="rounded-lg shadow-lg"
-        />
+        <MediaCard key="Briana King Joins StockX" item={{ src: '/videos/StockXVideos/Briana King Joins StockX.mp4', title: 'Briana King Joins StockX', description: 'Watch Briana King join StockX in this exciting video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
+        <MediaCard key="What Drives Brittney Elena" item={{ src: '/videos/StockXVideos/What Drives Brittney Elena.mp4', title: 'What Drives Brittney Elena', description: 'Discover what drives Brittney Elena in this engaging video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
       </div>
     </div>
   );

@@ -107,7 +107,7 @@ export default function Work() {
             </div>
             <div className="space-y-4">
               {media.stockx.map((item) => (
-                <MediaCard key={item.title} item={{...item, src: item.title === 'Briana King Joins StockX' ? '/videos/StockXVideos/Briana King Joins StockX.mp4' : item.title === 'What Drives Brittney Elena' ? '/videos/StockXVideos/What Drives Brittney Elena _ StockX.mp4' : '/videos/StockXVideos/NewStockXVideo.mp4', title: item.title === 'New StockX Video' ? 'Behind the Streams with Sydeon' : item.title }} type="video" size="small" showLink={false} />
+                <MediaCard key={item.title} item={{...item, src: item.title === 'Briana King Joins StockX' ? 'https://www.youtube.com/watch?v=example1' : item.title === 'What Drives Brittney Elena' ? 'https://www.youtube.com/watch?v=3-loqESOCMI&t=1s' : 'https://www.youtube.com/watch?v=default', title: item.title }} type="video" size="small" showLink={false} />
               ))}
             </div>
           </div>
