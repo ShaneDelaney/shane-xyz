@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -17,8 +18,23 @@ const Header = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          shane delaney
+          <Link href="/">shane delaney</Link>
         </motion.span>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Link href="/contact">
+            <motion.button
+              className="px-4 py-2 rounded-lg bg-black text-white text-sm font-light"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact Me
+            </motion.button>
+          </Link>
+        </motion.div>
       </div>
     </motion.header>
   );
