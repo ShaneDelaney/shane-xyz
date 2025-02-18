@@ -106,26 +106,6 @@ export default function Work() {
                 <li>• Maintained brand consistency across marketing assets.</li>
               </ul>
             </div>
-            <div className="space-y-4">
-              {media.stockx.map((item) => (
-                <MediaCard
-                  key={item.title}
-                  item={{
-                    ...item,
-                    src:
-                      item.title === 'Briana King Joins StockX'
-                        ? '/videos/StockXVideos/Briana_King_Joins_StockX.mp4'
-                        : item.title === 'What Drives Brittney Elena'
-                        ? '/videos/StockXVideos/What_Drives_Brittney_Elena_StockX.mp4'
-                        : '/videos/StockXVideos/Behind_the_Streams_with_Sydeon_StockX.mp4',
-                    title: item.title,
-                  }}
-                  type="video"
-                  size="small"
-                  showLink={false}
-                />
-              ))}
-            </div>
           </div>
         </motion.section>
 
