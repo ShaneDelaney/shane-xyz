@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+'use client';
 
 const AboutMe = () => {
   return (

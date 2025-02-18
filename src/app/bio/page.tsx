@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MediaCard } from '@/components/media/MediaCard';
 import Image from 'next/image';
 
 const container = {
