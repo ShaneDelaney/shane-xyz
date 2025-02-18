@@ -20,11 +20,11 @@ Message: ${message}
     });
 
     if (error) {
-      return NextResponse.json({ error }, { status: 400 });
+      return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Failed to send email' }, { status: 500 });
   }
 } 

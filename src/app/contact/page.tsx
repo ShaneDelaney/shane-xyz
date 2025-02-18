@@ -24,11 +24,15 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send message');
+      }
       
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('Contact form error:', error);
       setStatus('error');
     }
   };
@@ -56,7 +60,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            I'd love to hear from you. Send me a message and I'll get back to you as soon as possible.
+            I&apos;d love to hear from you. Send me a message and I&apos;ll get back to you as soon as possible.
           </motion.p>
         </div>
 
