@@ -52,11 +52,6 @@ export default function Work() {
                 <li>• Developed original, trend-focused concepts, achieving viral success.</li>
               </ul>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {['CheerSquad', 'Cured', 'MrShower'].map((title) => (
-                <MediaCard key={title} item={{ title, src: `/videos/PhonyVideos/${title}.mov`, description: '', aspectRatio: '16:9' }} type="video" size="large" showLink={true} />
-              ))}
-            </div>
           </div>
         </motion.section>
 

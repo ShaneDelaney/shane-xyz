@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const AboutMe = () => {
   return (
-    <div className="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-8 pt-20 pb-32 px-4 max-w-6xl mx-auto">
+    <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-6 pt-16 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
       <div className="md:w-2/3 space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">About Me</h1>
         <p className="text-xl text-zinc-600 font-light leading-relaxed">
@@ -14,15 +15,6 @@ const AboutMe = () => {
         <p className="text-xl text-zinc-600 font-light leading-relaxed">
           My goal is to continue pushing the boundaries of digital marketing, exploring innovative ways to connect with audiences and drive brand success.
         </p>
-      </div>
-      <div className="md:w-1/3 flex justify-center items-center">
-        <Image
-          src="/assets/Shanedelaney.png"
-          alt="Shane Delaney"
-          width={350}
-          height={350}
-          className="object-contain rounded-lg shadow-lg"
-        />
       </div>
     </div>
   );
