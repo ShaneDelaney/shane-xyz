@@ -4,21 +4,21 @@ import { motion } from 'framer-motion';
 
 export default function Contact() {
   return (
-    <div className="pt-24 pb-32 px-4 max-w-6xl mx-auto min-h-[calc(100vh-4rem)]">
+    <div className="relative w-full h-[100dvh] flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-2xl mx-auto space-y-8"
+        className="max-w-2xl w-full space-y-8"
       >
         <div className="space-y-4">
           <motion.h1 
-            className="text-4xl font-serif font-bold text-gray-800 text-center"
+            className="text-4xl font-serif font-light text-black text-center tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Get in Touch
+            contact me
           </motion.h1>
           <motion.p 
             className="text-xl text-zinc-600 font-light text-center"
@@ -26,7 +26,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            I&apos;d love to hear from you. Feel free to reach out directly:
+            i&apos;d love to hear from you. feel free to reach out directly:
           </motion.p>
         </div>
 
@@ -38,15 +38,15 @@ export default function Contact() {
         >
           <a 
             href="sms:+12487620695" 
-            className="block text-2xl text-blue-600 hover:underline"
+            className="block text-2xl text-black hover:opacity-70 transition-opacity font-light"
           >
             (248) 762-0695
           </a>
           <a 
             href="mailto:Shanedelaney11@gmail.com" 
-            className="block text-2xl text-blue-600 hover:underline"
+            className="block text-2xl text-black hover:opacity-70 transition-opacity font-light"
           >
-            Shanedelaney11@gmail.com
+            shanedelaney11@gmail.com
           </a>
         </motion.div>
       </motion.div>

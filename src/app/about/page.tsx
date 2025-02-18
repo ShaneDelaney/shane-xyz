@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutMe() {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-6 pt-16 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
+    <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-6 pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
       <div className="md:w-2/3 space-y-4">
         <motion.h1 
           className="text-4xl font-serif font-bold text-gray-800"

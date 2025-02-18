@@ -35,7 +35,7 @@ export default function Work() {
       initial="hidden"
       animate="show"
       layout
-      className="space-y-12 pt-20 pb-32 px-4 max-w-6xl mx-auto min-h-screen"
+      className="space-y-12 pt-32 pb-32 px-4 max-w-6xl mx-auto min-h-screen"
     >
       <motion.div variants={item} layout className="space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Professional Journey</h1>
@@ -132,7 +132,7 @@ export default function Work() {
         <h3 className="text-2xl font-semibold text-black">Skills & Expertise</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div 
-            className="p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
+            className="p-6 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors bg-white/50 backdrop-blur-sm"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
@@ -146,7 +146,7 @@ export default function Work() {
             </ul>
           </motion.div>
           <motion.div 
-            className="p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
+            className="p-6 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors bg-white/50 backdrop-blur-sm"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
@@ -160,7 +160,7 @@ export default function Work() {
             </ul>
           </motion.div>
           <motion.div 
-            className="p-6 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
+            className="p-6 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors bg-white/50 backdrop-blur-sm"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
