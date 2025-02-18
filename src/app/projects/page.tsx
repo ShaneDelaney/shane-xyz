@@ -5,20 +5,25 @@ const AboutMe = () => {
   return (
     <div className="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-8 pt-20 pb-32 px-4 max-w-6xl mx-auto">
       <div className="md:w-2/3 space-y-4">
-        <h1 className="text-4xl font-serif font-bold">About Me</h1>
-        <p className="text-xl text-zinc-600 font-light">
+        <h1 className="text-4xl font-serif font-bold text-gray-800">About Me</h1>
+        <p className="text-xl text-zinc-600 font-light leading-relaxed">
           I am a passionate digital marketer with a strong background in social media management and content strategy. My journey began with a love for storytelling and has evolved into a career focused on elevating brands through strategic SEO, compelling copywriting, and effective content management.
         </p>
-        <p className="text-xl text-zinc-600 font-light">
+        <p className="text-xl text-zinc-600 font-light leading-relaxed">
           Over the years, I have honed my skills in audience development, analytics growth, and narrative development, always striving to create engaging and impactful content.
         </p>
-        <p className="text-xl text-zinc-600 font-light">
+        <p className="text-xl text-zinc-600 font-light leading-relaxed">
           My goal is to continue pushing the boundaries of digital marketing, exploring innovative ways to connect with audiences and drive brand success.
         </p>
       </div>
-      <div className="md:w-1/3 flex justify-center">
-        <MediaCard key="Briana King Joins StockX" item={{ src: '/videos/StockXVideos/Briana King Joins StockX.mp4', title: 'Briana King Joins StockX', description: 'Watch Briana King join StockX in this exciting video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
-        <MediaCard key="What Drives Brittney Elena" item={{ src: '/videos/StockXVideos/What Drives Brittney Elena.mp4', title: 'What Drives Brittney Elena', description: 'Discover what drives Brittney Elena in this engaging video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
+      <div className="md:w-1/3 flex justify-center items-center">
+        <Image
+          src="/assets/Shanedelaney.png"
+          alt="Shane Delaney"
+          width={350}
+          height={350}
+          className="object-contain rounded-lg shadow-lg"
+        />
       </div>
     </div>
   );

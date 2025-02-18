@@ -28,7 +28,7 @@ export default function Work() {
       className="space-y-12 pt-20 pb-32 px-4 max-w-6xl mx-auto"
     >
       <motion.div variants={item} className="space-y-4">
-        <h1 className="text-4xl font-serif font-bold">My Professional Journey</h1>
+        <h1 className="text-4xl font-serif font-bold text-gray-800">My Professional Journey</h1>
         <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
       </motion.div>
 
@@ -37,12 +37,12 @@ export default function Work() {
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold">Content Manager at Phony Texts</h3>
-              <p className="italic text-zinc-600">Present Role</p>
-              <p className="text-zinc-600 font-light">
+              <h3 className="text-2xl font-semibold text-gray-900">Content Manager at Phony Texts</h3>
+              <p className="italic text-zinc-700 text-lg">Present Role</p>
+              <p className="text-zinc-700 font-light leading-relaxed text-lg">
                 At Phony Content, I advanced from Staff Writer to Social Media Content Manager within 9 months, leading content strategy for Tiny Texts, a Snapchat channel with 3.4M+ followers. Leveraging data-driven insights, I increased daily viewership by 90% and maintained retention rates 10% above the platform average.
               </p>
-              <ul className="space-y-2 text-zinc-600 font-light">
+              <ul className="space-y-2 text-zinc-700 font-light text-lg">
                 <li>• Directed content strategy and execution, driving audience growth and engagement.</li>
                 <li>• Created 50+ short-form stories with millions of views, including a video with 6M+ views and 40K+ new followers.</li>
                 <li>• Conducted audience research and trend analysis to optimize content performance.</li>
@@ -64,12 +64,12 @@ export default function Work() {
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold">SEO Writer at Collider</h3>
-              <p className="italic text-zinc-600">Previous Role</p>
-              <p className="text-zinc-600 font-light">
+              <h3 className="text-2xl font-semibold text-gray-900">SEO Writer at Collider</h3>
+              <p className="italic text-zinc-700 text-lg">Previous Role</p>
+              <p className="text-zinc-700 font-light leading-relaxed text-lg">
                 At Collider, I wrote SEO-driven content that increased organic traffic by 15%. I optimized content through keyword research and analytics, creating high-performing articles on trending topics. I implemented SEO strategies to boost traffic and developed content calendars aligned with search trends, specializing in analytical pieces and listicles.
               </p>
-              <ul className="space-y-2 text-zinc-600 font-light">
+              <ul className="space-y-2 text-zinc-700 font-light text-lg">
                 <li>• Boosted organic traffic by 15% with SEO-driven content.</li>
                 <li>• Optimized content through keyword research and analytics.</li>
               </ul>
@@ -95,20 +95,20 @@ export default function Work() {
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold">Production Assistant at StockX</h3>
-              <p className="italic text-zinc-600">Previous Role</p>
-              <p className="text-zinc-600 font-light">
+              <h3 className="text-2xl font-semibold text-gray-900">Production Assistant at StockX</h3>
+              <p className="italic text-zinc-700 text-lg">Previous Role</p>
+              <p className="text-zinc-700 font-light leading-relaxed text-lg">
                 At StockX, I supported digital campaigns with seamless logistics and content alignment. I maintained brand consistency across marketing assets, managed production logistics, and coordinated with teams. I ensured brand consistency, assisted in location scouting, and contributed to successful campaign launches.
               </p>
-              <ul className="space-y-2 text-zinc-600 font-light">
+              <ul className="space-y-2 text-zinc-700 font-light text-lg">
                 <li>• Supported digital campaigns with seamless logistics and content alignment.</li>
                 <li>• Maintained brand consistency across marketing assets.</li>
               </ul>
             </div>
             <div className="space-y-4">
-              {media.stockx.map((item) => (
-                <MediaCard key={item.title} item={{...item, src: item.title === 'Briana King Joins StockX' ? 'https://www.youtube.com/watch?v=example1' : item.title === 'What Drives Brittney Elena' ? 'https://www.youtube.com/watch?v=3-loqESOCMI&t=1s' : 'https://www.youtube.com/watch?v=default', title: item.title }} type="video" size="small" showLink={false} />
-              ))}
+              <MediaCard key="Briana King Joins StockX" item={{ src: '/videos/StockXVideos/Briana_King_Joins_StockX.mp4', title: 'Briana King Joins StockX', description: 'Watch Briana King join StockX in this exciting video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
+              <MediaCard key="What Drives Brittney Elena" item={{ src: '/videos/StockXVideos/What_Drives_Brittney_Elena_StockX.mp4', title: 'What Drives Brittney Elena', description: 'Discover what drives Brittney Elena in this engaging video.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
+              <MediaCard key="Behind the Streams with Sydeon" item={{ src: '/videos/StockXVideos/Behind_the_Streams_with_Sydeon_StockX.mp4', title: 'Behind the Streams with Sydeon', description: 'Explore behind the scenes with Sydeon.', aspectRatio: '16:9' }} type="video" size="small" showLink={false} />
             </div>
           </div>
         </motion.section>
@@ -116,12 +116,12 @@ export default function Work() {
         <motion.section variants={item} className="relative pl-8 border-l-2 border-zinc-200">
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-4">
-            <h3 className="text-2xl font-semibold">Freelance Email Copywriter at Cappuccino Man</h3>
-            <p className="italic text-zinc-600">Previous Role</p>
-            <p className="text-zinc-600 font-light">
+            <h3 className="text-2xl font-semibold text-gray-900">Freelance Email Copywriter at Cappuccino Man</h3>
+            <p className="italic text-zinc-700 text-lg">Previous Role</p>
+            <p className="text-zinc-700 font-light leading-relaxed text-lg">
               At Cappuccino Man, I developed email campaigns for better engagement and brand alignment.
             </p>
-            <ul className="space-y-2 text-zinc-600 font-light">
+            <ul className="space-y-2 text-zinc-700 font-light text-lg">
               <li>• Developed email campaigns for improved engagement and brand alignment.</li>
             </ul>
           </div>
