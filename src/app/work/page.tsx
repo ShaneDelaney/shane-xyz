@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const container = {
   hidden: { opacity: 0 },
@@ -40,6 +41,15 @@ export default function Work() {
       <motion.div variants={item} layout className="space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Journey</h1>
         <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
+        <Link href="/work/portfolio">
+          <motion.button
+            className="px-6 py-3 rounded-lg bg-black text-white text-sm font-light hover:bg-black/90 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            See My Work
+          </motion.button>
+        </Link>
       </motion.div>
 
       <div className="space-y-12">

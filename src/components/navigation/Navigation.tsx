@@ -12,6 +12,7 @@ const Navigation = () => {
   const pathname = usePathname();
 
   const navItems = [
+    { name: 'Portfolio', icon: '/assets/portfolio.png', path: '/work/portfolio' },
     { name: 'Work', icon: '/assets/about.png', path: '/work' },
     { name: 'Home', icon: '/assets/home.png', path: '/' },
     { name: 'Bio', icon: '/assets/bio.png', path: '/about' },
@@ -20,7 +21,7 @@ const Navigation = () => {
   return (
     <nav className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <motion.div 
-        className="flex items-center gap-3 bg-black/40 backdrop-blur-lg p-2 rounded-lg border border-white/10"
+        className="flex items-center gap-2 bg-black/40 backdrop-blur-lg p-2 rounded-lg border border-white/10"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
