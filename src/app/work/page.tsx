@@ -48,16 +48,18 @@ export default function Work() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-gray-900">Content Manager at Phony Texts</h3>
-              <p className="italic text-zinc-700 text-lg">Present Role</p>
-              <p className="text-zinc-700 font-light leading-relaxed text-lg">
-                At Phony Content, I advanced from Staff Writer to Social Media Content Manager within 9 months, leading content strategy for Tiny Texts, a Snapchat channel with 3.4M+ followers. Leveraging data-driven insights, I increased daily viewership by 90% and maintained retention rates 10% above the platform average.
-              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
+                <p className="italic text-lg">Los Angeles, CA</p>
+                <span className="hidden sm:block">|</span>
+                <p className="italic text-lg">May 2024 - Present</p>
+              </div>
+              <p className="text-zinc-600 text-base italic">Digital media company behind Tiny Texts, a Snapchat channel with 3.4M+ followers known for short-form, comedic screen-life stories.</p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
                 <li>• Directed content strategy and execution, driving audience growth and engagement.</li>
                 <li>• Created 50+ short-form stories with millions of views, including a video with 6M+ views and 40K+ new followers.</li>
                 <li>• Conducted audience research and trend analysis to optimize content performance.</li>
-                <li>• Managed editorial calendars for consistent and timely content.</li>
-                <li>• Provided editorial guidance to enhance content quality and engagement.</li>
+                <li>• Established and maintained comprehensive editorial calendars to ensure strategic content distribution.</li>
+                <li>• Led creative direction and quality assurance for team-wide content initiatives.</li>
                 <li>• Partnered with cross-functional teams to align visuals and messaging.</li>
                 <li>• Developed original, trend-focused concepts, achieving viral success.</li>
               </ul>
@@ -70,7 +72,12 @@ export default function Work() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-gray-900">SEO Writer at Collider</h3>
-              <p className="italic text-zinc-700 text-lg">Previous Role</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
+                <p className="italic text-lg">Remote</p>
+                <span className="hidden sm:block">|</span>
+                <p className="italic text-lg">August 2022 - October 2022</p>
+              </div>
+              <p className="text-zinc-600 text-base italic">Entertainment news platform covering movies, TV, and pop culture.</p>
               <p className="text-zinc-700 font-light leading-relaxed text-lg">
                 At Collider, I wrote SEO-driven content that increased organic traffic by 15%. I optimized content through keyword research and analytics, creating high-performing articles on trending topics. I implemented SEO strategies to boost traffic and developed content calendars aligned with search trends, specializing in analytical pieces and listicles.
               </p>
@@ -101,7 +108,12 @@ export default function Work() {
           <div className="space-y-8">
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-gray-900">Production Assistant at StockX</h3>
-              <p className="italic text-zinc-700 text-lg">Previous Role</p>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
+                <p className="italic text-lg">Los Angeles, CA</p>
+                <span className="hidden sm:block">|</span>
+                <p className="italic text-lg">June 2022</p>
+              </div>
+              <p className="text-zinc-600 text-base italic">Global E-Commerce marketplace for sneakers, streetwear, electronics, and collectibles.</p>
               <p className="text-zinc-700 font-light leading-relaxed text-lg">
                 At StockX, I supported digital campaigns with seamless logistics and content alignment. I maintained brand consistency across marketing assets, managed production logistics, and coordinated with teams. I ensured brand consistency, assisted in location scouting, and contributed to successful campaign launches.
               </p>
@@ -138,11 +150,11 @@ export default function Work() {
           >
             <h4 className="text-xl font-light mb-4 text-black">Content Strategy</h4>
             <ul className="space-y-2">
-              <li className="text-black">Digital Media Management</li>
-              <li className="text-black">Audience Development</li>
-              <li className="text-black">Analytics Growth</li>
-              <li className="text-black">Performance Analytics</li>
-              <li className="text-black">Narrative Development</li>
+              <li className="text-black">Content Development & Execution</li>
+              <li className="text-black">Audience Growth & Engagement</li>
+              <li className="text-black">Editorial Calendar Management</li>
+              <li className="text-black">Narrative & Brand Storytelling</li>
+              <li className="text-black">Email Marketing & Copywriting</li>
             </ul>
           </motion.div>
           <motion.div 
@@ -153,10 +165,10 @@ export default function Work() {
             <h4 className="text-xl font-light mb-4 text-black">Technical</h4>
             <ul className="space-y-2">
               <li className="text-black">SEO Best Practices</li>
-              <li className="text-black">Content Management Systems</li>
-              <li className="text-black">Analytics Tools</li>
-              <li className="text-black">Production Management</li>
-              <li className="text-black">Social Platforms</li>
+              <li className="text-black">Digital Marketing Strategy</li>
+              <li className="text-black">Performance Analytics & Optimization</li>
+              <li className="text-black">Content Management Systems (CMS)</li>
+              <li className="text-black">Social Media Management</li>
             </ul>
           </motion.div>
           <motion.div 
@@ -166,11 +178,11 @@ export default function Work() {
           >
             <h4 className="text-xl font-light mb-4 text-black">Creative</h4>
             <ul className="space-y-2">
-              <li className="text-black">Copywriting</li>
-              <li className="text-black">Art Direction</li>
-              <li className="text-black">Brand Voice</li>
+              <li className="text-black">Video Storytelling & Art Direction</li>
+              <li className="text-black">Cross-Functional Collaboration</li>
+              <li className="text-black">Brand Voice Development</li>
               <li className="text-black">Creative Direction</li>
-              <li className="text-black">Video Storytelling</li>
+              <li className="text-black">Research & Editing</li>
             </ul>
           </motion.div>
         </div>
