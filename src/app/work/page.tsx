@@ -136,7 +136,7 @@ export default function Work() {
             </div>
             <p className="text-zinc-600 text-base italic">Boutique coffee catering service specializing in elevated coffee experiences for high-end events and private functions across Los Angeles.</p>
             <p className="text-zinc-700 font-light leading-relaxed text-lg">
-              Developed targeted email campaigns to connect with event planners and luxury venues while building a distinctive brand presence in LA's premium events market.
+              Developed targeted email campaigns to connect with event planners and luxury venues while building a distinctive brand presence in LA&apos;s premium events market.
             </p>
             <ul className="space-y-2 text-zinc-700 font-light text-lg">
               <li>• Created engaging email sequences targeting event planners, wedding coordinators, and corporate clients.</li>
