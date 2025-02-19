@@ -101,13 +101,14 @@ const StockXCampaigns: WorkItem[] = [
 const WorkSection = ({ title, description, items }: { title: string; description: string; items: WorkItem[] }) => (
   <motion.section
     initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
     transition={{ duration: 0.5 }}
-    className="space-y-6"
+    className="space-y-8"
   >
     <div className="space-y-4">
       <h2 className="text-3xl font-light text-black">{title}</h2>
-      <p className="text-lg text-zinc-600 font-light">{description}</p>
+      <p className="text-lg text-zinc-600 font-light max-w-3xl">{description}</p>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {items.map((item, index) => (
@@ -118,28 +119,41 @@ const WorkSection = ({ title, description, items }: { title: string; description
           rel="noopener noreferrer"
         >
           <motion.div
-            className="p-6 rounded-lg border border-slate-200 hover:border-slate-300 transition-all bg-white/50 backdrop-blur-sm hover:shadow-lg"
-            whileHover={{ scale: 1.02 }}
+            className="group p-6 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all bg-white/50 backdrop-blur-sm hover:shadow-lg"
+            whileHover={{ y: -4, scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
             {item.image && (
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+              <div className="relative w-full h-48 mb-4 rounded-xl overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transform group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             )}
-            <h3 className="text-xl font-light text-black mb-2">{item.title}</h3>
+            <h3 className="text-xl font-light text-black mb-3 group-hover:text-black/70 transition-colors">{item.title}</h3>
             {item.stats && (
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {item.stats.views && (
-                  <p className="text-sm text-zinc-600">Views: {item.stats.views}</p>
+                  <p className="text-sm text-zinc-600 flex items-center gap-2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    {item.stats.views} Views
+                  </p>
                 )}
                 {item.stats.followers && (
-                  <p className="text-sm text-zinc-600">Follower Growth: {item.stats.followers}</p>
+                  <p className="text-sm text-zinc-600 flex items-center gap-2">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                    </svg>
+                    {item.stats.followers} New Followers
+                  </p>
                 )}
               </div>
             )}
@@ -159,26 +173,37 @@ export default function Portfolio() {
         transition={{ duration: 0.5 }}
         className="space-y-4 mb-16"
       >
-        <h1 className="text-4xl font-serif font-bold text-gray-800">My Work</h1>
-        <p className="text-xl text-zinc-600 font-light">A collection of my professional work across various platforms and mediums.</p>
+        <h1 className="text-4xl font-serif font-bold text-gray-800">Featured Work</h1>
+        <h2 className="text-xl text-zinc-600 font-light">A curated collection of my most impactful projects</h2>
+        <Link href="/work">
+          <motion.div
+            className="mt-8 inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors group"
+            whileHover={{ x: -4 }}
+          >
+            <svg className="w-5 h-5 transform rotate-180 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span className="text-lg">Back to Journey</span>
+          </motion.div>
+        </Link>
       </motion.div>
 
-      <div className="space-y-16">
+      <div className="space-y-24">
         <WorkSection
           title="Phony Stories"
-          description="A selection of stories written for a popular Snapchat series, blending humor with relatable scenarios to engage young audiences."
+          description="A selection of viral stories written for a popular Snapchat series, blending humor with relatable scenarios to engage young audiences."
           items={PhonyStories}
         />
 
         <WorkSection
           title="Collider Articles"
-          description="SEO-driven content developed for one of the top entertainment news platforms."
+          description="SEO-optimized entertainment content that drove significant organic traffic growth and reader engagement."
           items={ColliderArticles}
         />
 
         <WorkSection
           title="StockX Campaigns"
-          description="High-profile video campaigns showcasing meticulous planning, creative collaboration, and hands-on execution."
+          description="Impactful video campaigns showcasing influential creators and athletes, highlighting StockX's unique position in culture and commerce."
           items={StockXCampaigns}
         />
       </div>

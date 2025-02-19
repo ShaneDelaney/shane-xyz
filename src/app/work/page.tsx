@@ -42,13 +42,27 @@ export default function Work() {
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Journey</h1>
         <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
         <Link href="/work/portfolio">
-          <motion.button
-            className="px-6 py-3 rounded-lg bg-black text-white text-sm font-light hover:bg-black/90 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            className="mt-8 p-6 rounded-2xl bg-black/5 backdrop-blur-sm border border-black/10 hover:bg-black/10 transition-all group"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            See My Work
-          </motion.button>
+            <div className="flex items-center justify-between">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-light text-black">View My Portfolio</h3>
+                <p className="text-zinc-600">Explore my featured work</p>
+              </div>
+              <motion.div
+                className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <svg className="w-6 h-6 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+            </div>
+          </motion.div>
         </Link>
       </motion.div>
 
