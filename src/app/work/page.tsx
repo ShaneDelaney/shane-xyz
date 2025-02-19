@@ -129,12 +129,19 @@ export default function Work() {
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-4">
             <h3 className="text-2xl font-semibold text-gray-900">Freelance Email Copywriter at Cappuccino Man</h3>
-            <p className="italic text-zinc-700 text-lg">Previous Role</p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
+              <p className="italic text-lg">Los Angeles, CA</p>
+              <span className="hidden sm:block">|</span>
+              <p className="italic text-lg">March 2024</p>
+            </div>
+            <p className="text-zinc-600 text-base italic">Boutique coffee catering service specializing in elevated coffee experiences for high-end events and private functions across Los Angeles.</p>
             <p className="text-zinc-700 font-light leading-relaxed text-lg">
-              At Cappuccino Man, I developed email campaigns for better engagement and brand alignment.
+              Developed targeted email campaigns to connect with event planners and luxury venues while building a distinctive brand presence in LA's premium events market.
             </p>
             <ul className="space-y-2 text-zinc-700 font-light text-lg">
-              <li>• Developed email campaigns for improved engagement and brand alignment.</li>
+              <li>• Created engaging email sequences targeting event planners, wedding coordinators, and corporate clients.</li>
+              <li>• Crafted compelling promotional content highlighting signature coffee experiences and custom event packages.</li>
+              <li>• Implemented segmented email strategies to nurture relationships with different client categories.</li>
             </ul>
           </div>
         </motion.section>
