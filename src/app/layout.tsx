@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  openGraph: {
+    images: [], // This prevents any default image from being used in link previews
+  },
   icons: {
     icon: '/logo.png',
     shortcut: '/logo.png',
