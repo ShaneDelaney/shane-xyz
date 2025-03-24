@@ -2,77 +2,121 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function Hero() {
   return (
     <div className="relative w-full h-[100dvh] flex items-center justify-center px-4 py-4 sm:p-0 overflow-hidden">
-      {/* Main card */}
       <motion.div
-        className="relative rounded-2xl p-3 sm:p-4 md:p-8 w-full max-w-2xl mx-auto overflow-hidden select-none"
-        style={{
-          transformStyle: 'preserve-3d',
-          transformPerspective: '1200px',
-        }}
+        className="relative p-3 sm:p-4 md:p-5 w-full max-w-xl mx-auto overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center gap-3 sm:gap-6 md:gap-8">
+        <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-10">
           {/* Logo section */}
           <motion.div
-            className="relative mb-2 sm:mb-4 md:mb-6 cursor-pointer w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28"
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ 
-              duration: 0.8,
-              ease: [0.23, 1, 0.32, 1]
-            }}
-            style={{ transform: 'translateZ(40px)' }}
+            className="relative mb-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             whileHover={{ 
               scale: 1.05,
-              transition: { 
-                type: "spring",
-                stiffness: 500,
-                damping: 15,
-                restDelta: 0.001
-              }
+              transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
-            whileTap={{
-              scale: 0.95,
-              rotate: -8,
-              x: 10,
-              transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 8,
-                mass: 0.8
-              }
-            }}
+            whileTap={{ scale: 0.95 }}
           >
             <Image
               src="/assets/logo.png"
               alt="logo"
-              width={112}
-              height={112}
-              className="w-full h-full object-contain relative z-10 select-none touch-none pointer-events-none"
+              width={96}
+              height={96}
+              className="w-full h-full object-contain"
               priority
               draggable={false}
               quality={95}
             />
           </motion.div>
 
+          {/* Name heading */}
+          <motion.h1 
+            className="text-lg sm:text-xl md:text-2xl font-mono tracking-tight text-center text-zinc-900"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Shane Delaney
+          </motion.h1>
+
           {/* Personal narrative */}
-          <div className="relative z-10 w-full flex flex-col gap-1.5 landscape:gap-2 sm:gap-3 md:gap-4 font-mono text-[10px] landscape:text-[9px] sm:text-sm select-none">
-            <motion.div 
-              className="flex flex-col gap-0.5 landscape:gap-1 sm:gap-2 px-2 sm:px-4 md:px-6 py-1 landscape:py-1 sm:py-2 md:py-3"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+          <div className="w-full flex flex-col items-center gap-6">
+            <motion.p
+              className="text-sm sm:text-base text-zinc-700 font-light leading-relaxed text-center max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
             >
-              <span className="text-base landscape:text-sm sm:text-xl md:text-2xl lg:text-3xl font-mono tracking-tight relative select-none">
-                Social Media Management & Digital Marketing
-              </span>
-              <span className="text-[rgb(var(--text-primary))] leading-relaxed text-sm landscape:text-xs sm:text-lg md:text-xl lg:text-2xl select-none">
-                Elevating brands through strategic SEO, compelling copywriting, and effective content management.
-              </span>
+              Content Curator at Snap Inc. with proven success growing audiences and creating engaging social media that people actually watch.
+            </motion.p>
+
+            {/* Work link */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+              <Link href="/work">
+                <motion.button
+                  className="px-5 py-2 rounded-full bg-black text-white text-sm font-light flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <span>See my work</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </motion.button>
+              </Link>
+
+              <Link href="/about">
+                <motion.button
+                  className="px-5 py-2 rounded-full bg-white border border-black text-black text-sm font-light hover:bg-black/5 transition-colors"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  About me
+                </motion.button>
+              </Link>
+            </div>
+            
+            {/* Stats */}
+            <motion.div
+              className="flex items-center gap-6 pt-3 text-xs sm:text-sm text-zinc-500 font-light"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+            >
+              <div className="flex items-center gap-1">
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span>4M+ views</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M13 17l5-5-5-5M6 17l5-5-5-5" />
+                </svg>
+                <span>90% engagement</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z" />
+                </svg>
+                <span>40K+ followers</span>
+              </div>
             </motion.div>
           </div>
         </div>

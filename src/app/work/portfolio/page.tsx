@@ -173,8 +173,8 @@ export default function Portfolio() {
         transition={{ duration: 0.5 }}
         className="space-y-4 mb-16"
       >
-        <h1 className="text-4xl font-serif font-bold text-gray-800">Featured Work</h1>
-        <h2 className="text-xl text-zinc-600 font-light">A curated collection of my most impactful projects</h2>
+        <h1 className="text-4xl font-serif font-bold text-gray-800">My Best Work</h1>
+        <h2 className="text-xl text-zinc-600 font-light">Stories that captured millions of views because they connected with real people</h2>
         <Link href="/work">
           <motion.div
             className="mt-8 inline-flex items-center gap-2 text-black hover:text-black/70 transition-colors group"
@@ -191,19 +191,19 @@ export default function Portfolio() {
       <div className="space-y-24">
         <WorkSection
           title="Phony Stories"
-          description="A selection of viral stories written for a popular Snapchat series, blending humor with relatable scenarios to engage young audiences."
+          description="These addictive short-form stories boosted channel viewership by 90% and kept viewers watching longer than competitors. Each story connected with Gen Z and Millennial viewers in authentic ways."
           items={PhonyStories}
         />
 
         <WorkSection
           title="Collider Articles"
-          description="SEO-optimized entertainment content that drove significant organic traffic growth and reader engagement."
+          description="SEO-driven articles that real people actually wanted to read. My content boosted organic traffic by 15% by focusing on what movie and TV fans genuinely care about."
           items={ColliderArticles}
         />
 
         <WorkSection
           title="StockX Campaigns"
-          description="Impactful video campaigns showcasing influential creators and athletes, highlighting StockX's unique position in culture and commerce."
+          description="Digital campaigns that maintained authentic brand voice while connecting with target audiences. I helped ensure consistency across all marketing assets for maximum impact."
           items={StockXCampaigns}
         />
       </div>

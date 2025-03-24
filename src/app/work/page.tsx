@@ -40,7 +40,7 @@ export default function Work() {
     >
       <motion.div variants={item} layout className="space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Journey</h1>
-        <h2 className="text-xl text-zinc-600 font-light">Exploring Digital Innovation</h2>
+        <h2 className="text-xl text-zinc-600 font-light">Creating content people want to watch</h2>
         <Link href="/work/portfolio">
           <motion.div
             className="mt-8 p-6 rounded-2xl bg-black/5 backdrop-blur-sm border border-black/10 hover:bg-black/10 transition-all group"
@@ -50,7 +50,7 @@ export default function Work() {
             <div className="flex items-center justify-between">
               <div className="space-y-2">
                 <h3 className="text-2xl font-light text-black">View My Portfolio</h3>
-                <p className="text-zinc-600">Explore my featured work</p>
+                <p className="text-zinc-600">Check out my viral stories and campaigns</p>
               </div>
               <motion.div
                 className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center"
@@ -71,21 +71,42 @@ export default function Work() {
           <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
           <div className="space-y-8">
             <div className="space-y-4">
+              <h3 className="text-2xl font-semibold text-gray-900">Content Curator at Snap Inc.</h3>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
+                <p className="italic text-lg">Santa Monica, CA</p>
+                <span className="hidden sm:block">|</span>
+                <p className="italic text-lg">March 2025 - Present</p>
+              </div>
+              <p className="text-zinc-600 text-base italic">Global social media and camera app with over 750 million monthly active users worldwide.</p>
+              <ul className="space-y-2 text-zinc-700 font-light text-lg">
+                <li>• Identify and spotlight trending, culturally relevant content and tentpole moments for Snapchat's global audience</li>
+                <li>• Curate fresh, engaging public content alongside Trend Producers that resonates with Gen Z and Millennial users</li>
+                <li>• Review thousands of user-submitted Snaps daily to surface timely, relevant content</li>
+                <li>• Resolve content issues through cross-functional collaboration with engineering, moderation, and product teams</li>
+                <li>• Track and monitor US short-form video trends and major pop culture moments</li>
+              </ul>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section variants={item} layout className="relative pl-8 pb-12 border-l-2 border-zinc-200">
+          <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-zinc-200" />
+          <div className="space-y-8">
+            <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-gray-900">Content Manager at Phony Texts</h3>
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2 text-zinc-700">
                 <p className="italic text-lg">Los Angeles, CA</p>
                 <span className="hidden sm:block">|</span>
-                <p className="italic text-lg">May 2024 - Present</p>
+                <p className="italic text-lg">March 2024 - March 2025</p>
               </div>
               <p className="text-zinc-600 text-base italic">Digital media company behind Tiny Texts, a Snapchat channel with 3.4M+ followers known for short-form, comedic screen-life stories.</p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
-                <li>• Directed content strategy and execution, driving audience growth and engagement.</li>
-                <li>• Created 50+ short-form stories with millions of views, including a video with 6M+ views and 40K+ new followers.</li>
-                <li>• Conducted audience research and trend analysis to optimize content performance.</li>
-                <li>• Established and maintained comprehensive editorial calendars to ensure strategic content distribution.</li>
-                <li>• Led creative direction and quality assurance for team-wide content initiatives.</li>
-                <li>• Partnered with cross-functional teams to align visuals and messaging.</li>
-                <li>• Developed original, trend-focused concepts, achieving viral success.</li>
+                <li>• Developed short-form stories that boosted viewership by 90% compared to previous content</li>
+                <li>• Exceeded platform metrics by achieving retention rates 10% higher than average</li>
+                <li>• Launched viral campaign content that generated 4M+ views and attracted 40K+ new followers</li>
+                <li>• Analyzed audience data to enhance content engagement and drive viewer growth</li>
+                <li>• Orchestrated publishing schedules and coordinated deliverables across multiple stakeholders</li>
+                <li>• Designed and implemented efficient revision tracking and approval workflows</li>
               </ul>
             </div>
           </div>
@@ -103,11 +124,11 @@ export default function Work() {
               </div>
               <p className="text-zinc-600 text-base italic">Entertainment news platform covering movies, TV, and pop culture.</p>
               <p className="text-zinc-700 font-light leading-relaxed text-lg">
-                At Collider, I wrote SEO-driven content that increased organic traffic by 15%. I optimized content through keyword research and analytics, creating high-performing articles on trending topics. I implemented SEO strategies to boost traffic and developed content calendars aligned with search trends, specializing in analytical pieces and listicles.
+                Crafted SEO-optimized content that drove a 15% increase in organic traffic. Developed data-driven articles on trending entertainment topics through strategic keyword research and analytics.
               </p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
-                <li>• Boosted organic traffic by 15% with SEO-driven content.</li>
-                <li>• Optimized content through keyword research and analytics.</li>
+                <li>• Boosted organic traffic by 15% through targeted SEO-driven content strategies</li>
+                <li>• Leveraged keyword research and analytics to optimize content performance</li>
               </ul>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -139,11 +160,11 @@ export default function Work() {
               </div>
               <p className="text-zinc-600 text-base italic">Global E-Commerce marketplace for sneakers, streetwear, electronics, and collectibles.</p>
               <p className="text-zinc-700 font-light leading-relaxed text-lg">
-                At StockX, I supported digital campaigns with seamless logistics and content alignment. I maintained brand consistency across marketing assets, managed production logistics, and coordinated with teams. I ensured brand consistency, assisted in location scouting, and contributed to successful campaign launches.
+                Facilitated digital marketing campaigns through strategic logistical coordination and content alignment. Maintained consistent brand presentation across all marketing assets.
               </p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
-                <li>• Supported digital campaigns with seamless logistics and content alignment.</li>
-                <li>• Maintained brand consistency across marketing assets.</li>
+                <li>• Streamlined logistics for high-impact digital marketing campaigns</li>
+                <li>• Ensured brand consistency across diverse marketing materials</li>
               </ul>
             </div>
           </div>
@@ -160,12 +181,12 @@ export default function Work() {
             </div>
             <p className="text-zinc-600 text-base italic">Boutique coffee catering service specializing in elevated coffee experiences for high-end events and private functions across Los Angeles.</p>
             <p className="text-zinc-700 font-light leading-relaxed text-lg">
-              Developed targeted email campaigns to connect with event planners and luxury venues while building a distinctive brand presence in LA&apos;s premium events market.
+              Crafted targeted email campaigns for event planners and luxury venues to strengthen brand presence in LA's premium events market.
             </p>
             <ul className="space-y-2 text-zinc-700 font-light text-lg">
-              <li>• Created engaging email sequences targeting event planners, wedding coordinators, and corporate clients.</li>
-              <li>• Crafted compelling promotional content highlighting signature coffee experiences and custom event packages.</li>
-              <li>• Implemented segmented email strategies to nurture relationships with different client categories.</li>
+              <li>• Engineered strategic email sequences for event planners, wedding coordinators, and corporate clients</li>
+              <li>• Designed compelling promotional content showcasing signature coffee experiences and custom packages</li>
+              <li>• Structured segmented email strategies to effectively reach different client categories</li>
             </ul>
           </div>
         </motion.section>

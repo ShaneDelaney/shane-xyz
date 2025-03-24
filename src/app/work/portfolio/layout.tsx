@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'Portfolio | Shane Delaney',
-  description: 'A collection of my professional work across various platforms and mediums.',
+  description: 'Selected work showcasing social media content development and audience growth strategies with measurable results across platforms.',
 };
 
 export default function PortfolioLayout({

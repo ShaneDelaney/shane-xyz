@@ -23,11 +23,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Shane Delaney | Digital Marketing & Content Strategy',
+    default: 'Shane Delaney | Social Media Specialist',
     template: '%s | Shane Delaney'
   },
-  description: 'Digital marketing professional specializing in content strategy, SEO, and social media management. Elevating brands through strategic storytelling and data-driven insights.',
-  keywords: ['Digital Marketing', 'Content Strategy', 'SEO', 'Social Media Management', 'Brand Development', 'Content Creation'],
+  description: 'Content Curator at Snap Inc. specializing in social media content with proven results. Experience creating engaging content that drives measurable audience growth and retention.',
+  keywords: ['Social Media Specialist', 'Snap Inc.', 'Content Curator', 'Audience Growth', 'Content Strategy', 'Gen Z', 'Millennial Content'],
   authors: [{ name: 'Shane Delaney' }],
   creator: 'Shane Delaney',
   publisher: 'Shane Delaney',

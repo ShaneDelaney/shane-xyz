@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Me | Shane Delaney',
-  description: 'Learn more about Shane Delaney - Digital Marketing & Content Strategy',
+  description: 'Content Curator at Snap Inc. with proven success growing audiences and creating social media that people actually want to watch.',
 };
 
 export default function AboutLayout({
