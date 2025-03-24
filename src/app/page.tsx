@@ -56,7 +56,7 @@ function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Content Curator at Snap Inc. with proven success growing audiences and creating engaging social media content that people actually watch.
+              Content Curator at Snap Inc. with proven success growing audiences and creating engaging social media content.
             </motion.p>
 
             {/* Work link */}
