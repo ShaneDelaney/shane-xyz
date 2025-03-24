@@ -22,13 +22,13 @@ export default function AboutMe() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <p className="text-xl text-zinc-600 font-light leading-relaxed">
-            As a Content Curator at Snap Inc., I spend my days finding what resonates with global audiences. I identify trending content for one of the world's largest social platforms, shaping what millions of users see daily.
+            As a Content Curator at Snap Inc., I spend my days finding what resonates with global audiences. I identify trending content for one of the world&apos;s largest social platforms, shaping what millions of users see daily.
           </p>
           <p className="text-xl text-zinc-600 font-light leading-relaxed">
-            My track record speaks for itself—I've driven measurable growth across platforms with content that performs. At Phony Content, I transformed their Snapchat channel with campaigns reaching 4M+ views and 90% higher engagement rates than industry averages, bringing in 40K+ new followers.
+            My track record speaks for itself—I&apos;ve driven measurable growth across platforms with content that performs. At Phony Content, I transformed their Snapchat channel with campaigns reaching 4M+ views and 90% higher engagement rates than industry averages, bringing in 40K+ new followers.
           </p>
           <p className="text-xl text-zinc-600 font-light leading-relaxed">
-            What makes my approach unique is the blend of creative intuition with data-driven strategy. I don't just create content people should watch—I create content they actually want to watch. This philosophy has consistently delivered results across different platforms and audience segments.
+            What makes my approach unique is the blend of creative intuition with data-driven strategy. I don&apos;t just create content people should watch—I create content they actually want to watch. This philosophy has consistently delivered results across different platforms and audience segments.
           </p>
           
           <div className="pt-4">

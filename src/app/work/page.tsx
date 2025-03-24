@@ -79,7 +79,7 @@ export default function Work() {
               </div>
               <p className="text-zinc-600 text-base italic">Global social media and camera app with over 750 million monthly active users worldwide.</p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
-                <li>• Identify and spotlight trending, culturally relevant content and tentpole moments for Snapchat's global audience</li>
+                <li>• Identify and spotlight trending, culturally relevant content and tentpole moments for Snapchat&apos;s global audience</li>
                 <li>• Curate fresh, engaging public content alongside Trend Producers that resonates with Gen Z and Millennial users</li>
                 <li>• Review thousands of user-submitted Snaps daily to surface timely, relevant content</li>
                 <li>• Resolve content issues through cross-functional collaboration with engineering, moderation, and product teams</li>
@@ -181,7 +181,7 @@ export default function Work() {
             </div>
             <p className="text-zinc-600 text-base italic">Boutique coffee catering service specializing in elevated coffee experiences for high-end events and private functions across Los Angeles.</p>
             <p className="text-zinc-700 font-light leading-relaxed text-lg">
-              Crafted targeted email campaigns for event planners and luxury venues to strengthen brand presence in LA's premium events market.
+              Crafted targeted email campaigns for event planners and luxury venues to strengthen brand presence in LA&apos;s premium events market.
             </p>
             <ul className="space-y-2 text-zinc-700 font-light text-lg">
               <li>• Engineered strategic email sequences for event planners, wedding coordinators, and corporate clients</li>

@@ -13,10 +13,10 @@ function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-10">
+        <div className="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
           {/* Logo section */}
           <motion.div
-            className="relative mb-2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+            className="relative mb-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -40,7 +40,7 @@ function Hero() {
 
           {/* Name heading */}
           <motion.h1 
-            className="text-lg sm:text-xl md:text-2xl font-mono tracking-tight text-center text-zinc-900"
+            className="text-2xl sm:text-3xl md:text-4xl font-mono tracking-tight text-center text-zinc-900"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -49,7 +49,7 @@ function Hero() {
           </motion.h1>
 
           {/* Personal narrative */}
-          <div className="w-full flex flex-col items-center gap-6">
+          <div className="w-full flex flex-col items-center gap-6 pt-2">
             <motion.p
               className="text-sm sm:text-base text-zinc-700 font-light leading-relaxed text-center max-w-md"
               initial={{ opacity: 0, y: 20 }}
