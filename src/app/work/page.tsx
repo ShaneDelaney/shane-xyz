@@ -40,7 +40,7 @@ export default function Work() {
     >
       <motion.div variants={item} layout className="space-y-4">
         <h1 className="text-4xl font-serif font-bold text-gray-800">My Journey</h1>
-        <h2 className="text-xl text-zinc-600 font-light">Creating content people want to watch</h2>
+        <h2 className="text-xl text-zinc-600 font-light">Creating content that people actually want to watch</h2>
         <Link href="/work/portfolio">
           <motion.div
             className="mt-8 p-6 rounded-2xl bg-black/5 backdrop-blur-sm border border-black/10 hover:bg-black/10 transition-all group"
@@ -79,11 +79,11 @@ export default function Work() {
               </div>
               <p className="text-zinc-600 text-base italic">Global social media and camera app with over 750 million monthly active users worldwide.</p>
               <ul className="space-y-2 text-zinc-700 font-light text-lg">
-                <li>• Identify and spotlight trending, culturally relevant content and tentpole moments for Snapchat&apos;s global audience</li>
-                <li>• Curate fresh, engaging public content alongside Trend Producers that resonates with Gen Z and Millennial users</li>
-                <li>• Review thousands of user-submitted Snaps daily to surface timely, relevant content</li>
-                <li>• Resolve content issues through cross-functional collaboration with engineering, moderation, and product teams</li>
-                <li>• Track and monitor US short-form video trends and major pop culture moments</li>
+                <li>• Spearhead identification of viral-potential content and cultural moments that drive engagement across Snapchat&apos;s global audience</li>
+                <li>• Develop cutting-edge public content strategies alongside Trend Producers to capture Gen Z and Millennial attention</li>
+                <li>• Analyze thousands of user-submitted Snaps daily to strategically surface high-performing, timely content</li>
+                <li>• Lead cross-functional collaboration with engineering, moderation, and product teams to optimize content performance</li>
+                <li>• Pioneer tracking methodologies for emerging US short-form video trends to keep Snapchat ahead of pop culture movements</li>
               </ul>
             </div>
           </div>
