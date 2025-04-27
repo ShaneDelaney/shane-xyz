@@ -34,7 +34,7 @@ const SpotlightSection = () => (
       <div className="p-5 rounded-xl border border-slate-200 bg-white/50 shadow-sm">
         <h3 className="text-lg font-medium text-black mb-3">My Spotlight Contribution</h3>
         <p className="text-sm text-zinc-700 leading-relaxed">
-          As a Content Curator for Spotlight, I identify and surface trending content for Snapchat's global audience of 820M+ monthly users. My work helps maintain Spotlight's 99% brand-safe environment while keeping Snapchat at the forefront of Gen Z cultural movements. I contribute to a platform that has become an incubator for viral trends, elevating everyday creators to social media success through authentic content that resonates with audiences.
+          As a Content Curator for Spotlight, I identify and surface trending content for Snapchat&apos;s global audience of 820M+ monthly users. My work helps maintain Spotlight&apos;s 99% brand-safe environment while keeping Snapchat at the forefront of Gen Z cultural movements. I contribute to a platform that has become an incubator for viral trends, elevating everyday creators to social media success through authentic content that resonates with audiences.
         </p>
       </div>
       
