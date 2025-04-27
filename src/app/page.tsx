@@ -4,6 +4,47 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Spotlight Ticker component
+const SpotlightTicker = () => {
+  const metrics = [
+    { text: "SPOTLIGHT USERS", value: "500M+" },
+    { text: "VIEWING TIME", value: "+175%" },
+    { text: "CREATORS", value: "1M+" },
+    { text: "GEN Z REACH", value: "90%" },
+    { text: "YOY GROWTH", value: "+21%" },
+    { text: "BRAND SAFETY", value: "99%" },
+    { text: "MONTHLY USERS", value: "820M+" },
+  ];
+
+  return (
+    <div className="w-full overflow-hidden bg-black text-white py-2 border-y border-white/20 mt-6">
+      <div className="ticker-container relative flex">
+        <div className="ticker-animation flex whitespace-nowrap">
+          {[...metrics, ...metrics].map((metric, index) => (
+            <div key={index} className="flex items-center mx-4">
+              <span className="font-mono text-xs sm:text-sm text-white">{metric.text}</span>
+              <span className="font-mono font-bold text-xs sm:text-sm text-green-400 ml-2">{metric.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style jsx>{`
+        .ticker-animation {
+          animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 function Hero() {
   return (
     <div className="relative w-full h-[100dvh] flex items-center justify-center px-4 py-4 sm:p-0 overflow-hidden">
@@ -57,7 +98,7 @@ function Hero() {
               transition={{ delay: 0.4 }}
             >
               <p>
-                Content Curator at Snap Inc. helping build Spotlight into one of the fastest-growing video platforms in the world.
+                Content Curator at Snap Inc. with an editorial eye for developing Spotlight into one of the fastest-growing video platforms in the world.
               </p>
             </motion.div>
 
@@ -93,32 +134,14 @@ function Hero() {
               </Link>
             </div>
             
-            {/* Stats */}
+            {/* Spotlight metrics ticker */}
             <motion.div
-              className="flex items-center gap-6 text-xs sm:text-sm text-zinc-500 font-light"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className="w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <div className="flex items-center gap-1">
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                <span>4M+ views</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M13 17l5-5-5-5M6 17l5-5-5-5" />
-                </svg>
-                <span>90% engagement</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z" />
-                </svg>
-                <span>40K+ followers</span>
-              </div>
+              <SpotlightTicker />
             </motion.div>
           </div>
         </div>
