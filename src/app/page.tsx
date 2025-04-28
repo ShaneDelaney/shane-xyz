@@ -4,47 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Spotlight Ticker component
-const SpotlightTicker = () => {
-  const metrics = [
-    { text: "SPOTLIGHT USERS", value: "500M+" },
-    { text: "VIEWING TIME", value: "+175%" },
-    { text: "CREATORS", value: "1M+" },
-    { text: "GEN Z REACH", value: "90%" },
-    { text: "YOY GROWTH", value: "+21%" },
-    { text: "BRAND SAFETY", value: "99%" },
-    { text: "MONTHLY USERS", value: "820M+" },
-  ];
-
-  return (
-    <div className="w-full overflow-hidden bg-black text-white py-2 border-y border-white/20 mt-6">
-      <div className="ticker-container relative flex">
-        <div className="ticker-animation flex whitespace-nowrap">
-          {[...metrics, ...metrics].map((metric, index) => (
-            <div key={index} className="flex items-center mx-4">
-              <span className="font-mono text-xs sm:text-sm text-white">{metric.text}</span>
-              <span className="font-mono font-bold text-xs sm:text-sm text-green-400 ml-2">{metric.value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <style jsx>{`
-        .ticker-animation {
-          animation: ticker 30s linear infinite;
-        }
-        @keyframes ticker {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
-    </div>
-  );
-};
-
 function Hero() {
   return (
     <div className="relative w-full h-[100dvh] flex items-center justify-center px-4 py-4 sm:p-0 overflow-hidden">
@@ -133,16 +92,6 @@ function Hero() {
                 </motion.button>
               </Link>
             </div>
-            
-            {/* Spotlight metrics ticker */}
-            <motion.div
-              className="w-full"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-            >
-              <SpotlightTicker />
-            </motion.div>
           </div>
         </div>
       </motion.div>
