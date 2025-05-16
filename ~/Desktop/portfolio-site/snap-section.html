@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snap Inc. Portfolio Section</title>
+  <style>
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #171717;
+      background-color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3, h4 {
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    /* Section Styles */
+    .snap-section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      margin-bottom: 40px;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: #555;
+      max-width: 800px;
+    }
+
+    .impact-block {
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 60px;
+    }
+
+    .impact-label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .impact-text {
+      font-size: 1.125rem;
+      max-width: 900px;
+    }
+
+    .key-wins {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .key-win-card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .key-win-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .key-win-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 20px;
+      background-color: #FFFC00; /* Snapchat yellow */
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+    }
+
+    .key-win-title {
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .data-point {
+      display: inline-block;
+      font-weight: bold;
+      color: #000;
+      background-color: #FFFC00; /* Snapchat yellow */
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="snap-section">
+      <div class="section-header">
+        <h1>Snapchat – Trend & Content Strategy</h1>
+        <p class="section-subtitle">Driving platform growth through editorial systems, voice alignment, and creative sourcing.</p>
+      </div>
+
+      <div class="impact-block">
+        <span class="impact-label">My Role</span>
+        <p class="impact-text">
+          As a Trend Curator at Snap, I identify and elevate culturally resonant UGC for the Spotlight platform <span class="data-point">~1K+ reviews/day</span>. I build internal tools and brand voice systems that ensure consistency across teams—translating complex data into clear documentation, pitch decks, and even a custom-built content app using Cursor.
+        </p>
+      </div>
+
+      <h3>Key Wins</h3>
+      
+      <div class="key-wins">
+        <div class="key-win-card">
+          <div class="key-win-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 4v16"></path></svg>
+          </div>
+          <h4 class="key-win-title">Executive-Facing Projects</h4>
+          <p>
+            Developed Snap Star highlight decks and sourced creator clips for C-suite presentations, including work with Billie Eilish, Mike Tyson, and Lizzo, contributing to <span class="data-point">+175% YoY engagement</span>.
+          </p>
+        </div>
+
+        <div class="key-win-card">
+          <div class="key-win-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+          <h4 class="key-win-title">Product x Content Collaboration</h4>
+          <p>
+            Partnered with the Data Science team on a "mission trending" initiative; created a web app and doc/slides to distill technical insight into editorial guidance for <span class="data-point">1M+ monetized creators</span>.
+          </p>
+        </div>
+
+        <div class="key-win-card">
+          <div class="key-win-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <h4 class="key-win-title">Brand Campaigns</h4>
+          <p>
+            Sourced content for the "Say It in a Snap" campaign featured in NYC's Times Square subway, reaching an estimated <span class="data-point">500K+ daily impressions</span> and amplifying creator visibility.
+          </p>
+        </div>
+
+        <div class="key-win-card">
+          <div class="key-win-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h4 class="key-win-title">Voice & Trust</h4>
+          <p>
+            Maintained tone and content standards for <span class="data-point">99% brand-safe</span> Spotlight feed; worked cross-functionally with moderation, product, and marketing to establish consistent guidelines across teams.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html> 

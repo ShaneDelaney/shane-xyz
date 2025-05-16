@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.aider*
+public/assets/stockx-videos/
+temp/
+
+# Video files
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.flv
+
+# Temp directory
+temp/
+
+# Media directories
+public/assets/stockx-videos/
+public/assets/collider-videos/
