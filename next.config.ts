@@ -6,6 +6,15 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    unoptimized: process.env.NODE_ENV === 'development',
+  },
 }
 
 const withPWA = require('next-pwa')({
