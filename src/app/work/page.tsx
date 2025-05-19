@@ -66,6 +66,27 @@ const SpotlightSection = () => (
                 <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
+            <div className="text-sm text-zinc-700 group relative">
+              Led content strategy and curation for Snap's <span className="font-medium">New User Experience (NUX)</span> pilot focused on 13–17-year-olds—building Spotlight's first-touch feed by sourcing <span className="font-mono font-medium text-black px-1 py-0.5 bg-yellow-200 rounded-sm">300+</span> Snaps across Entertainment, Gaming, Fitness, and Tech. Balanced platform data with editorial judgment to optimize engagement and creator diversity.
+              <div className="absolute invisible group-hover:visible bg-black/75 text-white text-xs p-2 rounded w-64 -mt-1 left-0 top-full z-10">
+                Part of Snap's larger push to refine teen onboarding experience; insights from this pilot helped inform broader Spotlight curation logic.
+              </div>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="min-w-5 text-yellow-500 pt-0.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <p className="text-sm text-zinc-700">Created <span className="font-medium">Snap Stars</span> promotional decks for Billie Eilish and Mike Tyson</p>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="min-w-5 text-yellow-500 pt-0.5">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
             <p className="text-sm text-zinc-700">Launched <span className="font-medium">"boosted content"</span> initiative with data science team</p>
           </li>
           <li className="flex items-start gap-3">
@@ -75,14 +96,6 @@ const SpotlightSection = () => (
               </svg>
             </div>
             <p className="text-sm text-zinc-700">Built <span className="font-medium">brand voice documentation</span> for cross-team alignment</p>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Created <span className="font-medium">Snap Stars</span> promotional decks for Billie Eilish and Mike Tyson</p>
           </li>
           <li className="flex items-start gap-3">
             <div className="min-w-5 text-yellow-500 pt-0.5">
@@ -135,17 +148,6 @@ const SpotlightSection = () => (
       <div>
         <h3 className="text-lg font-medium text-black mb-3">Strategic Impact Areas</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
-            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h4 className="text-base font-medium text-black mb-2">Editorial Systems & Brand Voice</h4>
-            <p className="text-sm text-zinc-700">
-              Developed voice documentation and editorial standards to maintain brand consistency across teams, ensuring 99% brand-safe content curation.
-            </p>
-          </div>
           
           <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
             <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
@@ -154,8 +156,34 @@ const SpotlightSection = () => (
               </svg>
             </div>
             <h4 className="text-base font-medium text-black mb-2">Data-Driven Content Strategy</h4>
-            <p className="text-sm text-zinc-700">
+            <p className="text-sm text-zinc-700 mb-3">
               Collaborated with data science team on "boosted content" initiatives, translating analytics into guidance for 1M+ monetized creators.
+            </p>
+            <Link
+              href="/boosted-content"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium transition-colors hover:bg-yellow-200"
+            >
+              View case study
+              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+          
+          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
+            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 22c6.23-.05 7.87-5.57 7.5-10-.36-4.34-3.95-9.96-7.5-10-3.55.04-7.14 5.66-7.5 10-.37 4.43 1.27 9.95 7.5 10z" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 10h8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 8v8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h4 className="text-base font-medium text-black mb-2">New User Experience (NUX)</h4>
+            <p className="text-sm text-zinc-700 group relative">
+              Led content strategy for teen-focused pilot, curating 300+ Snaps across Entertainment, Gaming, Fitness and Tech. Balanced platform data with editorial judgment to optimize engagement.
+              <span className="absolute invisible group-hover:visible bg-black/75 text-white text-xs p-2 rounded w-64 -mt-1 left-0 top-full z-10">
+                Part of Snap's larger push to refine teen onboarding experience; insights helped inform broader Spotlight curation logic.
+              </span>
             </p>
           </div>
           
