@@ -98,16 +98,16 @@ const projects: Project[] = [
     company: "Snapchat",
     role: "Trend Curator",
     timeline: "Mar 2025–Present",
-    description: "Spearheaded Snapchat's teen onboarding strategy (13–17), curating 300+ Snaps and developing a Gen Z-informed editorial feed.",
-    longDescription: "Led editorial strategy for Snapchat's New User Experience, building a curated first-week content feed optimized for teen audiences. Balanced algorithmic signals with human editorial input to drive higher retention and platform adoption.",
+    description: "Curated high-quality user-generated content for Snapchat's New User Experience, creating personalized content feeds for teens (13-17).",
+    longDescription: "Developed personalized onboarding content flows that guide new users through Snapchat's features while showcasing high-performing UGC from creators that resonates with teen audiences (13-17), balancing algorithmic signals with human editorial input.",
     details: [
-      "Curated 300+ Snaps across Entertainment, Gaming, Fitness, and Tech categories",
-      "Identified content gaps and pitched ideal creator partnerships",
-      "Optimized for engagement and time-to-post metrics",
-      "Partnered with UX research, data, and product teams"
+      "Reviewed and recommended 300+ content pieces for diverse teen cohorts segmented by interest",
+      "Filtered content using data-driven cohort guidelines (M1.2 incremental data)",
+      "Collaborated with product engineering through dedicated Slack channels (#nux-curated-feed)",
+      "Ensured demographic fit while maintaining editorial quality standards"
     ],
-    tags: ["Gen Z Strategy", "Content Curation", "Product Collaboration"],
-    metrics: ["13–17 teen audience", "300+ curated Snaps", "Improved retention"],
+    tags: ["Teen Content Strategy", "Cohort Curation", "Product Collaboration"],
+    metrics: ["13–17 teen audience", "300+ pieces per cohort", "Diverse creators"],
     image: "/assets/snap-logo.png",
     bgColor: "#f9f9f9",
     relatedLinks: [
@@ -119,7 +119,7 @@ const projects: Project[] = [
       {
         title: "Snap Feed Curation",
         url: "",
-        description: "Developed editorial standards for the AI-powered Snap Feed, which organizes users' memories and camera roll content into personalized collections, enhancing discovery and engagement during critical first-week user journeys."
+        description: "Developed editorial standards for the AI-powered Spotlight feed, focusing on user-generated content discovery and engagement, helping surface the most relevant creator content during critical first-week user journeys."
       },
       {
         title: "Onboarding Optimization",
