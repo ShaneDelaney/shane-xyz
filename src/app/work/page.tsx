@@ -74,9 +74,7 @@ const PDFPreview = ({ url, title }: { url: string; title: string }) => {
               
               <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center z-20">
                 <a 
-                  href={url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="mailto:shanedelaney11@gmail.com?subject=Request for Full Report: StockX Core Insights&body=Hello Shane,%0D%0A%0D%0AI'm interested in receiving the full StockX Core Insights report that I previewed on your portfolio site.%0D%0A%0D%0AThank you,%0D%0A"
                   className="bg-black text-white text-sm font-medium rounded-full px-4 py-2 hover:bg-gray-800 transition-colors"
                 >
                   Request Full Report
