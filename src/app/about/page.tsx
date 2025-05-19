@@ -139,8 +139,13 @@ export default function About() {
               <div className="space-y-6 mt-5">
                 <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-full">
-                      <span className="text-xl font-bold text-gray-600">LMU</span>
+                    <div className="relative w-12 h-12 flex-shrink-0">
+                      <Image
+                        src="/assets/lmu-logo.png"
+                        alt="Loyola Marymount University logo"
+                        fill
+                        className="object-contain"
+                      />
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-800">Loyola Marymount University</h3>
