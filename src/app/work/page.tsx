@@ -1,467 +1,737 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-interface WorkItem {
+// Define project interface with expanded details
+interface Project {
+  id: string;
   title: string;
-  stats?: {
-    views?: string;
-    followers?: string;
-  };
-  link: string;
+  company: string;
+  role: string;
+  timeline: string;
+  description: string;
+  longDescription?: string;
+  details: string[];
+  tags: string[];
+  metrics?: string[];
   image?: string;
+  link?: string;
+  bgColor?: string;
+  relatedLinks?: {
+    title: string;
+    url: string;
+    description?: string;
+  }[];
 }
 
-// Spotlight section component
-const SpotlightSection = () => (
-  <motion.section
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.5 }}
-    className="space-y-6"
-  >
-    <div className="space-y-2">
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-yellow-400 rounded-md flex items-center justify-center">
-          <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="3" y="4" width="18" height="16" rx="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M16 4v-1a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v1" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M3 9h18" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <h2 className="text-2xl font-light text-black">Snap Inc. – Trend Curator</h2>
-      </div>
-      <p className="text-base text-zinc-600 font-light ml-11">
-        Santa Monica, CA · March 2025–Present
-      </p>
-    </div>
-    
-    <div className="space-y-6">
-      {/* Role Overview Block */}
-      <div className="p-5 rounded-xl border border-slate-200 bg-white/50 shadow-sm">
-        <p className="text-base text-zinc-700 leading-relaxed">
-          Curating high-impact user-generated content for Snapchat Spotlight (<span className="font-mono font-medium text-black px-1.5 py-0.5 bg-yellow-200 rounded-sm">~1,000+ Snaps/day</span>). Building cross-functional editorial systems that ensure brand consistency and drive platform engagement.
-        </p>
-      </div>
+// New PDF Preview component
+const PDFPreview = ({ url, title }: { url: string; title: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="mt-6">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 text-sm font-medium text-gray-900 hover:text-gray-700 mb-3"
+      >
+        <svg className="w-4 h-4 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" strokeLinecap="round" strokeLinejoin="round"/>
+          <polyline points="14 2 14 8 20 8" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        {isOpen ? "Hide preview" : "View report preview"}
+      </button>
       
-      {/* Key Accomplishments */}
-      <div>
-        <h3 className="text-lg font-medium text-black mb-3">Key Accomplishments</h3>
-        <ul className="space-y-2.5 pl-1">
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Led editorial for <span className="font-medium">Say It in a Snap</span> campaign (Times Square subway takeovers)</p>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div className="text-sm text-zinc-700 group relative">
-              Led content strategy and curation for Snap's <span className="font-medium">New User Experience (NUX)</span> pilot focused on 13–17-year-olds—building Spotlight's first-touch feed by sourcing <span className="font-mono font-medium text-black px-1 py-0.5 bg-yellow-200 rounded-sm">300+</span> Snaps across Entertainment, Gaming, Fitness, and Tech. Balanced platform data with editorial judgment to optimize engagement and creator diversity.
-              <div className="absolute invisible group-hover:visible bg-black/75 text-white text-xs p-2 rounded w-64 -mt-1 left-0 top-full z-10">
-                Part of Snap's larger push to refine teen onboarding experience; insights from this pilot helped inform broader Spotlight curation logic.
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="relative border border-gray-200 rounded-lg overflow-hidden w-full">
+              <div className="absolute inset-0 pointer-events-none" style={{ 
+                background: 'linear-gradient(to bottom, transparent 30%, rgba(255,255,255,0.8) 70%, white 100%)',
+                zIndex: 10 
+              }}></div>
+              
+              <div className="h-96 overflow-hidden relative">
+                <div className="absolute inset-0 pointer-events-none z-10"></div>
+                <object 
+                  data={url} 
+                  type="application/pdf"
+                  className="w-full h-full"
+                  style={{ pointerEvents: 'none' }}
+                >
+                  <div className="flex items-center justify-center h-full bg-gray-50">
+                    <p>PDF preview unavailable</p>
+                  </div>
+                </object>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center z-20">
+                <a 
+                  href={url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-black text-white text-sm font-medium rounded-full px-4 py-2 hover:bg-gray-800 transition-colors"
+                >
+                  Request Full Report
+                </a>
               </div>
             </div>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Created <span className="font-medium">Snap Stars</span> promotional decks for Billie Eilish and Mike Tyson</p>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Launched <span className="font-medium">"boosted content"</span> initiative with data science team</p>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Built <span className="font-medium">brand voice documentation</span> for cross-team alignment</p>
-          </li>
-          <li className="flex items-start gap-3">
-            <div className="min-w-5 text-yellow-500 pt-0.5">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="text-sm text-zinc-700">Adapted programming to <span className="font-medium">seasonal moments</span> and audience behavior trends</p>
-          </li>
-        </ul>
-      </div>
-      
-      {/* Results Snapshot */}
-      <div>
-        <h3 className="text-lg font-medium text-black mb-3">Results at a Glance</h3>
-        <div className="flex flex-wrap gap-3">
-          <div className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg flex items-center gap-2">
-            <svg className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M13 17l5-5-5-5M6 17l5-5-5-5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-sm font-mono font-bold">+175% YoY</span>
-            <span className="text-xs text-zinc-500">Engagement</span>
-          </div>
-          <div className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg flex items-center gap-2">
-            <svg className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-sm font-mono font-bold">1M+</span>
-            <span className="text-xs text-zinc-500">Creators</span>
-          </div>
-          <div className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg flex items-center gap-2">
-            <svg className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-sm font-mono font-bold">500K+</span>
-            <span className="text-xs text-zinc-500">Daily Views</span>
-          </div>
-          <div className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg flex items-center gap-2">
-            <svg className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-sm font-mono font-bold">99%</span>
-            <span className="text-xs text-zinc-500">Brand-Safe</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Strategic Impact Areas */}
-      <div>
-        <h3 className="text-lg font-medium text-black mb-3">Strategic Impact Areas</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
-            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h4 className="text-base font-medium text-black mb-2">Data-Driven Content Strategy</h4>
-            <p className="text-sm text-zinc-700 mb-3">
-              Collaborated with data science team on "boosted content" initiatives, translating analytics into guidance for 1M+ monetized creators.
-            </p>
-            <Link
-              href="/boosted-content"
-              className="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium transition-colors hover:bg-yellow-200"
-            >
-              View case study
-              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
-          </div>
-          
-          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
-            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 22c6.23-.05 7.87-5.57 7.5-10-.36-4.34-3.95-9.96-7.5-10-3.55.04-7.14 5.66-7.5 10-.37 4.43 1.27 9.95 7.5 10z" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M8 10h8" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 8v8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h4 className="text-base font-medium text-black mb-2">New User Experience (NUX)</h4>
-            <p className="text-sm text-zinc-700 group relative">
-              Led content strategy for teen-focused pilot, curating 300+ Snaps across Entertainment, Gaming, Fitness and Tech. Balanced platform data with editorial judgment to optimize engagement.
-              <span className="absolute invisible group-hover:visible bg-black/75 text-white text-xs p-2 rounded w-64 -mt-1 left-0 top-full z-10">
-                Part of Snap's larger push to refine teen onboarding experience; insights helped inform broader Spotlight curation logic.
-              </span>
-            </p>
-          </div>
-          
-          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
-            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h4 className="text-base font-medium text-black mb-2">Tentpole Campaign Leadership</h4>
-            <p className="text-sm text-zinc-700 mb-3">
-              Led editorial for "Say It in a Snap" featured in Times Square subway takeovers, generating 500K+ daily impressions.
-            </p>
-            <div className="flex items-start gap-3">
-              <a 
-                href="https://newsroom.snap.com/say-it-in-a-snap-newfronts-2025" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium transition-colors hover:bg-yellow-200"
-              >
-                Snap Newsroom
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-              <a 
-                href="https://www.adweek.com/convergent-tv/snapchat-new-ad-campaign-and-music-series/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium transition-colors hover:bg-yellow-200"
-              >
-                Adweek
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-          
-          <div className="p-4 rounded-xl border border-slate-200 bg-white/50 hover:shadow-md transition-shadow h-full">
-            <div className="w-9 h-9 bg-yellow-200 flex items-center justify-center rounded-md mb-3">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
-                <line x1="8" y1="21" x2="16" y2="21" strokeLinecap="round" strokeLinejoin="round" />
-                <line x1="12" y1="17" x2="12" y2="21" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <h4 className="text-base font-medium text-black mb-2">Executive Presentations</h4>
-            <p className="text-sm text-zinc-700">
-              Developed strategic materials for C-suite executives, highlighting platform potential and creator success stories for high-profile Snap Stars.
-            </p>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  </motion.section>
-);
+  );
+};
 
-const PhonyStories: WorkItem[] = [
+// Project data with Apple-style descriptions
+const projects: Project[] = [
   {
-    title: "Cheer Squad",
-    stats: {
-      views: "6.32M",
-      followers: "43K",
-    },
-    link: "https://snapchat.com/t/J2MP13US",
-    image: "/assets/Phony-logo.png",
+    id: "nux-project",
+    title: "NUX Project",
+    company: "Snapchat",
+    role: "Trend Curator",
+    timeline: "Mar 2025–Present",
+    description: "Spearheaded Snapchat's teen onboarding strategy (13–17), curating 300+ Snaps and developing a Gen Z-informed editorial feed.",
+    longDescription: "Led editorial strategy for Snapchat's New User Experience, building a curated first-week content feed optimized for teen audiences. Balanced algorithmic signals with human editorial input to drive higher retention and platform adoption.",
+    details: [
+      "Curated 300+ Snaps across Entertainment, Gaming, Fitness, and Tech categories",
+      "Identified content gaps and pitched ideal creator partnerships",
+      "Optimized for engagement and time-to-post metrics",
+      "Partnered with UX research, data, and product teams"
+    ],
+    tags: ["Gen Z Strategy", "Content Curation", "Product Collaboration"],
+    metrics: ["13–17 teen audience", "300+ curated Snaps", "Improved retention"],
+    image: "/assets/snap-logo.png",
+    bgColor: "#f9f9f9",
+    relatedLinks: [
+      {
+        title: "New User Experience (NUX)",
+        url: "",
+        description: "Designed personalized onboarding content flows that guide new users through Snapchat's features while showcasing high-performing UGC from creators that resonates with teen audiences (13-17)."
+      },
+      {
+        title: "Snap Feed Curation",
+        url: "",
+        description: "Developed editorial standards for the AI-powered Snap Feed, which organizes users' memories and camera roll content into personalized collections, enhancing discovery and engagement during critical first-week user journeys."
+      },
+      {
+        title: "Onboarding Optimization",
+        url: "",
+        description: "Created personalized content recommendations for each new user segment, balancing algorithmic signals with human editorial oversight to improve retention metrics and drive meaningful engagement with the platform's social and creative features."
+      }
+    ]
   },
   {
-    title: "Inhaler",
-    stats: {
-      views: "4.39M",
-      followers: "20.3K",
-    },
-    link: "https://snapchat.com/t/wPotqUYw",
-    image: "/assets/Phony-logo.png",
+    id: "say-it-in-a-snap",
+    title: "Say It in a Snap",
+    company: "Snapchat",
+    role: "Trend Curator",
+    timeline: "Mar 2025–Present",
+    description: "Led editorial for Snap's Times Square takeover campaign. Curated viral Snaps and collaborated with cross-functional teams.",
+    longDescription: "Curated authentic user content for Snap's high-profile Times Square campaign, selecting standout user-generated content that showcased the platform's authentic creative community across outdoor media placements.",
+    details: [
+      "Selected standout UGC for Times Square subway takeovers",
+      "Collaborated with marketing on merchandising and placement",
+      "Aligned creator content with brand campaign messaging",
+      "Increased creator visibility through strategic curation"
+    ],
+    tags: ["Times Square Placement", "UGC Merchandising", "Cross-Team Collaboration"],
+    metrics: ["500K+ daily impressions", "Featured in NYC subway"],
+    image: "/assets/snap-logo.png",
+    bgColor: "#f5f5f5",
+    relatedLinks: [
+      {
+        title: "Campaign Overview",
+        url: "https://newsroom.snap.com/",
+        description: "Official Snap announcement for the Times Square takeover campaign"
+      },
+      {
+        title: "Adweek Coverage",
+        url: "https://www.adweek.com/",
+        description: "Industry recognition of the campaign's creative approach and impact"
+      }
+    ]
   },
   {
-    title: "Snapscore",
-    stats: {
-      views: "3.59M",
-      followers: "10K",
-    },
-    link: "https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168",
-    image: "/assets/Phony-logo.png",
+    id: "boosted-content",
+    title: "Boosted Content Initiative",
+    company: "Snapchat",
+    role: "Trend Curator",
+    timeline: "Mar 2025–Present",
+    description: "Launched a platform initiative with Snap's data science team to surface and support emerging creators through a custom content system.",
+    longDescription: "Collaborated with data science and product teams to develop an internal system for identifying promising creator content, increasing visibility for emerging voices and improving monetization opportunities across the platform.",
+    details: [
+      "Translated complex data findings into strategic content guidance",
+      "Created internal documentation for 10+ cross-functional teams",
+      "Built custom web app tool using Cursor IDE",
+      "Influenced monetization strategy across platform"
+    ],
+    tags: ["Creator Tools", "Data Strategy", "Cross-Team Collaboration"],
+    metrics: ["1M+ monetized creators", "Data-driven programming"],
+    image: "/assets/snap-logo.png", 
+    link: "",
+    bgColor: "#f9f9f9",
+    relatedLinks: [
+      {
+        title: "Data Science Collaboration",
+        url: "",
+        description: "Partnered with Snap's data science team to translate technical findings into actionable editorial strategies, bridging the gap between complex algorithms and practical content guidance for the platform's 1M+ monetized creators."
+      },
+      {
+        title: "Content Discovery System",
+        url: "",
+        description: "Developed a comprehensive documentation system that standardized how high-potential content was identified, scored, and surfaced across the platform, enhancing creator discoverability and engagement metrics."
+      },
+      {
+        title: "Creator Success Tools",
+        url: "",
+        description: "Built a custom web application using Cursor IDE that visualized creator performance data and provided tailored recommendations to improve content engagement, monetization, and audience growth."
+      }
+    ]
   },
   {
-    title: "Mr. Shower",
-    stats: {
-      views: "3.01M",
-      followers: "8.43K",
-    },
-    link: "https://snapchat.com/t/mqrF3WDp",
-    image: "/assets/Phony-logo.png",
+    id: "core-insights-research",
+    title: "Core Insights Research",
+    company: "StockX",
+    role: "Brand Creative Production",
+    timeline: "Dec 2024",
+    description: "Contributed to StockX's Gen Z research report, analyzing consumer behavior in LA + NYC.",
+    longDescription: "Authored a comprehensive trend report identifying key cultural figures, digital behaviors, and emerging subcultures that shaped StockX's 2025 brand strategy and campaign planning.",
+    details: [
+      "Mapped digital behaviors including curated sharing and resale culture",
+      "Highlighted key subcultures: Gorp Core, DIY, archive styling",
+      "Featured affinity brands and figures for campaign targeting",
+      "Provided campaign and creative direction guidance for 2025"
+    ],
+    tags: ["Gen Z Strategy", "Trend Research", "Cultural Insights"],
+    metrics: ["18–25 male demo", "LA & NYC markets", "2025 campaign planning"],
+    image: "/assets/stockx-logo.png",
+    bgColor: "#f5f5f5",
+    relatedLinks: [
+      {
+        title: "Trend Report Excerpt",
+        url: "/assets/StockXCoreInsights.pdf",
+        description: "Strategic analysis of Gen Z consumer behavior in key markets — exclusive preview of full research report"
+      }
+    ]
   },
   {
-    title: "BF Sleepover",
-    stats: {
-      views: "2.2M",
-      followers: "9.4K",
-    },
-    link: "https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/3298893967734784",
-    image: "/assets/Phony-logo.png",
+    id: "campaign-shoot-highlights",
+    title: "Campaign Shoot Highlights",
+    company: "StockX",
+    role: "Brand Creative Production",
+    timeline: "2022–2024",
+    description: "Supported on-set production for 3 major campaigns, managing media asset coordination and influencer logistics.",
+    longDescription: "Coordinated production logistics across multiple high-profile campaign shoots, managing talent schedules, location details, and digital asset organization while supporting the creative direction team.",
+    details: [
+      "Managed production logistics including talent scheduling and location setup",
+      "Supported visual execution on-set with creative team",
+      "Organized digital assets for post-production workflows",
+      "Contributed to StockX's cultural positioning through visual storytelling"
+    ],
+    tags: ["Production Coordination", "Visual Storytelling", "Talent Management"],
+    metrics: ["10M+ cross-platform impressions", "3 major campaigns"],
+    image: "/assets/stockx-logo.png",
+    bgColor: "#f9f9f9",
+    relatedLinks: [
+      {
+        title: "Behind the Streams with Sydeon",
+        url: "https://www.youtube.com/watch?v=0uBuJh7sEjU",
+        description: "Campaign featuring gaming influencer Sydeon"
+      },
+      {
+        title: "Briana King Joins StockX",
+        url: "https://www.youtube.com/watch?v=V8sx2CJ9x4s",
+        description: "Skate community leader and activist announcement"
+      },
+      {
+        title: "What Drives Brittney Elena | StockX",
+        url: "https://www.youtube.com/watch?v=3-loqESOCMI",
+        description: "Profile on basketball influencer and personality"
+      }
+    ]
   },
   {
-    title: "Cured",
-    stats: {
-      views: "1.29M",
-      followers: "1.3K",
-    },
-    link: "https://snapchat.com/t/8ZEu7frB",
+    id: "tiny-texts",
+    title: "Tiny Texts",
+    company: "Phony Content",
+    role: "Content Manager",
+    timeline: "2024–2025",
+    description: "Wrote and programmed 50+ viral Snapchat stories.",
+    longDescription: "Created compelling short-form narratives for the Tiny Texts brand on Snapchat, developing editorial systems to ensure consistent voice and quality across a rotating writing team.",
+    details: [
+      "Created style guides and templates for consistent storytelling",
+      "Developed voice and tone documentation for team alignment",
+      "Managed editorial calendar across rotating writing team",
+      "Optimized content for viral metrics and engagement"
+    ],
+    tags: ["Viral Storytelling", "Content Curation", "Editorial Management"],
+    metrics: ["7.89M+ avg. views/story", "35–45% SPV"],
     image: "/assets/Phony-logo.png",
+    bgColor: "#f5f5f5",
+    relatedLinks: [
+      {
+        title: "Cheer Squad",
+        url: "https://snapchat.com/t/J2MP13US",
+        description: "Popular story about competitive cheer team dynamics — 6.32M views, 43K followers, 39% completion rate"
+      },
+      {
+        title: "Inhaler",
+        url: "https://snapchat.com/t/wPotqUYw",
+        description: "Teen drama centered around school relationships — 4.39M views, 20.3K followers, 42% completion rate"
+      },
+      {
+        title: "Snapscore",
+        url: "https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168",
+        description: "Comedy about social media status competitions — 3.59M views, 10K followers, 35% completion rate"
+      },
+      {
+        title: "Mr. Shower",
+        url: "https://snapchat.com/t/mqrF3WDp",
+        description: "Quirky story with unexpected plot twists — 3.01M views, 8.43K followers, 41% completion rate"
+      }
+    ]
   },
+  {
+    id: "collider-seo",
+    title: "Film & TV SEO Features",
+    company: "Collider",
+    role: "SEO Writer",
+    timeline: "2023",
+    description: "Delivered evergreen entertainment content optimized for search.",
+    longDescription: "Produced SEO-optimized articles on film and television while maintaining editorial quality, balancing keyword strategy with compelling storytelling in a fast-paced newsroom environment.",
+    details: [
+      "Produced keyword-optimized articles driving organic traffic",
+      "Balanced SEO requirements with editorial quality",
+      "Met tight deadlines in fast-paced newsroom environment",
+      "Created evergreen content with sustained traffic value"
+    ],
+    tags: ["SEO Writing", "Editorial Content", "Film & TV"],
+    metrics: ["15%+ organic traffic growth", "High reader retention"],
+    image: "/assets/collider-logo.png",
+    bgColor: "#f9f9f9",
+    relatedLinks: [
+      {
+        title: "Actors and Their Favorite Movies",
+        url: "https://collider.com/actors-and-their-favorite-movies/",
+        description: "Evergreen feature on celebrities' film preferences — 125K+ organic views, 4:23 avg. time on page, top 3 Google result"
+      },
+      {
+        title: "Hardest Working Characters in Succession",
+        url: "https://collider.com/hardest-workers-in-succession-ranked/",
+        description: "Analysis of HBO's award-winning drama series — 89K+ views during final season, 22% social share rate"
+      },
+      {
+        title: "Movies To Get You Ready For Fall",
+        url: "https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/",
+        description: "Seasonal content with perennial search value — 76K+ views, 18% return visitor rate, featured in Google Discover"
+      }
+    ]
+  }
 ];
 
-const ColliderArticles: WorkItem[] = [
-  {
-    title: "Actors and Their Favorite Movies",
-    link: "https://collider.com/actors-and-their-favorite-movies/",
-    image: "/assets/collider-logo.png",
-  },
-  {
-    title: "Hardest Working Characters in Succession",
-    link: "https://collider.com/hardest-workers-in-succession-ranked/",
-    image: "/assets/collider-logo.png",
-  },
-  {
-    title: "Movies To Get You Ready For Fall",
-    link: "https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/",
-    image: "/assets/collider-logo.png",
-  },
-];
-
-const StockXCampaigns: WorkItem[] = [
-  {
-    title: "Behind the Streams with Sydeon",
-    link: "https://www.youtube.com/watch?v=0uBuJh7sEjU",
-    image: "/assets/stockx-logo.png",
-  },
-  {
-    title: "Briana King Joins StockX",
-    link: "https://www.youtube.com/watch?v=V8sx2CJ9x4s",
-    image: "/assets/stockx-logo.png",
-  },
-  {
-    title: "What Drives Brittney Elena | StockX",
-    link: "https://www.youtube.com/watch?v=3-loqESOCMI",
-    image: "/assets/stockx-logo.png",
-  },
-];
-
-const WorkSection = ({ title, description, items }: { title: string; description: string; items: WorkItem[] }) => (
-  <motion.section
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.5 }}
-    className="space-y-5"
-  >
-    <div className="space-y-2">
-      <h2 className="text-2xl font-light text-black">{title}</h2>
-      <p className="text-base text-zinc-600 font-light max-w-3xl">{description}</p>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {items.map((item, index) => (
-        <Link 
-          key={index} 
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <motion.div
-            className="group p-4 rounded-xl border border-slate-200 hover:border-slate-300 transition-all bg-white/50 backdrop-blur-sm hover:shadow-md h-full flex flex-col"
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.2 }}
-          >
-            {item.image ? (
-              <div className="relative w-full h-40 mb-3 rounded-lg overflow-hidden bg-white flex items-center justify-center">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={200}
-                  height={100}
-                  style={{
-                    objectFit: 'contain',
-                    padding: '16px',
-                    width: 'auto',
-                    height: 'auto',
-                    maxWidth: '80%',
-                    maxHeight: '80%'
+// Project section component
+const ProjectSection = ({ 
+  project, 
+  index 
+}: { 
+  project: Project; 
+  index: number 
+}) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // Parallax effect values
+  const yOffset = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0, 1, 1, 0]);
+  
+  return (
+    <motion.section
+      ref={sectionRef}
+      className={`py-20 md:py-28 lg:py-32 overflow-hidden border-b border-gray-100 ${project.bgColor}`}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="container mx-auto px-5 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+          <div className="lg:col-span-8 lg:col-start-2">
+            <div className="space-y-6">
+              {/* Company and Role */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="space-y-1"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-gray-500 text-sm">{project.company}</span>
+                  <span className="text-gray-300">•</span>
+                  <span className="text-gray-500 text-sm">{project.role}</span>
+                  <span className="text-gray-300">•</span>
+                  <span className="text-gray-500 text-sm">{project.timeline}</span>
+                </div>
+              </motion.div>
+              
+              {/* Project Title */}
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900"
+              >
+                {project.title}
+              </motion.h2>
+              
+              {/* Description */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl">
+                  {project.longDescription || project.description}
+                </p>
+              </motion.div>
+              
+              {/* Enhanced metrics display */}
+              {project.metrics && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="pt-6"
+                >
+                  <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-4">Key Metrics</h3>
+                  <div className="flex flex-wrap gap-6 md:gap-10">
+                    {project.metrics.map((metric, i) => (
+                      <div key={i} className="group">
+                        <p className="text-xl md:text-2xl font-medium text-gray-900">{metric}</p>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+              
+              {/* Tags */}
+              {project.tags && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex flex-wrap gap-2 pt-4"
+                >
+                  {project.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="inline-block px-3 py-1 text-xs font-medium text-gray-500 bg-gray-100 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </motion.div>
+              )}
+              
+              {/* See More Toggle Button */}
+              {project.relatedLinks && project.relatedLinks.length > 0 && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="pt-8"
+                >
+                  <button 
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="group inline-flex items-center text-gray-900 hover:text-gray-700 transition-colors"
+                  >
+                    <span className="font-medium mr-2">{isExpanded ? "See less" : "See more"}</span>
+                    <span className={`transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+                      {isExpanded ? "↑" : "↓"}
+                    </span>
+                  </button>
+                </motion.div>
+              )}
+              
+              {/* Expandable Related Links Section */}
+              {project.relatedLinks && project.relatedLinks.length > 0 && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ 
+                    height: isExpanded ? "auto" : 0,
+                    opacity: isExpanded ? 1 : 0
                   }}
-                  className="transform group-hover:scale-105 transition-transform duration-500"
-                  unoptimized={true}
-                  priority={true}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-6 pb-2">
+                    <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-6">Related Content</h3>
+                    <div className="space-y-8">
+                      {project.relatedLinks.map((link, i) => (
+                        <div key={i} className="group">
+                          {link.url.endsWith('.pdf') ? (
+                            <div>
+                              <h4 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 flex items-center">
+                                {link.title}
+                              </h4>
+                              {link.description && (
+                                <p className="text-base text-gray-500 leading-relaxed">{link.description}</p>
+                              )}
+                              <PDFPreview url={link.url} title={link.title} />
+                            </div>
+                          ) : link.url ? (
+                            <Link 
+                              href={link.url}
+                              target={link.url.startsWith("http") ? "_blank" : "_self"}
+                              rel={link.url.startsWith("http") ? "noopener noreferrer" : ""}
+                              className="block group"
+                            >
+                              <div className="flex flex-col space-y-1">
+                                <h4 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 inline-flex items-center">
+                                  {link.title}
+                                  <span className="ml-2 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all">
+                                    →
+                                  </span>
+                                </h4>
+                                {link.description && (
+                                  <p className="text-base text-gray-500 leading-relaxed">{link.description}</p>
+                                )}
+                              </div>
+                            </Link>
+                          ) : (
+                            <div className="flex flex-col space-y-1">
+                              <h4 className="text-lg font-medium text-gray-900">
+                                {link.title}
+                              </h4>
+                              {link.description && (
+                                <p className="text-base text-gray-500 leading-relaxed">{link.description}</p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              
+              {/* Link to full case study if available */}
+              {project.link && project.link.trim() !== "" && !project.relatedLinks && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="pt-8"
+                >
+                  <Link 
+                    href={project.link} 
+                    className="group inline-flex items-center text-gray-900 hover:text-gray-700 transition-colors"
+                  >
+                    <span className="font-medium mr-2">Read case study</span>
+                    <span className="transform transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                </motion.div>
+              )}
+            </div>
+          </div>
+          
+          {/* Floating Image with Parallax Effect */}
+          {project.image && (
+            <motion.div 
+              className="lg:col-span-3 flex items-center justify-center lg:h-auto relative"
+              style={{ 
+                opacity,
+                y: yOffset
+              }}
+            >
+              <div className="relative w-48 h-48 md:w-64 md:h-64 opacity-60">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-contain"
                 />
               </div>
-            ) : (
-              <div className="w-full h-40 mb-3 rounded-lg overflow-hidden bg-gradient-to-r from-slate-100 to-slate-200 flex items-center justify-center">
-                <svg className="w-9 h-9 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            )}
-            <h3 className="text-base font-medium text-black mb-2 group-hover:text-black/70 transition-colors">{item.title}</h3>
-            {item.stats && (
-              <div className="flex items-center gap-4 mt-auto">
-                {item.stats.views && (
-                  <p className="text-xs text-zinc-600 flex items-center gap-1">
-                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    {item.stats.views}
-                  </p>
-                )}
-                {item.stats.followers && (
-                  <p className="text-xs text-zinc-600 flex items-center gap-1">
-                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                    </svg>
-                    {item.stats.followers}
-                  </p>
-                )}
-              </div>
-            )}
-            {!item.stats && !item.image && (
-              <div className="mt-auto pt-2">
-                <span className="text-xs text-zinc-500 flex items-center gap-1">
-                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Watch video
-                </span>
-              </div>
-            )}
-          </motion.div>
-        </Link>
-      ))}
-    </div>
-  </motion.section>
-);
-
-export default function Work() {
-  return (
-    <div className="min-h-screen pt-24 pb-24 px-4 max-w-5xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="space-y-3 mb-14"
-      >
-        <h1 className="text-3xl font-medium text-gray-800">Professional Experience</h1>
-        <p className="text-base text-zinc-600 font-light">Content strategy and creative work across entertainment platforms</p>
-      </motion.div>
-
-      <div className="space-y-20">
-        <SpotlightSection />
-
-        <WorkSection
-          title="Phony Content – Content Manager (2024 - 2025)"
-          description="Created and directed 50+ digital storylines for Snapchat's Tiny Texts, driving audience growth through engaging character-based narratives."
-          items={PhonyStories}
-        />
-
-        <WorkSection
-          title="Collider – SEO Content Writer (2023)"
-          description="Developed strategic, keyword-optimized content that boosted organic traffic while maintaining editorial quality."
-          items={ColliderArticles}
-        />
-
-        <WorkSection
-          title="StockX – Production Assistant (2022)"
-          description="Supported creative direction on major campaign shoots, ensuring brand storytelling aligned with platform voice."
-          items={StockXCampaigns}
-        />
+            </motion.div>
+          )}
+        </div>
       </div>
+    </motion.section>
+  );
+};
+
+// Main Work component
+export default function Work() {
+  const [filter, setFilter] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('all');
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // Handle scroll for header visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Control header visibility based on scroll direction and position
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        setIsHeaderVisible(false);
+      } else {
+        setIsHeaderVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  // Filter projects based on company
+  const filteredProjects = filter 
+    ? projects.filter(project => project.company.toLowerCase() === filter.toLowerCase())
+    : projects;
+
+  // Get unique companies for filter tabs
+  const companies = ['all', ...Array.from(new Set(projects.map(project => project.company.toLowerCase())))];
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Introduction - Apple-style hero section */}
+      <section className="pt-32 md:pt-40 pb-16 md:pb-24">
+        <div className="container mx-auto px-5 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl mx-auto"
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-gray-900 mb-10">
+              Selected Work
+            </h1>
+            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 leading-relaxed">
+              A curated collection of projects spanning content strategy, editorial leadership, and emerging culture trends.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Sticky filter header - Apple Navigation Style */}
+      <div 
+        ref={headerRef}
+        className={`sticky top-0 z-40 w-full py-4 bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300 ${
+          isHeaderVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+        }`}
+      >
+        <div className="container mx-auto px-5 md:px-8">
+          <div className="flex items-center justify-between overflow-x-auto hide-scrollbar">
+            {/* Filter tabs */}
+            <div className="flex gap-6 pb-1">
+              {companies.map((company) => (
+                <button
+                  key={company}
+                  onClick={() => {
+                    setActiveTab(company);
+                    setFilter(company === 'all' ? null : company);
+                  }}
+                  className={`py-2 text-sm font-medium whitespace-nowrap transition-colors ${
+                    activeTab === company
+                      ? 'text-gray-900 border-b-2 border-gray-900'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  {company === 'all' ? 'All Projects' : company === 'snapchat' ? 'Snapchat' : 
+                   company === 'stockx' ? 'StockX' : 
+                   company === 'phony content' ? 'Phony Content' : 
+                   company === 'collider' ? 'Collider' : company}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Project Sections - Apple Style Full-Width Sections */}
+      <div>
+        {filteredProjects.map((project, index) => (
+          <ProjectSection 
+            key={project.id} 
+            project={project} 
+            index={index}
+          />
+        ))}
+      </div>
+
+      {/* Footer section with call to action */}
+      <section className="py-20 md:py-28 lg:py-32 bg-gray-50">
+        <div className="container mx-auto px-5 md:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8"
+            >
+              Ready to collaborate?
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed"
+            >
+              Let's explore how my expertise in trend strategy and content development can elevate your brand.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Link 
+                href="mailto:shanedelaney11@gmail.com" 
+                className="inline-flex items-center py-4 px-8 text-base font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors"
+              >
+                Get in touch
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Custom styling for scrollbar hiding */}
+      <style jsx global>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 } 
