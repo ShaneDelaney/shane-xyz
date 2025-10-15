@@ -16,15 +16,32 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission (replace with actual API call)
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormState({ name: '', email: '', message: '' });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
       setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormState({ name: '', email: '', message: '' });
-      
-      // Reset success message after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }, 1000);
+    }
   };
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -186,6 +203,19 @@ export default function Contact() {
                 >
                   <p className="text-green-800 text-center font-medium">
                     Thanks for reaching out! I'll get back to you soon.
+                  </p>
+                </motion.div>
+              )}
+              
+              {/* Error Message */}
+              {submitStatus === 'error' && (
+                <motion.div
+                  className="p-4 bg-red-50 border border-red-200 rounded-lg"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <p className="text-red-800 text-center font-medium">
+                    Oops! Something went wrong. Please try again or email me directly.
                   </p>
                 </motion.div>
               )}
