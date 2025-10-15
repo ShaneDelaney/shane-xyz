@@ -96,12 +96,12 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   const hasPortfolioLinks = role.portfolioLinks && role.portfolioLinks.length > 0;
   
   const cardContent = (
-    <motion.div
+              <motion.div 
       className={`bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 transition-shadow ${
         hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
       }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -115,7 +115,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
                 fill
                 className="object-contain"
               />
-            </div>
+                </div>
           )}
           
           {/* Content */}
@@ -132,8 +132,8 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
                 {role.timeline}
               </p>
             </div>
-            
-            {/* Description */}
+              
+              {/* Description */}
             <div className="space-y-2 sm:space-y-3">
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 {role.description[0]}
@@ -142,7 +142,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
               {/* Additional descriptions when expanded */}
               <AnimatePresence>
                 {isExpanded && role.description.length > 1 && (
-                  <motion.div
+                <motion.div 
                     className="space-y-2 sm:space-y-3"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -154,13 +154,13 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
                         {desc}
                       </p>
                     ))}
-                  </motion.div>
-                )}
+                </motion.div>
+              )}
               </AnimatePresence>
               
               {/* Toggle button if multiple descriptions */}
               {role.description.length > 1 && (
-                <button
+                  <button 
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -171,7 +171,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
                   {isExpanded ? 'Show less' : 'Show more'}
                   <span className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}>
                     ↓
-                  </span>
+                                  </span>
                 </button>
               )}
               
@@ -205,7 +205,7 @@ export default function Work() {
   const filteredRoles = filter === 'all' 
     ? roles 
     : roles.filter(role => role.category === filter);
-  
+
   return (
     <div className="relative min-h-screen">
       {/* Subtle gradient background */}
@@ -245,7 +245,7 @@ export default function Work() {
               { value: 'creative', label: 'Creative' },
               { value: 'writing', label: 'Writing' }
             ].map((tab) => (
-              <button
+                <button
                 key={tab.value}
                 onClick={() => setFilter(tab.value)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
@@ -255,8 +255,8 @@ export default function Work() {
                 }`}
               >
                 {tab.label}
-              </button>
-            ))}
+                </button>
+              ))}
           </motion.div>
           
           {/* Timeline */}
@@ -269,4 +269,4 @@ export default function Work() {
       </section>
     </div>
   );
-}
+} 
