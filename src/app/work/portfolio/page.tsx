@@ -290,13 +290,13 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   return (
     <motion.div
       id={project.id}
-      className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-shadow scroll-mt-24"
+      className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-lg transition-shadow scroll-mt-24"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Logo */}
         {project.image && (
           <div className="relative w-16 h-16 flex-shrink-0">
@@ -312,18 +312,18 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         {/* Content */}
         <div className="flex-1">
           {/* Header */}
-          <div className="mb-4">
-            <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+          <div className="mb-3 sm:mb-4">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500 mb-2">
               <span>{project.company}</span>
               <span>•</span>
-              <span>{project.role}</span>
+              <span className="break-words">{project.role}</span>
               <span>•</span>
               <span>{project.timeline}</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
               {project.title}
             </h3>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
               {project.longDescription || project.description}
             </p>
           </div>
@@ -446,29 +446,29 @@ export default function Portfolio() {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50/10 -z-10" />
       
       {/* Header */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-32">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="mb-12"
+            className="mb-8 sm:mb-10 md:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="/work" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-6 transition-colors">
+            <Link href="/work" className="inline-flex items-center gap-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 mb-4 sm:mb-6 transition-colors">
               <span>←</span>
               <span>Back to Experience</span>
             </Link>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-4 sm:mb-6">
               Portfolio
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-3xl">
               Detailed case studies showcasing strategic thinking, creative execution, and measurable results across platforms.
             </p>
           </motion.div>
           
           {/* Filter Tabs */}
           <motion.div
-            className="flex flex-wrap gap-2 mb-12 pb-6 border-b border-gray-200"
+            className="flex flex-wrap gap-2 mb-8 sm:mb-10 md:mb-12 pb-4 sm:pb-6 border-b border-gray-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -477,7 +477,7 @@ export default function Portfolio() {
               <button
                 key={company}
                 onClick={() => setFilter(company)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   filter === company
                     ? 'bg-gray-900 text-white'
                     : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -489,7 +489,7 @@ export default function Portfolio() {
           </motion.div>
           
           {/* Projects */}
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8">
             {filteredProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
