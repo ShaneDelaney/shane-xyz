@@ -231,7 +231,7 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-sm text-gray-500">
-              Based in Los Angeles, CA · Available for freelance projects and full-time opportunities
+              Based in Los Angeles, CA
             </p>
           </motion.div>
         </div>
