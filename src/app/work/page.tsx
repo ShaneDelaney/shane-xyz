@@ -96,7 +96,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   const hasPortfolioLinks = role.portfolioLinks && role.portfolioLinks.length > 0;
   
   const CardWrapper = hasPortfolioLinks ? Link : 'div';
-  const cardProps = hasPortfolioLinks && role.portfolioLinks
+  const cardProps = hasPortfolioLinks && role.portfolioLinks?.[0]
     ? { href: `/work/portfolio#${role.portfolioLinks[0]}`, className: 'block' }
     : {};
   
