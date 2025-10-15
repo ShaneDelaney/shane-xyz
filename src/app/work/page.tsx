@@ -95,22 +95,16 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const hasPortfolioLinks = role.portfolioLinks && role.portfolioLinks.length > 0;
   
-  const CardWrapper = hasPortfolioLinks ? Link : 'div';
-  const cardProps = hasPortfolioLinks && role.portfolioLinks?.[0]
-    ? { href: `/work/portfolio#${role.portfolioLinks[0]}`, className: 'block' }
-    : {};
-  
-  return (
-    <CardWrapper {...cardProps}>
-      <motion.div
-        className={`bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 transition-shadow ${
-          hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
-        }`}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
+  const cardContent = (
+    <motion.div
+      className={`bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 transition-shadow ${
+        hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
+      }`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    >
         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
           {/* Logo */}
           {role.logo && (
@@ -194,7 +188,14 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
           </div>
         </div>
       </motion.div>
-    </CardWrapper>
+    );
+  
+  return hasPortfolioLinks && role.portfolioLinks?.[0] ? (
+    <Link href={`/work/portfolio#${role.portfolioLinks[0]}`} className="block">
+      {cardContent}
+    </Link>
+  ) : (
+    cardContent
   );
 };
 
