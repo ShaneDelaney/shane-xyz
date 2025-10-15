@@ -13,20 +13,40 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: true,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // Ensure any boosted-content requests redirect to the homepage
+  async redirects() {
+    return [
+      {
+        source: '/boosted-content',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/boosted-content/:path*',
+        destination: '/',
+        permanent: true,
+      }
+    ];
+  }
+};
+
+// Conditionally use PWA only in production
+let config = nextConfig;
+
+// Only use PWA in production to avoid development issues
+if (process.env.NODE_ENV === 'production') {
+  const withPWA = require('next-pwa')({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+    disable: false
+  });
+  config = withPWA(nextConfig);
 }
 
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development'
-})
-
-// Only use PWA in production
-const config = process.env.NODE_ENV === 'production' 
-  ? withPWA(nextConfig)
-  : nextConfig;
-
-module.exports = config;
+export default config;

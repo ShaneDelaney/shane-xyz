@@ -1,0 +1,2 @@
+This is a test file to check if routing is working properly.
+If you can access this file directly at /test/routing-check.txt, then the routing is correctly configured. 

@@ -1,15 +1,8 @@
-import type { Metadata, Viewport } from 'next';
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  themeColor: '#000000',
-};
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Content Portfolio | Shane Delaney',
-  description: 'Selected work showcasing content curation and audience growth strategies with measurable results across platforms. Strategic editorial development that connects and converts.',
+  title: 'Portfolio | Shane Delaney',
+  description: 'Detailed project case studies showcasing content strategy, creative marketing, and digital storytelling across platforms.',
 };
 
 export default function PortfolioLayout({
@@ -18,4 +11,5 @@ export default function PortfolioLayout({
   children: React.ReactNode;
 }) {
   return children;
-} 
+}
+

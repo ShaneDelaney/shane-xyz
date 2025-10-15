@@ -1,72 +1,61 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { motion } from 'framer-motion';
 
-const Navigation = () => {
+export default function Navigation() {
   const pathname = usePathname();
-
-  const navItems = [
-    { name: 'Work', icon: '/assets/about.png', path: '/work' },
-    { name: 'Home', icon: '/assets/home.png', path: '/' },
-    { name: 'Bio', icon: '/assets/bio.png', path: '/about' },
+  
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/work', label: 'Work' },
+    { href: '/contact', label: 'Contact' },
   ];
-
+  
   return (
-    <nav className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-      <motion.div 
-        className="flex items-center gap-2 bg-black/40 backdrop-blur-lg p-2 rounded-lg border border-white/10"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <TooltipProvider>
-          {navItems.map((item) => (
-            <Tooltip key={item.name}>
-              <TooltipTrigger asChild>
-                <Link href={item.path} className="block w-10 h-10">
-                  <Button
-                    variant={pathname === item.path ? "secondary" : "ghost"}
-                    size="icon"
-                    className={`
-                      w-10 h-10 rounded-lg transition-colors duration-200
-                      ${pathname === item.path 
-                        ? 'bg-white text-black hover:!bg-white/90' 
-                        : 'text-white hover:!bg-white/10'
-                      }
-                      !p-0 !m-0 !border-0 transform-none hover:transform-none
-                    `}
-                  >
-                    <Image
-                      src={item.icon}
-                      alt={item.name}
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 pointer-events-none"
-                      draggable={false}
+    <motion.nav 
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo/Name */}
+          <Link href="/" className="flex items-center">
+            <span className="text-lg font-semibold text-gray-900 tracking-tight">
+              Shane Delaney
+            </span>
+          </Link>
+          
+          {/* Navigation Links */}
+          <div className="flex items-center gap-1">
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative px-4 py-2 text-sm font-medium transition-colors"
+                >
+                  <span className={isActive ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'}>
+                    {link.label}
+                  </span>
+                  {isActive && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900"
+                      layoutId="navbar-indicator"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
-                  </Button>
+                  )}
                 </Link>
-              </TooltipTrigger>
-              <TooltipContent 
-                side="top" 
-                className="bg-black/80 border border-white/10 text-white"
-                sideOffset={8}
-              >
-                {item.name}
-                <TooltipPrimitive.Arrow className="fill-black/80" />
-              </TooltipContent>
-            </Tooltip>
-          ))}
-        </TooltipProvider>
-      </motion.div>
-    </nav>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </motion.nav>
   );
-};
-
-export default Navigation; 
+}

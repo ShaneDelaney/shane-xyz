@@ -5,6 +5,21 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  
+  async redirects() {
+    return [
+      {
+        source: '/boosted-content',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/boosted-content/:path*',
+        destination: '/',
+        permanent: true,
+      }
+    ];
+  },
 };
 
 export default nextConfig; 

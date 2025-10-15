@@ -1,53 +1,37 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
-import Header from "@/components/header/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#000000',
+  themeColor: '#ffffff',
 };
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Shane Delaney | Content Curator',
-    template: '%s | Shane Delaney'
-  },
-  description: 'Content Curator at Snap Inc. with a keen editorial eye for selecting and developing engaging content. Experience delivering measurable audience growth and retention through strategic content curation.',
-  keywords: ['Content Curator', 'Snap Inc.', 'Editorial Development', 'Content Strategy', 'Audience Growth', 'Gen Z', 'Millennial Content'],
-  authors: [{ name: 'Shane Delaney' }],
-  creator: 'Shane Delaney',
-  publisher: 'Shane Delaney',
-  robots: {
-    index: true,
-    follow: true,
-  },
+  title: "Shane Delaney | Digital Strategist & Creative Marketer",
+  description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta. Shaping stories and systems at the intersection of creativity and tech.",
+  keywords: ["digital strategy", "content marketing", "creative marketing", "storytelling", "Meta", "Snap Inc", "developer marketing", "VR content", "tech marketing"],
   openGraph: {
-    images: [], // This prevents any default image from being used in link previews
+    title: "Shane Delaney | Digital Strategist & Creative Marketer",
+    description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta. Shaping stories and systems at the intersection of creativity and tech.",
+    url: "https://shanedelaney.xyz",
+    siteName: "Shane Delaney",
+    locale: "en_US",
+    type: "website",
   },
-  icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/logo.png',
-    },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shane Delaney | Digital Strategist & Creative Marketer",
+    description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta.",
   },
-  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -56,15 +40,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900`}
       >
-        <Header />
-        <main>
+        <Navigation />
+        <main className="flex-grow pt-16">
           {children}
         </main>
-        <Navigation />
+        <footer className="py-8 text-center text-sm text-gray-500 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <p>© {new Date().getFullYear()} Shane Delaney. All rights reserved.</p>
+          </div>
+        </footer>
       </body>
     </html>
   );
