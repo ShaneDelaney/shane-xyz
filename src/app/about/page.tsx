@@ -83,6 +83,19 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
+              {/* Profile Image */}
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <div className="relative w-full aspect-[4/5]">
+                  <Image
+                    src="/about_shane.png"
+                    alt="Shane Delaney"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+              
               {/* Current Role */}
               <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                 <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-4">
