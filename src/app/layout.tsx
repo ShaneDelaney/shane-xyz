@@ -48,10 +48,8 @@ export default function RootLayout({
         <main className="flex-grow pt-16">
           {children}
         </main>
-        <footer className="py-8 text-center text-sm text-gray-500 border-t border-gray-200">
-          <div className="container mx-auto px-4">
-            <p>© {new Date().getFullYear()} Shane Delaney. All rights reserved.</p>
-          </div>
+        <footer className="py-4 text-center text-xs text-gray-400 border-t border-gray-200">
+          <p>© {new Date().getFullYear()} Shane Delaney</p>
         </footer>
       </body>
     </html>

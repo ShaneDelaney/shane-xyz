@@ -20,7 +20,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6 rounded-full overflow-hidden ring-2 ring-gray-200">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
               <Image
                 src="/logo.png"
                 alt="Shane Delaney"
@@ -43,31 +43,12 @@ export default function Home() {
             Shaping stories and systems at the intersection of creativity and tech.
           </motion.h1>
           
-          {/* Subtext */}
+          {/* CTA Buttons */}
           <motion.div
-            className="space-y-6 text-lg sm:text-xl text-gray-600 leading-relaxed mb-12 text-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p>
-              I'm Shane Delaney — a digital strategist and writer based in Los Angeles. 
-              At Meta, I help craft developer-focused storytelling for the Horizon ecosystem, 
-              connecting creators, studios, and builders shaping VR experiences.
-            </p>
-            <p>
-              Previously at Snap Inc., I worked on content programming and trend strategy 
-              for Spotlight, bridging editorial, data, and product teams to support creator 
-              ecosystems and drive platform growth.
-            </p>
-          </motion.div>
-          
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link href="/work">
               <motion.button
@@ -87,6 +68,25 @@ export default function Home() {
                 About Me
               </motion.button>
             </Link>
+          </motion.div>
+          
+          {/* Subtext */}
+          <motion.div
+            className="space-y-6 text-lg sm:text-xl text-gray-600 leading-relaxed text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p>
+              I'm Shane Delaney — a digital strategist and writer based in Los Angeles. 
+              At Meta, I help craft developer-focused storytelling for the Horizon ecosystem, 
+              connecting creators, studios, and builders shaping VR experiences.
+            </p>
+            <p>
+              Previously at Snap Inc., I worked on content programming and trend strategy 
+              for Spotlight, bridging editorial, data, and product teams to support creator 
+              ecosystems and drive platform growth.
+            </p>
           </motion.div>
         </div>
       </section>

@@ -1,6 +1,5 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -96,14 +95,10 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   const hasPortfolioLinks = role.portfolioLinks && role.portfolioLinks.length > 0;
   
   const cardContent = (
-              <motion.div 
+    <div
       className={`bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 transition-shadow ${
         hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
       }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
     >
         <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
           {/* Logo */}
@@ -140,23 +135,15 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
               </p>
               
               {/* Additional descriptions when expanded */}
-              <AnimatePresence>
-                {isExpanded && role.description.length > 1 && (
-                <motion.div 
-                    className="space-y-2 sm:space-y-3"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {role.description.slice(1).map((desc, idx) => (
-                      <p key={idx} className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                        {desc}
-                      </p>
-                    ))}
-                </motion.div>
+              {isExpanded && role.description.length > 1 && (
+                <div className="space-y-2 sm:space-y-3">
+                  {role.description.slice(1).map((desc, idx) => (
+                    <p key={idx} className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {desc}
+                    </p>
+                  ))}
+                </div>
               )}
-              </AnimatePresence>
               
               {/* Toggle button if multiple descriptions */}
               {role.description.length > 1 && (
@@ -187,7 +174,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     );
   
   return hasPortfolioLinks && role.portfolioLinks?.[0] ? (
@@ -214,12 +201,7 @@ export default function Work() {
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-32">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            className="mb-8 sm:mb-10 md:mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mb-8 sm:mb-10 md:mb-12">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-4 sm:mb-6">
               Work
             </h1>
@@ -230,15 +212,10 @@ export default function Work() {
               <span>View detailed portfolio projects</span>
               <span>→</span>
             </Link>
-          </motion.div>
+          </div>
           
           {/* Filter Tabs */}
-          <motion.div
-            className="flex flex-wrap gap-2 mb-8 sm:mb-10 md:mb-12 pb-4 sm:pb-6 border-b border-gray-200"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex flex-wrap gap-2 mb-8 sm:mb-10 md:mb-12 pb-4 sm:pb-6 border-b border-gray-200">
             {[
               { value: 'all', label: 'All' },
               { value: 'tech', label: 'Tech' },
@@ -255,9 +232,9 @@ export default function Work() {
                 }`}
               >
                 {tab.label}
-                </button>
-              ))}
-          </motion.div>
+              </button>
+            ))}
+          </div>
           
           {/* Timeline */}
           <div className="space-y-4 sm:space-y-6">
