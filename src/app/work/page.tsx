@@ -22,7 +22,7 @@ const roles: Role[] = [
     title: 'Content Marketing Coordinator II',
     timeline: 'October 2025 – Present',
     description: [
-      'Supporting developer storytelling across the Horizon platform — helping manage content workflows from concept to publication, coordinating with writers and creatives to ensure high-quality brand-aligned narratives.',
+      'Supporting developer storytelling across the Horizon platform. Helping manage content workflows from concept to publication, coordinating with writers and creatives to ensure high-quality brand-aligned narratives.',
       'Tracking content performance to inform story strategy and collaborating cross-functionally to align developer success initiatives with marketing goals.'
     ],
     logo: '/meta.png',

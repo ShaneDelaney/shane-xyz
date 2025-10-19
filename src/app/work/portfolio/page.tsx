@@ -173,7 +173,7 @@ const projects: Project[] = [
       {
         title: "Trend Report Excerpt",
         url: "/assets/StockXCoreInsights.pdf",
-        description: "Strategic analysis of Gen Z consumer behavior in key markets — exclusive preview of full research report"
+        description: "Strategic analysis of Gen Z consumer behavior in key markets (exclusive preview of full research report)"
       }
     ]
   },
@@ -233,17 +233,17 @@ const projects: Project[] = [
       {
         title: "Cheer Squad",
         url: "https://snapchat.com/t/J2MP13US",
-        description: "Popular story about competitive cheer team dynamics — 6.32M views, 43K followers, 39% completion rate"
+        description: "Popular story about competitive cheer team dynamics (6.32M views, 43K followers, 39% completion rate)"
       },
       {
         title: "Inhaler",
         url: "https://snapchat.com/t/wPotqUYw",
-        description: "Teen drama centered around school relationships — 4.39M views, 20.3K followers, 42% completion rate"
+        description: "Teen drama centered around school relationships (4.39M views, 20.3K followers, 42% completion rate)"
       },
       {
         title: "Snapscore",
         url: "https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168",
-        description: "Comedy about social media status competitions — 3.59M views, 10K followers, 35% completion rate"
+        description: "Comedy about social media status competitions (3.59M views, 10K followers, 35% completion rate)"
       }
     ]
   },
@@ -268,17 +268,17 @@ const projects: Project[] = [
       {
         title: "Actors and Their Favorite Movies",
         url: "https://collider.com/actors-and-their-favorite-movies/",
-        description: "Evergreen feature on celebrities' film preferences — 125K+ organic views, 4:23 avg. time on page, top 3 Google result"
+        description: "Evergreen feature on celebrities' film preferences (125K+ organic views, 4:23 avg. time on page, top 3 Google result)"
       },
       {
         title: "Hardest Working Characters in Succession",
         url: "https://collider.com/hardest-workers-in-succession-ranked/",
-        description: "Analysis of HBO's award-winning drama series — 89K+ views during final season, 22% social share rate"
+        description: "Analysis of HBO's award-winning drama series (89K+ views during final season, 22% social share rate)"
       },
       {
         title: "Movies To Get You Ready For Fall",
         url: "https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/",
-        description: "Seasonal content with perennial search value — 76K+ views, 18% return visitor rate, featured in Google Discover"
+        description: "Seasonal content with perennial search value (76K+ views, 18% return visitor rate, featured in Google Discover)"
       }
     ]
   }

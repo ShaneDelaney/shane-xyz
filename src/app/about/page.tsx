@@ -30,15 +30,15 @@ export default function About() {
               
               <p>
                 At <strong>Meta</strong>, I support the Horizon Developer Ecosystem team by helping produce and 
-                organize developer stories — highlighting how builders and studios are creating for Horizon Worlds 
+                organize developer stories, highlighting how builders and studios are creating for Horizon Worlds 
                 and Horizon Store.
               </p>
               
               <p>
                 Before that, I worked at <strong>Snap Inc.</strong> as a Trend Curator on the Spotlight team, 
                 where I played a pivotal role in daily content operations and curation for 1,000+ UGC submissions. 
-                I was the point of contact for the New User Experience (NUX) project in a target male 13–17 demographic 
-                — helping inform creative decisions through editorial judgment and performance insights.
+                I was the point of contact for the New User Experience (NUX) project in a target male 13–17 demographic. 
+                This meant helping inform creative decisions through editorial judgment and performance insights.
               </p>
               
               <p>
@@ -48,7 +48,7 @@ export default function About() {
               </p>
               
               <p className="font-medium text-gray-900">
-                I approach every project with equal parts creativity and precision — building content systems that 
+                I approach every project with equal parts creativity and precision, building content systems that 
                 let great ideas scale without losing their human voice.
               </p>
               

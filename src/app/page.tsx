@@ -50,7 +50,7 @@ export default function Home() {
           {/* Subtext */}
           <div className="text-lg sm:text-xl text-gray-600 leading-relaxed text-center">
             <p>
-              I'm Shane Delaney — a digital strategist and writer. 
+              I'm Shane Delaney, a digital strategist and writer. 
               At Meta, I help craft developer-focused storytelling for the Horizon ecosystem, 
               connecting creators, studios, and builders shaping VR experiences.
             </p>
