@@ -13,6 +13,19 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40">
         <div className="max-w-4xl mx-auto">
+          {/* Profile Section */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
+              <Image
+                src="/logo.png"
+                alt="Shane Delaney"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+          
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 mb-8 leading-tight text-center">
             Shaping stories and systems at the intersection of creativity and tech.
