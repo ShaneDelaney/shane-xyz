@@ -61,19 +61,6 @@ export default function About() {
                 I approach every project with equal parts creativity and precision — building content systems that 
                 let great ideas scale without losing their human voice.
               </p>
-              
-              <p className="text-sm text-gray-400 mt-6">
-                Fun fact: I was in the{' '}
-                <a 
-                  href="https://www.youtube.com/watch?v=35MjvGLdfoE" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-gray-700 transition-colors"
-                >
-                  2025 Grammy's
-                </a>
-                {' '}(not easy to spot 😉)
-              </p>
             </motion.div>
             
             {/* Sidebar */}
