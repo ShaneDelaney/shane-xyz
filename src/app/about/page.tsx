@@ -90,7 +90,7 @@ export default function About() {
                     src="/about_shane.png"
                     alt="Shane Delaney"
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     priority
                   />
                 </div>
