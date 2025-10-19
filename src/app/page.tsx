@@ -13,19 +13,6 @@ export default function Home() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40">
         <div className="max-w-4xl mx-auto">
-          {/* Profile Section */}
-          <div className="flex flex-col items-center mb-12">
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
-              <Image
-                src="/logo.png"
-                alt="Shane Delaney"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-          
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 mb-8 leading-tight text-center">
             Shaping stories and systems at the intersection of creativity and tech.
@@ -48,16 +35,11 @@ export default function Home() {
           </div>
           
           {/* Subtext */}
-          <div className="space-y-6 text-lg sm:text-xl text-gray-600 leading-relaxed text-center">
+          <div className="text-lg sm:text-xl text-gray-600 leading-relaxed text-center">
             <p>
               I'm Shane Delaney — a digital strategist and writer. 
               At Meta, I help craft developer-focused storytelling for the Horizon ecosystem, 
               connecting creators, studios, and builders shaping VR experiences.
-            </p>
-            <p>
-              Previously at Snap Inc., I worked on content programming and trend strategy 
-              for Spotlight, bridging editorial, data, and product teams to support creator 
-              ecosystems and drive platform growth.
             </p>
           </div>
         </div>

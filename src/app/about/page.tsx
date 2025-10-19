@@ -51,6 +51,24 @@ export default function About() {
                 I approach every project with equal parts creativity and precision — building content systems that 
                 let great ideas scale without losing their human voice.
               </p>
+              
+              {/* CTA Buttons */}
+              <div className="pt-8 mt-8 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link 
+                    href="/work"
+                    className="px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm text-center"
+                  >
+                    View My Work
+                  </Link>
+                  <Link 
+                    href="/contact"
+                    className="px-8 py-4 bg-white border border-gray-300 text-gray-900 rounded-full font-medium text-base hover:bg-gray-50 transition-colors shadow-sm text-center"
+                  >
+                    Get In Touch
+                  </Link>
+                </div>
+              </div>
             </div>
             
             {/* Sidebar */}
@@ -103,14 +121,6 @@ export default function About() {
                 </div>
               </div>
               
-              {/* Location */}
-              <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-4">
-                  Based In
-                </h3>
-                <p className="text-base text-gray-700">Los Angeles, CA</p>
-              </div>
-              
               {/* Education */}
               <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                 <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-4">
@@ -123,30 +133,6 @@ export default function About() {
                 </div>
               </div>
             </aside>
-          </div>
-          
-          {/* CTA Section */}
-          <div className="mt-20 pt-12 border-t border-gray-200">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/work">
-                <motion.button
-                  className="px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View My Work
-                </motion.button>
-              </Link>
-              <Link href="/contact">
-                <motion.button
-                  className="px-8 py-4 bg-white border border-gray-300 text-gray-900 rounded-full font-medium text-base hover:bg-gray-50 transition-colors shadow-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get In Touch
-                </motion.button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
