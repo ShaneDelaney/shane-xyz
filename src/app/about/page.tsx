@@ -14,26 +14,16 @@ export default function About() {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <motion.div
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mb-16">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-6">
               A strategist who blends storytelling with systems.
             </h1>
-          </motion.div>
+          </div>
           
           {/* Main Content Area */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Main Column - Body Copy */}
-            <motion.div
-              className="lg:col-span-8 space-y-6 text-lg text-gray-700 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <div className="lg:col-span-8 space-y-6 text-lg text-gray-700 leading-relaxed order-2 lg:order-1">
               <p>
                 I'm a content and marketing strategist focused on the intersection of creativity and technology.
               </p>
@@ -61,15 +51,10 @@ export default function About() {
                 I approach every project with equal parts creativity and precision — building content systems that 
                 let great ideas scale without losing their human voice.
               </p>
-            </motion.div>
+            </div>
             
             {/* Sidebar */}
-            <motion.aside
-              className="lg:col-span-4 space-y-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
+            <aside className="lg:col-span-4 space-y-8 order-1 lg:order-2">
               {/* Profile Image */}
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
                 <Image
@@ -137,17 +122,11 @@ export default function About() {
                   <p className="text-xs text-gray-500">2019 - 2023</p>
                 </div>
               </div>
-            </motion.aside>
+            </aside>
           </div>
           
           {/* CTA Section */}
-          <motion.div
-            className="mt-20 pt-12 border-t border-gray-200"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mt-20 pt-12 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/work">
                 <motion.button
@@ -168,7 +147,7 @@ export default function About() {
                 </motion.button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
@@ -23,10 +24,18 @@ export default function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Name */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="relative w-8 h-8">
+              <Image
+                src="/logo.png"
+                alt="SD"
+                fill
+                className="object-cover"
+              />
+            </div>
             <span className="text-lg font-semibold text-gray-900 tracking-tight">
               Shane Delaney
             </span>

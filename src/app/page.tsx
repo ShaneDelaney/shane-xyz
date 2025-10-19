@@ -14,12 +14,7 @@ export default function Home() {
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40">
         <div className="max-w-4xl mx-auto">
           {/* Profile Section */}
-          <motion.div
-            className="flex flex-col items-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex flex-col items-center mb-12">
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
               <Image
                 src="/logo.png"
@@ -29,27 +24,15 @@ export default function Home() {
                 priority
               />
             </div>
-            <h2 className="text-lg sm:text-xl font-medium text-gray-700 mb-1">Shane Delaney</h2>
-            <p className="text-sm sm:text-base text-gray-500">Los Angeles, CA</p>
-          </motion.div>
+          </div>
           
           {/* Main Heading */}
-          <motion.h1
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 mb-8 leading-tight text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 mb-8 leading-tight text-center">
             Shaping stories and systems at the intersection of creativity and tech.
-          </motion.h1>
+          </h1>
           
           {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link href="/work">
               <motion.button
                 className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm"
@@ -68,17 +51,12 @@ export default function Home() {
                 About Me
               </motion.button>
             </Link>
-          </motion.div>
+          </div>
           
           {/* Subtext */}
-          <motion.div
-            className="space-y-6 text-lg sm:text-xl text-gray-600 leading-relaxed text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="space-y-6 text-lg sm:text-xl text-gray-600 leading-relaxed text-center">
             <p>
-              I'm Shane Delaney — a digital strategist and writer based in Los Angeles. 
+              I'm Shane Delaney — a digital strategist and writer. 
               At Meta, I help craft developer-focused storytelling for the Horizon ecosystem, 
               connecting creators, studios, and builders shaping VR experiences.
             </p>
@@ -87,19 +65,13 @@ export default function Home() {
               for Spotlight, bridging editorial, data, and product teams to support creator 
               ecosystems and drive platform growth.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
       
       {/* Additional Info Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 border-t border-gray-200">
-        <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
               <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-2">
@@ -129,7 +101,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

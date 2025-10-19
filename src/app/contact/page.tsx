@@ -61,12 +61,7 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto">
           
           {/* Contact Form */}
-          <motion.div
-            className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 mb-12">
             <h2 className="text-2xl font-semibold text-gray-900 mb-2">Send a Message</h2>
             <p className="text-sm text-gray-600 mb-6">
               Open to connecting about content strategy and creative marketing.
@@ -125,7 +120,7 @@ export default function Contact() {
               </div>
               
               {/* Submit Button */}
-              <motion.button
+              <button
                 type="submit"
                 disabled={isSubmitting}
                 className={`w-full px-8 py-4 rounded-full font-medium text-base transition-all ${
@@ -133,47 +128,32 @@ export default function Contact() {
                     ? 'bg-gray-400 text-white cursor-not-allowed'
                     : 'bg-gray-900 text-white hover:bg-gray-800'
                 } shadow-sm`}
-                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
-              </motion.button>
+              </button>
               
               {/* Success Message */}
               {submitStatus === 'success' && (
-                <motion.div
-                  className="p-4 bg-green-50 border border-green-200 rounded-lg"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                   <p className="text-green-800 text-center font-medium">
                     Thanks for reaching out! I'll get back to you soon.
                   </p>
-                </motion.div>
+                </div>
               )}
               
               {/* Error Message */}
               {submitStatus === 'error' && (
-                <motion.div
-                  className="p-4 bg-red-50 border border-red-200 rounded-lg"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                   <p className="text-red-800 text-center font-medium">
                     Oops! Something went wrong. Please try again or email me directly.
                   </p>
-                </motion.div>
+                </div>
               )}
             </form>
-          </motion.div>
+          </div>
           
           {/* Direct Contact Info */}
-          <motion.div
-            className="mt-12 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mt-12 bg-white border border-gray-200 rounded-2xl p-6 sm:p-8">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Direct Contact</h2>
             <div className="space-y-3">
               <a
@@ -208,20 +188,14 @@ export default function Contact() {
                 </div>
               </a>
             </div>
-          </motion.div>
+          </div>
           
           {/* Additional Info */}
-          <motion.div
-            className="mt-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="mt-8 text-center">
             <p className="text-sm text-gray-500">
               Based in Los Angeles, CA
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
