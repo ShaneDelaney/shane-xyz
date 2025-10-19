@@ -72,15 +72,14 @@ export default function About() {
             >
               {/* Profile Image */}
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                <div className="relative w-full aspect-[4/5]">
-                  <Image
-                    src="/about_shane.png"
-                    alt="Shane Delaney"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                  />
-                </div>
+                <Image
+                  src="/about_shane.png"
+                  alt="Shane Delaney"
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto"
+                  priority
+                />
               </div>
               
               {/* Current Role */}
