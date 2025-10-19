@@ -33,23 +33,17 @@ export default function Home() {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/work">
-              <motion.button
-                className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                See My Work
-              </motion.button>
+            <Link 
+              href="/work"
+              className="w-full sm:w-auto px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm text-center"
+            >
+              See My Work
             </Link>
-            <Link href="/about">
-              <motion.button
-                className="w-full sm:w-auto px-8 py-4 bg-white border border-gray-300 text-gray-900 rounded-full font-medium text-base hover:bg-gray-50 transition-colors shadow-sm"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                About Me
-              </motion.button>
+            <Link 
+              href="/about"
+              className="w-full sm:w-auto px-8 py-4 bg-white border border-gray-300 text-gray-900 rounded-full font-medium text-base hover:bg-gray-50 transition-colors shadow-sm text-center"
+            >
+              About Me
             </Link>
           </div>
           
