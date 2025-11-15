@@ -312,8 +312,6 @@ const projects: Project[] = [
 ];
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  
   return (
     <motion.div
       id={project.id}
@@ -385,73 +383,50 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             </div>
           )}
           
-          {/* Expand button */}
+          {/* Related Links - Always Visible */}
           {project.relatedLinks && project.relatedLinks.length > 0 && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors inline-flex items-center gap-1 mt-2"
-            >
-              {isExpanded ? 'Show less' : 'View details'}
-              <span className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}>
-                ↓
-              </span>
-            </button>
-          )}
-          
-          {/* Expanded content */}
-          <AnimatePresence>
-            {isExpanded && project.relatedLinks && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-6 pt-6 border-t border-gray-200 space-y-6">
-                  {project.relatedLinks.map((link, i) => (
-                    <div key={i}>
-                      {link.url.endsWith('.pdf') ? (
-                        <div>
-                          <h4 className="text-lg font-medium text-gray-900 mb-1">
-                            {link.title}
-                          </h4>
-                          {link.description && (
-                            <p className="text-base text-gray-600 mb-2">{link.description}</p>
-                          )}
-                          <PDFPreview url={link.url} title={link.title} />
-                        </div>
-                      ) : link.url ? (
-                        <Link 
-                          href={link.url}
-                          target={link.url.startsWith("http") ? "_blank" : "_self"}
-                          rel={link.url.startsWith("http") ? "noopener noreferrer" : ""}
-                          className="block group"
-                        >
-                          <h4 className="text-lg font-medium text-gray-900 group-hover:text-gray-700 inline-flex items-center gap-2 mb-1">
-                            {link.title}
-                            <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                          </h4>
-                          {link.description && (
-                            <p className="text-base text-gray-600">{link.description}</p>
-                          )}
-                        </Link>
-                      ) : (
-                        <div>
-                          <h4 className="text-lg font-medium text-gray-900 mb-1">
-                            {link.title}
-                          </h4>
-                          {link.description && (
-                            <p className="text-base text-gray-600">{link.description}</p>
-                          )}
-                        </div>
+            <div className="mt-6 pt-6 border-t border-gray-200 space-y-4">
+              {project.relatedLinks.map((link, i) => (
+                <div key={i}>
+                  {link.url.endsWith('.pdf') ? (
+                    <div>
+                      <h4 className="text-base font-medium text-gray-900 mb-1">
+                        {link.title}
+                      </h4>
+                      {link.description && (
+                        <p className="text-sm text-gray-600 mb-2">{link.description}</p>
+                      )}
+                      <PDFPreview url={link.url} title={link.title} />
+                    </div>
+                  ) : link.url ? (
+                    <Link 
+                      href={link.url}
+                      target={link.url.startsWith("http") ? "_blank" : "_self"}
+                      rel={link.url.startsWith("http") ? "noopener noreferrer" : ""}
+                      className="block group"
+                    >
+                      <h4 className="text-base font-medium text-gray-900 group-hover:text-gray-700 inline-flex items-center gap-2 mb-1">
+                        {link.title}
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                      </h4>
+                      {link.description && (
+                        <p className="text-sm text-gray-600">{link.description}</p>
+                      )}
+                    </Link>
+                  ) : (
+                    <div>
+                      <h4 className="text-base font-medium text-gray-900 mb-1">
+                        {link.title}
+                      </h4>
+                      {link.description && (
+                        <p className="text-sm text-gray-600">{link.description}</p>
                       )}
                     </div>
-                  ))}
+                  )}
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -498,11 +473,39 @@ export default function Portfolio() {
             </p>
           </motion.div>
           
+          {/* Mobile: Horizontal Scroll Navigation */}
+          <div className="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto">
+            <div className="flex gap-2 min-w-max pb-2">
+              {companies.map((company) => (
+                <a
+                  key={company}
+                  href={`#${company.toLowerCase()}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.getElementById(company.toLowerCase());
+                    if (element) {
+                      const offset = 80;
+                      const elementPosition = element.getBoundingClientRect().top;
+                      const offsetPosition = elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap"
+                >
+                  {company} ({projectsByCompany[company].length})
+                </a>
+              ))}
+            </div>
+          </div>
+
           {/* Two Column Layout: Sidebar + Content */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Sticky Sidebar Navigation */}
-            <aside className="lg:col-span-3">
-              <div className="lg:sticky lg:top-24">
+            {/* Desktop: Sticky Sidebar Navigation */}
+            <aside className="hidden lg:block lg:col-span-3">
+              <div className="sticky top-24">
                 <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm">
                   <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-4">
                     Jump to
@@ -544,7 +547,7 @@ export default function Portfolio() {
             </aside>
             
             {/* Main Content - Projects by Company */}
-            <div className="lg:col-span-9 space-y-12 sm:space-y-16">
+            <div className="col-span-1 lg:col-span-9 space-y-12 sm:space-y-16">
               {companies.map((company, companyIndex) => (
                 <motion.section
                   key={company}

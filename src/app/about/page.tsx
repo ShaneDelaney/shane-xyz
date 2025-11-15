@@ -32,8 +32,7 @@ export default function About() {
                 At <strong>Meta</strong>, I lead narrative direction for developer and creator stories across the 
                 Horizon ecosystem. I run interviews with VR studios and mobile creators, shape the angles and themes 
                 of each piece, and provide editorial oversight to ensure clarity and voice alignment. I guide agency 
-                partners on execution and assist in preparing features for the Meta Horizon Developers Blog—focused 
-                on strategic narrative direction, not final writing.
+                partners on execution and assist in preparing features for the Meta Horizon Developers Blog.
               </p>
               
               <p>
