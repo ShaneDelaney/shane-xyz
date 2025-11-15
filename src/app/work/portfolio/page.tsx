@@ -459,13 +459,18 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 };
 
 export default function Portfolio() {
-  const [filter, setFilter] = useState<string>('all');
+  const [activeSection, setActiveSection] = useState<string>('');
   
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.company.toLowerCase() === filter.toLowerCase());
+  // Group projects by company
+  const projectsByCompany = projects.reduce((acc, project) => {
+    if (!acc[project.company]) {
+      acc[project.company] = [];
+    }
+    acc[project.company].push(project);
+    return acc;
+  }, {} as Record<string, Project[]>);
   
-  const companies = ['all', ...Array.from(new Set(projects.map(p => p.company.toLowerCase())))];
+  const companies = Object.keys(projectsByCompany);
   
   return (
     <div className="relative min-h-screen">
@@ -474,7 +479,7 @@ export default function Portfolio() {
       
       {/* Header */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-32">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             className="mb-8 sm:mb-10 md:mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -493,33 +498,80 @@ export default function Portfolio() {
             </p>
           </motion.div>
           
-          {/* Filter Tabs */}
-          <motion.div
-            className="flex flex-wrap gap-2 mb-8 sm:mb-10 md:mb-12 pb-4 sm:pb-6 border-b border-gray-200"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {companies.map((company) => (
-              <button
-                key={company}
-                onClick={() => setFilter(company)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
-                  filter === company
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {company === 'all' ? 'All Projects' : company.charAt(0).toUpperCase() + company.slice(1)}
-              </button>
-            ))}
-          </motion.div>
-          
-          {/* Projects */}
-          <div className="space-y-4 sm:space-y-6 md:space-y-8">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
+          {/* Two Column Layout: Sidebar + Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Sticky Sidebar Navigation */}
+            <aside className="lg:col-span-3">
+              <div className="lg:sticky lg:top-24">
+                <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm">
+                  <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-4">
+                    Jump to
+                  </h3>
+                  <nav className="space-y-2">
+                    {companies.map((company) => (
+                      <a
+                        key={company}
+                        href={`#${company.toLowerCase()}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const element = document.getElementById(company.toLowerCase());
+                          if (element) {
+                            const offset = 100;
+                            const elementPosition = element.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - offset;
+                            window.scrollTo({
+                              top: offsetPosition,
+                              behavior: 'smooth'
+                            });
+                            setActiveSection(company.toLowerCase());
+                          }
+                        }}
+                        className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeSection === company.toLowerCase()
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        {company}
+                        <span className="ml-2 text-xs opacity-70">
+                          ({projectsByCompany[company].length})
+                        </span>
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+              </div>
+            </aside>
+            
+            {/* Main Content - Projects by Company */}
+            <div className="lg:col-span-9 space-y-12 sm:space-y-16">
+              {companies.map((company, companyIndex) => (
+                <motion.section
+                  key={company}
+                  id={company.toLowerCase()}
+                  className="scroll-mt-24"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.5, delay: companyIndex * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {/* Company Header */}
+                  <div className="mb-6 sm:mb-8">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-2">
+                      {company}
+                    </h2>
+                    <div className="h-1 w-16 bg-gray-900 rounded-full"></div>
+                  </div>
+                  
+                  {/* Projects for this company */}
+                  <div className="space-y-6 sm:space-y-8">
+                    {projectsByCompany[company].map((project, index) => (
+                      <ProjectCard key={project.id} project={project} index={index} />
+                    ))}
+                  </div>
+                </motion.section>
+              ))}
+            </div>
           </div>
         </div>
       </section>

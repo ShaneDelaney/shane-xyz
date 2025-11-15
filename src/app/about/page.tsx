@@ -29,9 +29,11 @@ export default function About() {
               </p>
               
               <p>
-                At <strong>Meta</strong>, I support the Horizon Developer Ecosystem team by helping produce and 
-                organize developer stories, highlighting how builders and studios are creating for Horizon Worlds 
-                and Horizon Store.
+                At <strong>Meta</strong>, I lead narrative direction for developer and creator stories across the 
+                Horizon ecosystem. I run interviews with VR studios and mobile creators, shape the angles and themes 
+                of each piece, and provide editorial oversight to ensure clarity and voice alignment. I guide agency 
+                partners on execution and assist in preparing features for the Meta Horizon Developers Blog—focused 
+                on strategic narrative direction, not final writing.
               </p>
               
               <p>
