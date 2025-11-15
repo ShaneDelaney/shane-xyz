@@ -87,6 +87,33 @@ const PDFPreview = ({ url, title }: { url: string; title: string }) => {
 
 const projects: Project[] = [
   {
+    id: "matthiaos-horizon-blog",
+    title: "Matthiaos: Pioneering Change in Worlds Through Passion and Community",
+    company: "Meta",
+    role: "Content Marketing Coordinator",
+    timeline: "2025",
+    description: "Feature spotlight on Matthiaos, a leading creator whose work blends worldbuilding, community, and personal storytelling inside Horizon Worlds.",
+    longDescription: "A feature spotlight on Matthiaos, a leading creator whose work blends worldbuilding, community, and personal storytelling inside Horizon Worlds. This piece showcases how creators are building meaningful experiences and communities in the metaverse.",
+    details: [
+      "Led narrative direction and shaped the story angle around community and creative leadership",
+      "Conducted interview with creator to surface authentic insights and personal journey",
+      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
+      "Guided agency partners on execution and content delivery",
+      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
+    ],
+    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
+    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
+    image: "/meta.png",
+    link: "https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community",
+    relatedLinks: [
+      {
+        title: "Read the full feature",
+        url: "https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community",
+        description: "Published on the Meta Horizon Developers Blog – showcasing how Matthiaos uses worldbuilding and community engagement to pioneer new creative experiences in VR."
+      }
+    ]
+  },
+  {
     id: "nux-project",
     title: "NUX Project",
     company: "Snapchat",

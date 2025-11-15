@@ -22,11 +22,12 @@ const roles: Role[] = [
     title: 'Content Marketing Coordinator II',
     timeline: 'October 2025 – Present',
     description: [
-      'Supporting developer storytelling across the Horizon platform. Helping manage content workflows from concept to publication, coordinating with writers and creatives to ensure high-quality brand-aligned narratives.',
-      'Tracking content performance to inform story strategy and collaborating cross-functionally to align developer success initiatives with marketing goals.'
+      'Lead narrative direction for developer and creator stories across the Horizon ecosystem. Run interviews with VR studios and mobile creators, shaping angles, themes, and narrative structure of each piece.',
+      'Guide agency partners on execution and own editorial quality and voice across published content. Assist in preparing and posting features on the Meta Horizon Developers Blog, providing strategic narrative direction and editorial oversight.'
     ],
     logo: '/meta.png',
-    category: 'tech'
+    category: 'tech',
+    portfolioLinks: ['matthiaos-horizon-blog']
   },
   {
     id: 'snap',
