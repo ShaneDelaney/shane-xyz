@@ -64,7 +64,7 @@ export default function Contact() {
           <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 mb-12">
             <h2 className="text-2xl font-semibold text-gray-900 mb-2">Send a Message</h2>
             <p className="text-sm text-gray-600 mb-6">
-              Open to connecting about content strategy and creative marketing.
+              I'm open to freelance projects, full-time roles, and creative collaborations. If you're looking for a content strategist who speaks developer, let's connect. Feel free to reach out via email or LinkedIn to discuss opportunities and ideas.
             </p>
             
             <form onSubmit={handleSubmit} className="space-y-6">

@@ -25,34 +25,26 @@ export default function About() {
             {/* Main Column - Body Copy */}
             <div className="lg:col-span-8 space-y-6 text-lg text-gray-700 leading-relaxed order-2 lg:order-1">
               <p>
-                I'm a content and marketing strategist focused on the intersection of creativity and technology, with a proven 
-                track record of driving high-impact storytelling initiatives at companies like Meta and Snap.
+                I'm a content marketing and creative strategist specializing in developer storytelling, product education, 
+                and high-velocity editorial workflows. I excel at translating complex technical concepts into clear, compelling 
+                content—from in-depth blog posts and documentation to snappy social media updates and short-form video tutorials.
               </p>
               
               <p>
-                At <strong>Meta</strong>, I lead narrative direction for developer and creator stories across the 
-                Horizon ecosystem. I run interviews with VR studios and mobile creators, shape the angles and themes 
-                of each piece, and provide editorial oversight to ensure clarity and voice alignment. I guide agency 
-                partners on execution and assist in preparing features for the Meta Horizon Developers Blog, helping to 
-                inspire and inform a global creator community.
-              </p>
-              
-              <p>
-                Before that, I worked at <strong>Snap Inc.</strong> as a Trend Curator on the Spotlight team, 
-                where I played a pivotal role in daily content operations and curation for 1,000+ UGC submissions. 
-                I was the point of contact for the New User Experience (NUX) project in a target male 13–17 demographic. 
-                This meant helping inform creative decisions through editorial judgment and performance insights.
-              </p>
-              
-              <p>
-                My background also includes content management for <strong>Phony Content</strong>, where I oversaw 
-                Snapchat story production, and creative coordination for <strong>StockX</strong>, where I contributed 
-                to the 2024 Core Insights Report and brand campaign shoots.
+                My background blends trend-driven performance analysis, cross-functional production, and deep developer ecosystem 
+                experience. At <strong>Meta</strong>, I lead narrative direction for developer and creator stories in the Horizon 
+                VR ecosystem, turning cutting-edge tech into accessible stories that inspire creators and builders. Previously at 
+                <strong>Snap Inc.</strong>, I guided trend-focused content curation for the Snapchat Spotlight platform, using 
+                performance insights to inform editorial decisions and engage new users. I also managed high-volume content 
+                production at <strong>Phony Content</strong> (over 50 scripted Snapchat stories) and contributed to culture-driven 
+                marketing initiatives at <strong>StockX</strong> – analyzing Gen Z subcultures and sneaker trends to help shape the 
+                brand's 2025 go-to-market strategy.
               </p>
               
               <p className="font-medium text-gray-900">
-                I approach every project with equal parts creativity, curiosity, and precision, building content systems that 
-                let great ideas scale without losing their human voice.
+                I'm equally creative and tactical, building content systems that let great ideas scale without losing their human touch. 
+                I'm also an avid user of Vercel (the platform hosting this site) and work daily with tools like Cursor and GitHub, 
+                keeping me closely connected to the developer communities I write for.
               </p>
               
               {/* CTA Buttons */}
@@ -107,7 +99,7 @@ export default function About() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-base font-medium text-gray-900">Snap Inc.</p>
-                    <p className="text-sm text-gray-600">Trend Curator</p>
+                    <p className="text-sm text-gray-600">Trend Producer</p>
                   </div>
                   <div>
                     <p className="text-base font-medium text-gray-900">Phony Content</p>

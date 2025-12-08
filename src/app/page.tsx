@@ -45,7 +45,7 @@ export default function Home() {
           
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 mb-8 leading-tight text-center">
-            Shaping stories and systems at the intersection of creativity and tech.
+            Shaping developer stories and content systems at the intersection of creativity and tech.
           </h1>
           
           {/* CTA Buttons */}
@@ -67,9 +67,9 @@ export default function Home() {
           {/* Subtext */}
           <div className="text-lg sm:text-xl text-gray-600 leading-relaxed text-center">
             <p>
-              I'm Shane Delaney, a digital strategist and writer with a passion for connecting creativity and technology. 
-              At Meta, I spearhead developer-focused storytelling in the Horizon ecosystem, amplifying the voices of creators 
-              and builders who are shaping the future of VR experiences.
+              I'm Shane Delaney, a developer-focused content strategist. 
+              At Meta, I lead narrative strategy for Horizon's developer ecosystem, crafting blog posts, case studies, 
+              and creator spotlights that educate and inspire VR developers while driving adoption of new Horizon Worlds features.
             </p>
           </div>
         </div>

@@ -22,8 +22,8 @@ const roles: Role[] = [
     title: 'Content Marketing Coordinator II',
     timeline: 'October 2025 – Present',
     description: [
-      'Lead narrative direction for developer and creator stories across the Horizon ecosystem. Run interviews with VR studios and mobile creators, shaping angles, themes, and narrative structure of each piece.',
-      'Guide agency partners on execution and own editorial quality and voice across published content. Assist in preparing and posting features on the Meta Horizon Developers Blog, providing strategic narrative direction and editorial oversight.'
+      'Lead narrative strategy for Horizon's developer ecosystem, crafting blog posts, case studies, and developer spotlights that educate and inspire VR creators while driving adoption of new Horizon Worlds features.',
+      'Manage the end-to-end editorial pipeline – from sourcing creator stories and conducting interviews to guiding agency writers and publishing on the Horizon Developers Blog.'
     ],
     logo: '/meta.png',
     category: 'tech',
@@ -32,11 +32,11 @@ const roles: Role[] = [
   {
     id: 'snap',
     company: 'Snap Inc.',
-    title: 'Trend Curator',
+    title: 'Trend Producer',
     timeline: 'March 2025 – October 2025',
     description: [
-      'Managed daily curation for Spotlight\'s Boosted Content and Mission Trending projects. Collaborated with product and data science teams to translate performance insights into editorial decisions.',
-      'Served as POC for the NUX initiative targeting teen male users (13–17), helping guide content tone and retention strategy within the Spotlight feed.'
+      'Managed a daily curation pipeline of 1,000+ creator submissions for Snapchat Spotlight, using performance data to inform content picks and strategy.',
+      'Collaborated with product and data science teams to launch trend-driven initiatives – including a tailored new-user experience – that boosted engagement among teen audiences.'
     ],
     logo: '/assets/snap-logo.png',
     category: 'tech',
@@ -46,9 +46,9 @@ const roles: Role[] = [
     id: 'phony',
     company: 'Phony Content',
     title: 'Content Manager',
-    timeline: 'March 2024 – March 2025',
+    timeline: 'May 2024 – March 2025',
     description: [
-      'Managed creative production for 50+ scripted Snapchat stories, building smoother project pipelines and QA processes to improve story pacing, tone, and engagement.'
+      'Oversaw the production of 50+ scripted Snapchat stories, working closely with writers, editors, and designers. Streamlined workflows to improve story pacing, tone, and consistency—delivering highly engaging mobile content at scale.'
     ],
     logo: '/assets/Phony-logo.png',
     category: 'creative',
@@ -60,7 +60,7 @@ const roles: Role[] = [
     title: 'Brand Creative Production (Freelance)',
     timeline: 'September 2021 & December 2024',
     description: [
-      'Coordinated shoots and authored the 2024 Core Insights Report, analyzing Gen Z subcultures to inform StockX\'s 2025 marketing strategy.'
+      'Coordinated multiple lifestyle photo and video shoots for major campaigns, ensuring seamless execution across creative teams. Authored the 2024 Core Insights Report, a culture-driven analysis of Gen Z trends that informed StockX's 2025 marketing strategy.'
     ],
     logo: '/assets/stockx-logo.png',
     category: 'creative',
@@ -72,7 +72,7 @@ const roles: Role[] = [
     title: 'SEO Content Writer',
     timeline: 'August 2022 – October 2022',
     description: [
-      'Wrote SEO-driven content in entertainment and gaming that boosted organic traffic by 15%.'
+      'Wrote SEO-driven articles on entertainment and gaming, boosting organic web traffic by ~15% in two months.'
     ],
     logo: '/assets/collider-logo.png',
     category: 'writing',
@@ -84,7 +84,7 @@ const roles: Role[] = [
     title: 'Copywriter (Project)',
     timeline: 'March 2024',
     description: [
-      'Developed email marketing copy that increased engagement and supported brand voice consistency.'
+      'Developed and executed an email marketing campaign for a D2C coffee brand, creating compelling copy that increased customer engagement while maintaining a consistent brand voice.'
     ],
     logo: '/cap_man.png',
     category: 'writing'
