@@ -97,7 +97,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   
   const cardContent = (
     <div
-      className={`bg-white border border-gray-200 rounded-2xl p-4 sm:p-6 md:p-8 transition-shadow ${
+      className={`bg-white border border-gray-200 rounded-xl p-4 sm:p-5 md:p-6 transition-shadow ${
         hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
       }`}
     >
@@ -117,11 +117,11 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
           {/* Content */}
           <div className="flex-1 min-w-0 w-full">
             {/* Header */}
-            <div className="mb-3 sm:mb-4">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1">
+            <div className="mb-2 sm:mb-3">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-0.5">
                 {role.company}
               </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium mb-1.5 sm:mb-2">
+              <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium mb-1">
                 {role.title}
               </p>
               <p className="text-xs sm:text-sm text-gray-500">
@@ -130,7 +130,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
             </div>
               
               {/* Description */}
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-1.5 sm:space-y-2">
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                 {role.description[0]}
               </p>
@@ -165,7 +165,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
               
               {/* Portfolio link indicator */}
               {hasPortfolioLinks && (
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
+                <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-gray-100">
                   <span className="text-xs sm:text-sm text-gray-500 inline-flex items-center gap-1">
                     View related projects
                     <span>→</span>
@@ -200,13 +200,13 @@ export default function Work() {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50/10 -z-10" />
       
       {/* Header */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-32">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-8 sm:mb-10 md:mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-4 sm:mb-6">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 mb-3 sm:mb-4">
               Work
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-3xl mb-3 sm:mb-4">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mb-2 sm:mb-3">
               A timeline of roles spanning content strategy, creative marketing, and digital storytelling across tech and media.
             </p>
             <Link href="/work/portfolio" className="inline-flex items-center gap-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 transition-colors">
@@ -216,7 +216,7 @@ export default function Work() {
           </div>
           
           {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2 mb-8 sm:mb-10 md:mb-12 pb-4 sm:pb-6 border-b border-gray-200">
+          <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 pb-3 sm:pb-4 border-b border-gray-200">
             {[
               { value: 'all', label: 'All' },
               { value: 'tech', label: 'Tech' },
@@ -238,7 +238,7 @@ export default function Work() {
           </div>
           
           {/* Timeline */}
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-3 sm:space-y-4">
             {filteredRoles.map((role, index) => (
               <RoleCard key={role.id} role={role} index={index} />
             ))}

@@ -11,11 +11,11 @@ export default function About() {
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-purple-50/10 -z-10" />
       
       {/* Main Content */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="mb-16">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-6">
+          <div className="mb-8">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-4">
               A strategist who blends storytelling with systems.
             </h1>
           </div>
@@ -23,7 +23,7 @@ export default function About() {
           {/* Main Content Area */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Main Column - Body Copy */}
-            <div className="lg:col-span-8 space-y-6 text-lg text-gray-700 leading-relaxed order-2 lg:order-1">
+            <div className="lg:col-span-8 space-y-4 text-base text-gray-700 leading-relaxed order-2 lg:order-1">
               <p>
                 I'm a content marketing and creative strategist specializing in developer storytelling, product education, 
                 and high-velocity editorial workflows. I excel at translating complex technical concepts into clear, compelling 
@@ -33,8 +33,7 @@ export default function About() {
               <p>
                 My background blends trend-driven performance analysis, cross-functional production, and deep developer ecosystem 
                 experience. At <strong>Meta</strong>, I lead narrative direction for developer and creator stories in the Horizon 
-                VR ecosystem, turning cutting-edge tech into accessible stories that inspire creators and builders. Previously at 
-                <strong>Snap Inc.</strong>, I guided trend-focused content curation for the Snapchat Spotlight platform, using 
+                VR ecosystem, turning cutting-edge tech into accessible stories that inspire creators and builders. Previously at <strong>Snap Inc.</strong>, I guided trend-focused content curation for the Snapchat Spotlight platform, using 
                 performance insights to inform editorial decisions and engage new users. I also managed high-volume content 
                 production at <strong>Phony Content</strong> (over 50 scripted Snapchat stories) and contributed to culture-driven 
                 marketing initiatives at <strong>StockX</strong> – analyzing Gen Z subcultures and sneaker trends to help shape the 
@@ -48,8 +47,8 @@ export default function About() {
               </p>
               
               {/* CTA Buttons */}
-              <div className="pt-8 mt-8 border-t border-gray-200">
-                <div className="flex flex-col sm:flex-row gap-4">
+              <div className="pt-6 mt-6 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Link 
                     href="/work"
                     className="px-8 py-4 bg-gray-900 text-white rounded-full font-medium text-base hover:bg-gray-800 transition-colors shadow-sm text-center"
@@ -67,7 +66,7 @@ export default function About() {
             </div>
             
             {/* Sidebar */}
-            <aside className="lg:col-span-4 space-y-8 order-1 lg:order-2">
+            <aside className="lg:col-span-4 space-y-6 order-1 lg:order-2">
               {/* Profile Image */}
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
                 <Image
@@ -75,7 +74,7 @@ export default function About() {
                   alt="Shane Delaney"
                   width={800}
                   height={1000}
-                  className="w-full h-auto"
+                  className="w-full h-auto max-h-64 object-cover"
                   priority
                 />
               </div>
