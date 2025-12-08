@@ -131,11 +131,11 @@ const projects: Project[] = [
     tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
     metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
     image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-a-top-ranked-world-with-zero-development-experience",
+    link: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world",
     relatedLinks: [
       {
         title: "Read the full feature",
-        url: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-a-top-ranked-world-with-zero-development-experience",
+        url: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world",
         description: "Published on the Meta Horizon Developers Blog – detailing how Dinco and SnakeThug7 turned an unlikely collaboration into a hit VR farming experience."
       }
     ]
@@ -158,11 +158,11 @@ const projects: Project[] = [
     tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
     metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
     image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/saydeechan-a-solo-creators-journey-to-bring-worlds-to-japan",
+    link: "https://developers.meta.com/horizon/blog/saydeechan-bringing-worlds-to-japan",
     relatedLinks: [
       {
         title: "Read the full feature",
-        url: "https://developers.meta.com/horizon/blog/saydeechan-a-solo-creators-journey-to-bring-worlds-to-japan",
+        url: "https://developers.meta.com/horizon/blog/saydeechan-bringing-worlds-to-japan",
         description: "Published on the Meta Horizon Developers Blog – exploring how Saydeechan blends art, fashion, and cultural storytelling to build community in VR."
       }
     ]
