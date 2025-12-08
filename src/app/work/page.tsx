@@ -60,7 +60,7 @@ const roles: Role[] = [
     title: 'Brand Creative Production (Freelance)',
     timeline: 'September 2021 & December 2024',
     description: [
-      'Coordinated multiple lifestyle photo and video shoots for major campaigns, ensuring seamless execution across creative teams. Authored the 2024 Core Insights Report, a culture-driven analysis of Gen Z trends that informed StockX's 2025 marketing strategy.'
+      'Coordinated multiple lifestyle photo and video shoots for major campaigns, ensuring seamless execution across creative teams. Authored the 2024 Core Insights Report, a culture-driven analysis of Gen Z trends that informed StockX\'s 2025 marketing strategy.'
     ],
     logo: '/assets/stockx-logo.png',
     category: 'creative',
