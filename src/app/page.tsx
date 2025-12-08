@@ -3,8 +3,15 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Home() {
+  const [rotation, setRotation] = useState(0);
+
+  const handleLogoClick = () => {
+    setRotation(rotation + 360);
+  };
+
   return (
     <div className="relative min-h-screen">
       {/* Subtle gradient background */}
@@ -15,7 +22,17 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           {/* Profile Section */}
           <div className="flex flex-col items-center mb-12">
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6">
+            <motion.div 
+              className="relative w-24 h-24 sm:w-32 sm:h-32 mb-6 cursor-pointer"
+              onClick={handleLogoClick}
+              animate={{ 
+                rotate: rotation,
+              }}
+              transition={{ 
+                duration: 0.6,
+                ease: "easeInOut"
+              }}
+            >
               <Image
                 src="/logo.png"
                 alt="Shane Delaney"
@@ -23,7 +40,7 @@ export default function Home() {
                 className="object-cover"
                 priority
               />
-            </div>
+            </motion.div>
           </div>
           
           {/* Main Heading */}
