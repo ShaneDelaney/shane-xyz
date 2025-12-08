@@ -114,6 +114,60 @@ const projects: Project[] = [
     ]
   },
   {
+    id: "grow-a-farm-horizon-blog",
+    title: "Grow a Farm: How Two Gaming Influencers Built a Top-Ranked World with Zero Development Experience",
+    company: "Meta",
+    role: "Content Marketing Coordinator",
+    timeline: "2025",
+    description: "A success story spotlighting how two gaming influencers with no formal development experience created a top-ranked Horizon world from scratch.",
+    longDescription: "A success story spotlighting how two gaming influencers with no formal development experience created a top-ranked Horizon world from scratch. This piece highlights how vision, community engagement, and a dash of collaboration can turn first-time builders into standout creators in VR.",
+    details: [
+      "Led narrative direction and shaped the story angle around collaboration and first-time creator success",
+      "Conducted interviews with creators Dinco and SnakeThug7 to surface authentic insights about their journey",
+      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
+      "Guided agency partners on execution and content delivery",
+      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
+    ],
+    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
+    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
+    image: "/meta.png",
+    link: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-a-top-ranked-world-with-zero-development-experience",
+    relatedLinks: [
+      {
+        title: "Read the full feature",
+        url: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-a-top-ranked-world-with-zero-development-experience",
+        description: "Published on the Meta Horizon Developers Blog – detailing how Dinco and SnakeThug7 turned an unlikely collaboration into a hit VR farming experience."
+      }
+    ]
+  },
+  {
+    id: "saydeechan-horizon-blog",
+    title: "Saydeechan: A Solo Creator's Journey to Bring Worlds to Japan",
+    company: "Meta",
+    role: "Content Marketing Coordinator",
+    timeline: "2025",
+    description: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces.",
+    longDescription: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces. This piece explores how one creator blended art, fashion, and cultural storytelling to make virtual worlds feel like home for a new regional community.",
+    details: [
+      "Led narrative direction and shaped the story angle around cultural storytelling and regional expansion",
+      "Conducted interview with creator to surface authentic insights about building for Japanese audiences",
+      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
+      "Guided agency partners on execution and content delivery",
+      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
+    ],
+    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
+    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
+    image: "/meta.png",
+    link: "https://developers.meta.com/horizon/blog/saydeechan-a-solo-creators-journey-to-bring-worlds-to-japan",
+    relatedLinks: [
+      {
+        title: "Read the full feature",
+        url: "https://developers.meta.com/horizon/blog/saydeechan-a-solo-creators-journey-to-bring-worlds-to-japan",
+        description: "Published on the Meta Horizon Developers Blog – exploring how Saydeechan blends art, fashion, and cultural storytelling to build community in VR."
+      }
+    ]
+  },
+  {
     id: "nux-project",
     title: "NUX Project",
     company: "Snapchat",

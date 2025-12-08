@@ -25,14 +25,16 @@ export default function About() {
             {/* Main Column - Body Copy */}
             <div className="lg:col-span-8 space-y-6 text-lg text-gray-700 leading-relaxed order-2 lg:order-1">
               <p>
-                I'm a content and marketing strategist focused on the intersection of creativity and technology.
+                I'm a content and marketing strategist focused on the intersection of creativity and technology, with a proven 
+                track record of driving high-impact storytelling initiatives at companies like Meta and Snap.
               </p>
               
               <p>
                 At <strong>Meta</strong>, I lead narrative direction for developer and creator stories across the 
                 Horizon ecosystem. I run interviews with VR studios and mobile creators, shape the angles and themes 
                 of each piece, and provide editorial oversight to ensure clarity and voice alignment. I guide agency 
-                partners on execution and assist in preparing features for the Meta Horizon Developers Blog.
+                partners on execution and assist in preparing features for the Meta Horizon Developers Blog, helping to 
+                inspire and inform a global creator community.
               </p>
               
               <p>
@@ -49,7 +51,7 @@ export default function About() {
               </p>
               
               <p className="font-medium text-gray-900">
-                I approach every project with equal parts creativity and precision, building content systems that 
+                I approach every project with equal parts creativity, curiosity, and precision, building content systems that 
                 let great ideas scale without losing their human voice.
               </p>
               
