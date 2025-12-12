@@ -45,7 +45,7 @@ export default function Home() {
           
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-tight text-gray-900 mb-6 leading-tight text-center">
-            Shaping developer stories and content systems at the intersection of creativity and tech.
+            Building content systems at the intersection of creativity and tech.
           </h1>
           
           {/* CTA Buttons */}
@@ -67,11 +67,8 @@ export default function Home() {
           {/* Subtext */}
           <div className="text-base sm:text-lg text-gray-600 leading-relaxed text-center mb-8">
             <p>
-              I'm Shane Delaney, a developer-focused content strategist. 
-              At Meta, I lead narrative strategy for Horizon's developer ecosystem, crafting blog posts, case studies, 
-              and creator spotlights that educate and inspire VR developers while driving adoption of new Horizon Worlds features. 
-              I recently led the creation of Meta's four-part Horizon Go-To-Market guide series, providing a comprehensive 
-              playbook for VR developers on marketing strategy, influencer partnerships, community engagement, and asset creation.
+              Developer-focused content strategist at Meta, leading narrative strategy for Horizon's developer ecosystem. 
+              Building content systems that bridge technical expertise and marketing strategy.
             </p>
           </div>
           

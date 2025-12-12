@@ -131,110 +131,43 @@ const projects: Project[] = [
     ]
   },
   {
-    id: "vail-vr-horizon-blog",
-    title: "Vail VR: From Couch-Surfing to $15M in Crowdfunding",
+    id: "meta-horizon-builder-stories",
+    title: "Meta Horizon Builder Story Spotlights",
     company: "Meta",
     role: "Content Marketing Coordinator",
     timeline: "2025",
-    description: "Builder story spotlighting Vail VR's journey from humble beginnings to raising $15M in crowdfunding, showcasing the entrepreneurial path of VR developers.",
-    longDescription: "A builder story spotlighting Vail VR's remarkable journey from humble beginnings to raising $15M in crowdfunding. This piece explores the entrepreneurial path of VR developers, highlighting how vision, persistence, and community support can transform a startup idea into a major success in the VR space.",
+    description: "Led narrative strategy and editorial oversight for a series of builder story spotlights on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR.",
+    longDescription: "Led narrative strategy and editorial oversight for a series of builder story spotlights on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR. Each feature explores unique paths to success—from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, from community-driven worldbuilding to cultural storytelling that expands VR to new regions. These stories educate and inspire VR developers while driving adoption of Horizon Worlds features.",
     details: [
-      "Led narrative direction and shaped the story angle around entrepreneurship and crowdfunding success",
-      "Conducted research and interviews to surface authentic insights about Vail VR's journey",
-      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
-      "Crafted compelling narrative that bridges technical achievement with human storytelling",
-      "Published on Meta Horizon Developers Blog as part of builder stories series"
+      "Led narrative direction and shaped story angles for each builder spotlight, ensuring diverse perspectives and compelling storytelling",
+      "Conducted interviews and research to surface authentic insights about creator journeys and achievements",
+      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment across all features",
+      "Guided agency partners on execution and content delivery",
+      "Managed publication pipeline for builder stories series on Meta Horizon Developers Blog"
     ],
-    tags: ["Narrative Direction", "Editorial Oversight", "Builder Stories", "Entrepreneurship"],
-    metrics: ["Meta Horizon Developers Blog", "Builder stories series"],
+    tags: ["Narrative Direction", "Editorial Oversight", "Builder Stories", "Developer Stories", "Horizon Worlds"],
+    metrics: ["4-part builder stories series", "Meta Horizon Developers Blog", "Creator spotlight series"],
     image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/",
     relatedLinks: [
       {
-        title: "Read the full feature",
+        title: "Vail VR: From Couch-Surfing to $15M in Crowdfunding",
         url: "https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/",
-        description: "Published on the Meta Horizon Developers Blog – exploring Vail VR's journey from startup to $15M crowdfunding success in the VR space."
-      }
-    ]
-  },
-  {
-    id: "matthiaos-horizon-blog",
-    title: "Matthiaos: Pioneering Change in Worlds Through Passion and Community",
-    company: "Meta",
-    role: "Content Marketing Coordinator",
-    timeline: "2025",
-    description: "Feature spotlight on Matthiaos, a leading creator whose work blends worldbuilding, community, and personal storytelling inside Horizon Worlds.",
-    longDescription: "A feature spotlight on Matthiaos, a leading creator whose work blends worldbuilding, community, and personal storytelling inside Horizon Worlds. This piece showcases how creators are building meaningful experiences and communities in the metaverse.",
-    details: [
-      "Led narrative direction and shaped the story angle around community and creative leadership",
-      "Conducted interview with creator to surface authentic insights and personal journey",
-      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
-      "Guided agency partners on execution and content delivery",
-      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
-    ],
-    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
-    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
-    image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community",
-    relatedLinks: [
+        description: "Builder story spotlighting Vail VR's remarkable journey from humble beginnings to raising $15M in crowdfunding. This piece explores the entrepreneurial path of VR developers, highlighting how vision, persistence, and community support can transform a startup idea into a major success in the VR space."
+      },
       {
-        title: "Read the full feature",
+        title: "Matthiaos: Pioneering Change in Worlds Through Passion and Community",
         url: "https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community",
-        description: "Published on the Meta Horizon Developers Blog – showcasing how Matthiaos uses worldbuilding and community engagement to pioneer new creative experiences in VR."
-      }
-    ]
-  },
-  {
-    id: "grow-a-farm-horizon-blog",
-    title: "Grow a Farm: How Two Gaming Influencers Built a Top-Ranked World with Zero Development Experience",
-    company: "Meta",
-    role: "Content Marketing Coordinator",
-    timeline: "2025",
-    description: "A success story spotlighting how two gaming influencers with no formal development experience created a top-ranked Horizon world from scratch.",
-    longDescription: "A success story spotlighting how two gaming influencers with no formal development experience created a top-ranked Horizon world from scratch. This piece highlights how vision, community engagement, and a dash of collaboration can turn first-time builders into standout creators in VR.",
-    details: [
-      "Led narrative direction and shaped the story angle around collaboration and first-time creator success",
-      "Conducted interviews with creators Dinco and SnakeThug7 to surface authentic insights about their journey",
-      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
-      "Guided agency partners on execution and content delivery",
-      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
-    ],
-    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
-    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
-    image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world",
-    relatedLinks: [
+        description: "Feature spotlight on Matthiaos, a leading creator whose work blends worldbuilding, community, and personal storytelling inside Horizon Worlds. This piece showcases how creators are building meaningful experiences and communities in the metaverse."
+      },
       {
-        title: "Read the full feature",
+        title: "Grow a Farm: How Two Gaming Influencers Built a Top-Ranked World with Zero Development Experience",
         url: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world",
-        description: "Published on the Meta Horizon Developers Blog – detailing how Dinco and SnakeThug7 turned an unlikely collaboration into a hit VR farming experience."
-      }
-    ]
-  },
-  {
-    id: "saydeechan-horizon-blog",
-    title: "Saydeechan: A Solo Creator's Journey to Bring Worlds to Japan",
-    company: "Meta",
-    role: "Content Marketing Coordinator",
-    timeline: "2025",
-    description: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces.",
-    longDescription: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces. This piece explores how one creator blended art, fashion, and cultural storytelling to make virtual worlds feel like home for a new regional community.",
-    details: [
-      "Led narrative direction and shaped the story angle around cultural storytelling and regional expansion",
-      "Conducted interview with creator to surface authentic insights about building for Japanese audiences",
-      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
-      "Guided agency partners on execution and content delivery",
-      "Assisted in preparing and posting the feature on Meta Horizon Developers Blog"
-    ],
-    tags: ["Narrative Direction", "Editorial Oversight", "Developer Stories", "Horizon Worlds"],
-    metrics: ["Meta Horizon Developers Blog", "Creator spotlight series"],
-    image: "/meta.png",
-    link: "https://developers.meta.com/horizon/blog/saydeechan-bringing-worlds-to-japan",
-    relatedLinks: [
+        description: "A success story spotlighting how two gaming influencers with no formal development experience created a top-ranked Horizon world from scratch. This piece highlights how vision, community engagement, and a dash of collaboration can turn first-time builders into standout creators in VR."
+      },
       {
-        title: "Read the full feature",
+        title: "Saydeechan: A Solo Creator's Journey to Bring Worlds to Japan",
         url: "https://developers.meta.com/horizon/blog/saydeechan-bringing-worlds-to-japan",
-        description: "Published on the Meta Horizon Developers Blog – exploring how Saydeechan blends art, fashion, and cultural storytelling to build community in VR."
+        description: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces. This piece explores how one creator blended art, fashion, and cultural storytelling to make virtual worlds feel like home for a new regional community."
       }
     ]
   },

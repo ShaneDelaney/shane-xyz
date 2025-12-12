@@ -28,7 +28,7 @@ const roles: Role[] = [
     ],
     logo: '/meta.png',
     category: 'tech',
-    portfolioLinks: ['meta-horizon-gtm-guides', 'vail-vr-horizon-blog', 'matthiaos-horizon-blog', 'grow-a-farm-horizon-blog', 'saydeechan-horizon-blog']
+    portfolioLinks: ['meta-horizon-gtm-guides', 'meta-horizon-builder-stories']
   },
   {
     id: 'snap',
