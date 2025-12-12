@@ -23,11 +23,12 @@ const roles: Role[] = [
     timeline: 'October 2025 – Present',
     description: [
       'Lead narrative strategy for Horizon\'s developer ecosystem, crafting blog posts, case studies, and developer spotlights that educate and inspire VR creators while driving adoption of new Horizon Worlds features.',
+      'Led the end-to-end creation of a four-part Meta Horizon Go-To-Market guide series for developers, coordinating publication schedules and owning all copy. The series covers developing marketing plans, leveraging influencer partnerships, building social media/community engagement, and mastering marketing assets for VR apps and Horizon Worlds.',
       'Manage the end-to-end editorial pipeline – from sourcing creator stories and conducting interviews to guiding agency writers and publishing on the Horizon Developers Blog.'
     ],
     logo: '/meta.png',
     category: 'tech',
-    portfolioLinks: ['matthiaos-horizon-blog', 'grow-a-farm-horizon-blog', 'saydeechan-horizon-blog']
+    portfolioLinks: ['meta-horizon-gtm-guides', 'vail-vr-horizon-blog', 'matthiaos-horizon-blog', 'grow-a-farm-horizon-blog', 'saydeechan-horizon-blog']
   },
   {
     id: 'snap',

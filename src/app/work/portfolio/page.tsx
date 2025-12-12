@@ -87,6 +87,77 @@ const PDFPreview = ({ url, title }: { url: string; title: string }) => {
 
 const projects: Project[] = [
   {
+    id: "meta-horizon-gtm-guides",
+    title: "Meta Horizon Go-To-Market Developer Guides",
+    company: "Meta",
+    role: "Content Marketing Coordinator",
+    timeline: "2025",
+    description: "Led the end-to-end creation of a four-part Meta Horizon Go-To-Market guide series for developers, coordinating publication schedules and owning all copy.",
+    longDescription: "Led the end-to-end creation of a four-part Meta Horizon Go-To-Market guide series for developers, coordinating publication schedules and owning all copy. Played dual roles as content strategist and technical writer, ensuring each guide was on-message and technically accurate. The series provides a comprehensive go-to-market playbook for VR developers, covering marketing strategy, influencer partnerships, social media/community engagement, and marketing asset creation for VR apps and Horizon Worlds.",
+    details: [
+      "Coordinated publication schedules and owned all copy for four comprehensive educational guides",
+      "Defined and executed content strategy aligned with Meta's developer marketing goals",
+      "Crafted guides addressing critical needs from high-level marketing strategy to hands-on tactics like community-building and influencer collaboration",
+      "Managed project lifecycle from initial outline to final web publication, coordinating cross-functional reviews with product managers, developer relations, designers, and legal",
+      "Maintained editorial calendar with tight deadlines, resulting in on-schedule release of all guides",
+      "Applied content marketing principles to maximize impact, structuring content with clear headings, visuals, and examples",
+      "Created supplementary worksheets and checklists to accompany the Marketing Plan guide, enabling developers to apply concepts directly",
+      "Ensured consistent, developer-friendly tone aligned with Meta's branding, turning complex marketing concepts into actionable advice"
+    ],
+    tags: ["Content Strategy", "Technical Writing", "Project Management", "Content Marketing", "Developer Education"],
+    metrics: ["4-part guide series", "Cornerstone resources in Meta developers portal", "Enhanced Meta Horizon developer experience"],
+    image: "/meta.png",
+    relatedLinks: [
+      {
+        title: "Develop a Marketing Plan for Your VR App",
+        url: "https://developers.meta.com/horizon/resources/gtm-marketing-plan",
+        description: "Guide covering high-level marketing strategy, audience research, and identifying target demographics and optimal channels for VR apps."
+      },
+      {
+        title: "Leverage Influencer Partnerships",
+        url: "https://developers.meta.com/horizon/resources/gtm-influencer-marketing",
+        description: "Guide on collaborating with gaming influencers and building strategic partnerships to grow VR app visibility."
+      },
+      {
+        title: "Build Social Media and Community Engagement",
+        url: "https://developers.meta.com/horizon/resources/gtm-social-media",
+        description: "Guide on community-building tactics, including forum engagement and social media strategies for VR developers."
+      },
+      {
+        title: "Master Marketing Assets for VR Apps",
+        url: "https://developers.meta.com/horizon/resources/gtm-marketing-assets",
+        description: "Guide on creating effective marketing assets and visual content for promoting VR apps and Horizon Worlds experiences."
+      }
+    ]
+  },
+  {
+    id: "vail-vr-horizon-blog",
+    title: "Vail VR: From Couch-Surfing to $15M in Crowdfunding",
+    company: "Meta",
+    role: "Content Marketing Coordinator",
+    timeline: "2025",
+    description: "Builder story spotlighting Vail VR's journey from humble beginnings to raising $15M in crowdfunding, showcasing the entrepreneurial path of VR developers.",
+    longDescription: "A builder story spotlighting Vail VR's remarkable journey from humble beginnings to raising $15M in crowdfunding. This piece explores the entrepreneurial path of VR developers, highlighting how vision, persistence, and community support can transform a startup idea into a major success in the VR space.",
+    details: [
+      "Led narrative direction and shaped the story angle around entrepreneurship and crowdfunding success",
+      "Conducted research and interviews to surface authentic insights about Vail VR's journey",
+      "Provided editorial oversight to ensure clarity, accuracy, and brand voice alignment",
+      "Crafted compelling narrative that bridges technical achievement with human storytelling",
+      "Published on Meta Horizon Developers Blog as part of builder stories series"
+    ],
+    tags: ["Narrative Direction", "Editorial Oversight", "Builder Stories", "Entrepreneurship"],
+    metrics: ["Meta Horizon Developers Blog", "Builder stories series"],
+    image: "/meta.png",
+    link: "https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/",
+    relatedLinks: [
+      {
+        title: "Read the full feature",
+        url: "https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/",
+        description: "Published on the Meta Horizon Developers Blog – exploring Vail VR's journey from startup to $15M crowdfunding success in the VR space."
+      }
+    ]
+  },
+  {
     id: "matthiaos-horizon-blog",
     title: "Matthiaos: Pioneering Change in Worlds Through Passion and Community",
     company: "Meta",

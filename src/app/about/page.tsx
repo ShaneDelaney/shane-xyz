@@ -33,7 +33,10 @@ export default function About() {
               <p>
                 My background blends trend-driven performance analysis, cross-functional production, and deep developer ecosystem 
                 experience. At <strong>Meta</strong>, I lead narrative direction for developer and creator stories in the Horizon 
-                VR ecosystem, turning cutting-edge tech into accessible stories that inspire creators and builders. Previously at <strong>Snap Inc.</strong>, I guided trend-focused content curation for the Snapchat Spotlight platform, using 
+                VR ecosystem, turning cutting-edge tech into accessible stories that inspire creators and builders. I recently led 
+                the end-to-end creation of Meta's four-part Horizon Go-To-Market guide series, coordinating publication schedules 
+                and owning all copy. This project showcased my ability to blend content strategy, technical writing, and project 
+                management—delivering educational content that empowers VR developers with actionable marketing strategies. Previously at <strong>Snap Inc.</strong>, I guided trend-focused content curation for the Snapchat Spotlight platform, using 
                 performance insights to inform editorial decisions and engage new users. I also managed high-volume content 
                 production at <strong>Phony Content</strong> (over 50 scripted Snapchat stories) and contributed to culture-driven 
                 marketing initiatives at <strong>StockX</strong> – analyzing Gen Z subcultures and sneaker trends to help shape the 

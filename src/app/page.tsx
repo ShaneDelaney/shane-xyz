@@ -69,7 +69,9 @@ export default function Home() {
             <p>
               I'm Shane Delaney, a developer-focused content strategist. 
               At Meta, I lead narrative strategy for Horizon's developer ecosystem, crafting blog posts, case studies, 
-              and creator spotlights that educate and inspire VR developers while driving adoption of new Horizon Worlds features.
+              and creator spotlights that educate and inspire VR developers while driving adoption of new Horizon Worlds features. 
+              I recently led the creation of Meta's four-part Horizon Go-To-Market guide series, providing a comprehensive 
+              playbook for VR developers on marketing strategy, influencer partnerships, community engagement, and asset creation.
             </p>
           </div>
           
