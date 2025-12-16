@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 interface Role {
   id: string;
@@ -98,86 +99,86 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
   
   const cardContent = (
     <div
-      className={`bg-white border border-gray-200 rounded-xl p-4 sm:p-5 md:p-6 transition-shadow ${
-        hasPortfolioLinks ? 'hover:shadow-lg cursor-pointer hover:border-gray-300' : 'hover:shadow-lg'
+      className={`bg-white border border-gray-200 rounded-lg p-3 transition-shadow ${
+        hasPortfolioLinks ? 'hover:shadow-md cursor-pointer hover:border-gray-300' : 'hover:shadow-md'
       }`}
     >
-        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-          {/* Logo */}
-          {role.logo && (
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
-              <Image
-                src={role.logo}
-                alt={`${role.company} logo`}
-                fill
-                className="object-contain"
-              />
-                </div>
-          )}
-          
-          {/* Content */}
-          <div className="flex-1 min-w-0 w-full">
-            {/* Header */}
-            <div className="mb-2 sm:mb-3">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-0.5">
-                {role.company}
-              </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium mb-1">
-                {role.title}
-              </p>
-              <p className="text-xs sm:text-sm text-gray-500">
-                {role.timeline}
-              </p>
-            </div>
-              
-              {/* Description */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                {role.description[0]}
-              </p>
-              
-              {/* Additional descriptions when expanded */}
-              {isExpanded && role.description.length > 1 && (
-                <div className="space-y-2 sm:space-y-3">
-                  {role.description.slice(1).map((desc, idx) => (
-                    <p key={idx} className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {desc}
-                    </p>
-                  ))}
-                </div>
-              )}
-              
-              {/* Toggle button if multiple descriptions */}
-              {role.description.length > 1 && (
-                  <button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsExpanded(!isExpanded);
-                  }}
-                  className="text-xs sm:text-sm font-medium text-gray-900 hover:text-gray-700 transition-colors inline-flex items-center gap-1 mt-2"
-                >
-                  {isExpanded ? 'Show less' : 'Show more'}
-                  <span className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}>
-                    ↓
-                                  </span>
-                </button>
-              )}
-              
-              {/* Portfolio link indicator */}
-              {hasPortfolioLinks && (
-                <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-gray-100">
-                  <span className="text-xs sm:text-sm text-gray-500 inline-flex items-center gap-1">
-                    View related projects
-                    <span>→</span>
-                  </span>
-                </div>
-              )}
-            </div>
+      <div className="flex items-start gap-3">
+        {/* Logo */}
+        {role.logo && (
+          <div className="relative w-10 h-10 flex-shrink-0">
+            <Image
+              src={role.logo}
+              alt={`${role.company} logo`}
+              fill
+              className="object-contain"
+            />
+          </div>
+        )}
+        
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          {/* Header */}
+          <div className="mb-1.5">
+            <h3 className="text-base font-semibold text-gray-900 mb-0.5">
+              {role.company}
+            </h3>
+            <p className="text-xs text-gray-700 font-medium mb-0.5">
+              {role.title}
+            </p>
+            <p className="text-[10px] text-gray-500">
+              {role.timeline}
+            </p>
+          </div>
+            
+          {/* Description */}
+          <div>
+            <p className="text-xs text-gray-600 leading-relaxed">
+              {role.description[0]}
+            </p>
+            
+            {/* Additional descriptions when expanded */}
+            {isExpanded && role.description.length > 1 && (
+              <div className="space-y-1.5 mt-1.5">
+                {role.description.slice(1).map((desc, idx) => (
+                  <p key={idx} className="text-xs text-gray-600 leading-relaxed">
+                    {desc}
+                  </p>
+                ))}
+              </div>
+            )}
+            
+            {/* Toggle button if multiple descriptions */}
+            {role.description.length > 1 && (
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsExpanded(!isExpanded);
+                }}
+                className="text-[10px] font-medium text-gray-900 hover:text-gray-700 transition-colors inline-flex items-center gap-1 mt-1.5"
+              >
+                {isExpanded ? 'Show less' : 'Show more'}
+                <span className={`transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}>
+                  ↓
+                </span>
+              </button>
+            )}
+            
+            {/* Portfolio link indicator */}
+            {hasPortfolioLinks && (
+              <div className="mt-1.5 pt-1.5 border-t border-gray-100">
+                <span className="text-[10px] text-gray-500 inline-flex items-center gap-1">
+                  View projects
+                  <span>→</span>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
   
   return hasPortfolioLinks && role.portfolioLinks?.[0] ? (
     <Link href={`/work/portfolio#${role.portfolioLinks[0]}`} className="block">
@@ -190,60 +191,75 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
 
 export default function Work() {
   const [filter, setFilter] = useState<string>('all');
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
   
   const filteredRoles = filter === 'all' 
     ? roles 
     : roles.filter(role => role.category === filter);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="fixed inset-0 h-screen w-screen overflow-hidden bg-white">
       {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50/10 -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-white to-gray-50/30 -z-10" />
       
       {/* Header */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-6 sm:mb-8">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 mb-3 sm:mb-4">
-              Work
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mb-2 sm:mb-3">
-              A timeline of roles spanning content strategy, creative marketing, and digital storytelling across tech and media.
-            </p>
-            <Link href="/work/portfolio" className="inline-flex items-center gap-2 text-xs sm:text-sm text-gray-600 hover:text-gray-900 transition-colors">
-              <span>View detailed portfolio projects</span>
-              <span>→</span>
-            </Link>
-          </div>
+      <section className="h-full w-full flex items-center justify-center px-3 sm:px-4 lg:px-6 py-4 sm:py-6 overflow-y-auto scrollbar-hide">
+        <div className="max-w-5xl mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="mb-3 sm:mb-4 md:mb-6">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-1.5 sm:mb-2">
+                Work
+              </h1>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mb-2 sm:mb-3">
+                Storytelling and creative strategy for tech companies—turning complex products into compelling narratives.
+              </p>
+              <Link href="/work/portfolio" className="inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-600 hover:text-gray-900 transition-colors">
+                <span>View portfolio</span>
+                <span>→</span>
+              </Link>
+            </div>
           
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 pb-3 sm:pb-4 border-b border-gray-200">
-            {[
-              { value: 'all', label: 'All' },
-              { value: 'tech', label: 'Tech' },
-              { value: 'creative', label: 'Creative' },
-              { value: 'writing', label: 'Writing' }
-            ].map((tab) => (
+            {/* Filter Tabs */}
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
+              {[
+                { value: 'all', label: 'All' },
+                { value: 'tech', label: 'Tech' },
+                { value: 'creative', label: 'Creative' },
+                { value: 'writing', label: 'Writing' }
+              ].map((tab) => (
                 <button
-                key={tab.value}
-                onClick={() => setFilter(tab.value)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
-                  filter === tab.value
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-          
-          {/* Timeline */}
-          <div className="space-y-3 sm:space-y-4">
-            {filteredRoles.map((role, index) => (
-              <RoleCard key={role.id} role={role} index={index} />
-            ))}
-          </div>
+                  key={tab.value}
+                  onClick={() => setFilter(tab.value)}
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium transition-all ${
+                    filter === tab.value
+                      ? 'bg-gray-900 text-white'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            
+            {/* Timeline - Compact */}
+            <div className="space-y-1.5 sm:space-y-2 max-h-[50vh] overflow-y-auto scrollbar-hide">
+              {filteredRoles.map((role, index) => (
+                <RoleCard key={role.id} role={role} index={index} />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
