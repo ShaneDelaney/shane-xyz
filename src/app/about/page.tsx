@@ -75,15 +75,15 @@ export default function About() {
                 </p>
                 
                 <p>
-                  At Meta, I lead narrative strategy for Horizon's developer ecosystem, managing an end-to-end editorial pipeline that has produced 10+ major pieces—including a four-part Go-To-Market guide series and a six-part builder story spotlight series. These stories showcase diverse creator journeys, from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, educating and inspiring VR developers while driving adoption of Horizon Worlds features.
+                  At Meta, I lead narrative strategy for Horizon's developer ecosystem, managing an end-to-end editorial pipeline that has produced 10+ major pieces, including a four-part Go-To-Market guide series and a six-part builder story spotlight series. These stories showcase diverse creator journeys, from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds. Each piece educates and inspires VR developers while driving adoption of Horizon Worlds features.
                 </p>
                 
                 <p>
-                  Previously at Snap Inc., I curated content for Spotlight, managing a daily pipeline of 1,000+ creator submissions and collaborating with product and data science teams to launch trend-driven initiatives. At Phony Content, I produced 50+ viral Snapchat stories that generated 4M+ views and 40K+ new followers, achieving a 90% viewership boost. I also contributed to trend research at StockX that informed 2025 marketing strategy.
+                  Previously at Snap Inc., I curated content for Spotlight, managing a daily pipeline of 1,000+ creator submissions and collaborating with product and data science teams to launch trend-driven initiatives. At Phony Content, I produced 50+ viral Snapchat stories that generated 4M+ views and 40K+ new followers, achieving a 90% viewership boost. I also contributed to trend research at StockX that informed the company's 2025 marketing strategy.
                 </p>
                 
                 <p className="text-gray-700">
-                  Building creative strategies that help ideas connect with people—combining storytelling with data analysis to create content that drives engagement and measurable impact.
+                  I build creative strategies that help ideas connect with people by combining storytelling with data analysis to create content that drives engagement and measurable impact.
                 </p>
               </motion.div>
               
