@@ -25,7 +25,8 @@ const roles: Role[] = [
     description: [
       'Lead narrative strategy for Horizon\'s developer ecosystem, crafting blog posts, case studies, and developer spotlights that educate and inspire VR creators while driving adoption of new Horizon Worlds features.',
       'Led the end-to-end creation of a four-part Meta Horizon Go-To-Market guide series for developers, coordinating publication schedules and owning all copy. The series covers developing marketing plans, leveraging influencer partnerships, building social media/community engagement, and mastering marketing assets for VR apps and Horizon Worlds.',
-      'Manage the end-to-end editorial pipeline – from sourcing creator stories and conducting interviews to guiding agency writers and publishing on the Horizon Developers Blog.'
+      'Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR. Managed the full editorial pipeline—from sourcing creator stories and conducting interviews to guiding agency writers and publishing—resulting in 10+ major pieces that drive developer engagement and platform adoption.',
+      'Manage the end-to-end editorial pipeline using data-driven insights to identify high-impact stories, ensuring each piece aligns with developer needs and platform goals while maintaining editorial excellence and brand voice consistency.'
     ],
     logo: '/meta.png',
     category: 'tech',
@@ -37,8 +38,8 @@ const roles: Role[] = [
     title: 'Trend Producer',
     timeline: 'March 2025 – October 2025',
     description: [
-      'Managed a daily curation pipeline of 1,000+ creator submissions for Snapchat Spotlight, using performance data to inform content picks and strategy.',
-      'Collaborated with product and data science teams to launch trend-driven initiatives – including a tailored new-user experience – that boosted engagement among teen audiences.'
+      'Managed a daily curation pipeline of 1,000+ creator submissions for Snapchat Spotlight, using performance data and analytics to inform content picks and strategy, achieving retention rates 10% higher than platform averages.',
+      'Collaborated with product and data science teams to launch trend-driven initiatives – including a tailored new-user experience – that boosted engagement among teen audiences through data-informed content selection and strategic curation.'
     ],
     logo: '/assets/snap-logo.png',
     category: 'tech',

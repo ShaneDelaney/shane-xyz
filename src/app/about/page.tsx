@@ -71,15 +71,19 @@ export default function About() {
                 className="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6"
               >
                 <p>
-                  Content strategist working on storytelling and creative strategy. I help turn complex ideas into clear narratives.
+                  Content strategist working on storytelling and creative strategy. I help turn complex ideas into clear narratives that drive measurable results.
                 </p>
                 
                 <p>
-                  At Meta, I work on narrative strategy for Horizon's developer ecosystem. I recently coordinated Meta's four-part Go-To-Market guide series. Previously at Snap Inc., I curated content for Spotlight. I also worked on content production at Phony Content and contributed to trend research at StockX.
+                  At Meta, I lead narrative strategy for Horizon's developer ecosystem, managing an end-to-end editorial pipeline that has produced 10+ major pieces—including a four-part Go-To-Market guide series and a six-part builder story spotlight series. These stories showcase diverse creator journeys, from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, educating and inspiring VR developers while driving adoption of Horizon Worlds features.
+                </p>
+                
+                <p>
+                  Previously at Snap Inc., I curated content for Spotlight, managing a daily pipeline of 1,000+ creator submissions and collaborating with product and data science teams to launch trend-driven initiatives. At Phony Content, I produced 50+ viral Snapchat stories that generated 4M+ views and 40K+ new followers, achieving a 90% viewership boost. I also contributed to trend research at StockX that informed 2025 marketing strategy.
                 </p>
                 
                 <p className="text-gray-700">
-                  Building creative strategies that help ideas connect with people.
+                  Building creative strategies that help ideas connect with people—combining storytelling with data analysis to create content that drives engagement and measurable impact.
                 </p>
               </motion.div>
               

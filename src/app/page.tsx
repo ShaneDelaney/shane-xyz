@@ -78,7 +78,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="text-balance">
-                Content strategist at Meta, crafting stories and creative strategy for Horizon's developer ecosystem. Turning technical concepts into compelling narratives that drive engagement and adoption.
+                Content strategist at Meta, crafting stories and creative strategy for Horizon's developer ecosystem. Leading narrative strategy for developer spotlights and educational guides that turn technical concepts into compelling narratives that drive engagement and adoption.
               </p>
             </motion.div>
             

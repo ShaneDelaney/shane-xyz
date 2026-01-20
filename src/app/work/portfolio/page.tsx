@@ -142,8 +142,8 @@ const projects: Project[] = [
     company: "Meta",
     role: "Content Marketing Coordinator",
     timeline: "2025",
-    description: "Led narrative strategy and editorial oversight for a series of builder story spotlights on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR.",
-    longDescription: "Led narrative strategy and editorial oversight for a series of builder story spotlights on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR. Each feature explores unique paths to success—from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, from community-driven worldbuilding to cultural storytelling that expands VR to new regions. These stories educate and inspire VR developers while driving adoption of Horizon Worlds features.",
+    description: "Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR that drive developer engagement and platform adoption.",
+    longDescription: "Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog, showcasing diverse creator journeys and success stories in VR. Each feature explores unique paths to success—from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, from community-driven worldbuilding to cultural storytelling that expands VR to new regions. These stories educate and inspire VR developers while driving adoption of Horizon Worlds features, using data-driven insights to identify high-impact narratives that resonate with the developer community.",
     details: [
       "Led narrative direction and shaped story angles for each builder spotlight, ensuring diverse perspectives and compelling storytelling",
       "Conducted interviews and research to surface authentic insights about creator journeys and achievements",
@@ -152,7 +152,7 @@ const projects: Project[] = [
       "Managed publication pipeline for builder stories series on Meta Horizon Developers Blog"
     ],
     tags: ["Narrative Direction", "Editorial Oversight", "Builder Stories", "Developer Stories", "Horizon Worlds"],
-    metrics: ["4-part builder stories series", "Meta Horizon Developers Blog", "Creator spotlight series"],
+    metrics: ["6-part builder stories series", "Meta Horizon Developers Blog", "Creator spotlight series"],
     image: "/meta.png",
     relatedLinks: [
       {
@@ -174,6 +174,16 @@ const projects: Project[] = [
         title: "Saydeechan: A Solo Creator's Journey to Bring Worlds to Japan",
         url: "https://developers.meta.com/horizon/blog/saydeechan-bringing-worlds-to-japan",
         description: "A creator spotlight on Sade Young (aka \"Saydeechan\"), who helped launch Horizon Worlds in Japan by building culturally rich, community-driven spaces. This piece explores how one creator blended art, fashion, and cultural storytelling to make virtual worlds feel like home for a new regional community."
+      },
+      {
+        title: "Year in Review: Insights from 2025's Breakout Creators and Developers",
+        url: "https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/",
+        description: "A retrospective spotlighting how breakout developers in 2025 leveraged rapid iteration as a superpower. Features Kawaii.Creator's four-day world build using Generative AI, New Folder Games' burst development model that created a Top 10 paid app, and Austin Lewis' minimalist prototyping approach—showcasing how speed and focused iteration led to commercial success in VR."
+      },
+      {
+        title: "VAIL VR (Part Two): A Look Inside AEXLAB'S Community-Driven Live Ops Engine",
+        url: "https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/",
+        description: "The second part of the Vail VR builder story, exploring how AEXLAB transitioned their flagship shooter from premium to free-to-play. This piece dives into their data-driven onboarding system, Discord-to-roadmap pipeline, and community-driven live operations approach—demonstrating how a 35-person team ships frequent, focused updates based on player signals to sustain long-term engagement."
       }
     ]
   },
@@ -183,16 +193,16 @@ const projects: Project[] = [
     company: "Snapchat",
     role: "Trend Curator",
     timeline: "Mar 2025–Present",
-    description: "Curated high-quality user-generated content for Snapchat's New User Experience, creating personalized content feeds for teens (13-17).",
-    longDescription: "Developed personalized onboarding content flows that guide new users through Snapchat's features while showcasing high-performing UGC from creators that resonates with teen audiences (13-17), balancing algorithmic signals with human editorial input.",
+    description: "Curated high-quality user-generated content for Snapchat's New User Experience, creating personalized content feeds for teens (13-17) that achieved retention rates 10% higher than platform averages.",
+    longDescription: "Developed personalized onboarding content flows that guide new users through Snapchat's features while showcasing high-performing UGC from creators that resonates with teen audiences (13-17). Used data-driven curation to balance algorithmic signals with human editorial input, resulting in improved engagement and retention metrics.",
     details: [
       "Reviewed and recommended 300+ content pieces for diverse teen cohorts segmented by interest",
       "Filtered content using data-driven cohort guidelines (M1.2 incremental data)",
       "Collaborated with product engineering through dedicated Slack channels (#nux-curated-feed)",
       "Ensured demographic fit while maintaining editorial quality standards"
     ],
-    tags: ["Teen Content Strategy", "Cohort Curation", "Product Collaboration"],
-    metrics: ["13–17 teen audience", "300+ pieces per cohort", "Diverse creators"],
+    tags: ["Teen Content Strategy", "Cohort Curation", "Product Collaboration", "Data-Driven Curation"],
+    metrics: ["13–17 teen audience", "300+ pieces per cohort", "10% higher retention than platform average", "Data-driven cohort segmentation"],
     image: "/assets/snap-logo.png",
     relatedLinks: [
       {
@@ -231,8 +241,8 @@ const projects: Project[] = [
     company: "Snapchat",
     role: "Trend Curator",
     timeline: "Mar 2025–Present",
-    description: "Launched a platform initiative with Snap's data science team to surface and support emerging creators through a custom content system.",
-    longDescription: "Collaborated with data science and product teams to develop an internal system for identifying promising creator content, increasing visibility for emerging voices and improving monetization opportunities across the platform.",
+    description: "Launched a platform initiative with Snap's data science team to surface and support emerging creators through a custom content system, influencing monetization strategy across 1M+ creators.",
+    longDescription: "Collaborated with data science and product teams to develop an internal system for identifying promising creator content, translating complex data findings into strategic content guidance. Increased visibility for emerging voices and improved monetization opportunities across the platform, creating internal documentation for 10+ cross-functional teams.",
     details: [
       "Translated complex data findings into strategic content guidance",
       "Created internal documentation for 10+ cross-functional teams",
@@ -309,16 +319,17 @@ const projects: Project[] = [
     company: "Phony Content",
     role: "Content Manager",
     timeline: "2024–2025",
-    description: "Wrote and programmed 50+ viral Snapchat stories.",
-    longDescription: "Created compelling short-form narratives for the Tiny Texts brand on Snapchat, developing editorial systems to ensure consistent voice and quality across a rotating writing team.",
+    description: "Wrote and programmed 50+ viral Snapchat stories, generating 4M+ views and 40K+ new followers while boosting viewership by 90%.",
+    longDescription: "Created compelling short-form narratives for the Tiny Texts brand on Snapchat, developing editorial systems to ensure consistent voice and quality across a rotating writing team. Achieved significant growth through data-driven content optimization and strategic storytelling that resonated with target audiences.",
     details: [
       "Created style guides and templates for consistent storytelling",
       "Developed voice and tone documentation for team alignment",
       "Managed editorial calendar across rotating writing team",
-      "Optimized content for viral metrics and engagement"
+      "Optimized content for viral metrics and engagement, achieving 90% viewership boost compared to previous content",
+      "Generated 4M+ views and 40K+ new followers through strategic content curation"
     ],
-    tags: ["Viral Storytelling", "Content Curation", "Editorial Management"],
-    metrics: ["7.89M+ avg. views/story", "35–45% SPV"],
+    tags: ["Viral Storytelling", "Content Curation", "Editorial Management", "Data-Driven Strategy"],
+    metrics: ["4M+ views generated", "40K+ new followers", "90% viewership boost", "7.89M+ avg. views/story", "35–45% SPV"],
     image: "/assets/Phony-logo.png",
     relatedLinks: [
       {
