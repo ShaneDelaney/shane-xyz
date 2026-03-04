@@ -179,7 +179,7 @@ export default function ShaneGPT() {
                     return (
                       <button
                         key={ctx.key}
-                        onClick={() => setContext(ctx.key)}
+                        onClick={() => { setContext(ctx.key); setMessages([]); }}
                         className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-150 text-left w-full ${
                           isActive
                             ? 'bg-white/10 text-white'
