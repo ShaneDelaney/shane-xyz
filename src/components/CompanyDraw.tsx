@@ -30,27 +30,29 @@ function animatePath(isInView: boolean, delay = 0, duration = 1.5) {
 }
 
 // ─── META ∞ ─────────────────────────────────────────────────────────────────
-// Single continuous stroke: starts at centre crossing, traces left loop
-// counterclockwise, returns to centre, traces right loop counterclockwise.
-// The self-intersection at centre creates the 3-D crossover of the Meta mark.
+// Single continuous ribbon stroke traced from the reference logo:
+// Pen starts at the centre crossing, sweeps right loop first (counterclockwise),
+// returns through centre (creating the visible X crossing), then sweeps the
+// left loop counterclockwise and closes. The self-intersection at (130,50)
+// replicates the 3-D twist of the Meta mark.
 export function MetaLogo({ className }: { className?: string }) {
   const { ref, isInView } = useDraw();
   return (
     <div ref={ref} className={className}>
-      <svg viewBox="0 0 220 80" aria-label="Meta" {...SVG_PROPS}>
+      <svg viewBox="0 0 260 100" aria-label="Meta" {...SVG_PROPS} strokeWidth={1.6}>
         <motion.path
           d="
-            M 110 40
-            C 110 27  92 16  68 16
-            C  44 16  24 28  24 40
-            C  24 52  44 64  68 64
-            C  92 64 110 53 110 40
-            C 110 27 128 16 152 16
-            C 176 16 196 28 196 40
-            C 196 52 176 64 152 64
-            C 128 64 110 53 110 40
+            M 130 50
+            C 135 30 155 10 185 10
+            C 220 10 245 25 245 50
+            C 245 75 220 90 185 90
+            C 155 90 135 70 130 50
+            C 125 30 105 10  75 10
+            C  40 10  15 25  15 50
+            C  15 75  40 90  75 90
+            C 105 90 125 70 130 50
           "
-          {...animatePath(isInView, 0, 2.2)}
+          {...animatePath(isInView, 0, 2.4)}
         />
       </svg>
     </div>
@@ -58,36 +60,37 @@ export function MetaLogo({ className }: { className?: string }) {
 }
 
 // ─── SNAP GHOST ──────────────────────────────────────────────────────────────
-// Round head arc, straight body sides, then W-shaped bottom:
-// two feet hanging DOWN with a notch rising between them.
+// Traced from the official Snap ghost reference image (single closed outline):
+// Round head arch → right side descends → RIGHT shoulder bump protrudes out →
+// right foot curls DOWN-RIGHT → centre valley rises → left foot curls DOWN-LEFT →
+// LEFT shoulder bump protrudes out → back up to head. No internal features —
+// the real logo is outline-only.
 export function SnapLogo({ className }: { className?: string }) {
   const { ref, isInView } = useDraw();
   return (
     <div ref={ref} className={className}>
-      <svg viewBox="0 0 80 82" aria-label="Snap" {...SVG_PROPS}>
-        {/* Ghost body */}
+      <svg viewBox="0 0 100 118" aria-label="Snap" {...SVG_PROPS} strokeWidth={1.8}>
         <motion.path
           d="
-            M 10 40
-            A 30 30 0 0 0 70 40
-            L 70 55
-            C 70 65 65 73 58 73
-            C 51 73 48 65 40 65
-            C 32 65 29 73 22 73
-            C 15 73 10 65 10 55
+            M 50 12
+            C 70 12 82 22 82 38
+            C 82 48 84 52 90 55
+            C 96 58 96 66 90 69
+            C 84 72 82 76 82 82
+            C 82 92 87 98 82 102
+            C 77 106 70 104 66 98
+            C 62 92 58 88 55 88
+            C 52 88 48 88 45 88
+            C 42 88 38 92 34 98
+            C 30 104 23 106 18 102
+            C 13 98 18 92 18 82
+            C 18 76 16 72 10 69
+            C  4 66  4 58 10 55
+            C 16 52 18 48 18 38
+            C 18 22 30 12 50 12
             Z
           "
-          {...animatePath(isInView, 0, 1.8)}
-        />
-        {/* Left eye */}
-        <motion.path
-          d="M 27 33 A 4 4 0 1 0 35 33 A 4 4 0 1 0 27 33"
-          {...animatePath(isInView, 1.6, 0.6)}
-        />
-        {/* Right eye */}
-        <motion.path
-          d="M 45 33 A 4 4 0 1 0 53 33 A 4 4 0 1 0 45 33"
-          {...animatePath(isInView, 1.9, 0.6)}
+          {...animatePath(isInView, 0, 2.8)}
         />
       </svg>
     </div>

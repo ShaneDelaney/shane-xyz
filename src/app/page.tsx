@@ -39,7 +39,7 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.1, ease: EASE }}
             className="mb-10"
           >
-            <MetaLogo className="w-32" />
+            <MetaLogo className="w-44" />
           </motion.div>
 
           {/* Bio */}
