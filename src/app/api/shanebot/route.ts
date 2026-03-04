@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { findCachedAnswer, FALLBACK } from '@/lib/shanebot';
+
+const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
 
 const SYSTEM_PROMPT = `You are an intelligent assistant embedded in Shane Delaney's personal portfolio site at shanedelaney.xyz. Your job is to answer questions about Shane's professional background, experience, skills, and work in a way that is honest, direct, and human — never robotic or over-polished.
 
@@ -137,13 +138,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ answer: "That's a long one — try asking something more specific and I'll give you a better answer." });
     }
 
-    // Check cache first (instant, no API cost)
-    const cached = findCachedAnswer(question);
-    if (cached) {
-      return NextResponse.json({ answer: cached, cached: true });
-    }
-
-    // Hit the API for everything else
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ answer: FALLBACK });

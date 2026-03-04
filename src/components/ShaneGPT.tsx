@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { findCachedAnswer, FALLBACK } from '@/lib/shanebot';
+const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -37,13 +37,6 @@ export default function ShaneGPT() {
     if (!trimmed || loading) return;
     setLoading(true);
     setAnswer('');
-
-    const cached = findCachedAnswer(trimmed);
-    if (cached) {
-      setAnswer(cached);
-      setLoading(false);
-      return;
-    }
 
     try {
       const res = await fetch('/api/shanebot', {
