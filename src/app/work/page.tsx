@@ -30,11 +30,11 @@ const roles: Role[] = [
       { value: '4 Teams', label: 'XFN Coordinated' },
     ],
     bullets: [
-      'Lead end-to-end editorial lifecycle for the Horizon Developer Blog, from story ideation and stakeholder alignment through publication.',
-      'Own two flagship content series: a 4-part Go-To-Market Developer Guide and a 6-part Builder Story Spotlight, coordinating across Product, DevRel, Design, and Legal.',
-      'Manage the formal stat review and verification process with Data Science, ensuring 100% accuracy of all public-facing metrics before any content goes live.',
-      'Serve as the primary editorial bridge between Marketing, Product, and Legal, synthesizing XFN feedback and producing internal status reports for leadership.',
-      'Maintain DRI trackers and editorial calendars to monitor story progress and keep global delivery dates on track.',
+      'Leads end-to-end editorial lifecycle for the Horizon Developer Blog, from story ideation and stakeholder alignment through publication.',
+      'Owned editorial direction for the 4-part Go-To-Market Developer Guide — covering marketing plan development, influencer partnerships, social and community engagement, and marketing asset creation. The series is a cornerstone resource on Meta\'s developer portal, built to be platform-agnostic and durably useful for Horizon developers.',
+      'Managed cross-functional reviews across Product, DevRel, Design, and Legal for all high-visibility launches, running the formal stat review process with Data Science to ensure 100% metric accuracy before publication.',
+      'Leads the 6-part Builder Story Spotlight series — defining story angles, conducting creator interviews, and managing the full pipeline from sourcing through launch.',
+      'Maintains DRI trackers and editorial calendars to keep global delivery dates on track across all active stories.',
     ],
   },
   {
