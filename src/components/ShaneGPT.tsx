@@ -94,7 +94,7 @@ export default function ShaneGPT() {
             />
 
             <motion.div
-              className="fixed bottom-20 right-6 z-50 w-[min(360px,calc(100vw-3rem))] bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col overflow-hidden"
+              className="fixed bottom-20 right-6 z-50 w-[min(380px,calc(100vw-3rem))] bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col overflow-hidden"
               initial={{ opacity: 0, y: 10, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 6, scale: 0.97 }}
@@ -113,7 +113,7 @@ export default function ShaneGPT() {
               </div>
 
               {/* Body */}
-              <div className="px-4 py-4 min-h-[160px] flex flex-col gap-3">
+              <div className="px-4 py-4 min-h-[160px] max-h-[320px] overflow-y-auto flex flex-col gap-3">
 
                 {/* Idle: suggested questions */}
                 {!answer && !loading && (
@@ -174,7 +174,7 @@ export default function ShaneGPT() {
                     value={question}
                     onChange={e => setQuestion(e.target.value)}
                     placeholder="Ask a question..."
-                    maxLength={300}
+                    maxLength={500}
                     className="flex-1 text-sm text-gray-900 placeholder-gray-400 bg-transparent outline-none"
                   />
                   <button
