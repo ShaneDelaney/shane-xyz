@@ -1,145 +1,163 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-interface DrawPath {
-  d: string;
-  delay: number;
-  duration: number;
+// Shared hook — triggers animation once when element scrolls into view
+function useDraw() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  return { ref, isInView };
 }
 
-interface DrawLabel {
-  x: number;
-  y: number;
-  text: string;
-  delay: number;
+const SVG_PROPS = {
+  fill: 'none',
+  stroke: '#1f2937',
+  strokeWidth: 1.4,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+};
+
+function animatePath(isInView: boolean, delay = 0, duration = 1.5) {
+  return {
+    initial: { pathLength: 0, opacity: 0 },
+    animate: isInView ? { pathLength: 1, opacity: 1 } : {},
+    transition: {
+      pathLength: { delay, duration, ease: 'easeInOut' as const },
+      opacity: { delay, duration: 0.01 },
+    },
+  };
 }
 
-// ─────────────────────────────────────────────────
-// Layout: 280 × 380 canvas
-//   Meta  ∞   — top centre    (140, 72)
-//   Snap ghost — mid left     ( 80, 200)
-//   StockX  X  — mid right    (200, 200)
-//   Collider   — bot left     ( 80, 320)
-//   Phony      — bot right    (200, 320)
-// ─────────────────────────────────────────────────
-
-const PATHS: DrawPath[] = [
-
-  // ── META ∞ ──────────────────────────────────────
-  // Left oval  (centre 116, 72 | rx=26 ry=16)
-  {
-    d: 'M 90 72 A 26 16 0 0 1 142 72 A 26 16 0 0 1 90 72 Z',
-    delay: 0, duration: 1.3,
-  },
-  // Right oval (centre 164, 72 | rx=26 ry=16)
-  {
-    d: 'M 138 72 A 26 16 0 0 1 190 72 A 26 16 0 0 1 138 72 Z',
-    delay: 0.7, duration: 1.3,
-  },
-
-  // ── SNAP GHOST ──────────────────────────────────
-  // Head arc + sides + three-bump bottom
-  {
-    d: 'M 60 195 A 20 22 0 0 0 100 195 L 100 210 C 101 219 98 223 94 219 C 90 215 87 213 84 217 C 81 221 79 222 80 222 C 81 222 79 221 76 217 C 73 213 70 215 66 219 C 62 223 59 219 60 210 Z',
-    delay: 2.2, duration: 2.0,
-  },
-
-  // ── STOCKX  X ───────────────────────────────────
-  {
-    d: 'M 178 178 L 222 222',
-    delay: 4.5, duration: 0.8,
-  },
-  {
-    d: 'M 222 178 L 178 222',
-    delay: 5.0, duration: 0.8,
-  },
-
-  // ── COLLIDER (clapperboard) ──────────────────────
-  // Main body
-  {
-    d: 'M 52 308 L 52 348 L 108 348 L 108 308 Z',
-    delay: 6.0, duration: 1.0,
-  },
-  // Top bar
-  {
-    d: 'M 52 308 L 52 300 L 108 300 L 108 308',
-    delay: 6.8, duration: 0.5,
-  },
-  // Diagonal stripes (staggered)
-  { d: 'M 60 300 L 65 308', delay: 7.1, duration: 0.25 },
-  { d: 'M 69 300 L 74 308', delay: 7.3, duration: 0.25 },
-  { d: 'M 78 300 L 83 308', delay: 7.5, duration: 0.25 },
-  { d: 'M 87 300 L 92 308', delay: 7.7, duration: 0.25 },
-  { d: 'M 96 300 L 101 308', delay: 7.9, duration: 0.25 },
-
-  // ── PHONY CONTENT (smartphone) ──────────────────
-  // Phone body
-  {
-    d: 'M 184 298 C 184 294 187 292 191 292 L 209 292 C 213 292 216 294 216 298 L 216 348 C 216 352 213 354 209 354 L 191 354 C 187 354 184 352 184 348 Z',
-    delay: 8.5, duration: 1.2,
-  },
-  // Speaker slot
-  {
-    d: 'M 196 296 L 204 296',
-    delay: 9.5, duration: 0.3,
-  },
-  // Home button (small circle)
-  {
-    d: 'M 197 350 A 3 3 0 1 0 203 350 A 3 3 0 1 0 197 350',
-    delay: 9.7, duration: 0.5,
-  },
-];
-
-const LABELS: DrawLabel[] = [
-  { x: 140, y: 104, text: 'META',    delay: 2.1 },
-  { x:  80, y: 238, text: 'SNAP',    delay: 4.4 },
-  { x: 200, y: 238, text: 'STOCKX',  delay: 5.9 },
-  { x:  80, y: 364, text: 'COLLIDER', delay: 8.2 },
-  { x: 200, y: 364, text: 'PHONY',   delay: 10.2 },
-];
-
-export default function CompanyDraw() {
+// ─── META ∞ ─────────────────────────────────────────────────────────────────
+// Single continuous stroke: starts at centre crossing, traces left loop
+// counterclockwise, returns to centre, traces right loop counterclockwise.
+// The self-intersection at centre creates the 3-D crossover of the Meta mark.
+export function MetaLogo({ className }: { className?: string }) {
+  const { ref, isInView } = useDraw();
   return (
-    <svg
-      viewBox="0 0 280 380"
-      fill="none"
-      stroke="#1f2937"
-      strokeWidth="1.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-label="Companies Shane Delaney has worked with"
-    >
-      {PATHS.map((p, i) => (
+    <div ref={ref} className={className}>
+      <svg viewBox="0 0 220 80" aria-label="Meta" {...SVG_PROPS}>
         <motion.path
-          key={i}
-          d={p.d}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{
-            pathLength: { delay: p.delay, duration: p.duration, ease: 'easeInOut' },
-            opacity: { delay: p.delay, duration: 0.01 },
-          }}
+          d="
+            M 110 40
+            C 110 27  92 16  68 16
+            C  44 16  24 28  24 40
+            C  24 52  44 64  68 64
+            C  92 64 110 53 110 40
+            C 110 27 128 16 152 16
+            C 176 16 196 28 196 40
+            C 196 52 176 64 152 64
+            C 128 64 110 53 110 40
+          "
+          {...animatePath(isInView, 0, 2.2)}
         />
-      ))}
+      </svg>
+    </div>
+  );
+}
 
-      {LABELS.map((l, i) => (
-        <motion.text
-          key={`lbl-${i}`}
-          x={l.x}
-          y={l.y}
-          textAnchor="middle"
-          fontSize="8"
-          fill="#9ca3af"
-          stroke="none"
-          letterSpacing="0.12em"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: l.delay, duration: 0.5, ease: 'easeOut' }}
-        >
-          {l.text}
-        </motion.text>
-      ))}
-    </svg>
+// ─── SNAP GHOST ──────────────────────────────────────────────────────────────
+// Round head arc, straight body sides, then W-shaped bottom:
+// two feet hanging DOWN with a notch rising between them.
+export function SnapLogo({ className }: { className?: string }) {
+  const { ref, isInView } = useDraw();
+  return (
+    <div ref={ref} className={className}>
+      <svg viewBox="0 0 80 82" aria-label="Snap" {...SVG_PROPS}>
+        {/* Ghost body */}
+        <motion.path
+          d="
+            M 10 40
+            A 30 30 0 0 0 70 40
+            L 70 55
+            C 70 65 65 73 58 73
+            C 51 73 48 65 40 65
+            C 32 65 29 73 22 73
+            C 15 73 10 65 10 55
+            Z
+          "
+          {...animatePath(isInView, 0, 1.8)}
+        />
+        {/* Left eye */}
+        <motion.path
+          d="M 27 33 A 4 4 0 1 0 35 33 A 4 4 0 1 0 27 33"
+          {...animatePath(isInView, 1.6, 0.6)}
+        />
+        {/* Right eye */}
+        <motion.path
+          d="M 45 33 A 4 4 0 1 0 53 33 A 4 4 0 1 0 45 33"
+          {...animatePath(isInView, 1.9, 0.6)}
+        />
+      </svg>
+    </div>
+  );
+}
+
+// ─── STOCKX X ────────────────────────────────────────────────────────────────
+export function StockXLogo({ className }: { className?: string }) {
+  const { ref, isInView } = useDraw();
+  return (
+    <div ref={ref} className={className}>
+      <svg viewBox="0 0 60 60" aria-label="StockX" {...SVG_PROPS}>
+        <motion.path d="M 8 8 L 52 52" {...animatePath(isInView, 0, 0.7)} />
+        <motion.path d="M 52 8 L 8 52" {...animatePath(isInView, 0.4, 0.7)} />
+      </svg>
+    </div>
+  );
+}
+
+// ─── COLLIDER (film clapperboard) ────────────────────────────────────────────
+export function ColliderLogo({ className }: { className?: string }) {
+  const { ref, isInView } = useDraw();
+  return (
+    <div ref={ref} className={className}>
+      <svg viewBox="0 0 80 70" aria-label="Collider" {...SVG_PROPS}>
+        {/* Body */}
+        <motion.path
+          d="M 8 22 L 8 62 L 72 62 L 72 22 Z"
+          {...animatePath(isInView, 0, 1.0)}
+        />
+        {/* Top bar */}
+        <motion.path
+          d="M 8 22 L 8 12 L 72 12 L 72 22"
+          {...animatePath(isInView, 0.8, 0.5)}
+        />
+        {/* Diagonal stripes */}
+        {[16, 25, 34, 43, 52].map((x, i) => (
+          <motion.path
+            key={x}
+            d={`M ${x} 12 L ${x + 8} 22`}
+            {...animatePath(isInView, 1.2 + i * 0.15, 0.25)}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ─── PHONY CONTENT (smartphone) ──────────────────────────────────────────────
+export function PhonyLogo({ className }: { className?: string }) {
+  const { ref, isInView } = useDraw();
+  return (
+    <div ref={ref} className={className}>
+      <svg viewBox="0 0 50 80" aria-label="Phony Content" {...SVG_PROPS}>
+        {/* Phone body */}
+        <motion.path
+          d="M 6 8 C 6 4 9 2 13 2 L 37 2 C 41 2 44 4 44 8 L 44 72 C 44 76 41 78 37 78 L 13 78 C 9 78 6 76 6 72 Z"
+          {...animatePath(isInView, 0, 1.2)}
+        />
+        {/* Speaker */}
+        <motion.path
+          d="M 18 7 L 32 7"
+          {...animatePath(isInView, 1.0, 0.3)}
+        />
+        {/* Home button */}
+        <motion.path
+          d="M 22 72 A 3 3 0 1 0 28 72 A 3 3 0 1 0 22 72"
+          {...animatePath(isInView, 1.2, 0.5)}
+        />
+      </svg>
+    </div>
   );
 }

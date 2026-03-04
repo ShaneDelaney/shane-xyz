@@ -2,14 +2,19 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import CompanyDraw from '@/components/CompanyDraw';
 import { useState, useEffect } from 'react';
+import {
+  MetaLogo,
+  SnapLogo,
+  StockXLogo,
+  ColliderLogo,
+  PhonyLogo,
+} from '@/components/CompanyDraw';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => { setMounted(true); }, []);
 
   return (
@@ -17,8 +22,9 @@ export default function Home() {
       <section className="w-full px-6 pt-32 pb-28">
         <div className="max-w-5xl mx-auto">
 
+          {/* Location */}
           <motion.p
-            className="text-sm text-gray-400 mb-5 tracking-wide"
+            className="text-sm text-gray-400 mb-8 tracking-wide"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
@@ -26,17 +32,19 @@ export default function Home() {
             Shane Delaney — Los Angeles, CA
           </motion.p>
 
+          {/* Meta — left, draws on load */}
           <motion.div
-            className="mb-12 w-56 sm:w-72"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.05, ease: EASE }}
+            transition={{ duration: 0.3, delay: 0.1, ease: EASE }}
+            className="mb-10"
           >
-            <CompanyDraw />
+            <MetaLogo className="w-32" />
           </motion.div>
 
+          {/* Bio */}
           <motion.p
-            className="text-xl sm:text-2xl text-gray-400 leading-relaxed mb-10 max-w-2xl font-light"
+            className="text-xl sm:text-2xl text-gray-400 leading-relaxed mb-8 max-w-2xl font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
@@ -44,8 +52,19 @@ export default function Home() {
             Content marketing at Meta, building editorial systems and strategy for Horizon&apos;s developer ecosystem. Previously at Snap Inc.
           </motion.p>
 
+          {/* Snap — right, appears after bio */}
           <motion.div
-            className="flex items-center gap-3 mb-16"
+            className="flex justify-end mb-8"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.3, delay: 0.3, ease: EASE }}
+          >
+            <SnapLogo className="w-14" />
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex items-center gap-3 mb-14"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.22, ease: EASE }}
@@ -65,8 +84,15 @@ export default function Home() {
             </a>
           </motion.div>
 
+          {/* StockX + Collider — scattered, staggered positions */}
+          <div className="flex items-end gap-10 mb-14">
+            <StockXLogo className="w-10 mt-2" />
+            <ColliderLogo className="w-16 ml-6" />
+          </div>
+
+          {/* Stats cards */}
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden mb-12"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
@@ -84,6 +110,11 @@ export default function Home() {
               </div>
             ))}
           </motion.div>
+
+          {/* Phony — below stats, right offset */}
+          <div className="flex justify-end pr-8">
+            <PhonyLogo className="w-10" />
+          </div>
 
         </div>
       </section>
