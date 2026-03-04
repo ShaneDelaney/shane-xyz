@@ -143,18 +143,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ answer: FALLBACK, debug: 'no_api_key' });
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'llama-3.1-8b-instant',
         max_tokens: 300,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: question.trim() }],
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: question.trim() },
+        ],
       }),
     });
 
@@ -164,7 +165,7 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json();
-    const answer = data.content?.[0]?.text ?? FALLBACK;
+    const answer = data.choices?.[0]?.message?.content ?? FALLBACK;
     return NextResponse.json({ answer });
   } catch (e) {
     return NextResponse.json({ answer: FALLBACK, debug: 'exception', err: String(e) });
