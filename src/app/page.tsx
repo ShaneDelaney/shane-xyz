@@ -6,11 +6,12 @@ import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const STATS = [
-  { label: 'Currently',  value: 'Meta',        sub: 'Content Marketing Coordinator II' },
-  { label: 'Previously', value: 'Snap Inc.',    sub: 'Trend Producer' },
-  { label: 'Education',  value: 'LMU',          sub: 'B.A. English & Screenwriting' },
-  { label: 'Based',      value: 'Los Angeles',  sub: 'California' },
+const COMPANIES = [
+  { name: 'Meta',          id: 'meta'     },
+  { name: 'Snap Inc.',     id: 'snap'     },
+  { name: 'StockX',        id: 'stockx'   },
+  { name: 'Collider',      id: 'collider' },
+  { name: 'Phony Content', id: 'phony'    },
 ];
 
 export default function Home() {
@@ -69,24 +70,27 @@ export default function Home() {
             </a>
           </motion.div>
 
-          {/* Stats cards — clean border-divided layout */}
+          {/* Company pills */}
           <motion.div
-            className="border border-gray-200 rounded-2xl overflow-hidden grid grid-cols-2 sm:grid-cols-4"
-            initial={{ opacity: 0, y: 16 }}
+            className="flex flex-wrap gap-2"
+            initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.42, ease: EASE }}
+            transition={{ duration: 0.6, delay: 0.42, ease: EASE }}
           >
-            {STATS.map((item, i) => (
-              <div
-                key={item.label}
-                className={`px-6 py-6 ${i < STATS.length - 1 ? 'border-r border-gray-200' : ''}`}
+            {COMPANIES.map((co, i) => (
+              <motion.div
+                key={co.id}
+                initial={{ opacity: 0 }}
+                animate={mounted ? { opacity: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.46 + i * 0.06, ease: EASE }}
               >
-                <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mb-3">
-                  {item.label}
-                </p>
-                <p className="text-base font-semibold text-gray-900 mb-1">{item.value}</p>
-                <p className="text-xs text-gray-400 leading-snug">{item.sub}</p>
-              </div>
+                <Link
+                  href={`/work?company=${co.id}`}
+                  className="inline-block px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200 hover:text-gray-900 transition-colors duration-200"
+                >
+                  {co.name}
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
 
