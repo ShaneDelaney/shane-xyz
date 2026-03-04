@@ -2,53 +2,72 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
 
-const SUGGESTED = [
-  "What is Shane's current role?",
-  "How is Shane working with AI?",
-  "What are Shane's core skills?",
-  "Is Shane open to new opportunities?",
+const CONTEXTS = [
+  { key: 'home',    label: 'Home',    icon: '⌂' },
+  { key: 'about',   label: 'About',   icon: '◉' },
+  { key: 'work',    label: 'Work',    icon: '◈' },
+  { key: 'contact', label: 'Contact', icon: '◎' },
 ];
 
-const NAV_LINKS = [
-  { href: '/', label: 'Home', icon: '⌂' },
-  { href: '/about', label: 'About', icon: '◉' },
-  { href: '/work', label: 'Work', icon: '◈' },
-  { href: '/contact', label: 'Contact', icon: '◎' },
-];
+const CONTEXT_SUGGESTIONS: Record<string, string[]> = {
+  home: [
+    "What is Shane's current role?",
+    "What makes Shane stand out?",
+    "Is Shane open to new opportunities?",
+    "Where is Shane based?",
+  ],
+  about: [
+    "Tell me about Shane's background.",
+    "What are Shane's core skills?",
+    "How is Shane working with AI?",
+    "What's Shane's educational background?",
+  ],
+  work: [
+    "What did Shane accomplish at Meta?",
+    "What was Shane's role at Snap?",
+    "Tell me about the GTM guide series.",
+    "What are Shane's biggest projects?",
+  ],
+  contact: [
+    "How can I contact Shane?",
+    "Is Shane open to freelance work?",
+    "What kind of roles is Shane looking for?",
+    "What's the best way to reach Shane?",
+  ],
+};
 
-function detectNavIntent(q: string): string | null {
-  const lower = q.toLowerCase();
-  if (/show.*(work|project|portfolio)|see.*(work|project|portfolio)|(work|project|portfolio) page|take me.*work|go to.*work/.test(lower)) return '/work';
-  if (/about page|take me.*about|go to.*about|show.*about/.test(lower)) return '/about';
-  if (/contact page|how.*contact|get in touch|reach.*shane|email.*shane/.test(lower)) return '/contact';
-  if (/\bhome page\b|go.*home|take me.*home/.test(lower)) return '/';
-  return null;
+function pathnameToContext(pathname: string): string {
+  if (pathname.startsWith('/about')) return 'about';
+  if (pathname.startsWith('/work')) return 'work';
+  if (pathname.startsWith('/contact')) return 'contact';
+  return 'home';
 }
 
 interface Message {
   role: 'user' | 'assistant';
   text: string;
-  isNav?: boolean;
 }
 
 export default function ShaneGPT() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [context, setContext] = useState(() => pathnameToContext(pathname));
   const [question, setQuestion] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const router = useRouter();
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  // Sync context when route changes but don't close panel
+  useEffect(() => {
+    setContext(pathnameToContext(pathname));
+  }, [pathname]);
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 150);
@@ -63,20 +82,8 @@ export default function ShaneGPT() {
     if (!trimmed || loading) return;
 
     setMessages(prev => [...prev, { role: 'user', text: trimmed }]);
-
-    const navTarget = detectNavIntent(trimmed);
-    if (navTarget) {
-      const pageNames: Record<string, string> = { '/': 'Home', '/about': 'About', '/work': 'Work', '/contact': 'Contact' };
-      setLoading(true);
-      setTimeout(() => {
-        setMessages(prev => [...prev, { role: 'assistant', text: `Taking you to ${pageNames[navTarget]}...`, isNav: true }]);
-        setLoading(false);
-        setTimeout(() => router.push(navTarget), 700);
-      }, 350);
-      return;
-    }
-
     setLoading(true);
+
     try {
       const res = await fetch('/api/shanebot', {
         method: 'POST',
@@ -98,6 +105,7 @@ export default function ShaneGPT() {
     setQuestion('');
   };
 
+  const suggestions = CONTEXT_SUGGESTIONS[context];
   const hasMessages = messages.length > 0;
 
   return (
@@ -162,38 +170,38 @@ export default function ShaneGPT() {
               exit={{ opacity: 0, y: 10, scale: 0.98 }}
               transition={{ duration: 0.25, ease: EASE }}
             >
-              {/* Sidebar */}
+              {/* Sidebar — sets context, never navigates */}
               <div className="w-40 flex-shrink-0 bg-[#111] flex flex-col py-5">
-                <p className="text-[9px] font-semibold text-gray-600 uppercase tracking-widest px-4 mb-3">Pages</p>
+                <p className="text-[9px] font-semibold text-gray-600 uppercase tracking-widest px-4 mb-3">Context</p>
                 <div className="flex flex-col gap-0.5 px-2">
-                  {NAV_LINKS.map(link => {
-                    const isActive = pathname === link.href;
+                  {CONTEXTS.map(ctx => {
+                    const isActive = context === ctx.key;
                     return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+                      <button
+                        key={ctx.key}
+                        onClick={() => setContext(ctx.key)}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-150 text-left w-full ${
                           isActive
                             ? 'bg-white/10 text-white'
                             : 'text-gray-500 hover:text-gray-200 hover:bg-white/5'
                         }`}
                       >
-                        <span className="text-xs opacity-60">{link.icon}</span>
-                        <span className={isActive ? 'font-medium' : ''}>{link.label}</span>
+                        <span className="text-xs opacity-60">{ctx.icon}</span>
+                        <span className={isActive ? 'font-medium' : ''}>{ctx.label}</span>
                         {isActive && (
                           <motion.div
                             layoutId="sidebar-active"
                             className="ml-auto w-1 h-1 rounded-full bg-white/60"
                           />
                         )}
-                      </Link>
+                      </button>
                     );
                   })}
                 </div>
 
                 <div className="mt-auto px-4 pb-1">
                   <p className="text-[9px] text-gray-700 leading-relaxed">
-                    Try: "show me his work" or "how do I contact Shane?"
+                    Switch context to change suggested questions.
                   </p>
                 </div>
               </div>
@@ -221,22 +229,26 @@ export default function ShaneGPT() {
 
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
-                  <AnimatePresence>
+                  {/* Context-aware suggestions */}
+                  <AnimatePresence mode="wait">
                     {!hasMessages && !loading && (
                       <motion.div
-                        key="suggestions"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        key={`suggestions-${context}`}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.18, ease: EASE }}
                         className="flex flex-col gap-1.5"
                       >
-                        <p className="text-xs text-gray-400 mb-1">Suggested questions</p>
-                        {SUGGESTED.map((s, i) => (
+                        <p className="text-xs text-gray-400 mb-1">
+                          Suggested — {CONTEXTS.find(c => c.key === context)?.label}
+                        </p>
+                        {suggestions.map((s, i) => (
                           <motion.button
                             key={s}
                             initial={{ opacity: 0, x: 6 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: i * 0.05, ease: EASE }}
+                            transition={{ duration: 0.18, delay: i * 0.04, ease: EASE }}
                             onClick={() => ask(s)}
                             className="text-left text-xs text-gray-600 px-3 py-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 hover:border-gray-200"
                           >
@@ -255,25 +267,13 @@ export default function ShaneGPT() {
                       transition={{ duration: 0.2, ease: EASE }}
                       className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
-                      {msg.isNav ? (
-                        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-900 text-white text-xs">
-                          <motion.span
-                            animate={{ x: [0, 3, 0] }}
-                            transition={{ duration: 0.6, repeat: 2 }}
-                          >
-                            →
-                          </motion.span>
-                          {msg.text}
-                        </div>
-                      ) : (
-                        <div className={`max-w-[86%] px-3 py-2.5 rounded-2xl text-xs leading-relaxed ${
-                          msg.role === 'user'
-                            ? 'bg-gray-900 text-white rounded-br-sm'
-                            : 'bg-gray-100 text-gray-700 rounded-bl-sm'
-                        }`}>
-                          {msg.text}
-                        </div>
-                      )}
+                      <div className={`max-w-[86%] px-3 py-2.5 rounded-2xl text-xs leading-relaxed ${
+                        msg.role === 'user'
+                          ? 'bg-gray-900 text-white rounded-br-sm'
+                          : 'bg-gray-100 text-gray-700 rounded-bl-sm'
+                      }`}>
+                        {msg.text}
+                      </div>
                     </motion.div>
                   ))}
 

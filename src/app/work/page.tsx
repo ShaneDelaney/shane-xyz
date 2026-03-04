@@ -1,18 +1,19 @@
 'use client';
 
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface Role {
   id: string;
   company: string;
   title: string;
+  period: string;
   location: string;
-  timeline: string;
+  stats: { value: string; label: string }[];
   bullets: string[];
-  category: string;
-  portfolioLinks?: string[];
 }
 
 const roles: Role[] = [
@@ -20,194 +21,214 @@ const roles: Role[] = [
     id: 'meta',
     company: 'Meta',
     title: 'Content Marketing Coordinator II',
+    period: 'Oct 2025 – Present',
     location: 'Los Angeles, CA',
-    timeline: 'October 2025 – Present',
-    bullets: [
-      'Lead the end-to-end editorial content lifecycle for the Developer Blog, ensuring all posts remain current with platform updates and follow strict brand guidelines.',
-      'Build and maintain story templates, track editorial milestones, and manage cross-functional (XFN) feedback loops for high-visibility launches.',
-      'Manage the formal stat review process, collaborating with Data Science and XFN teams to audit and confirm 100% accuracy of all public-facing metrics prior to launch.',
-      'Serve as the primary editorial bridge between Marketing, Product, and Legal, synthesizing feedback and producing internal status reports for leadership.',
-      'Maintain internal trackers and DRI assignments to monitor story progress and ensure alignment on global delivery dates.',
+    stats: [
+      { value: '4-part', label: 'GTM Guide Series' },
+      { value: '6-part', label: 'Builder Story Series' },
+      { value: '100%', label: 'Metric Accuracy' },
+      { value: 'XFN', label: 'Cross-func Lead' },
     ],
-    category: 'tech',
-    portfolioLinks: ['meta-horizon-gtm-guides', 'meta-horizon-builder-stories'],
+    bullets: [
+      'Lead end-to-end editorial lifecycle for the Horizon Developer Blog, from story ideation through publication.',
+      'Build and maintain story templates, track editorial milestones, and manage XFN feedback loops for high-visibility launches.',
+      'Manage the formal stat review process with Data Science, confirming 100% accuracy of all public-facing metrics before launch.',
+      'Serve as primary editorial bridge between Marketing, Product, and Legal — synthesizing feedback and producing leadership status reports.',
+      'Maintain internal DRI trackers to monitor story progress and align on global delivery dates.',
+    ],
   },
   {
     id: 'snap',
     company: 'Snap Inc.',
     title: 'Trend Producer',
+    period: 'Mar – Oct 2025',
     location: 'Santa Monica, CA',
-    timeline: 'March 2025 – October 2025',
-    bullets: [
-      'Served as Programming Lead for Spotlight content; synthesized daily performance data to identify breakout trends and inform real-time amplification decisions.',
-      'Led daily afternoon syncs with editorial teams to review performance; translated data patterns into actionable creative iteration plans to improve content reach.',
-      'Orchestrated high-volume digital content streams (1,000+ Snaps per day), ensuring all assets met strict quality, safety, and brand-safe policy bars.',
-      'Developed standardized templates for content briefs and Editorial Instructions (EIs) to reduce operational friction and accelerate the creative QA cycle.',
+    stats: [
+      { value: '1,000+', label: 'Snaps/day' },
+      { value: '10%', label: 'Higher Retention' },
+      { value: '500K+', label: 'Daily Impressions' },
+      { value: '1M+', label: 'Creators Influenced' },
     ],
-    category: 'tech',
-    portfolioLinks: ['nux-project', 'say-it-in-a-snap', 'boosted-content'],
+    bullets: [
+      'Served as Programming Lead for Spotlight content, synthesizing daily performance data to identify breakout trends.',
+      'Led daily editorial syncs; translated data patterns into actionable creative iteration plans.',
+      'Orchestrated a daily pipeline of 1,000+ Snaps, ensuring all content met strict quality, safety, and brand-safe standards.',
+      'Developed standardized Editorial Instructions (EIs) and content brief templates to reduce operational friction.',
+    ],
   },
   {
     id: 'phony',
     company: 'Phony Content',
     title: 'Content Manager',
+    period: 'May 2024 – Mar 2025',
     location: 'Los Angeles, CA',
-    timeline: 'May 2024 – March 2025',
-    bullets: [
-      'Led project governance for 50+ scripted digital stories, managing resource allocation and creative QA via agile sprint planning.',
-      'Built centralized documentation frameworks and editorial systems to standardize production workflows across subscription-based platforms.',
+    stats: [
+      { value: '4M+', label: 'Total Views' },
+      { value: '40K+', label: 'New Followers' },
+      { value: '90%', label: 'Viewership Boost' },
+      { value: '50+', label: 'Scripted Stories' },
     ],
-    category: 'creative',
-    portfolioLinks: ['tiny-texts'],
+    bullets: [
+      'Led editorial operations for Tiny Texts — a Snapchat channel of 50+ scripted digital stories.',
+      'Managed resource allocation and creative QA via agile sprint planning.',
+      'Built centralized documentation frameworks to standardize production workflows.',
+      'Top story: Cheer Squad — 6.32M views, 43K followers, 39% completion rate.',
+    ],
   },
   {
     id: 'collider',
     company: 'Collider',
-    title: 'Editorial Content Specialist (Freelance)',
+    title: 'Editorial Content Specialist',
+    period: 'Aug – Oct 2022',
     location: 'Los Angeles, CA',
-    timeline: 'August 2022 – October 2022',
-    bullets: [
-      'Produced high-visibility features for a platform with 30M+ monthly visitors, adhering to complex style guides and SEO metadata protocols.',
-      'Boosted organic web traffic by ~15% in two months through targeted SEO content strategies.',
+    stats: [
+      { value: '30M+', label: 'Monthly Visitors' },
+      { value: '15%', label: 'Traffic Boost' },
+      { value: '125K+', label: 'Top Article Views' },
+      { value: '#3', label: 'Google Ranking' },
     ],
-    category: 'writing',
-    portfolioLinks: ['collider-seo'],
+    bullets: [
+      'Produced high-visibility features for a platform with 30M+ monthly visitors, adhering to complex style guides and SEO protocols.',
+      'Boosted organic web traffic by approximately 15% in two months through targeted SEO content strategies.',
+      'Top article: "Actors and Their Favorite Movies" — 125K+ views, 4:23 average time on page.',
+    ],
   },
   {
     id: 'stockx',
     company: 'StockX',
-    title: 'Brand Creative Production (Freelance)',
+    title: 'Brand Creative Production',
+    period: 'Sep 2021 & Dec 2024',
     location: 'Los Angeles, CA',
-    timeline: 'September 2021 & December 2024',
-    bullets: [
-      'Authored the 2024 Core Insights Report analyzing digital consumption patterns to inform global product marketing and programming strategies.',
-      'Managed production timelines for high-visibility digital campaigns.',
+    stats: [
+      { value: '10M+', label: 'Cross-platform Impressions' },
+      { value: '3', label: 'Major Campaign Shoots' },
+      { value: 'Gen Z', label: '2025 Insights Report' },
     ],
-    category: 'creative',
-    portfolioLinks: ['core-insights-research', 'campaign-shoot-highlights'],
+    bullets: [
+      'Authored the 2024 Core Insights Report analyzing Gen Z digital consumption patterns in LA and NYC, informing StockX\'s 2025 marketing strategy.',
+      'Managed production timelines for high-visibility lifestyle campaigns.',
+      'Supported 3 major shoots: "Behind the Streams with Sydeon," "Briana King Joins StockX," "What Drives Brittney Elena."',
+    ],
   },
 ];
 
-const filters = [
-  { value: 'all', label: 'All' },
-  { value: 'tech', label: 'Tech' },
-  { value: 'creative', label: 'Creative' },
-  { value: 'writing', label: 'Writing' },
-];
-
-const RoleCard = ({ role, index }: { role: Role; index: number }) => {
-  const [expanded, setExpanded] = useState(false);
-  const preview = role.bullets[0];
-  const rest = role.bullets.slice(1);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="border border-gray-200 rounded-xl p-5 hover:border-gray-300 transition-colors"
-    >
-      {/* Header row */}
-      <div className="flex items-start justify-between gap-4 mb-3">
-        <div>
-          <h3 className="text-sm font-semibold text-gray-900">{role.company}</h3>
-          <p className="text-xs text-gray-600 mt-0.5">{role.title}</p>
-          <p className="text-[10px] text-gray-400 mt-0.5">{role.location} · {role.timeline}</p>
-        </div>
-        {role.portfolioLinks && role.portfolioLinks.length > 0 && (
-          <Link
-            href={`/work/portfolio#${role.portfolioLinks[0]}`}
-            className="text-[10px] font-medium text-gray-400 hover:text-gray-900 transition-colors whitespace-nowrap flex items-center gap-1 mt-0.5"
-          >
-            Projects →
-          </Link>
-        )}
-      </div>
-
-      {/* Bullets */}
-      <ul className="space-y-1.5">
-        <li className="text-xs text-gray-600 leading-relaxed flex items-start gap-2">
-          <span className="text-gray-300 mt-1 flex-shrink-0">–</span>
-          <span>{preview}</span>
-        </li>
-        {expanded && rest.map((bullet, i) => (
-          <li key={i} className="text-xs text-gray-600 leading-relaxed flex items-start gap-2">
-            <span className="text-gray-300 mt-1 flex-shrink-0">–</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
-
-      {rest.length > 0 && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="mt-3 text-[10px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
-        >
-          {expanded ? 'Show less ↑' : `+${rest.length} more`}
-        </button>
-      )}
-    </motion.div>
-  );
-};
-
 export default function Work() {
-  const [filter, setFilter] = useState('all');
+  const [active, setActive] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [direction, setDirection] = useState(1);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
-  const filtered = filter === 'all' ? roles : roles.filter(r => r.category === filter);
+  const select = (i: number) => {
+    setDirection(i > active ? 1 : -1);
+    setActive(i);
+  };
+
+  const role = roles[active];
 
   return (
-    <div className="min-h-screen bg-white">
-      <section className="w-full px-4 sm:px-6 pt-28 sm:pt-32 pb-20">
-        <div className="max-w-3xl mx-auto w-full">
+    <div className="min-h-screen bg-white flex flex-col">
+      <section className="flex-1 w-full px-6 pt-20 pb-0">
+        <div className="max-w-5xl mx-auto h-full">
 
+          {/* Page header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-baseline justify-between pt-14 pb-8"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, ease: EASE }}
           >
-            <div className="flex items-end justify-between gap-4 mb-2">
-              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Experience</h1>
-              <Link
-                href="/work/portfolio"
-                className="text-xs font-medium text-gray-400 hover:text-gray-900 transition-colors mb-1"
-              >
-                Portfolio →
-              </Link>
-            </div>
-            <p className="text-sm text-gray-500 mb-8 leading-relaxed">
-              Content marketing and editorial operations across tech platforms and media.
-            </p>
+            <h1 className="text-3xl font-semibold tracking-tight text-gray-900">Experience</h1>
+            <Link href="/work/portfolio" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
+              Portfolio →
+            </Link>
+          </motion.div>
 
-            {/* Filter tabs */}
-            <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b border-gray-100">
-              {filters.map((tab) => (
-                <button
-                  key={tab.value}
-                  onClick={() => setFilter(tab.value)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                    filter === tab.value
-                      ? 'bg-gray-900 text-white'
-                      : 'bg-white border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  }`}
+          {/* Split layout */}
+          <motion.div
+            className="flex gap-0 border border-gray-100 rounded-2xl overflow-hidden"
+            style={{ height: 'calc(100vh - 14rem)' }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+          >
+            {/* Left — company list */}
+            <div className="w-44 flex-shrink-0 border-r border-gray-100 py-4 flex flex-col gap-0.5 overflow-y-auto">
+              {roles.map((r, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => select(i)}
+                    className={`w-full text-left px-4 py-3 transition-all duration-150 relative ${
+                      isActive ? 'bg-gray-50' : 'hover:bg-gray-50/60'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="role-indicator"
+                        className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-900"
+                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                      />
+                    )}
+                    <p className={`text-sm transition-colors ${isActive ? 'font-semibold text-gray-900' : 'text-gray-400'}`}>
+                      {r.company}
+                    </p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">{r.period.split(' – ')[0].split(' ').slice(-1)[0]}</p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right — spotlight */}
+            <div className="flex-1 overflow-y-auto">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={role.id}
+                  initial={{ opacity: 0, x: direction * 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: direction * -20 }}
+                  transition={{ duration: 0.28, ease: EASE }}
+                  className="p-8 h-full"
                 >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+                  {/* Role header */}
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-1">{role.company}</h2>
+                    <p className="text-sm text-gray-500">{role.title}</p>
+                    <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
+                  </div>
 
-            {/* Role list */}
-            <div className="space-y-3">
-              {filtered.map((role, i) => (
-                <RoleCard key={role.id} role={role} index={i} />
-              ))}
+                  {/* Stats strip */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
+                    {role.stats.map(stat => (
+                      <div key={stat.label} className="bg-gray-50 rounded-xl px-4 py-3">
+                        <p className="text-lg font-semibold text-gray-900 tracking-tight leading-none mb-1">{stat.value}</p>
+                        <p className="text-[10px] text-gray-400">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bullets */}
+                  <div className="space-y-3">
+                    {role.bullets.map((bullet, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25, delay: 0.1 + i * 0.06, ease: EASE }}
+                        className="flex items-start gap-3"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-2" />
+                        <p className="text-sm text-gray-600 leading-relaxed">{bullet}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
 
+          <div className="pb-8" />
         </div>
       </section>
     </div>
