@@ -2,10 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
+import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
 
 const SUGGESTED = [
   "What is Shane's current role?",
@@ -14,9 +16,26 @@ const SUGGESTED = [
   "Is Shane open to new opportunities?",
 ];
 
+const NAV_LINKS = [
+  { href: '/', label: 'Home', icon: '⌂' },
+  { href: '/about', label: 'About', icon: '◉' },
+  { href: '/work', label: 'Work', icon: '◈' },
+  { href: '/contact', label: 'Contact', icon: '◎' },
+];
+
+function detectNavIntent(q: string): string | null {
+  const lower = q.toLowerCase();
+  if (/show.*(work|project|portfolio)|see.*(work|project|portfolio)|(work|project|portfolio) page|take me.*work|go to.*work/.test(lower)) return '/work';
+  if (/about page|take me.*about|go to.*about|show.*about/.test(lower)) return '/about';
+  if (/contact page|how.*contact|get in touch|reach.*shane|email.*shane/.test(lower)) return '/contact';
+  if (/\bhome page\b|go.*home|take me.*home/.test(lower)) return '/';
+  return null;
+}
+
 interface Message {
   role: 'user' | 'assistant';
   text: string;
+  isNav?: boolean;
 }
 
 export default function ShaneGPT() {
@@ -27,18 +46,14 @@ export default function ShaneGPT() {
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
-  // Close panel on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
-  // Focus input when panel opens
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 150);
   }, [open]);
 
-  // Scroll to bottom when messages update
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
@@ -46,9 +61,22 @@ export default function ShaneGPT() {
   const ask = async (q: string) => {
     const trimmed = q.trim();
     if (!trimmed || loading) return;
-    setLoading(true);
+
     setMessages(prev => [...prev, { role: 'user', text: trimmed }]);
 
+    const navTarget = detectNavIntent(trimmed);
+    if (navTarget) {
+      const pageNames: Record<string, string> = { '/': 'Home', '/about': 'About', '/work': 'Work', '/contact': 'Contact' };
+      setLoading(true);
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'assistant', text: `Taking you to ${pageNames[navTarget]}...`, isNav: true }]);
+        setLoading(false);
+        setTimeout(() => router.push(navTarget), 700);
+      }, 350);
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await fetch('/api/shanebot', {
         method: 'POST',
@@ -74,42 +102,20 @@ export default function ShaneGPT() {
 
   return (
     <>
-      {/* Floating orb trigger */}
+      {/* Trigger */}
       <motion.button
         onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center"
-        style={{
-          background: open
-            ? 'radial-gradient(circle at 40% 35%, #a78bfa, #6d28d9)'
-            : 'radial-gradient(circle at 40% 35%, #c4b5fd, #7c3aed)',
-          boxShadow: open
-            ? '0 0 0 4px rgba(139,92,246,0.15), 0 0 24px rgba(139,92,246,0.5), 0 0 48px rgba(139,92,246,0.25)'
-            : '0 0 0 4px rgba(167,139,250,0.15), 0 0 20px rgba(167,139,250,0.4), 0 0 40px rgba(167,139,250,0.2)',
-        }}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium shadow-lg hover:bg-gray-800 transition-colors"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.65, ease: EASE }}
-        whileHover={{ scale: 1.08, boxShadow: '0 0 0 6px rgba(139,92,246,0.2), 0 0 32px rgba(139,92,246,0.6), 0 0 60px rgba(139,92,246,0.3)' } as never}
-        whileTap={{ scale: 0.93 }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.96 }}
         aria-label={open ? 'Close' : 'Ask a question about Shane'}
       >
-        {/* Glow pulse ring */}
-        {!open && (
-          <motion.span
-            className="absolute inset-0 rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.3), transparent 70%)' }}
-            animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        )}
-
-        {/* Icon */}
         <motion.span
-          className="text-lg leading-none text-white relative z-10"
-          animate={open
-            ? { rotate: 135, scale: 1 }
-            : { rotate: 0, scale: [1, 1.15, 1] }
-          }
+          className="text-base leading-none inline-block"
+          animate={open ? { rotate: 135, scale: 1 } : { rotate: 0, scale: [1, 1.2, 1] }}
           transition={open
             ? { duration: 0.25, ease: EASE }
             : { duration: 2.5, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }
@@ -117,150 +123,213 @@ export default function ShaneGPT() {
         >
           ✦
         </motion.span>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={open ? 'close' : 'ask'}
+            className="hidden sm:inline"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15, ease: EASE }}
+          >
+            {open ? 'Close' : 'Ask about Shane'}
+          </motion.span>
+        </AnimatePresence>
+        <span className="sm:hidden">{open ? '×' : 'Ask'}</span>
       </motion.button>
 
       {/* Panel */}
       <AnimatePresence>
         {open && (
           <>
-            {/* Invisible backdrop to close on outside click */}
             <motion.div
-              className="fixed inset-0 z-40"
+              className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setOpen(false)}
             />
 
             <motion.div
-              className="fixed bottom-20 right-6 z-50 w-[min(380px,calc(100vw-3rem))] bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col overflow-hidden"
-              initial={{ opacity: 0, y: 14, scale: 0.96 }}
+              className="fixed bottom-20 right-6 z-50 flex overflow-hidden rounded-2xl shadow-2xl border border-white/10"
+              style={{
+                width: 'min(600px, calc(100vw - 2rem))',
+                height: 'min(520px, calc(100vh - 8rem))',
+              }}
+              initial={{ opacity: 0, y: 16, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.97 }}
-              transition={{ duration: 0.22, ease: EASE }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: EASE }}
             >
-              {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                <p className="text-sm font-semibold text-gray-900">Ask a question about Shane</p>
-                <motion.button
-                  onClick={() => setOpen(false)}
-                  className="text-gray-400 hover:text-gray-700 transition-colors w-6 h-6 flex items-center justify-center rounded-md hover:bg-gray-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label="Close"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </motion.button>
-              </div>
-
-              {/* Body */}
-              <div className="px-4 py-4 min-h-[160px] max-h-[360px] overflow-y-auto flex flex-col gap-3">
-
-                {/* Suggestions — visible only when no messages */}
-                <AnimatePresence>
-                  {!hasMessages && !loading && (
-                    <motion.div
-                      key="suggestions"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="flex flex-col gap-1.5"
-                    >
-                      {SUGGESTED.map((s, i) => (
-                        <motion.button
-                          key={s}
-                          initial={{ opacity: 0, x: 6 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2, delay: i * 0.05, ease: EASE }}
-                          onClick={() => ask(s)}
-                          className="text-left text-xs text-gray-600 px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 hover:border-gray-200"
-                        >
-                          {s}
-                        </motion.button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Chat history */}
-                {messages.map((msg, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: EASE }}
-                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div className={`max-w-[85%] px-3 py-2 rounded-2xl text-xs leading-relaxed ${
-                      msg.role === 'user'
-                        ? 'bg-violet-600 text-white rounded-br-sm'
-                        : 'bg-gray-100 text-gray-700 rounded-bl-sm'
-                    }`}>
-                      {msg.text}
-                    </div>
-                  </motion.div>
-                ))}
-
-                {/* Loading dots */}
-                <AnimatePresence>
-                  {loading && (
-                    <motion.div
-                      key="loading"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="flex justify-start"
-                    >
-                      <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-3 py-2.5 flex items-center gap-1.5">
-                        {[0, 1, 2].map(i => (
-                          <motion.span
-                            key={i}
-                            className="w-1.5 h-1.5 bg-gray-400 rounded-full"
-                            animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
-                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+              {/* Sidebar */}
+              <div className="w-40 flex-shrink-0 bg-[#111] flex flex-col py-5">
+                <p className="text-[9px] font-semibold text-gray-600 uppercase tracking-widest px-4 mb-3">Pages</p>
+                <div className="flex flex-col gap-0.5 px-2">
+                  {NAV_LINKS.map(link => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+                          isActive
+                            ? 'bg-white/10 text-white'
+                            : 'text-gray-500 hover:text-gray-200 hover:bg-white/5'
+                        }`}
+                      >
+                        <span className="text-xs opacity-60">{link.icon}</span>
+                        <span className={isActive ? 'font-medium' : ''}>{link.label}</span>
+                        {isActive && (
+                          <motion.div
+                            layoutId="sidebar-active"
+                            className="ml-auto w-1 h-1 rounded-full bg-white/60"
                           />
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
 
-                <div ref={bottomRef} />
+                <div className="mt-auto px-4 pb-1">
+                  <p className="text-[9px] text-gray-700 leading-relaxed">
+                    Try: "show me his work" or "how do I contact Shane?"
+                  </p>
+                </div>
               </div>
 
-              {/* Input */}
-              <form onSubmit={handleSubmit} className="px-4 pb-4">
-                <div
-                  className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-2 transition-colors bg-white focus-within:border-gray-500"
-                >
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={question}
-                    onChange={e => setQuestion(e.target.value)}
-                    placeholder="Ask a question..."
-                    maxLength={500}
-                    className="flex-1 text-sm text-gray-900 placeholder-gray-400 bg-transparent outline-none"
-                  />
+              {/* Chat */}
+              <div className="flex-1 flex flex-col bg-white min-w-0">
+                {/* Header */}
+                <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-400">✦</span>
+                    <p className="text-sm font-semibold text-gray-900">Ask about Shane</p>
+                  </div>
                   <motion.button
-                    type="submit"
-                    disabled={!question.trim() || loading}
-                    className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white disabled:opacity-25 transition-opacity"
+                    onClick={() => setOpen(false)}
+                    className="text-gray-400 hover:text-gray-700 transition-colors w-6 h-6 flex items-center justify-center rounded-md hover:bg-gray-100"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    aria-label="Send"
+                    aria-label="Close"
                   >
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </motion.button>
                 </div>
-              </form>
+
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-2.5">
+                  <AnimatePresence>
+                    {!hasMessages && !loading && (
+                      <motion.div
+                        key="suggestions"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex flex-col gap-1.5"
+                      >
+                        <p className="text-xs text-gray-400 mb-1">Suggested questions</p>
+                        {SUGGESTED.map((s, i) => (
+                          <motion.button
+                            key={s}
+                            initial={{ opacity: 0, x: 6 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: i * 0.05, ease: EASE }}
+                            onClick={() => ask(s)}
+                            className="text-left text-xs text-gray-600 px-3 py-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 hover:border-gray-200"
+                          >
+                            {s}
+                          </motion.button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {messages.map((msg, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: EASE }}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      {msg.isNav ? (
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-900 text-white text-xs">
+                          <motion.span
+                            animate={{ x: [0, 3, 0] }}
+                            transition={{ duration: 0.6, repeat: 2 }}
+                          >
+                            →
+                          </motion.span>
+                          {msg.text}
+                        </div>
+                      ) : (
+                        <div className={`max-w-[86%] px-3 py-2.5 rounded-2xl text-xs leading-relaxed ${
+                          msg.role === 'user'
+                            ? 'bg-gray-900 text-white rounded-br-sm'
+                            : 'bg-gray-100 text-gray-700 rounded-bl-sm'
+                        }`}>
+                          {msg.text}
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+
+                  <AnimatePresence>
+                    {loading && (
+                      <motion.div
+                        key="loading"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex justify-start"
+                      >
+                        <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-3 py-2.5 flex items-center gap-1.5">
+                          {[0, 1, 2].map(i => (
+                            <motion.span
+                              key={i}
+                              className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                              animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
+                              transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div ref={bottomRef} />
+                </div>
+
+                {/* Input */}
+                <form onSubmit={handleSubmit} className="px-4 pb-4 pt-2">
+                  <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-2.5 focus-within:border-gray-400 transition-colors">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={question}
+                      onChange={e => setQuestion(e.target.value)}
+                      placeholder="Ask anything..."
+                      maxLength={500}
+                      className="flex-1 text-sm text-gray-900 placeholder-gray-400 bg-transparent outline-none"
+                    />
+                    <motion.button
+                      type="submit"
+                      disabled={!question.trim() || loading}
+                      className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white disabled:opacity-20 transition-opacity"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      aria-label="Send"
+                    >
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </motion.button>
+                  </div>
+                </form>
+              </div>
             </motion.div>
           </>
         )}
