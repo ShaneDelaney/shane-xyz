@@ -14,12 +14,18 @@ const SUGGESTED = [
   "Is Shane open to new opportunities?",
 ];
 
+interface Message {
+  role: 'user' | 'assistant';
+  text: string;
+}
+
 export default function ShaneGPT() {
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   // Close panel on route change
@@ -32,11 +38,16 @@ export default function ShaneGPT() {
     if (open) setTimeout(() => inputRef.current?.focus(), 150);
   }, [open]);
 
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
+
   const ask = async (q: string) => {
     const trimmed = q.trim();
     if (!trimmed || loading) return;
     setLoading(true);
-    setAnswer('');
+    setMessages(prev => [...prev, { role: 'user', text: trimmed }]);
 
     try {
       const res = await fetch('/api/shanebot', {
@@ -45,9 +56,9 @@ export default function ShaneGPT() {
         body: JSON.stringify({ question: trimmed }),
       });
       const data = await res.json();
-      setAnswer(data.answer ?? FALLBACK);
+      setMessages(prev => [...prev, { role: 'assistant', text: data.answer ?? FALLBACK }]);
     } catch {
-      setAnswer(FALLBACK);
+      setMessages(prev => [...prev, { role: 'assistant', text: FALLBACK }]);
     } finally {
       setLoading(false);
     }
@@ -59,11 +70,7 @@ export default function ShaneGPT() {
     setQuestion('');
   };
 
-  const reset = () => {
-    setAnswer('');
-    setQuestion('');
-    setTimeout(() => inputRef.current?.focus(), 50);
-  };
+  const hasMessages = messages.length > 0;
 
   return (
     <>
@@ -150,11 +157,11 @@ export default function ShaneGPT() {
               </div>
 
               {/* Body */}
-              <div className="px-4 py-4 min-h-[160px] max-h-[320px] overflow-y-auto flex flex-col gap-3">
+              <div className="px-4 py-4 min-h-[160px] max-h-[360px] overflow-y-auto flex flex-col gap-3">
 
-                {/* Suggestions — visible only when idle */}
+                {/* Suggestions — visible only when no messages */}
                 <AnimatePresence>
-                  {!answer && !loading && (
+                  {!hasMessages && !loading && (
                     <motion.div
                       key="suggestions"
                       initial={{ opacity: 0 }}
@@ -179,6 +186,25 @@ export default function ShaneGPT() {
                   )}
                 </AnimatePresence>
 
+                {/* Chat history */}
+                {messages.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.22, ease: EASE }}
+                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div className={`max-w-[85%] px-3 py-2 rounded-2xl text-xs leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'bg-violet-600 text-white rounded-br-sm'
+                        : 'bg-gray-100 text-gray-700 rounded-bl-sm'
+                    }`}>
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+
                 {/* Loading dots */}
                 <AnimatePresence>
                   {loading && (
@@ -188,35 +214,23 @@ export default function ShaneGPT() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.15 }}
-                      className="flex items-center gap-1.5 py-1"
+                      className="flex justify-start"
                     >
-                      {[0, 1, 2].map(i => (
-                        <motion.span
-                          key={i}
-                          className="w-1.5 h-1.5 bg-gray-400 rounded-full"
-                          animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
-                          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
-                        />
-                      ))}
+                      <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-3 py-2.5 flex items-center gap-1.5">
+                        {[0, 1, 2].map(i => (
+                          <motion.span
+                            key={i}
+                            className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                            animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
+                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                          />
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                {/* Answer — stays visible while user types follow-up */}
-                <AnimatePresence>
-                  {answer && (
-                    <motion.p
-                      key="answer"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.22, ease: EASE }}
-                      className="text-sm text-gray-700 leading-relaxed"
-                    >
-                      {answer}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
+                <div ref={bottomRef} />
               </div>
 
               {/* Input */}
