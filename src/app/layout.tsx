@@ -50,9 +50,8 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="py-8 px-6 border-t border-gray-100">
-          <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <div className="max-w-5xl mx-auto">
             <p className="text-xs text-gray-400">© {new Date().getFullYear()} Shane Delaney</p>
-            <p className="text-xs text-gray-400">Built with <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" className="hover:text-gray-700 transition-colors">Claude Code</a></p>
           </div>
         </footer>
         <ShaneGPT />

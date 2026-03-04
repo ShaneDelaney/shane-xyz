@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -13,26 +14,34 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="w-full px-6 pt-36 pb-24">
-        <div className="max-w-4xl mx-auto">
+      <section className="w-full px-6 pt-28 pb-24">
+        <div className="max-w-5xl mx-auto">
 
           <motion.p
-            className="text-sm text-gray-400 mb-6 tracking-wide"
+            className="text-sm text-gray-400 mb-5 tracking-wide"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            Los Angeles, CA
+            Shane Delaney — Los Angeles, CA
           </motion.p>
 
-          <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-gray-900 leading-[1.04] mb-8"
-            initial={{ opacity: 0, y: 24 }}
+          {/* Hero media block — swap src for a video or on-set photo */}
+          <motion.div
+            className="relative w-full rounded-2xl overflow-hidden mb-10 bg-gray-100"
+            style={{ height: '420px' }}
+            initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
           >
-            Editorial operations<br />and content strategy.
-          </motion.h1>
+            <Image
+              src="/about_shane.png"
+              alt="Shane Delaney"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </motion.div>
 
           <motion.p
             className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-10 max-w-2xl font-light"
@@ -44,7 +53,7 @@ export default function Home() {
           </motion.p>
 
           <motion.div
-            className="flex items-center gap-3 mb-24"
+            className="flex items-center gap-3 mb-16"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.22, ease: EASE }}
@@ -65,7 +74,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-100 rounded-2xl overflow-hidden"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
@@ -76,10 +85,10 @@ export default function Home() {
               { label: 'Education', value: 'LMU', sub: 'B.A. English & Screenwriting' },
               { label: 'Based', value: 'Los Angeles', sub: 'California' },
             ].map(item => (
-              <div key={item.label} className="bg-white px-5 py-5">
-                <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">{item.label}</p>
-                <p className="text-sm font-semibold text-gray-900 mb-0.5">{item.value}</p>
-                <p className="text-xs text-gray-400">{item.sub}</p>
+              <div key={item.label} className="bg-slate-50 px-5 py-5">
+                <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest mb-2">{item.label}</p>
+                <p className="text-sm font-semibold text-slate-900 mb-0.5 whitespace-nowrap">{item.value}</p>
+                <p className="text-xs text-slate-400 whitespace-nowrap">{item.sub}</p>
               </div>
             ))}
           </motion.div>

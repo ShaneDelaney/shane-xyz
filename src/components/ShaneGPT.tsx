@@ -6,7 +6,45 @@ import { usePathname } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
+const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
+
+// Renders **bold**, - bullet lines, and \n line breaks
+function renderMarkdown(text: string) {
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+  let bullets: string[] = [];
+
+  const flushBullets = (key: string) => {
+    if (bullets.length === 0) return;
+    elements.push(
+      <ul key={key} className="mt-1.5 space-y-1 pl-1">
+        {bullets.map((b, i) => (
+          <li key={i} className="flex items-start gap-1.5">
+            <span className="mt-[5px] w-1 h-1 rounded-full bg-gray-400 flex-shrink-0" />
+            <span dangerouslySetInnerHTML={{ __html: b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
+          </li>
+        ))}
+      </ul>
+    );
+    bullets = [];
+  };
+
+  lines.forEach((line, i) => {
+    if (line.startsWith('- ')) {
+      bullets.push(line.slice(2));
+    } else {
+      flushBullets(`bullets-${i}`);
+      if (line.trim()) {
+        elements.push(
+          <p key={i} className={i > 0 ? 'mt-1.5' : ''} dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
+        );
+      }
+    }
+  });
+  flushBullets('bullets-end');
+
+  return <>{elements}</>;
+}
 
 const CONTEXTS = [
   { key: 'home',    label: 'Home',    icon: '⌂' },
@@ -272,7 +310,7 @@ export default function ShaneGPT() {
                           ? 'bg-gray-900 text-white rounded-br-sm'
                           : 'bg-gray-100 text-gray-700 rounded-bl-sm'
                       }`}>
-                        {msg.text}
+                        {msg.role === 'assistant' ? renderMarkdown(msg.text) : msg.text}
                       </div>
                     </motion.div>
                   ))}
