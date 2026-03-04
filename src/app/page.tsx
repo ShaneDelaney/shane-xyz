@@ -14,25 +14,31 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="w-full px-6 pt-32 pb-28">
+      {/* Whole-section entrance — fades in as one unit */}
+      <motion.section
+        className="w-full px-6 pt-32 pb-28"
+        initial={{ opacity: 0 }}
+        animate={mounted ? { opacity: 1 } : {}}
+        transition={{ duration: 0.8, ease: EASE }}
+      >
         <div className="max-w-5xl mx-auto">
 
           {/* Location */}
           <motion.p
             className="text-sm text-gray-400 mb-10 tracking-wide"
-            initial={{ opacity: 0 }}
-            animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, ease: EASE }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
           >
             Shane Delaney — Los Angeles, CA
           </motion.p>
 
-          {/* Bio */}
+          {/* Bio — larger, more commanding */}
           <motion.p
-            className="text-2xl sm:text-3xl text-gray-400 leading-relaxed mb-12 max-w-2xl font-light"
-            initial={{ opacity: 0, y: 16 }}
+            className="text-3xl sm:text-4xl text-gray-400 leading-snug mb-14 max-w-3xl font-light"
+            initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+            transition={{ duration: 0.8, delay: 0.18, ease: EASE }}
           >
             Content marketing at Meta, building editorial systems and strategy for Horizon&apos;s developer ecosystem. Previously at Snap Inc.
           </motion.p>
@@ -42,7 +48,7 @@ export default function Home() {
             className="flex items-center gap-3 mb-16"
             initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.18, ease: EASE }}
+            transition={{ duration: 0.6, delay: 0.28, ease: EASE }}
           >
             <Link
               href="/work"
@@ -59,6 +65,15 @@ export default function Home() {
             </a>
           </motion.div>
 
+          {/* Hairline rule */}
+          <motion.hr
+            className="border-none h-px bg-gray-200 mb-6"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={mounted ? { scaleX: 1, opacity: 1 } : {}}
+            style={{ originX: 0 }}
+            transition={{ duration: 0.7, delay: 0.38, ease: EASE }}
+          />
+
           {/* Company names — staggered fade */}
           <div className="flex items-center gap-2 mb-16 flex-wrap">
             {COMPANIES.map((name, i) => (
@@ -67,11 +82,11 @@ export default function Home() {
                 className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={mounted ? { opacity: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: EASE }}
+                transition={{ duration: 0.5, delay: 0.46 + i * 0.07, ease: EASE }}
               >
                 <span className="text-xs text-gray-400 tracking-wide">{name}</span>
                 {i < COMPANIES.length - 1 && (
-                  <span className="text-gray-200 text-xs">·</span>
+                  <span className="text-gray-200 text-xs select-none">·</span>
                 )}
               </motion.span>
             ))}
@@ -80,9 +95,9 @@ export default function Home() {
           {/* Stats cards */}
           <motion.div
             className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.7, ease: EASE }}
           >
             {[
               { label: 'Currently',  value: 'Meta',        sub: 'Content Marketing Coordinator II' },
@@ -99,7 +114,7 @@ export default function Home() {
           </motion.div>
 
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
