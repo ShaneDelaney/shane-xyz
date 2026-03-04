@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { findCachedAnswer, FALLBACK } from '@/lib/shanebot';
 
 const SUGGESTED = [
-  'What does Shane do at Meta?',
-  'What tools does Shane use?',
-  'Is Shane open to new roles?',
+  "What is Shane's current role?",
+  "What are Shane's core skills?",
+  "Is Shane open to new opportunities?",
+  "What did Shane do at Snap?",
 ];
 
 export default function ShaneGPT() {
@@ -14,7 +16,6 @@ export default function ShaneGPT() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -24,9 +25,19 @@ export default function ShaneGPT() {
   const ask = async (q: string) => {
     const trimmed = q.trim();
     if (!trimmed || loading) return;
+
     setLoading(true);
     setAnswer('');
-    setError('');
+
+    // Check cache client-side first (instant)
+    const cached = findCachedAnswer(trimmed);
+    if (cached) {
+      setAnswer(cached);
+      setLoading(false);
+      return;
+    }
+
+    // Fall back to API for uncached questions
     try {
       const res = await fetch('/api/shanebot', {
         method: 'POST',
@@ -34,10 +45,9 @@ export default function ShaneGPT() {
         body: JSON.stringify({ question: trimmed }),
       });
       const data = await res.json();
-      if (data.error) setError(data.error);
-      else setAnswer(data.answer);
+      setAnswer(data.answer ?? FALLBACK);
     } catch {
-      setError('Something went wrong. Try again.');
+      setAnswer(FALLBACK);
     } finally {
       setLoading(false);
     }
@@ -49,6 +59,12 @@ export default function ShaneGPT() {
     setQuestion('');
   };
 
+  const reset = () => {
+    setAnswer('');
+    setQuestion('');
+    setTimeout(() => inputRef.current?.focus(), 50);
+  };
+
   return (
     <>
       {/* Floating trigger */}
@@ -57,19 +73,20 @@ export default function ShaneGPT() {
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium shadow-lg hover:bg-gray-800 transition-colors"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        aria-label="Ask ShaneGPT"
+        aria-label="Ask a question about Shane"
       >
         <span className="text-base leading-none">✦</span>
-        <span>Ask ShaneGPT</span>
+        <span className="hidden sm:inline">Ask about Shane</span>
+        <span className="sm:hidden">Ask</span>
       </motion.button>
 
       {/* Panel */}
       <AnimatePresence>
         {open && (
           <>
-            {/* Backdrop (mobile) */}
+            {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 z-40 bg-black/10 md:hidden"
+              className="fixed inset-0 z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -77,21 +94,18 @@ export default function ShaneGPT() {
             />
 
             <motion.div
-              className="fixed bottom-20 right-6 z-50 w-[min(340px,calc(100vw-3rem))] bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col overflow-hidden"
-              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              className="fixed bottom-20 right-6 z-50 w-[min(360px,calc(100vw-3rem))] bg-white border border-gray-200 rounded-2xl shadow-xl flex flex-col overflow-hidden"
+              initial={{ opacity: 0, y: 10, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.97 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: 6, scale: 0.97 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-gray-900">ShaneGPT</span>
-                  <span className="text-[10px] font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-md">beta</span>
-                </div>
+                <p className="text-sm font-semibold text-gray-900">Ask a question about Shane</p>
                 <button
                   onClick={() => setOpen(false)}
-                  className="text-gray-400 hover:text-gray-700 transition-colors text-lg leading-none"
+                  className="text-gray-400 hover:text-gray-700 transition-colors text-xl leading-none w-6 h-6 flex items-center justify-center"
                   aria-label="Close"
                 >
                   ×
@@ -99,39 +113,36 @@ export default function ShaneGPT() {
               </div>
 
               {/* Body */}
-              <div className="px-4 py-4 flex flex-col gap-4 min-h-[180px]">
-                {/* Suggestions (show when no answer yet) */}
-                {!answer && !loading && !error && (
-                  <div>
-                    <p className="text-xs text-gray-400 mb-2.5">Ask anything about Shane</p>
-                    <div className="flex flex-col gap-1.5">
-                      {SUGGESTED.map((s) => (
-                        <button
-                          key={s}
-                          onClick={() => { ask(s); }}
-                          className="text-left text-xs text-gray-600 px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100"
-                        >
-                          {s}
-                        </button>
-                      ))}
-                    </div>
+              <div className="px-4 py-4 min-h-[160px] flex flex-col gap-3">
+
+                {/* Idle: suggested questions */}
+                {!answer && !loading && (
+                  <div className="flex flex-col gap-1.5">
+                    {SUGGESTED.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => ask(s)}
+                        className="text-left text-xs text-gray-600 px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-100 hover:border-gray-200"
+                      >
+                        {s}
+                      </button>
+                    ))}
                   </div>
                 )}
 
                 {/* Loading */}
                 {loading && (
-                  <div className="flex items-center gap-2 text-xs text-gray-400 py-2">
+                  <div className="flex items-center gap-2 py-2">
                     <span className="flex gap-1">
                       {[0, 1, 2].map(i => (
                         <motion.span
                           key={i}
-                          className="w-1 h-1 bg-gray-400 rounded-full"
+                          className="w-1.5 h-1.5 bg-gray-400 rounded-full"
                           animate={{ opacity: [0.3, 1, 0.3] }}
-                          transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                          transition={{ duration: 0.9, repeat: Infinity, delay: i * 0.18 }}
                         />
                       ))}
                     </span>
-                    <span>Thinking...</span>
                   </div>
                 )}
 
@@ -140,30 +151,17 @@ export default function ShaneGPT() {
                   <motion.div
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.25 }}
                     className="flex flex-col gap-3"
                   >
                     <p className="text-sm text-gray-700 leading-relaxed">{answer}</p>
                     <button
-                      onClick={() => { setAnswer(''); setError(''); }}
-                      className="self-start text-[10px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
+                      onClick={reset}
+                      className="self-start text-[11px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
                     >
                       Ask another question
                     </button>
                   </motion.div>
-                )}
-
-                {/* Error */}
-                {error && !loading && (
-                  <div className="flex flex-col gap-2">
-                    <p className="text-xs text-red-500">{error}</p>
-                    <button
-                      onClick={() => setError('')}
-                      className="self-start text-[10px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
-                    >
-                      Try again
-                    </button>
-                  </div>
                 )}
               </div>
 
@@ -175,14 +173,14 @@ export default function ShaneGPT() {
                     type="text"
                     value={question}
                     onChange={e => setQuestion(e.target.value)}
-                    placeholder="Ask about Shane..."
+                    placeholder="Ask a question..."
                     maxLength={300}
                     className="flex-1 text-sm text-gray-900 placeholder-gray-400 bg-transparent outline-none"
                   />
                   <button
                     type="submit"
                     disabled={!question.trim() || loading}
-                    className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white disabled:opacity-30 transition-opacity hover:bg-gray-700"
+                    className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-gray-900 text-white disabled:opacity-25 transition-opacity hover:bg-gray-700"
                     aria-label="Send"
                   >
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
