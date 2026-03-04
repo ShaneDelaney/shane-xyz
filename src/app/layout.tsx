@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
+import ShaneGPT from "@/components/ShaneGPT";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
         <footer className="py-6 text-center text-xs text-gray-400 border-t border-gray-100">
           <p>© {new Date().getFullYear()} Shane Delaney · Los Angeles, CA</p>
         </footer>
+        <ShaneGPT />
       </body>
     </html>
   );

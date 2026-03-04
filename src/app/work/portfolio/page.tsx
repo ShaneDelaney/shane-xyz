@@ -38,7 +38,7 @@ const projects: Project[] = [
     company: "Meta",
     role: "Content Marketing Coordinator II",
     timeline: "2025",
-    description: "Led end-to-end editorial lifecycle for a four-part GTM guide series — coordinating XFN reviews, owning all copy, and managing publication schedules.",
+    description: "Led end-to-end editorial lifecycle for a four-part GTM guide series, coordinating XFN reviews, owning all copy, and managing publication schedules.",
     longDescription: "Led the end-to-end creation of a four-part Meta Horizon Go-To-Market guide series for developers, coordinating publication schedules and owning all copy. Managed the full project lifecycle from initial outline to final web publication, coordinating cross-functional reviews with Product, Developer Relations, Design, and Legal. The series provides a comprehensive go-to-market playbook for VR developers, covering marketing strategy, influencer partnerships, social media/community engagement, and marketing asset creation.",
     details: [
       "Owned all copy and editorial direction for four comprehensive developer guides",
@@ -65,7 +65,7 @@ const projects: Project[] = [
     role: "Content Marketing Coordinator II",
     timeline: "2025",
     description: "Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog.",
-    longDescription: "Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog. Defined story angles, conducted interviews, guided agency partners on execution, and managed the full publication pipeline. Each feature showcases diverse creator journeys — from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds — educating and inspiring VR developers while driving adoption of Horizon Worlds features.",
+    longDescription: "Led narrative strategy and editorial oversight for a six-part builder story spotlight series on the Meta Horizon Developers Blog. Defined story angles, conducted interviews, guided agency partners on execution, and managed the full publication pipeline. Each feature showcases diverse creator journeys, from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds, educating and inspiring VR developers while driving adoption of Horizon Worlds features.",
     details: [
       "Defined story angles and narrative direction for each builder spotlight",
       "Conducted interviews to surface authentic creator insights",
@@ -105,11 +105,11 @@ const projects: Project[] = [
   },
   {
     id: "say-it-in-a-snap",
-    title: "Say It in a Snap — Times Square Campaign",
+    title: "Say It in a Snap: Times Square Campaign",
     company: "Snap Inc.",
     role: "Trend Producer",
     timeline: "2025",
-    description: "Led editorial curation for Snap's Times Square takeover — selecting standout UGC for NYC subway placements generating 500K+ daily impressions.",
+    description: "Led editorial curation for Snap's Times Square takeover, selecting standout UGC for NYC subway placements generating 500K+ daily impressions.",
     longDescription: "Curated authentic user-generated content for Snap's high-profile Times Square campaign, selecting standout UGC that showcased the platform's creative community across outdoor media placements in NYC subway stations.",
     details: [
       "Selected standout UGC for Times Square and subway takeover placements",
@@ -144,8 +144,8 @@ const projects: Project[] = [
     company: "Phony Content",
     role: "Content Manager",
     timeline: "2024–2025",
-    description: "Led editorial operations for 50+ scripted Snapchat stories — generating 4M+ views and 40K+ new followers with a 90% viewership boost.",
-    longDescription: "Led project governance for Tiny Texts on Snapchat — managing resource allocation, creative QA, and editorial systems across a rotating writing team. Built style guides, voice/tone documentation, and editorial calendars to standardize production at scale.",
+    description: "Led editorial operations for 50+ scripted Snapchat stories, generating 4M+ views and 40K+ new followers with a 90% viewership boost.",
+    longDescription: "Led project governance for Tiny Texts on Snapchat, managing resource allocation, creative QA, and editorial systems across a rotating writing team. Built style guides, voice/tone documentation, and editorial calendars to standardize production at scale.",
     details: [
       "Led agile sprint planning and creative QA for 50+ scripted digital stories",
       "Built centralized style guides and voice/tone documentation for writing team consistency",
@@ -188,7 +188,7 @@ const projects: Project[] = [
     company: "StockX",
     role: "Brand Creative Production",
     timeline: "2021–2024",
-    description: "Managed production logistics for 3 major campaign shoots — coordinating talent, location, and asset workflows across 10M+ impressions.",
+    description: "Managed production logistics for 3 major campaign shoots, coordinating talent, location, and asset workflows across 10M+ impressions.",
     longDescription: "Coordinated production logistics across multiple high-profile campaign shoots, managing talent schedules, location details, and digital asset organization while supporting the creative direction team.",
     details: [
       "Managed talent scheduling, location coordination, and asset organization for 3 campaigns",

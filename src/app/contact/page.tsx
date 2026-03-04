@@ -159,7 +159,7 @@ export default function Contact() {
                 </button>
                 {submitStatus === 'success' && (
                   <p className="text-center text-sm text-green-700 bg-green-50 border border-green-100 rounded-lg py-2.5">
-                    Thanks — I&apos;ll get back to you soon.
+                    Thanks. I&apos;ll get back to you soon.
                   </p>
                 )}
                 {submitStatus === 'error' && (

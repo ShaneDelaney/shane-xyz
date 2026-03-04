@@ -52,13 +52,13 @@ export default function About() {
               Marketing & Editorial Operations Specialist with a track record of managing high-volume content pipelines, coordinating cross-functional teams, and building editorial systems that scale.
             </p>
             <p>
-              At Meta, I lead the end-to-end editorial content lifecycle for the Horizon Developer Blog — building story templates, managing the formal stat review process with Data Science, coordinating feedback loops across Marketing, Product, and Legal, and maintaining DRI trackers to keep global delivery dates on track.
+              At Meta, I lead the end-to-end editorial content lifecycle for the Horizon Developer Blog. I build and maintain story templates, manage the formal stat review process with Data Science, coordinate feedback loops across Marketing, Product, and Legal, and maintain DRI trackers to keep global delivery dates on track.
             </p>
             <p>
-              Previously at Snap Inc., I served as Programming Lead for Spotlight — synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day.
+              Previously at Snap Inc., I served as Programming Lead for Spotlight, synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day.
             </p>
             <p>
-              I bridge creative strategy and operational execution — building the processes that let teams move fast without losing quality.
+              I bridge creative strategy and operational execution, building the processes that let teams move fast without losing quality.
             </p>
           </motion.div>
 

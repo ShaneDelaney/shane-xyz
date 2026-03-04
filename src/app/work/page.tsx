@@ -26,7 +26,7 @@ const roles: Role[] = [
       'Lead the end-to-end editorial content lifecycle for the Developer Blog, ensuring all posts remain current with platform updates and follow strict brand guidelines.',
       'Build and maintain story templates, track editorial milestones, and manage cross-functional (XFN) feedback loops for high-visibility launches.',
       'Manage the formal stat review process, collaborating with Data Science and XFN teams to audit and confirm 100% accuracy of all public-facing metrics prior to launch.',
-      'Serve as the primary editorial bridge between Marketing, Product, and Legal — synthesizing feedback and producing internal status reports for leadership.',
+      'Serve as the primary editorial bridge between Marketing, Product, and Legal, synthesizing feedback and producing internal status reports for leadership.',
       'Maintain internal trackers and DRI assignments to monitor story progress and ensure alignment on global delivery dates.',
     ],
     category: 'tech',
