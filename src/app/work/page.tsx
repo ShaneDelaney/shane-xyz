@@ -30,11 +30,11 @@ const roles: Role[] = [
       { value: '4 Teams', label: 'XFN Coordinated' },
     ],
     bullets: [
-      'Leads end-to-end editorial lifecycle for the Horizon Developer Blog, from story ideation and stakeholder alignment through publication.',
-      'Owned editorial direction for the 4-part Go-To-Market Developer Guide — covering marketing plan development, influencer partnerships, social and community engagement, and marketing asset creation. The series is a cornerstone resource on Meta\'s developer portal, built to be platform-agnostic and durably useful for Horizon developers.',
-      'Managed cross-functional reviews across Product, DevRel, Design, and Legal for all high-visibility launches, running the formal stat review process with Data Science to ensure 100% metric accuracy before publication.',
-      'Leads the 6-part Builder Story Spotlight series — defining story angles, conducting creator interviews, and managing the full pipeline from sourcing through launch.',
-      'Maintains DRI trackers and editorial calendars to keep global delivery dates on track across all active stories.',
+      'Leads end-to-end editorial lifecycle for the Horizon Developer Blog, from story ideation through publication, ensuring content stays current with platform updates and meets strict brand guidelines.',
+      'Owned editorial direction for the 4-part Go-To-Market Developer Guide (marketing plan development, influencer partnerships, social and community engagement, marketing asset creation) — now a cornerstone resource on Meta\'s developer portal.',
+      'Managed XFN reviews across Product, DevRel, Design, and Legal for all high-visibility launches; ran the formal stat review process with Data Science to confirm 100% metric accuracy prior to publication.',
+      'Led the 6-part Builder Story Spotlight series — defined story angles, conducted creator interviews, guided agency partners on execution, and managed the full pipeline from sourcing through launch.',
+      'Maintains internal DRI trackers and editorial calendars to monitor story progress and align on global delivery dates.',
     ],
   },
   {
@@ -50,11 +50,11 @@ const roles: Role[] = [
       { value: '1M+', label: 'Creators Influenced' },
     ],
     bullets: [
-      'Served as Programming Lead for Spotlight, one of Snapchat\'s highest-scale content surfaces with 500M+ monthly viewers.',
+      'Served as Programming Lead for Spotlight — one of Snapchat\'s highest-scale content surfaces, reaching 500M+ monthly viewers.',
       'Managed a high-volume daily content pipeline of 1,000+ Snaps, ensuring all assets met strict quality, safety, and brand-safe policy standards.',
-      'Synthesized daily performance data to surface breakout trends and drive real-time amplification decisions across the Spotlight feed.',
-      'Developed standardized Editorial Instructions (EIs) and content brief templates, reducing operational friction across the QA cycle.',
-      'Collaborated with Data Science to build a creator identification system that influenced monetization strategy across 1M+ creators.',
+      'Synthesized daily performance data to identify breakout trends and inform real-time amplification decisions; led daily editorial syncs to translate findings into actionable creative direction.',
+      'Developed standardized Editorial Instructions (EIs) and content brief templates that reduced operational friction and accelerated the creative QA cycle.',
+      'Collaborated with Data Science to build a custom creator identification system; developed internal documentation for 10+ cross-functional teams and influenced monetization strategy across 1M+ creators.',
     ],
   },
   {

@@ -3,27 +3,9 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { SkillsDrawer } from '@/components/SkillsDrawer';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-const skills = [
-  {
-    category: 'Editorial & Production',
-    items: ['Editorial Calendar Management', 'Story Lifecycle Management', 'Content Pipeline Management', 'Resource Tracking (DRIs)', 'Editorial Instructions (EIs)', 'Content Programming'],
-  },
-  {
-    category: 'Operations & Tools',
-    items: ['Airtable', 'Jira', 'Confluence', 'Asana', 'Salesforce', 'Figma', 'CMS Platforms', 'Technical Metadata Management', 'Project Governance'],
-  },
-  {
-    category: 'Strategy & Analytics',
-    items: ['Stat Review Process', 'XFN Alignment', 'Stakeholder Management', 'Performance Data Synthesis', 'Competitive Gap Analysis', 'Process Optimization'],
-  },
-  {
-    category: 'AI & Dev Tools',
-    items: ['Claude Code', 'Cursor', 'GitHub', 'SuperWhisper'],
-  },
-];
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
@@ -53,16 +35,16 @@ export default function About() {
               Marketing and Editorial Operations Specialist with a track record of managing high-volume content pipelines, coordinating cross-functional teams, and building editorial systems that scale.
             </p>
             <p>
-              At Meta, I lead the end-to-end editorial content lifecycle for the Horizon Developer Blog. I build story templates, manage the formal stat review process with Data Science, coordinate feedback loops across Marketing, Product, and Legal, and maintain DRI trackers to keep global delivery dates on track.
+              At Meta, Shane leads the end-to-end editorial content lifecycle for the Horizon Developer Blog. He builds story templates, manages the formal stat review process with Data Science, coordinates feedback loops across Marketing, Product, and Legal, and maintains DRI trackers to keep global delivery dates on track.
             </p>
             <p>
-              Previously at Snap Inc., I was Programming Lead for Spotlight, synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day.
+              Previously at Snap Inc., Shane served as Programming Lead for Spotlight, synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day across a platform with 500M+ monthly viewers.
             </p>
             <p>
-              I bridge creative strategy and operational execution, building the processes that let teams move fast without losing quality.
+              Shane bridges creative strategy and operational execution, building the processes that let teams move fast without losing quality.
             </p>
             <p>
-              Alongside that, I&apos;ve gone deep on AI-native work. At Meta, I&apos;m actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on my team. Proficient with Claude Code, Cursor, GitHub, and SuperWhisper. Built this site entirely with Claude Code.
+              Alongside that, he has gone deep on AI-native work. At Meta, he is actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on his team. Proficient with Claude Code, Cursor, GitHub, and SuperWhisper. Built this site entirely with Claude Code.
             </p>
           </motion.div>
 
@@ -89,29 +71,35 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Skills */}
+          {/* Skills summary strip */}
           <motion.div
+            className="mb-14"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-            className="mb-14"
           >
-            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-6">Skills & Tools</p>
-            <div className="space-y-6">
-              {skills.map(group => (
-                <div key={group.category}>
-                  <p className="text-xs font-medium text-gray-700 mb-3">{group.category}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map(item => (
-                      <span
-                        key={item}
-                        className="px-2.5 py-1 text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded-lg"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Skills & Tools</p>
+              <SkillsDrawer>
+                <button className="text-xs text-gray-400 hover:text-gray-900 transition-colors">
+                  View all →
+                </button>
+              </SkillsDrawer>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-100 rounded-xl overflow-hidden">
+              {[
+                { label: 'Editorial & Production', example: 'Pipeline · DRIs · EIs' },
+                { label: 'Operations & Tools', example: 'Airtable · Jira · Confluence' },
+                { label: 'Strategy & Analytics', example: 'XFN · Data Synthesis' },
+                { label: 'AI & Dev Tools', example: 'Claude Code · Cursor' },
+              ].map(cat => (
+                <SkillsDrawer key={cat.label}>
+                  <button className="bg-white px-4 py-4 text-left hover:bg-gray-50 transition-colors w-full">
+                    <p className="text-xs font-medium text-gray-700 mb-1">{cat.label}</p>
+                    <p className="text-[10px] text-gray-400">{cat.example}</p>
+                  </button>
+                </SkillsDrawer>
               ))}
             </div>
           </motion.div>
