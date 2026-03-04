@@ -106,8 +106,17 @@ export const cache: CacheEntry[] = [
 
   // --- AVAILABILITY ---
   {
-    keywords: [['available', 'open to', 'looking', 'hiring', 'opportunity', 'new role', 'job', 'hire', 'recruit']],
+    keywords: [['available', 'open to', 'hiring', 'opportunity', 'hire', 'recruit']],
     answer: "Shane is open to full-time roles, freelance projects, and creative collaborations. Based in **Los Angeles, CA** — reach him at shanedelaney11@gmail.com.",
+  },
+  // More specific: "what kind of roles / what roles is Shane looking for"
+  {
+    keywords: [['role', 'roles', 'position'], ['looking', 'seeking', 'want', 'interest', 'open']],
+    answer: "Shane is targeting roles in **content marketing, editorial operations, or content strategy** — especially at the intersection of content and AI. Full-time preferred, open to remote or hybrid. Reach him at shanedelaney11@gmail.com.",
+  },
+  {
+    keywords: [['freelance', 'contract', 'part-time', 'side project']],
+    answer: "Yes — Shane takes on freelance and contract work. Previous clients include **StockX** and **Phony Content**. Reach him at shanedelaney11@gmail.com.",
   },
 
   // --- CONTACT ---

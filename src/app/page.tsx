@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import PortraitDraw from '@/components/PortraitDraw';
 import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -24,6 +25,15 @@ export default function Home() {
           >
             Shane Delaney — Los Angeles, CA
           </motion.p>
+
+          <motion.div
+            className="mb-12 w-52 sm:w-64"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.05, ease: EASE }}
+          >
+            <PortraitDraw />
+          </motion.div>
 
           <motion.p
             className="text-xl sm:text-2xl text-gray-400 leading-relaxed mb-10 max-w-2xl font-light"
