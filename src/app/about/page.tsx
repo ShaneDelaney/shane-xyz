@@ -1,159 +1,137 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { SkillsDrawer } from '@/components/SkillsDrawer';
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   return (
-    <div className="fixed inset-0 h-screen w-screen overflow-hidden bg-white">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-white to-gray-50/30 -z-10" />
-      
-      {/* Main Content */}
-      <section className="h-full w-full flex items-center justify-center px-3 sm:px-4 lg:px-6 py-4 sm:py-6 overflow-y-auto scrollbar-hide">
-        <div className="max-w-5xl mx-auto w-full">
+    <div className="min-h-screen bg-white">
+      <section className="w-full px-6 pt-32 pb-24">
+        <div className="max-w-3xl mx-auto">
+
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.06] mb-10"
+            initial={{ opacity: 0, y: 24 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
+            Editorial operations<br />and content strategy.
+          </motion.h1>
+
           <motion.div
+            className="space-y-5 text-base text-gray-500 leading-relaxed mb-14 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col lg:flex-row items-center lg:items-start gap-6 sm:gap-8 lg:gap-12"
+            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
           >
-            {/* Profile Image - Hero style */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={mounted ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex-shrink-0"
-            >
-              <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
-                <Image
-                  src="/about_shane.png"
-                  alt="Shane Delaney"
-                  width={800}
-                  height={1000}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-            </motion.div>
-            
-            {/* Content */}
-            <div className="flex-1 min-w-0 w-full">
-              {/* Header */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={mounted ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="mb-4 sm:mb-6"
-              >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 mb-3 sm:mb-4 leading-tight">
-                  Storytelling and creative strategy in tech.
-                </h1>
-              </motion.div>
-              
-              {/* Body Copy */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={mounted ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-3 sm:space-y-4 text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6"
-              >
-                <p>
-                  Content strategist working on storytelling and creative strategy. I help turn complex ideas into clear narratives that drive measurable results.
-                </p>
-                
-                <p>
-                  At Meta, I lead narrative strategy for Horizon's developer ecosystem, managing an end-to-end editorial pipeline that has produced 10+ major pieces, including a four-part Go-To-Market guide series and a six-part builder story spotlight series. These stories showcase diverse creator journeys, from entrepreneurial crowdfunding campaigns to first-time creators building top-ranked worlds. Each piece educates and inspires VR developers while driving adoption of Horizon Worlds features.
-                </p>
-                
-                <p>
-                  Previously at Snap Inc., I curated content for Spotlight, managing a daily pipeline of 1,000+ creator submissions and collaborating with product and data science teams to launch trend-driven initiatives. At Phony Content, I produced 50+ viral Snapchat stories that generated 4M+ views and 40K+ new followers, achieving a 90% viewership boost. I also contributed to trend research at StockX that informed the company's 2025 marketing strategy.
-                </p>
-                
-                <p className="text-gray-700">
-                  I build creative strategies that help ideas connect with people by combining storytelling with data analysis to create content that drives engagement and measurable impact.
-                </p>
-              </motion.div>
-              
-              {/* Info Cards Grid */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={mounted ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-4 sm:mb-6"
-              >
-                {/* Currently */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-white border border-gray-200 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:shadow-md hover:border-gray-300 transition-all duration-300"
-                >
-                  <h3 className="text-[9px] sm:text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5 sm:mb-2">
-                    Currently
-                  </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-gray-900 mb-0.5">Meta</p>
-                  <p className="text-[10px] sm:text-xs text-gray-600">Content Marketing Coordinator II</p>
-                </motion.div>
-                
-                {/* Previously */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-white border border-gray-200 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:shadow-md hover:border-gray-300 transition-all duration-300"
-                >
-                  <h3 className="text-[9px] sm:text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5 sm:mb-2">
-                    Previously
-                  </h3>
-                  <p className="text-[10px] sm:text-xs text-gray-600 leading-relaxed">
-                    Snap Inc., Phony Content, StockX, Collider
-                  </p>
-                </motion.div>
-                
-                {/* Education */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-white border border-gray-200 rounded-lg sm:rounded-xl p-3 sm:p-4 hover:shadow-md hover:border-gray-300 transition-all duration-300"
-                >
-                  <h3 className="text-[9px] sm:text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5 sm:mb-2">
-                    Education
-                  </h3>
-                  <p className="text-[10px] sm:text-xs font-medium text-gray-900 mb-0.5">LMU</p>
-                  <p className="text-[9px] sm:text-[10px] text-gray-600">B.A. English & Screenwriting</p>
-                </motion.div>
-              </motion.div>
-              
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={mounted ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col sm:flex-row gap-2.5 sm:gap-3"
-              >
-                <Link 
-                  href="/work"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 bg-gray-900 text-white rounded-full font-medium text-xs sm:text-sm hover:bg-gray-800 transition-all duration-300 shadow-sm hover:shadow-md text-center"
-                >
-                  View My Work
-                </Link>
-                <Link 
-                  href="/contact"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 bg-white border border-gray-300 text-gray-900 rounded-full font-medium text-xs sm:text-sm hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 shadow-sm hover:shadow-md text-center"
-                >
-                  Get In Touch
-                </Link>
-              </motion.div>
+            <p>
+              Marketing and Editorial Operations Specialist with a track record of managing high-volume content pipelines, coordinating cross-functional teams, and building editorial systems that scale.
+            </p>
+            <p>
+              At Meta, Shane leads the end-to-end editorial content lifecycle for the Horizon Developer Blog. He builds story templates, manages the formal stat review process with Data Science, coordinates feedback loops across Marketing, Product, and Legal, and maintains DRI trackers to keep global delivery dates on track.
+            </p>
+            <p>
+              Previously at Snap Inc., Shane served as Programming Lead for Spotlight, synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day across a platform with 500M+ monthly viewers.
+            </p>
+            <p>
+              Shane bridges creative strategy and operational execution, building the processes that let teams move fast without losing quality.
+            </p>
+            <p>
+              Alongside that, he has gone deep on AI-native work. At Meta, he is actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on his team. Proficient with Claude Code, Cursor, GitHub, and SuperWhisper. Built this site entirely with Claude Code.
+            </p>
+          </motion.div>
+
+          {/* Info grid */}
+          <motion.div
+            className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-gray-100 rounded-2xl overflow-hidden mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
+          >
+            <div className="bg-white px-5 py-5">
+              <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">Currently</p>
+              <p className="text-sm font-semibold text-gray-900 mb-0.5">Meta</p>
+              <p className="text-xs text-gray-400">Content Marketing Coordinator II</p>
+            </div>
+            <div className="bg-white px-5 py-5">
+              <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">Previously</p>
+              <p className="text-xs text-gray-400 leading-relaxed">Snap Inc. · Phony Content · StockX · Collider</p>
+            </div>
+            <div className="bg-white px-5 py-5 col-span-2 sm:col-span-1">
+              <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">Education</p>
+              <p className="text-sm font-semibold text-gray-900 mb-0.5">LMU</p>
+              <p className="text-xs text-gray-400">B.A. English & Screenwriting</p>
             </div>
           </motion.div>
+
+          {/* Skills summary strip */}
+          <motion.div
+            className="mb-14"
+            initial={{ opacity: 0, y: 16 }}
+            animate={mounted ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest">Skills & Tools</p>
+              <SkillsDrawer>
+                <button className="text-xs text-gray-400 hover:text-gray-900 transition-colors">
+                  View all →
+                </button>
+              </SkillsDrawer>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-gray-100 rounded-xl overflow-hidden">
+              {[
+                { label: 'Editorial & Production', example: 'Pipeline · DRIs · EIs' },
+                { label: 'Operations & Tools', example: 'Airtable · Jira · Confluence' },
+                { label: 'Strategy & Analytics', example: 'XFN · Data Synthesis' },
+                { label: 'AI & Dev Tools', example: 'Claude Code · Cursor' },
+              ].map(cat => (
+                <SkillsDrawer key={cat.label}>
+                  <button className="bg-white px-4 py-4 text-left hover:bg-gray-50 transition-colors w-full">
+                    <p className="text-xs font-medium text-gray-700 mb-1">{cat.label}</p>
+                    <p className="text-[10px] text-gray-400">{cat.example}</p>
+                  </button>
+                </SkillsDrawer>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-wrap gap-3"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
+          >
+            <Link
+              href="/work"
+              className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors"
+            >
+              View My Work
+            </Link>
+            <a
+              href="/ShaneDelaneyResume.pdf"
+              download
+              className="px-5 py-2.5 border border-gray-200 text-gray-700 rounded-full text-sm font-medium hover:border-gray-400 transition-colors"
+            >
+              Download Resume ↓
+            </a>
+            <Link
+              href="/contact"
+              className="px-5 py-2.5 text-gray-400 text-sm font-medium hover:text-gray-900 transition-colors"
+            >
+              Get In Touch →
+            </Link>
+          </motion.div>
+
         </div>
       </section>
     </div>

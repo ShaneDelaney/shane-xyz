@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
+import ShaneGPT from "@/components/ShaneGPT";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,12 +17,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Shane Delaney | Digital Strategist & Creative Marketer",
-  description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta. Shaping stories and systems at the intersection of creativity and tech.",
-  keywords: ["digital strategy", "content marketing", "creative marketing", "storytelling", "Meta", "Snap Inc", "developer marketing", "VR content", "tech marketing"],
+  title: "Shane Delaney | Editorial Operations & Content Strategy",
+  description: "Los Angeles-based Marketing & Editorial Operations Specialist at Meta. Managing high-volume content pipelines, XFN coordination, and editorial systems for Horizon's developer ecosystem.",
+  keywords: ["editorial operations", "content strategy", "content marketing", "Meta", "Snap Inc", "editorial pipeline", "XFN coordination", "developer marketing", "content operations"],
   openGraph: {
-    title: "Shane Delaney | Digital Strategist & Creative Marketer",
-    description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta. Shaping stories and systems at the intersection of creativity and tech.",
+    title: "Shane Delaney | Editorial Operations & Content Strategy",
+    description: "Los Angeles-based Marketing & Editorial Operations Specialist at Meta. Managing high-volume content pipelines, XFN coordination, and editorial systems for Horizon's developer ecosystem.",
     url: "https://shanedelaney.xyz",
     siteName: "Shane Delaney",
     locale: "en_US",
@@ -29,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Delaney | Digital Strategist & Creative Marketer",
-    description: "Los Angeles-based digital strategist, creative marketer, and writer at Meta.",
+    title: "Shane Delaney | Editorial Operations & Content Strategy",
+    description: "Marketing & Editorial Operations Specialist at Meta.",
   },
 };
 
@@ -45,12 +46,16 @@ export default function RootLayout({
         className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900`}
       >
         <Navigation />
-        <main className="flex-grow pt-16">
+        <main className="flex-grow">
           {children}
         </main>
-        <footer className="py-4 text-center text-xs text-gray-400 border-t border-gray-200">
-          <p>© {new Date().getFullYear()} Shane Delaney</p>
+        <footer className="py-8 px-6 border-t border-gray-100">
+          <div className="max-w-5xl mx-auto flex items-center justify-between">
+            <p className="text-xs text-gray-400">© {new Date().getFullYear()} Shane Delaney</p>
+            <p className="text-xs text-gray-400">Built with <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" className="hover:text-gray-700 transition-colors">Claude Code</a></p>
+          </div>
         </footer>
+        <ShaneGPT />
       </body>
     </html>
   );
