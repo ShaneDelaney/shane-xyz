@@ -26,10 +26,9 @@ export default function Home() {
             Shane Delaney — Los Angeles, CA
           </motion.p>
 
-          {/* Hero media block — swap src for a video or on-set photo */}
+          {/* Hero media block — swap for a video or on-set photo */}
           <motion.div
-            className="relative w-full rounded-2xl overflow-hidden mb-10 bg-gray-100"
-            style={{ height: '420px' }}
+            className="relative w-full rounded-2xl overflow-hidden mb-10 bg-gray-100 aspect-[3/2]"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
@@ -38,7 +37,7 @@ export default function Home() {
               src="/about_shane.png"
               alt="Shane Delaney"
               fill
-              className="object-cover object-top"
+              className="object-cover object-[center_15%]"
               priority
             />
           </motion.div>
