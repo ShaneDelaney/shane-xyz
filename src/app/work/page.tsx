@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -115,6 +115,14 @@ const roles: Role[] = [
 ];
 
 export default function Work() {
+  return (
+    <Suspense>
+      <WorkInner />
+    </Suspense>
+  );
+}
+
+function WorkInner() {
   const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
   const [direction, setDirection] = useState(1);
