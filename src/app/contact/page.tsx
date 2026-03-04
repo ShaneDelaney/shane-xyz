@@ -50,7 +50,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 mb-2">Get in touch.</h1>
             <p className="text-sm text-gray-500 mb-10 leading-relaxed">
@@ -63,7 +63,7 @@ export default function Contact() {
             className="flex flex-col sm:flex-row gap-3 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <a
               href="mailto:shanedelaney11@gmail.com"
@@ -102,7 +102,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="border-t border-gray-100 pt-8">
               <h2 className="text-sm font-semibold text-gray-900 mb-5">Send a message</h2>

@@ -20,7 +20,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start"
           >
             {/* Avatar */}
@@ -46,7 +46,7 @@ export default function Home() {
               className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 mb-5 leading-[1.08]"
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
             >
               Editorial operations<br className="hidden sm:block" /> and content strategy.
             </motion.h1>
@@ -56,9 +56,9 @@ export default function Home() {
               className="text-base sm:text-lg text-gray-500 leading-relaxed mb-8 max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              Marketing & Editorial Operations Specialist at Meta — managing high-volume content pipelines, XFN coordination, and editorial systems for Horizon&apos;s developer ecosystem. Previously at Snap Inc., Phony Content, StockX, and Collider.
+              Content marketing and editorial operations at Meta, building content systems and strategy for Horizon&apos;s developer ecosystem. Previously at Snap Inc.
             </motion.p>
 
             {/* CTAs */}
@@ -66,27 +66,21 @@ export default function Home() {
               className="flex flex-wrap gap-3 mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href="/work"
-                className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm"
+                className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
               >
                 See My Work
               </Link>
               <a
                 href="/ShaneDelaneyResume.pdf"
                 download
-                className="px-5 py-2.5 bg-white border border-gray-300 text-gray-900 rounded-full text-sm font-medium hover:bg-gray-50 hover:border-gray-400 transition-all shadow-sm"
+                className="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 rounded-full text-sm font-medium hover:border-gray-400 hover:text-gray-900 transition-all"
               >
-                Download Resume ↓
+                Resume ↓
               </a>
-              <Link
-                href="/about"
-                className="px-5 py-2.5 text-gray-500 text-sm font-medium hover:text-gray-900 transition-colors"
-              >
-                About Me →
-              </Link>
             </motion.div>
 
             {/* Info strip */}
@@ -94,7 +88,7 @@ export default function Home() {
               className="border-t border-gray-100 pt-8 w-full grid grid-cols-1 sm:grid-cols-3 gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <div>
                 <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">Currently</p>

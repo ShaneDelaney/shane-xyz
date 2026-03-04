@@ -11,7 +11,7 @@ const skills = [
   },
   {
     category: 'Operations & Tools',
-    items: ['Quip', 'Airtable', 'Jira', 'Confluence', 'Asana', 'Salesforce', 'Figma', 'CMS Platforms', 'Technical Metadata Management', 'Project Governance'],
+    items: ['Airtable', 'Jira', 'Confluence', 'Asana', 'Salesforce', 'Figma', 'CMS Platforms', 'Technical Metadata Management', 'Project Governance'],
   },
   {
     category: 'Strategy & Analytics',
@@ -36,7 +36,7 @@ export default function About() {
             className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 leading-tight mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             Editorial operations<br className="hidden sm:block" /> and content strategy.
           </motion.h1>
@@ -46,19 +46,19 @@ export default function About() {
             className="space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <p>
-              Detail-oriented Marketing & Editorial Operations Specialist with extensive experience managing high-volume content pipelines at Meta and Snap Inc. Proven track record in lead-time management, cross-functional (XFN) production syncing, and maintaining complex editorial calendars.
+              Marketing & Editorial Operations Specialist with a track record of managing high-volume content pipelines, coordinating cross-functional teams, and building editorial systems that scale.
             </p>
             <p>
-              At Meta, I lead the end-to-end editorial content lifecycle for the Horizon Developer Blog — building story templates in Quip, managing the formal stat review process with Data Science, coordinating XFN feedback loops across Marketing, Product, and Legal, and maintaining DRI trackers to keep global delivery dates on track.
+              At Meta, I lead the end-to-end editorial content lifecycle for the Horizon Developer Blog — building story templates, managing the formal stat review process with Data Science, coordinating feedback loops across Marketing, Product, and Legal, and maintaining DRI trackers to keep global delivery dates on track.
             </p>
             <p>
-              Previously at Snap Inc., I served as Programming Lead for Spotlight, synthesizing daily performance data to identify breakout trends, developing standardized Editorial Instructions (EIs), and orchestrating a daily pipeline of 1,000+ Snaps. At Phony Content, I built centralized documentation frameworks and editorial systems that standardized production workflows across subscription-based platforms, generating 4M+ views.
+              Previously at Snap Inc., I served as Programming Lead for Spotlight — synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day.
             </p>
             <p>
-              I bridge the gap between creative strategy and technical execution — building the systems and processes that let editorial teams move fast without breaking quality.
+              I bridge creative strategy and operational execution — building the processes that let teams move fast without losing quality.
             </p>
           </motion.div>
 
@@ -67,7 +67,7 @@ export default function About() {
             className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="border border-gray-200 rounded-xl p-4 hover:border-gray-300 transition-colors">
               <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-2">Currently</p>
@@ -89,7 +89,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="mb-10"
           >
             <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-5">Skills & Tools</h2>
@@ -117,7 +117,7 @@ export default function About() {
             className="flex flex-wrap gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link
               href="/work"

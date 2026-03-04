@@ -24,7 +24,7 @@ const roles: Role[] = [
     timeline: 'October 2025 – Present',
     bullets: [
       'Lead the end-to-end editorial content lifecycle for the Developer Blog, ensuring all posts remain current with platform updates and follow strict brand guidelines.',
-      'Utilize Quip as the primary collaborative workspace to build story templates, track editorial milestones, and manage cross-functional (XFN) feedback loops for high-visibility launches.',
+      'Build and maintain story templates, track editorial milestones, and manage cross-functional (XFN) feedback loops for high-visibility launches.',
       'Manage the formal stat review process, collaborating with Data Science and XFN teams to audit and confirm 100% accuracy of all public-facing metrics prior to launch.',
       'Serve as the primary editorial bridge between Marketing, Product, and Legal — synthesizing feedback and producing internal status reports for leadership.',
       'Maintain internal trackers and DRI assignments to monitor story progress and ensure alignment on global delivery dates.',
@@ -104,7 +104,7 @@ const RoleCard = ({ role, index }: { role: Role; index: number }) => {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.35, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       className="border border-gray-200 rounded-xl p-5 hover:border-gray-300 transition-colors"
     >
       {/* Header row */}
@@ -168,7 +168,7 @@ export default function Work() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex items-end justify-between gap-4 mb-2">
               <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Experience</h1>
@@ -180,7 +180,7 @@ export default function Work() {
               </Link>
             </div>
             <p className="text-sm text-gray-500 mb-8 leading-relaxed">
-              Editorial operations and content strategy across tech, creative, and media.
+              Content marketing and editorial operations across tech platforms and media.
             </p>
 
             {/* Filter tabs */}
