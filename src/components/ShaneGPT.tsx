@@ -157,15 +157,15 @@ export default function ShaneGPT() {
               {/* Body */}
               <div className="px-4 py-4 min-h-[160px] max-h-[320px] overflow-y-auto flex flex-col gap-3">
 
-                {/* Suggested questions */}
-                <AnimatePresence mode="wait">
+                {/* Suggestions — visible only when idle */}
+                <AnimatePresence>
                   {!answer && !loading && (
                     <motion.div
                       key="suggestions"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.15, ease: EASE }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
                       className="flex flex-col gap-1.5"
                     >
                       {SUGGESTED.map((s, i) => (
@@ -182,8 +182,10 @@ export default function ShaneGPT() {
                       ))}
                     </motion.div>
                   )}
+                </AnimatePresence>
 
-                  {/* Loading dots */}
+                {/* Loading dots */}
+                <AnimatePresence>
                   {loading && (
                     <motion.div
                       key="loading"
@@ -191,7 +193,7 @@ export default function ShaneGPT() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.15 }}
-                      className="flex items-center gap-1.5 py-2"
+                      className="flex items-center gap-1.5 py-1"
                     >
                       {[0, 1, 2].map(i => (
                         <motion.span
@@ -203,27 +205,21 @@ export default function ShaneGPT() {
                       ))}
                     </motion.div>
                   )}
+                </AnimatePresence>
 
-                  {/* Answer */}
-                  {answer && !loading && (
-                    <motion.div
+                {/* Answer — stays visible while user types follow-up */}
+                <AnimatePresence>
+                  {answer && (
+                    <motion.p
                       key="answer"
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.25, ease: EASE }}
-                      className="flex flex-col gap-3"
+                      transition={{ duration: 0.22, ease: EASE }}
+                      className="text-sm text-gray-700 leading-relaxed"
                     >
-                      <p className="text-sm text-gray-700 leading-relaxed">{answer}</p>
-                      <motion.button
-                        onClick={reset}
-                        className="self-start text-[11px] font-medium text-gray-400 hover:text-gray-700 transition-colors"
-                        whileHover={{ x: 2 }}
-                        transition={{ duration: 0.15 }}
-                      >
-                        Ask another question →
-                      </motion.button>
-                    </motion.div>
+                      {answer}
+                    </motion.p>
                   )}
                 </AnimatePresence>
               </div>
