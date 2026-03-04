@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -115,28 +114,18 @@ const roles: Role[] = [
 ];
 
 export default function Work() {
-  return (
-    <Suspense>
-      <WorkInner />
-    </Suspense>
-  );
-}
-
-function WorkInner() {
-  const searchParams = useSearchParams();
+  const [active, setActive] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [direction, setDirection] = useState(1);
 
-  const initialIndex = () => {
-    const id = searchParams.get('company');
-    if (!id) return 0;
-    const i = roles.findIndex(r => r.id === id);
-    return i >= 0 ? i : 0;
-  };
-
-  const [active, setActive] = useState(initialIndex);
-
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get('company');
+    if (id) {
+      const i = roles.findIndex(r => r.id === id);
+      if (i >= 0) setActive(i);
+    }
+    setMounted(true);
+  }, []);
 
   const select = (i: number) => {
     setDirection(i > active ? 1 : -1);
