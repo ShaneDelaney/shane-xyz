@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { findCachedAnswer } from '@/lib/shanebot';
 
 const FALLBACK = "I don't have a specific answer for that, but you can reach Shane directly at shanedelaney11@gmail.com — he's happy to chat.";
 
@@ -144,6 +145,11 @@ export async function POST(req: NextRequest) {
 
     if (question.trim().length > 500) {
       return NextResponse.json({ answer: "That's a long one — try asking something more specific and I'll give you a better answer." });
+    }
+
+    const cached = findCachedAnswer(question.trim());
+    if (cached) {
+      return NextResponse.json({ answer: cached });
     }
 
     const apiKey = process.env.API_KEY;

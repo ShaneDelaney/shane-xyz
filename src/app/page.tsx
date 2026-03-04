@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -14,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="w-full px-6 pt-28 pb-24">
+      <section className="w-full px-6 pt-32 pb-28">
         <div className="max-w-5xl mx-auto">
 
           <motion.p
@@ -26,24 +25,8 @@ export default function Home() {
             Shane Delaney — Los Angeles, CA
           </motion.p>
 
-          {/* Hero media block — swap for a video or on-set photo */}
-          <motion.div
-            className="relative w-full rounded-2xl overflow-hidden mb-10 bg-gray-100 aspect-[16/7]"
-            initial={{ opacity: 0, y: 16 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.05, ease: EASE }}
-          >
-            <Image
-              src="/about_shane.png"
-              alt="Shane Delaney"
-              fill
-              className="object-cover object-[center_15%] grayscale opacity-80"
-              priority
-            />
-          </motion.div>
-
           <motion.p
-            className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-10 max-w-2xl font-light"
+            className="text-xl sm:text-2xl text-gray-400 leading-relaxed mb-10 max-w-2xl font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
