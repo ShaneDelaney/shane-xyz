@@ -3,12 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -220,132 +214,103 @@ const projects: Project[] = [
 
 const companyOrder = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
-const ProjectCard = ({ project }: { project: Project }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <>
-      <button
-        id={project.id}
-        onClick={() => setIsOpen(true)}
-        className="w-full text-left py-4 border-b border-gray-100 last:border-0 group flex items-start justify-between gap-4"
-      >
-        <div className="flex-1 min-w-0">
-          <p className="text-[10px] text-gray-400 mb-1">{project.company} · {project.timeline}</p>
-          <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-snug">{project.title}</h3>
-          <p className="text-xs text-gray-400 leading-relaxed line-clamp-2 mb-2">{project.description}</p>
-          {project.metrics && project.metrics.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {project.metrics.slice(0, 3).map((m, i) => (
-                <span key={i} className="text-[10px] text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md">{m}</span>
-              ))}
-            </div>
-          )}
+const ProjectRow = ({ project, onSelect }: { project: Project; onSelect: () => void }) => (
+  <button
+    id={project.id}
+    onClick={onSelect}
+    className="w-full text-left py-4 border-b border-gray-100 last:border-0 group flex items-start justify-between gap-4"
+  >
+    <div className="flex-1 min-w-0">
+      <p className="text-[10px] text-gray-400 mb-1">{project.company} · {project.timeline}</p>
+      <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-snug">{project.title}</h3>
+      <p className="text-xs text-gray-400 leading-relaxed line-clamp-2 mb-2">{project.description}</p>
+      {project.metrics && project.metrics.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {project.metrics.slice(0, 3).map((m, i) => (
+            <span key={i} className="text-[10px] text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md">{m}</span>
+          ))}
         </div>
-        <span className="text-gray-300 group-hover:text-gray-500 transition-colors text-sm flex-shrink-0 mt-0.5">→</span>
-      </button>
+      )}
+    </div>
+    <span className="text-gray-300 group-hover:text-gray-500 transition-colors text-sm flex-shrink-0 mt-0.5">→</span>
+  </button>
+);
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto bg-white">
-          <DialogHeader>
-            <p className="text-xs text-gray-400 mb-1">{project.company} · {project.role} · {project.timeline}</p>
-            <DialogTitle className="text-xl font-semibold text-gray-900 leading-tight">
-              {project.title}
-            </DialogTitle>
-          </DialogHeader>
+const ProjectDetail = ({ project, onBack }: { project: Project; onBack: () => void }) => (
+  <div className="px-8 pt-6 pb-8 h-full overflow-y-auto">
+    <button
+      onClick={onBack}
+      className="text-sm text-gray-400 hover:text-gray-900 transition-colors mb-8 inline-flex items-center gap-1.5"
+    >
+      ← Back
+    </button>
 
-          <div className="space-y-6 mt-2">
-            <p className="text-sm text-gray-500 leading-relaxed">
-              {project.longDescription || project.description}
-            </p>
+    <div className="mb-6">
+      <p className="text-[10px] text-gray-400 mb-2">{project.company} · {project.role} · {project.timeline}</p>
+      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-3">{project.title}</h2>
+      <p className="text-sm text-gray-500 leading-relaxed">{project.longDescription || project.description}</p>
+    </div>
 
-            {project.metrics && project.metrics.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {project.metrics.map((m, i) => (
-                  <div key={i} className="bg-gray-50 rounded-xl px-4 py-3">
-                    <p className="text-sm font-semibold text-gray-900 tracking-tight leading-snug">{m}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {project.details.length > 0 && (
-              <div>
-                <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-3">Key Contributions</p>
-                <div className="space-y-3">
-                  {project.details.map((d, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-                      <p className="text-sm text-gray-600 leading-relaxed">{d}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {project.tags.length > 0 && (
-              <div>
-                <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-3">Skills & Areas</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="text-xs text-gray-500 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-full">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {project.relatedLinks && project.relatedLinks.length > 0 && (
-              <div>
-                <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-3">Related Links</p>
-                <div className="space-y-3">
-                  {project.relatedLinks.map((link, i) => (
-                    link.url ? (
-                      <a
-                        key={i}
-                        href={link.url}
-                        target={link.url.startsWith('http') ? '_blank' : '_self'}
-                        rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
-                        className="block group/link"
-                      >
-                        <p className="text-sm font-medium text-gray-900 group-hover/link:text-gray-500 transition-colors inline-flex items-center gap-1.5">
-                          {link.title}
-                          <span className="opacity-0 group-hover/link:opacity-100 transition-opacity text-xs">↗</span>
-                        </p>
-                        {link.description && <p className="text-xs text-gray-400 mt-0.5">{link.description}</p>}
-                      </a>
-                    ) : (
-                      <div key={i}>
-                        <p className="text-sm font-medium text-gray-900">{link.title}</p>
-                        {link.description && <p className="text-xs text-gray-400 mt-0.5">{link.description}</p>}
-                      </div>
-                    )
-                  ))}
-                </div>
-              </div>
-            )}
+    {project.metrics && project.metrics.length > 0 && (
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-8">
+        {project.metrics.map((m, i) => (
+          <div key={i} className="bg-gray-50 rounded-xl px-4 py-3">
+            <p className="text-sm font-semibold text-gray-900 tracking-tight leading-snug">{m}</p>
           </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-};
+        ))}
+      </div>
+    )}
+
+    {project.details.length > 0 && (
+      <div className="mb-8">
+        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Contributions</p>
+        <div className="space-y-3">
+          {project.details.map((d, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
+              <p className="text-sm text-gray-600 leading-relaxed">{d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {project.relatedLinks && project.relatedLinks.length > 0 && (
+      <div>
+        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Links</p>
+        <div>
+          {project.relatedLinks.map((link, i) => (
+            link.url ? (
+              <a
+                key={i}
+                href={link.url}
+                target={link.url.startsWith('http') ? '_blank' : '_self'}
+                rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
+                className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0 group/link"
+              >
+                <span className="text-sm font-medium text-gray-900 group-hover/link:text-gray-500 transition-colors">{link.title}</span>
+                <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs">↗</span>
+              </a>
+            ) : (
+              <div key={i} className="py-3 border-b border-gray-100 last:border-0">
+                <span className="text-sm text-gray-400">{link.title}</span>
+              </div>
+            )
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+);
 
 export default function Portfolio() {
   const [mounted, setMounted] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState('all');
-  const [direction, setDirection] = useState(1);
+  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [panelDirection, setPanelDirection] = useState(1);
+  const [companyDirection, setCompanyDirection] = useState(1);
 
-  useEffect(() => {
-    setMounted(true);
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const project = projects.find(p => p.id === hash);
-      if (project) setSelectedCompany(project.company);
-      setTimeout(() => {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 400);
-    }
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   const companies = ['all', ...companyOrder];
   const filtered = selectedCompany === 'all' ? projects : projects.filter(p => p.company === selectedCompany);
@@ -354,12 +319,27 @@ export default function Portfolio() {
     return acc;
   }, {} as Record<string, number>);
 
-  const select = (company: string) => {
+  const selectCompany = (company: string) => {
     const fromIdx = companies.indexOf(selectedCompany);
     const toIdx = companies.indexOf(company);
-    setDirection(toIdx > fromIdx ? 1 : -1);
+    setCompanyDirection(toIdx > fromIdx ? 1 : -1);
+    setActiveProject(null);
     setSelectedCompany(company);
   };
+
+  const openProject = (project: Project) => {
+    setPanelDirection(1);
+    setActiveProject(project);
+  };
+
+  const closeProject = () => {
+    setPanelDirection(-1);
+    setActiveProject(null);
+  };
+
+  // Panel key: when no project open, key is the company; when project open, key is project id
+  const panelKey = activeProject ? activeProject.id : selectedCompany;
+  const panelDir = activeProject ? panelDirection : companyDirection;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -392,7 +372,7 @@ export default function Portfolio() {
                 return (
                   <button
                     key={company}
-                    onClick={() => select(company)}
+                    onClick={() => selectCompany(company)}
                     className={`w-full text-left px-4 py-3 transition-all duration-150 relative ${
                       isActive ? 'bg-gray-50' : 'hover:bg-gray-50/60'
                     }`}
@@ -417,20 +397,26 @@ export default function Portfolio() {
               })}
             </div>
 
-            {/* Right: project list */}
-            <div className="flex-1 overflow-y-auto">
+            {/* Right: list or detail */}
+            <div className="flex-1 overflow-hidden">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={selectedCompany}
-                  initial={{ opacity: 0, x: direction * 16 }}
+                  key={panelKey}
+                  initial={{ opacity: 0, x: panelDir * 24 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: direction * -16 }}
+                  exit={{ opacity: 0, x: panelDir * -24 }}
                   transition={{ duration: 0.22, ease: EASE }}
-                  className="px-8 pt-2 pb-8"
+                  className="h-full"
                 >
-                  {filtered.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
-                  ))}
+                  {activeProject ? (
+                    <ProjectDetail project={activeProject} onBack={closeProject} />
+                  ) : (
+                    <div className="px-8 pt-2 pb-8">
+                      {filtered.map((project) => (
+                        <ProjectRow key={project.id} project={project} onSelect={() => openProject(project)} />
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
