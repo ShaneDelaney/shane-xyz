@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ answer: FALLBACK, debug: 'no_api_key' });
+      return NextResponse.json({ answer: FALLBACK });
     }
 
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -160,14 +160,13 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      const err = await response.text();
-      return NextResponse.json({ answer: FALLBACK, debug: `api_error_${response.status}`, err });
+      return NextResponse.json({ answer: FALLBACK });
     }
 
     const data = await response.json();
     const answer = data.choices?.[0]?.message?.content ?? FALLBACK;
     return NextResponse.json({ answer });
-  } catch (e) {
-    return NextResponse.json({ answer: FALLBACK, debug: 'exception', err: String(e) });
+  } catch {
+    return NextResponse.json({ answer: FALLBACK });
   }
 }
