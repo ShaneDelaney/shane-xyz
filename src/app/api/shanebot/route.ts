@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ answer: FALLBACK });
+      return NextResponse.json({ answer: FALLBACK, debug: 'no_api_key' });
     }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -159,13 +159,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      return NextResponse.json({ answer: FALLBACK });
+      const err = await response.text();
+      return NextResponse.json({ answer: FALLBACK, debug: `api_error_${response.status}`, err });
     }
 
     const data = await response.json();
     const answer = data.content?.[0]?.text ?? FALLBACK;
     return NextResponse.json({ answer });
-  } catch {
-    return NextResponse.json({ answer: FALLBACK });
+  } catch (e) {
+    return NextResponse.json({ answer: FALLBACK, debug: 'exception', err: String(e) });
   }
 }
