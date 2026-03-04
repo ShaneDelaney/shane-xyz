@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -114,9 +115,18 @@ const roles: Role[] = [
 ];
 
 export default function Work() {
-  const [active, setActive] = useState(0);
+  const searchParams = useSearchParams();
   const [mounted, setMounted] = useState(false);
   const [direction, setDirection] = useState(1);
+
+  const initialIndex = () => {
+    const id = searchParams.get('company');
+    if (!id) return 0;
+    const i = roles.findIndex(r => r.id === id);
+    return i >= 0 ? i : 0;
+  };
+
+  const [active, setActive] = useState(initialIndex);
 
   useEffect(() => { setMounted(true); }, []);
 

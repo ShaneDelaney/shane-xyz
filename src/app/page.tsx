@@ -6,7 +6,13 @@ import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const COMPANIES = ['Meta', 'Snap Inc.', 'StockX', 'Collider', 'Phony Content'];
+const COMPANIES = [
+  { name: 'Meta',          id: 'meta'    },
+  { name: 'Snap Inc.',     id: 'snap'    },
+  { name: 'StockX',        id: 'stockx'  },
+  { name: 'Collider',      id: 'collider'},
+  { name: 'Phony Content', id: 'phony'   },
+];
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -74,17 +80,22 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.38, ease: EASE }}
           />
 
-          {/* Company names — staggered fade */}
+          {/* Company names — staggered fade, each links to /work?company=id */}
           <div className="flex items-center gap-2 mb-16 flex-wrap">
-            {COMPANIES.map((name, i) => (
+            {COMPANIES.map((co, i) => (
               <motion.span
-                key={name}
+                key={co.id}
                 className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={mounted ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.46 + i * 0.07, ease: EASE }}
               >
-                <span className="text-xs text-gray-400 tracking-wide">{name}</span>
+                <Link
+                  href={`/work?company=${co.id}`}
+                  className="text-xs text-gray-400 tracking-wide hover:text-gray-900 transition-colors duration-200"
+                >
+                  {co.name}
+                </Link>
                 {i < COMPANIES.length - 1 && (
                   <span className="text-gray-200 text-xs select-none">·</span>
                 )}
