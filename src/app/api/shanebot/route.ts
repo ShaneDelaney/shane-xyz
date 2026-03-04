@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ answer: "That's a long one — try asking something more specific and I'll give you a better answer." });
     }
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.API_KEY;
     if (!apiKey) {
       return NextResponse.json({ answer: FALLBACK });
     }
