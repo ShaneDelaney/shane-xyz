@@ -67,23 +67,41 @@ export default function ShaneGPT() {
 
   return (
     <>
-      {/* Floating trigger — enters after nav + page content settle */}
+      {/* Floating orb trigger */}
       <motion.button
         onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium shadow-lg hover:bg-gray-800 transition-colors"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center"
+        style={{
+          background: open
+            ? 'radial-gradient(circle at 40% 35%, #a78bfa, #6d28d9)'
+            : 'radial-gradient(circle at 40% 35%, #c4b5fd, #7c3aed)',
+          boxShadow: open
+            ? '0 0 0 4px rgba(139,92,246,0.15), 0 0 24px rgba(139,92,246,0.5), 0 0 48px rgba(139,92,246,0.25)'
+            : '0 0 0 4px rgba(167,139,250,0.15), 0 0 20px rgba(167,139,250,0.4), 0 0 40px rgba(167,139,250,0.2)',
+        }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.65, ease: EASE }}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.96 }}
+        whileHover={{ scale: 1.08, boxShadow: '0 0 0 6px rgba(139,92,246,0.2), 0 0 32px rgba(139,92,246,0.6), 0 0 60px rgba(139,92,246,0.3)' } as never}
+        whileTap={{ scale: 0.93 }}
         aria-label={open ? 'Close' : 'Ask a question about Shane'}
       >
-        {/* Icon: pulses gently when idle, rotates 45° when open */}
+        {/* Glow pulse ring */}
+        {!open && (
+          <motion.span
+            className="absolute inset-0 rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.3), transparent 70%)' }}
+            animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )}
+
+        {/* Icon */}
         <motion.span
-          className="text-base leading-none inline-block"
+          className="text-lg leading-none text-white relative z-10"
           animate={open
             ? { rotate: 135, scale: 1 }
-            : { rotate: 0, scale: [1, 1.2, 1] }
+            : { rotate: 0, scale: [1, 1.15, 1] }
           }
           transition={open
             ? { duration: 0.25, ease: EASE }
@@ -92,22 +110,6 @@ export default function ShaneGPT() {
         >
           ✦
         </motion.span>
-
-        {/* Label: swaps on open */}
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.span
-            key={open ? 'close' : 'ask'}
-            className="hidden sm:inline"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15, ease: EASE }}
-          >
-            {open ? 'Close' : 'Ask about Shane'}
-          </motion.span>
-        </AnimatePresence>
-
-        <span className="sm:hidden">{open ? '×' : 'Ask'}</span>
       </motion.button>
 
       {/* Panel */}
