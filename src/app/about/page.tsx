@@ -17,6 +17,10 @@ const skills = [
     category: 'Strategy & Analytics',
     items: ['Stat Review Process', 'XFN Alignment', 'Stakeholder Management', 'Performance Data Synthesis', 'Competitive Gap Analysis', 'Process Optimization'],
   },
+  {
+    category: 'AI & Dev Tools',
+    items: ['Claude Code', 'Cursor', 'GitHub', 'SuperWhisper'],
+  },
 ];
 
 export default function About() {
@@ -59,6 +63,9 @@ export default function About() {
             </p>
             <p>
               I bridge creative strategy and operational execution, building the processes that let teams move fast without losing quality.
+            </p>
+            <p>
+              Alongside that, I&apos;ve gone head-first into AI-native work. At Meta, I&apos;m actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on my team. I&apos;m proficient with Claude Code, Cursor, GitHub, and SuperWhisper, and built this site entirely with Claude Code. Eager to keep pushing in this space.
             </p>
           </motion.div>
 

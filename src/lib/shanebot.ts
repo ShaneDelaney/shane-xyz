@@ -148,6 +148,28 @@ export const cache: CacheEntry[] = [
     keywords: [['location', 'based', 'where', 'city', 'los angeles', 'la', 'remote']],
     answer: "Shane is based in Los Angeles, CA. He's worked on-site in LA and Santa Monica, and is open to discussing remote or hybrid arrangements depending on the role.",
   },
+
+  // --- AI-NATIVE ---
+  {
+    keywords: [['ai', 'artificial intelligence'], ['native', 'first', 'tools', 'build', 'use', 'work', 'skill', 'experience', 'proficient']],
+    answer: "Shane has gone head-first into AI-native work. At Meta, he's actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on his team. He's proficient with Claude Code, Cursor, GitHub, and SuperWhisper, and built his portfolio site entirely with Claude Code.",
+  },
+  {
+    keywords: [['claude code', 'cursor', 'superwhisper', 'github', 'ai tool', 'dev tool']],
+    answer: "Shane's AI and dev tool stack includes Claude Code, Cursor, GitHub, and SuperWhisper. He built this portfolio site entirely with Claude Code and uses these tools daily for building systems, automations, and internal tools at Meta.",
+  },
+  {
+    keywords: [['build', 'building', 'built'], ['tool', 'dashboard', 'system', 'automation', 'app', 'internal']],
+    answer: "Beyond content operations, Shane is actively building systems, dashboards, and internal and external tools at Meta using AI. He's taken on early responsibility as an AI-first practitioner on his team and built this portfolio site himself using Claude Code.",
+  },
+  {
+    keywords: [['website', 'site', 'portfolio', 'built', 'made', 'created', 'developed', 'coded']],
+    answer: "Shane built this portfolio site himself using Claude Code. It reflects his broader approach to AI-native work — he's actively using and building with AI tools at Meta and in his own projects.",
+  },
+  {
+    keywords: [['learn', 'learning', 'growth', 'eager', 'curious', 'growth mindset']],
+    answer: "Shane is actively learning and building in the AI space. At Meta, he's taken on responsibility as an early AI-first practitioner, building tools and systems with AI. He describes himself as eager to keep pushing in this space and open to roles where that mindset is valued.",
+  },
 ];
 
 export function findCachedAnswer(question: string): string | null {

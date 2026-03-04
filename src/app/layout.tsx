@@ -49,8 +49,9 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <footer className="py-6 text-center text-xs text-gray-400 border-t border-gray-100">
+        <footer className="py-6 text-center text-xs text-gray-400 border-t border-gray-100 space-y-1">
           <p>© {new Date().getFullYear()} Shane Delaney · Los Angeles, CA</p>
+          <p>Built with <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 transition-colors underline underline-offset-2">Claude Code</a></p>
         </footer>
         <ShaneGPT />
       </body>

@@ -6,9 +6,9 @@ import { findCachedAnswer, FALLBACK } from '@/lib/shanebot';
 
 const SUGGESTED = [
   "What is Shane's current role?",
+  "How is Shane working with AI?",
   "What are Shane's core skills?",
   "Is Shane open to new opportunities?",
-  "What did Shane do at Snap?",
 ];
 
 export default function ShaneGPT() {
