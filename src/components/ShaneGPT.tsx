@@ -226,9 +226,8 @@ export default function ShaneGPT() {
 
               {/* Input */}
               <form onSubmit={handleSubmit} className="px-4 pb-4">
-                <motion.div
-                  className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-2 transition-colors bg-white"
-                  whileFocusWithin={{ borderColor: '#6b7280' }}
+                <div
+                  className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-2 transition-colors bg-white focus-within:border-gray-500"
                 >
                   <input
                     ref={inputRef}
@@ -251,7 +250,7 @@ export default function ShaneGPT() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </motion.button>
-                </motion.div>
+                </div>
               </form>
             </motion.div>
           </>
