@@ -77,11 +77,11 @@ export const cache: CacheEntry[] = [
   // --- SKILLS / TOOLS ---
   {
     keywords: [['skill', 'tool', 'software', 'platform', 'use', 'know', 'proficient']],
-    answer: "**Core strengths:**\n- Editorial operations, pipeline management, XFN coordination\n- Data synthesis and performance-driven content strategy\n- AI-native tooling: Claude Code, Cursor, GitHub, SuperWhisper\n- Ops tools: Airtable, Jira, Confluence, Asana, Salesforce",
+    answer: "Shane's strongest areas: **editorial operations** (pipeline management, DRIs, stat review, EIs), **XFN coordination**, and **AI-native tooling** (Claude Code, Cursor, GitHub). Ops stack includes Airtable, Jira, Confluence, and Asana. Ask about a specific area for more detail.",
   },
   {
     keywords: [['airtable', 'jira', 'confluence', 'asana', 'salesforce', 'figma', 'cms']],
-    answer: "Shane's ops toolkit: **Airtable, Jira, Confluence, Asana, Salesforce, Figma,** and various CMS platforms — used for project governance, editorial tracking, and cross-functional collaboration.",
+    answer: "Ops toolkit: **Airtable, Jira, Confluence, Asana, Salesforce, Figma,** and various CMS platforms — used daily for project governance, editorial tracking, and cross-functional collaboration.",
   },
 
   // --- AI ---
