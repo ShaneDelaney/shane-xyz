@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import PortraitDraw from '@/components/PortraitDraw';
+import CompanyDraw from '@/components/CompanyDraw';
 import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -27,12 +27,12 @@ export default function Home() {
           </motion.p>
 
           <motion.div
-            className="mb-12 w-52 sm:w-64"
+            className="mb-12 w-56 sm:w-72"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.05, ease: EASE }}
           >
-            <PortraitDraw />
+            <CompanyDraw />
           </motion.div>
 
           <motion.p
