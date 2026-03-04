@@ -386,75 +386,48 @@ const projects: Project[] = [
   }
 ];
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+const ProjectCard = ({ project }: { project: Project }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
     <>
-      <motion.button
+      <button
         id={project.id}
         onClick={() => setIsOpen(true)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="w-full bg-white border border-gray-200 rounded-xl p-5 hover:shadow-lg hover:border-gray-300 transition-all duration-300 text-left group relative overflow-hidden"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-20px" }}
-        transition={{ duration: 0.4, delay: index * 0.03, ease: [0.16, 1, 0.3, 1] }}
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
+        className="w-full bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md hover:border-gray-300 transition-shadow text-left group"
       >
-        {/* Subtle background gradient on hover */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-gray-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          initial={false}
-        />
-        
-        <div className="flex items-center gap-4 relative z-10">
-          {/* Logo - Hero style with animation */}
+        <div className="flex items-start gap-3">
           {project.image && (
-            <motion.div 
-              className="relative w-16 h-16 flex-shrink-0"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            <div className="relative w-10 h-10 flex-shrink-0">
               <Image
                 src={project.image}
                 alt={`${project.company} logo`}
                 fill
-                className="object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                className="object-contain"
               />
-            </motion.div>
+            </div>
           )}
-          
-          {/* Content */}
+
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-3 mb-1">
               <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-1.5 text-xs text-gray-500 mb-1.5">
-                  <span className="font-semibold text-gray-600">{project.company}</span>
-                  <span>•</span>
-                  <span>{project.timeline}</span>
-                </div>
-                <h3 className="text-base font-semibold text-gray-900 leading-tight group-hover:text-gray-700 transition-colors duration-300">
+                <p className="text-[10px] text-gray-500 mb-0.5">
+                  {project.company} · {project.timeline}
+                </p>
+                <h3 className="text-base font-semibold text-gray-900 leading-tight mb-0.5">
                   {project.title}
                 </h3>
               </div>
-              <motion.span 
-                className="text-gray-400 text-sm flex-shrink-0"
-                animate={{ x: isHovered ? 4 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <span className="text-gray-400 text-sm flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                 →
-              </motion.span>
+              </span>
             </div>
-            <p className="text-xs text-gray-600 leading-relaxed line-clamp-2 group-hover:text-gray-700 transition-colors duration-300">
+            <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">
               {project.description}
             </p>
           </div>
         </div>
-      </motion.button>
+      </button>
 
       {/* Detail Modal */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -659,39 +632,32 @@ export default function Portfolio() {
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-white to-gray-50/30 -z-10" />
       
-      {/* Header */}
-      <section className="h-full w-full flex flex-col px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
-        <div className="max-w-6xl mx-auto w-full flex flex-col h-full">
-          {/* Header Section */}
+      <section className="h-full w-full flex flex-col px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
+        <div className="max-w-5xl mx-auto w-full flex flex-col h-full">
           <motion.div
-            className="mb-4 flex-shrink-0"
+            className="mb-3 sm:mb-4 flex-shrink-0"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="/work" className="inline-flex items-center gap-2 text-xs text-gray-600 hover:text-gray-900 mb-3 transition-colors">
+            <Link href="/work" className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-gray-600 hover:text-gray-900 mb-2 sm:mb-3 transition-colors">
               <span>←</span>
               <span>Back to Work</span>
             </Link>
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 mb-1.5">
-                  Portfolio
-                </h1>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Case studies showcasing strategic thinking, creative execution, and measurable results.
-                </p>
-              </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}
-              </div>
+            <div className="mb-1.5 sm:mb-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 mb-1.5 sm:mb-2">
+                Portfolio
+              </h1>
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl">
+                Case studies showcasing strategic thinking, creative execution, and measurable results.
+              </p>
             </div>
-            
+
             {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2 pb-3 border-b border-gray-200">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-gray-200">
               <button
                 onClick={() => setSelectedCompany('all')}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium transition-all ${
                   selectedCompany === 'all'
                     ? 'bg-gray-900 text-white'
                     : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -703,7 +669,7 @@ export default function Portfolio() {
                 <button
                   key={company}
                   onClick={() => setSelectedCompany(company)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium transition-all ${
                     selectedCompany === company
                       ? 'bg-gray-900 text-white'
                       : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -714,17 +680,17 @@ export default function Portfolio() {
               ))}
             </div>
           </motion.div>
-          
+
           {/* Scrollable Projects */}
-          <div className="flex-1 overflow-y-auto scrollbar-hide -mx-4 px-4">
-            <div className="space-y-3 pb-6">
+          <div className="flex-1 overflow-y-auto scrollbar-hide">
+            <div className="space-y-1.5 sm:space-y-2 pb-6">
               {filteredProjects.length > 0 ? (
-                filteredProjects.map((project, index) => (
-                  <ProjectCard key={project.id} project={project} index={index} />
+                filteredProjects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
                 ))
               ) : (
                 <div className="text-center py-12">
-                  <p className="text-sm text-gray-500">No projects found for this filter.</p>
+                  <p className="text-sm text-gray-500">No projects found.</p>
                 </div>
               )}
             </div>
