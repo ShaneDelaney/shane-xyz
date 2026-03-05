@@ -136,11 +136,11 @@ export default function Work() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <section className="flex-1 w-full px-6 pt-20 pb-0">
+      <section className="flex-1 w-full px-4 sm:px-6 pt-20 pb-0">
         <div className="max-w-5xl mx-auto h-full">
 
           <motion.div
-            className="flex items-baseline justify-between pt-14 pb-8"
+            className="flex items-baseline justify-between pt-8 sm:pt-14 pb-6 sm:pb-8"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
@@ -151,9 +151,66 @@ export default function Work() {
             </Link>
           </motion.div>
 
+          {/* Mobile: flat stacked layout */}
+          <div className="sm:hidden">
+            {/* Company tab strip */}
+            <div className="flex gap-2 overflow-x-auto pb-4 -mx-4 px-4">
+              {roles.map((r, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => select(i)}
+                    className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all duration-150 ${
+                      isActive
+                        ? 'bg-gray-900 text-white font-medium'
+                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                    }`}
+                  >
+                    {r.company}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Role content */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={role.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: EASE }}
+                className="pt-6"
+              >
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold tracking-tight text-gray-900 mb-1">{role.company}</h2>
+                  <p className="text-sm text-gray-500">{role.title}</p>
+                  <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-8">
+                  {role.stats.map(stat => (
+                    <div key={stat.label} className="bg-gray-50 rounded-xl px-4 py-3">
+                      <p className="text-lg font-semibold text-gray-900 tracking-tight leading-none mb-1">{stat.value}</p>
+                      <p className="text-[10px] text-gray-400 leading-snug">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="space-y-4 pb-10">
+                  {role.bullets.map((bullet, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
+                      <p className="text-sm text-gray-600 leading-relaxed">{bullet}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop: two-panel card */}
           <motion.div
-            className="flex gap-0 border border-gray-100 rounded-2xl overflow-hidden"
-            style={{ height: 'calc(100vh - 14rem)' }}
+            className="hidden sm:flex gap-0 border border-gray-100 rounded-2xl overflow-hidden sm:h-[calc(100vh-14rem)]"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
@@ -204,8 +261,6 @@ export default function Work() {
                     <p className="text-sm text-gray-500">{role.title}</p>
                     <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
                   </div>
-
-                  {/* Stats */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
                     {role.stats.map(stat => (
                       <div key={stat.label} className="bg-gray-50 rounded-xl px-4 py-3">
@@ -214,8 +269,6 @@ export default function Work() {
                       </div>
                     ))}
                   </div>
-
-                  {/* Bullets */}
                   <div className="space-y-3">
                     {role.bullets.map((bullet, i) => (
                       <motion.div

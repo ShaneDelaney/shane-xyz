@@ -237,7 +237,7 @@ const ProjectRow = ({ project, onSelect }: { project: Project; onSelect: () => v
 );
 
 const ProjectDetail = ({ project, onBack }: { project: Project; onBack: () => void }) => (
-  <div className="px-8 pt-6 pb-8 h-full overflow-y-auto">
+  <div className="px-4 sm:px-8 pt-4 sm:pt-6 pb-8 h-full overflow-y-auto">
     <button
       onClick={onBack}
       className="text-sm text-gray-400 hover:text-gray-900 transition-colors mb-8 inline-flex items-center gap-1.5"
@@ -343,11 +343,11 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <section className="flex-1 w-full px-6 pt-20 pb-0">
+      <section className="flex-1 w-full px-4 sm:px-6 pt-20 pb-0">
         <div className="max-w-5xl mx-auto h-full">
 
           <motion.div
-            className="flex items-baseline justify-between pt-14 pb-8"
+            className="flex items-baseline justify-between pt-8 sm:pt-14 pb-6 sm:pb-8"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
@@ -358,9 +358,102 @@ export default function Portfolio() {
             </Link>
           </motion.div>
 
+          {/* Mobile: flat layout */}
+          <div className="sm:hidden">
+            {/* Company filter pills */}
+            <div className="flex gap-2 overflow-x-auto pb-4 -mx-4 px-4">
+              {companies.map((company) => {
+                const isActive = company === selectedCompany;
+                return (
+                  <button
+                    key={company}
+                    onClick={() => selectCompany(company)}
+                    className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all duration-150 ${
+                      isActive
+                        ? 'bg-gray-900 text-white font-medium'
+                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                    }`}
+                  >
+                    {company === 'all' ? 'All' : company}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Project list or detail */}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={panelKey}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: EASE }}
+              >
+                {activeProject ? (
+                  <div className="pt-4 pb-10">
+                    <button
+                      onClick={closeProject}
+                      className="text-sm text-gray-400 hover:text-gray-900 transition-colors mb-6 inline-flex items-center gap-1.5"
+                    >
+                      ← Back
+                    </button>
+                    <p className="text-[10px] text-gray-400 mb-2">{activeProject.company} · {activeProject.role} · {activeProject.timeline}</p>
+                    <h2 className="text-xl font-semibold tracking-tight text-gray-900 mb-3">{activeProject.title}</h2>
+                    <p className="text-sm text-gray-500 leading-relaxed mb-6">{activeProject.longDescription || activeProject.description}</p>
+                    {activeProject.metrics && activeProject.metrics.length > 0 && (
+                      <div className="grid grid-cols-2 gap-2 mb-8">
+                        {activeProject.metrics.map((m, i) => (
+                          <div key={i} className="bg-gray-50 rounded-xl px-4 py-3">
+                            <p className="text-sm font-semibold text-gray-900 tracking-tight leading-snug">{m}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {activeProject.details.length > 0 && (
+                      <div className="mb-8">
+                        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Contributions</p>
+                        <div className="space-y-3">
+                          {activeProject.details.map((d, i) => (
+                            <div key={i} className="flex items-start gap-3">
+                              <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
+                              <p className="text-sm text-gray-600 leading-relaxed">{d}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {activeProject.relatedLinks && activeProject.relatedLinks.length > 0 && (
+                      <div>
+                        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Links</p>
+                        {activeProject.relatedLinks.map((link, i) => (
+                          link.url ? (
+                            <a key={i} href={link.url} target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0 group/link">
+                              <span className="text-sm font-medium text-gray-900 group-hover/link:text-gray-500 transition-colors">{link.title}</span>
+                              <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs">↗</span>
+                            </a>
+                          ) : (
+                            <div key={i} className="py-3 border-b border-gray-100 last:border-0">
+                              <span className="text-sm text-gray-400">{link.title}</span>
+                            </div>
+                          )
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="pb-10">
+                    {filtered.map((project) => (
+                      <ProjectRow key={project.id} project={project} onSelect={() => openProject(project)} />
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop: two-panel card */}
           <motion.div
-            className="flex gap-0 border border-gray-100 rounded-2xl overflow-hidden"
-            style={{ height: 'calc(100vh - 14rem)' }}
+            className="hidden sm:flex gap-0 border border-gray-100 rounded-2xl overflow-hidden sm:h-[calc(100vh-14rem)]"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}

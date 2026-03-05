@@ -13,11 +13,11 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="w-full px-6 pt-32 pb-24">
+      <section className="w-full px-5 sm:px-6 pt-20 sm:pt-32 pb-16 sm:pb-24">
         <div className="max-w-3xl mx-auto">
 
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.06] mb-10"
+            className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-900 leading-[1.06] mb-6 sm:mb-10"
             initial={{ opacity: 0, y: 24 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
@@ -26,7 +26,7 @@ export default function About() {
           </motion.h1>
 
           <motion.div
-            className="space-y-5 text-base text-gray-500 leading-relaxed mb-14 max-w-2xl"
+            className="space-y-5 text-base text-gray-500 leading-relaxed mb-10 sm:mb-14 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
@@ -50,7 +50,7 @@ export default function About() {
 
           {/* Info grid */}
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-gray-100 rounded-2xl overflow-hidden mb-14"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-gray-100 rounded-2xl overflow-hidden mb-10 sm:mb-14"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
@@ -73,7 +73,7 @@ export default function About() {
 
           {/* Skills summary strip */}
           <motion.div
-            className="mb-14"
+            className="mb-10 sm:mb-14"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
