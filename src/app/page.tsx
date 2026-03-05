@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <motion.section
-        className="w-full px-6 pt-32 pb-28"
+        className="w-full px-5 sm:px-6 pt-20 sm:pt-32 pb-16 sm:pb-28"
         initial={{ opacity: 0 }}
         animate={mounted ? { opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
@@ -30,7 +30,7 @@ export default function Home() {
 
           {/* Location */}
           <motion.p
-            className="text-sm text-gray-400 mb-10 tracking-wide"
+            className="text-sm text-gray-400 mb-6 sm:mb-10 tracking-wide"
             initial={{ opacity: 0, y: 8 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
@@ -40,7 +40,7 @@ export default function Home() {
 
           {/* Bio */}
           <motion.p
-            className="text-3xl sm:text-4xl text-gray-400 leading-snug mb-14 max-w-3xl font-light"
+            className="text-2xl sm:text-4xl text-gray-400 leading-snug mb-10 sm:mb-14 max-w-3xl font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.18, ease: EASE }}
@@ -50,7 +50,7 @@ export default function Home() {
 
           {/* CTAs */}
           <motion.div
-            className="flex items-center gap-3 mb-20"
+            className="flex items-center gap-3 mb-12 sm:mb-20"
             initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.28, ease: EASE }}
