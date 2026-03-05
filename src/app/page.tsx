@@ -70,29 +70,28 @@ export default function Home() {
             </a>
           </motion.div>
 
-          {/* Company pills */}
-          <motion.div
-            className="flex flex-wrap gap-2"
-            initial={{ opacity: 0, y: 12 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.42, ease: EASE }}
-          >
+          {/* Company names — plain text links */}
+          <div className="flex items-center gap-2 flex-wrap">
             {COMPANIES.map((co, i) => (
-              <motion.div
+              <motion.span
                 key={co.id}
+                className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={mounted ? { opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.46 + i * 0.06, ease: EASE }}
+                transition={{ duration: 0.5, delay: 0.42 + i * 0.07, ease: EASE }}
               >
                 <Link
                   href={`/work?company=${co.id}`}
-                  className="inline-block px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-gray-200 hover:text-gray-900 transition-colors duration-200"
+                  className="text-xs text-gray-400 tracking-wide hover:text-gray-900 transition-colors duration-200"
                 >
                   {co.name}
                 </Link>
-              </motion.div>
+                {i < COMPANIES.length - 1 && (
+                  <span className="text-gray-200 text-xs select-none">·</span>
+                )}
+              </motion.span>
             ))}
-          </motion.div>
+          </div>
 
         </div>
       </motion.section>
