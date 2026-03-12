@@ -18,22 +18,22 @@ const FEATURED = [
   {
     label: 'Developer Story',
     title: 'VAIL VR: From Couch Surfing to $15M in Crowdfunding',
-    url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/',
+    href: '/work/portfolio?project=meta-horizon-builder-stories',
   },
   {
     label: 'Developer Story',
     title: 'Saydeechan: Bringing Worlds to Japan',
-    url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/',
+    href: '/work/portfolio?project=meta-horizon-builder-stories',
   },
   {
-    label: 'GTM Guide',
-    title: 'Develop a Marketing Plan for Your VR App',
-    url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
+    label: 'GTM Guide Series',
+    title: 'Go-To-Market Developer Guides (6 parts)',
+    href: '/work/portfolio?project=meta-horizon-gtm-guides',
   },
   {
     label: 'Year in Review',
     title: 'Insights from 2025\'s Breakout Creators and Developers',
-    url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
+    href: '/work/portfolio?project=meta-horizon-builder-stories',
   },
 ];
 
@@ -42,18 +42,18 @@ export default function Home() {
   useEffect(() => { setMounted(true); }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="h-screen overflow-hidden bg-white flex items-center pt-14">
       <motion.section
-        className="w-full px-5 sm:px-6 pt-20 sm:pt-32 pb-16 sm:pb-28"
+        className="w-full px-5 sm:px-8"
         initial={{ opacity: 0 }}
         animate={mounted ? { opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
 
           {/* Location */}
           <motion.p
-            className="text-sm text-gray-400 mb-6 sm:mb-10 tracking-wide"
+            className="text-xs text-gray-400 mb-5 tracking-wide"
             initial={{ opacity: 0, y: 8 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
@@ -63,7 +63,7 @@ export default function Home() {
 
           {/* Bio */}
           <motion.p
-            className="text-2xl sm:text-4xl text-gray-400 leading-snug mb-10 sm:mb-14 max-w-3xl font-light"
+            className="text-xl sm:text-3xl text-gray-400 leading-snug mb-7 sm:mb-9 font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.18, ease: EASE }}
@@ -73,27 +73,27 @@ export default function Home() {
 
           {/* CTAs */}
           <motion.div
-            className="flex items-center gap-3 mb-12 sm:mb-16"
+            className="flex items-center gap-3 mb-8 sm:mb-10"
             initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.28, ease: EASE }}
           >
             <Link
               href="/work/portfolio"
-              className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors"
+              className="px-5 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors"
             >
               Portfolio
             </Link>
             <Link
               href="/work"
-              className="px-5 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
+              className="px-5 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
             >
               Experience →
             </Link>
             <a
               href="/ShaneDelaneyResume.pdf"
               download
-              className="px-5 py-2.5 text-sm font-medium text-gray-400 hover:text-gray-900 transition-colors"
+              className="px-5 py-2 text-sm font-medium text-gray-400 hover:text-gray-900 transition-colors"
             >
               Resume ↓
             </a>
@@ -101,33 +101,35 @@ export default function Home() {
 
           {/* Featured Work */}
           <motion.div
-            className="mb-12 sm:mb-16"
+            className="mb-7 sm:mb-9"
             initial={{ opacity: 0, y: 16 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.38, ease: EASE }}
           >
-            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Featured Work</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-gray-100 rounded-2xl overflow-hidden">
+            <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2.5">Featured Work</p>
+            <div className="border-t border-gray-100">
               {FEATURED.map((item, i) => (
-                <motion.a
+                <motion.div
                   key={i}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white px-5 py-4 group flex items-start justify-between gap-3 hover:bg-gray-50 transition-colors"
                   initial={{ opacity: 0 }}
                   animate={mounted ? { opacity: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.44 + i * 0.06, ease: EASE }}
                 >
-                  <div className="min-w-0">
-                    <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-1.5">{item.label}</p>
-                    <p className="text-sm font-medium text-gray-900 leading-snug group-hover:text-gray-500 transition-colors">{item.title}</p>
-                  </div>
-                  <span className="text-gray-300 group-hover:text-gray-500 transition-colors text-xs flex-shrink-0 mt-0.5">↗</span>
-                </motion.a>
+                  <Link
+                    href={item.href}
+                    className="flex items-center gap-5 py-3 border-b border-gray-100 group"
+                  >
+                    <span className="text-[9px] text-gray-300 font-medium w-5 flex-shrink-0 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-0.5">{item.label}</p>
+                      <p className="text-sm font-medium text-gray-900 leading-snug group-hover:text-gray-500 transition-colors">{item.title}</p>
+                    </div>
+                    <span className="text-gray-300 group-hover:text-gray-700 transition-colors text-xs flex-shrink-0">→</span>
+                  </Link>
+                </motion.div>
               ))}
             </div>
-            <div className="mt-3 text-right">
+            <div className="mt-2.5 text-right">
               <Link
                 href="/work/portfolio"
                 className="text-xs text-gray-400 hover:text-gray-900 transition-colors"

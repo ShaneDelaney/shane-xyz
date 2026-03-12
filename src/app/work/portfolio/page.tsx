@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -308,14 +309,25 @@ const ProjectDetail = ({ project, onBack }: { project: Project; onBack: () => vo
   </div>
 );
 
-export default function Portfolio() {
+function PortfolioInner() {
   const [mounted, setMounted] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState('all');
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [panelDirection, setPanelDirection] = useState(1);
   const [companyDirection, setCompanyDirection] = useState(1);
+  const searchParams = useSearchParams();
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    const projectId = searchParams.get('project');
+    if (projectId) {
+      const found = projects.find(p => p.id === projectId);
+      if (found) {
+        setActiveProject(found);
+        setSelectedCompany(found.company);
+      }
+    }
+  }, [searchParams]);
 
   const companies = ['all', ...companyOrder];
   const filtered = selectedCompany === 'all' ? projects : projects.filter(p => p.company === selectedCompany);
@@ -524,5 +536,13 @@ export default function Portfolio() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function Portfolio() {
+  return (
+    <Suspense>
+      <PortfolioInner />
+    </Suspense>
   );
 }
