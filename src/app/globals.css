@@ -105,9 +105,12 @@
     text-wrap: balance;
   }
 
-  html, body {
-    height: 100%;
-    overflow: hidden;
+  /* Desktop only: lock page scroll so internal panels scroll independently */
+  @media (min-width: 768px) {
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
   }
 
   html {
