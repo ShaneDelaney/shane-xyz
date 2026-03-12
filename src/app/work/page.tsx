@@ -30,10 +30,10 @@ interface Company {
 const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
-    overview: 'Meta Horizon is a developer ecosystem where creators build worlds, games, and experiences for VR.',
-    problem: 'Developers building successful worlds were not visible outside the ecosystem. There was no pipeline to identify them, develop their stories, and publish them at scale.',
-    system: 'Designed a developer storytelling pipeline — sourcing creators, developing narrative angles, conducting editorial interviews, coordinating cross-functional review across product, marketing, analytics, and legal, and managing publication end-to-end.',
-    impact: 'Published 13 pieces across developer stories and go-to-market guides. Surfaced creators generating millions of plays and shaping the Horizon ecosystem.',
+    overview: 'Meta Horizon is a developer ecosystem where creators build worlds, games, and experiences for VR. Sole content DRI for the Developer Ecosystem Success team across editorial, research, and internal tooling.',
+    problem: 'Developers building successful worlds had no visibility outside the ecosystem. There was no pipeline to identify them, develop their stories, and publish them at scale — and no internal tooling to support the team\'s growth strategy.',
+    system: 'Designed a full content engine: sourcing creators, developing narrative angles, conducting editorial interviews, coordinating XFN review across product, marketing, analytics, and legal, and managing publication end-to-end. Also built an internal Growth Systems Toolkit — three AI-powered tools for strategy validation and stakeholder demos, deployed on Vercel.',
+    impact: 'Published 13 pieces across developer stories and go-to-market guides. Authored an external whitepaper with research firm NRG. Built internal tooling used for 2026 growth strategy demos.',
     initiatives: [
       { id: 'meta-pipeline', category: 'Content System', title: 'Developer Story Pipeline', description: 'Sole DRI across all production stages for the Horizon Developer Blog — sourcing creators, developing narratives, conducting interviews, coordinating XFN review, and managing publication. 13 pieces published across developer stories and GTM guides.',
         responsibilities: ['Owned the full content lifecycle from creator sourcing to publication', 'Conducted all editorial interviews with VR developers and creators', 'Developed narrative angles and story structures for each piece', 'Managed editorial timelines across concurrent projects'] },
@@ -71,10 +71,10 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'snap', name: 'Snap Inc.', role: 'Trend Producer', period: 'Mar – Oct 2025',
-    overview: 'Spotlight is Snapchat\'s short-form video discovery surface, reaching hundreds of millions of viewers daily.',
-    problem: 'At 1,000+ pieces of content per day, identifying breakout creators and cultural signals before they reached algorithmic momentum required more than data — it required editorial judgment at scale.',
-    system: 'Built a daily programming practice combining cultural pattern recognition, platform data, and editorial instinct. Contributed to a creator identification system with Data Science to surface emerging talent earlier and at scale.',
-    impact: 'Shaped what 500M+ monthly viewers saw first. Contributed creator selections used in Times Square and other high-visibility Snap brand campaigns.',
+    overview: 'Spotlight is Snapchat\'s short-form video discovery surface on a platform with 900M+ monthly active users. Promoted from Trend Curator to Trend Producer — final decision maker on content amplification.',
+    problem: 'At 1,000+ pieces of content per day on a 900M+ MAU platform, identifying breakout creators and cultural signals before they reached algorithmic momentum required editorial judgment, not just data.',
+    system: 'Built a daily programming practice combining cross-platform competitive monitoring (TikTok, YouTube Shorts, Instagram Reels), internal performance data, and editorial instinct. Led the Breakout Creator workstream with Data Science to surface high-potential talent before peak adoption.',
+    impact: 'Delivered consistent above-benchmark engagement and retention lifts. Creator selections featured in Times Square takeovers and major national Snap brand campaigns.',
     initiatives: [
       { id: 'snap-spotlight', category: 'Content Programming', title: 'Spotlight Programming Lead', description: 'Daily editorial oversight of a 1,000+ piece pipeline across one of the largest UGC surfaces in social media. Every programming decision shaped what 500M+ monthly viewers saw first.',
         responsibilities: ['Reviewed and programmed 1,000+ videos daily across Spotlight', 'Made editorial decisions directly shaping what 500M+ monthly viewers saw first', 'Balanced trend velocity, quality, and audience fit in every programming call', 'Maintained consistent editorial standards at high volume and speed'] },

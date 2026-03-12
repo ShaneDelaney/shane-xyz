@@ -8,16 +8,20 @@ const E = [0.16, 1, 0.3, 1] as const;
 
 const PILLARS = [
   {
-    title: 'Signal Detection',
-    body: 'Identifying emerging creators, trends, and cultural signals inside large platform ecosystems.',
+    title: 'Editorial Judgment at Scale',
+    body: 'Final decision maker on high-volume content amplification — balancing brand, culture, creators, and business goals under time pressure.',
+  },
+  {
+    title: 'Platform & Competitive Intelligence',
+    body: 'Systematic cross-platform monitoring to identify format shifts, creator behaviors, and parity gaps before peak adoption.',
   },
   {
     title: 'Narrative Systems',
-    body: 'Designing editorial pipelines that translate platform activity into stories.',
+    body: 'Building the editorial pipelines and story frameworks that translate platform activity into published content at scale.',
   },
   {
-    title: 'Platform Storytelling',
-    body: 'Explaining complex products through creators and real-world use cases.',
+    title: 'Cross-Functional Execution',
+    body: 'End-to-end ownership across product, marketing, legal, and data science — shipping complex initiatives without losing speed or quality.',
   },
 ];
 
@@ -101,7 +105,7 @@ export default function Home() {
             >
               How I Work
             </p>
-            <div className="grid grid-cols-3 gap-8 max-w-[560px]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-[680px]">
               {PILLARS.map((p, i) => (
                 <motion.div
                   key={p.title}
