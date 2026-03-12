@@ -540,7 +540,7 @@ function PortfolioInner() {
       onTouchEnd={handleTouchEnd}
     >
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 lg:px-16 py-3 flex-shrink-0">
+      <div className="flex items-center justify-between px-6 lg:px-10 py-3 flex-shrink-0">
         <Link href="/work" className="text-sm text-white/40 hover:text-white transition-colors">
           ← Back
         </Link>
@@ -548,10 +548,61 @@ function PortfolioInner() {
       </div>
 
       {/* Main body */}
-      <div className="flex flex-col lg:flex-row flex-1 min-h-0 px-6 lg:px-16 gap-6 lg:gap-8 pb-2">
+      <div className="flex flex-col lg:flex-row flex-1 min-h-0 px-6 lg:px-10 gap-6 lg:gap-6 pb-2">
+
+        {/* Sidebar — company card list (desktop only) */}
+        <div className="hidden lg:flex flex-col flex-shrink-0 w-44 xl:w-52 py-4 overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={card.company}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="flex flex-col h-full"
+            >
+              <p
+                className="text-[9px] uppercase tracking-widest font-semibold mb-3 px-3"
+                style={{ color: card.accent }}
+              >
+                {card.company}
+              </p>
+              <div className="flex flex-col gap-0.5 overflow-y-auto flex-1 scrollbar-none">
+                {coCards.map((c, i) => {
+                  const isActive = c.id === card.id;
+                  const globalIdx = CARDS.findIndex(x => x.id === c.id);
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => {
+                        setDirection(globalIdx > index ? 1 : -1);
+                        setIndex(globalIdx);
+                      }}
+                      className="text-left px-3 py-2 rounded-lg transition-all group"
+                      style={isActive ? { backgroundColor: card.accent + '18' } : {}}
+                    >
+                      <span
+                        className="block text-[9px] font-semibold mb-0.5 tabular-nums"
+                        style={{ color: isActive ? card.accent : 'rgba(255,255,255,0.2)' }}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span
+                        className="block text-[11px] leading-snug line-clamp-2 transition-colors"
+                        style={{ color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)' }}
+                      >
+                        {c.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         {/* Left — editorial panel */}
-        <div className="lg:w-5/12 flex flex-col justify-center lg:pr-4 py-2 lg:py-6 min-h-0">
+        <div className="lg:flex-1 flex flex-col justify-center lg:pr-4 py-2 lg:py-6 min-h-0">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={card.id}
@@ -732,7 +783,7 @@ function PortfolioInner() {
       </div>
 
       {/* Bottom nav bar */}
-      <div className="px-6 lg:px-16 py-5 flex flex-col gap-4">
+      <div className="px-6 lg:px-10 py-5 flex flex-col gap-4">
         <div className="flex items-center justify-between">
           {/* Prev */}
           <button
