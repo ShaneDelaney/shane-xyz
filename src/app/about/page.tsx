@@ -25,7 +25,7 @@ export default function About() {
       style={{ background: 'var(--t-bg)' }}
     >
       {/* ── Mobile layout ── */}
-      <div className="md:hidden px-5 pt-8 pb-16">
+      <div className="md:hidden px-5 pt-8 pb-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={mounted ? { opacity: 1, y: 0 } : {}}

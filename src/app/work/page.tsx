@@ -291,7 +291,7 @@ export default function Work() {
         </div>
 
         {/* Company content */}
-        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-16">
+        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-24">
           <AnimatePresence mode="wait">
             <motion.div
               key={`m-${activeCompany}`}

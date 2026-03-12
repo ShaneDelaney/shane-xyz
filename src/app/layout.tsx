@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
+import BottomNav from "@/components/navigation/BottomNav";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
@@ -55,6 +56,7 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>
