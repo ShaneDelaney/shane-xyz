@@ -43,7 +43,7 @@ const COMPANIES: Company[] = [
     overview: [
       'Built the Horizon Developer Blog from zero — 13 pieces published in 5 months across developer stories, GTM guides, and a whitepaper',
       'Owned the full content pipeline: creator sourcing, editorial interviews, 8-stage XFN review across Product, DevRel, Design, Legal, and Data Science',
-      'Built three AI-powered internal tools (Creator Compass, Campaign Intelligence Dashboard, GRI Simulator) — deployed on Vercel and used in 2026 leadership strategy sessions',
+      'Built three AI-powered internal tools (Creator Compass, Campaign Intelligence Dashboard, GRI Simulator) — used in 2026 leadership strategy sessions',
       'Co-authored the NRG Gaming whitepaper as editorial lead',
       'Designed and built a Horizon Creator Studio prototype, presented to C-suite; now on the product roadmap',
     ],
@@ -511,32 +511,33 @@ export default function Work() {
                   );
 
                   return (
-                    <div ref={containerRef} className="flex-1 min-h-0 overflow-hidden flex flex-col" style={{ borderTop: '1px solid var(--t-divider)', userSelect: isDraggingDivider ? 'none' : undefined }}>
+                    <div ref={containerRef} className="flex-1 min-h-0 overflow-hidden flex flex-col" style={{ userSelect: isDraggingDivider ? 'none' : undefined }}>
 
-                      {/* More Context toggle */}
-                      <div className="flex-shrink-0 flex justify-center pt-3 pb-1">
+                      {/* Divider with More Context floating on it */}
+                      <div className="flex-shrink-0 relative flex items-center justify-center" style={{ height: '36px' }}>
+                        <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: 'var(--t-divider)' }} />
                         <button
                           onClick={() => setTopOpen(o => !o)}
-                          className="flex flex-col items-center gap-[5px] group"
-                          style={{ outline: 'none' }}
+                          className="relative z-10 flex items-center gap-[7px] px-3 group"
+                          style={{ background: 'var(--t-bg)', outline: 'none' }}
                         >
-                          <span className="text-[10px] uppercase tracking-[0.12em] font-medium transition-colors duration-200 group-hover:opacity-100" style={{ color: 'var(--t-tertiary)', opacity: topOpen ? 0.6 : 1 }}>
+                          <span className="text-[10px] uppercase tracking-[0.12em] font-medium transition-opacity duration-300" style={{ color: 'var(--t-tertiary)', opacity: topOpen ? 0.5 : 1 }}>
                             {topOpen ? 'Less' : 'More Context'}
                           </span>
                           <motion.svg
-                            width="22" height="11" viewBox="0 0 22 11" fill="none"
+                            width="20" height="10" viewBox="0 0 20 10" fill="none"
                             stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-                            style={{ color: 'var(--t-tertiary)', display: 'block' }}
+                            style={{ color: 'var(--t-tertiary)', display: 'block', flexShrink: 0 }}
                             animate={topOpen
                               ? { rotate: 180, opacity: 1 }
-                              : { rotate: 0, opacity: [0.35, 1, 0.35] }
+                              : { rotate: 0, opacity: [0.3, 1, 0.3] }
                             }
                             transition={topOpen
-                              ? { rotate: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }, opacity: { duration: 0.2 } }
-                              : { opacity: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                              ? { rotate: { duration: 0.45, ease: [0.16, 1, 0.3, 1] }, opacity: { duration: 0.2 } }
+                              : { opacity: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } }
                             }
                           >
-                            <path d="M1 1.5l10 8 10-8" />
+                            <path d="M1 1.5l9 7 9-7" />
                           </motion.svg>
                         </button>
                       </div>
@@ -552,6 +553,7 @@ export default function Work() {
                             style={{ overflow: 'hidden', flexShrink: 0, borderBottom: '1px solid var(--t-divider)' }}
                           >
                             <div className="px-8 lg:px-14 py-5">
+                              <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}>Key Contributions</p>
                               <ul className="flex flex-col gap-2.5 max-w-[720px]">
                                 {company.overview.map((point, i) => (
                                   <li key={i} className="flex items-start gap-3 text-[13px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
