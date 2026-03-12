@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 
 const E = [0.16, 1, 0.3, 1] as const;
-const FALLBACK = "I don't have a specific answer for that. Reach Shane directly at shanedelaney11@gmail.com.";
 
 interface Initiative {
   id: string;
@@ -25,6 +24,7 @@ interface Company {
   system: string;
   impact: string;
   stats?: { value: string; label: string }[];
+  overview: string[];
   initiatives: Initiative[];
 }
 
@@ -39,6 +39,13 @@ const COMPANIES: Company[] = [
       { value: '13', label: 'Pieces Published' },
       { value: '5', label: 'XFN Teams' },
       { value: '3', label: 'Internal Tools Built' },
+    ],
+    overview: [
+      'Built the Horizon Developer Blog from zero — 13 pieces published in 5 months across developer stories, GTM guides, and a whitepaper',
+      'Owned the full content pipeline: creator sourcing, editorial interviews, 8-stage XFN review across Product, DevRel, Design, Legal, and Data Science',
+      'Built three AI-powered internal tools (Creator Compass, Campaign Intelligence Dashboard, GRI Simulator) — deployed on Vercel and used in 2026 leadership strategy sessions',
+      'Co-authored the NRG Gaming whitepaper as editorial lead',
+      'Designed and built a Horizon Creator Studio prototype, presented to C-suite; now on the product roadmap',
     ],
     initiatives: [
       { id: 'meta-pipeline', category: 'Content System', title: 'Developer Story Pipeline', description: 'DRI across all production stages for the Horizon Developer Blog — sourcing creators, developing narratives, conducting interviews, coordinating XFN review, and managing publication. 13 pieces published across developer stories and GTM guides.',
@@ -87,6 +94,14 @@ const COMPANIES: Company[] = [
       { value: '1,000+', label: 'Pieces/Day' },
       { value: 'Promoted', label: 'Same Tenure' },
     ],
+    overview: [
+      'Reviewed and programmed 1,000+ pieces of content daily on Spotlight — a 900M+ MAU short-form discovery surface',
+      'Promoted from Trend Curator to Trend Producer within the same tenure, taking on final decision-making authority',
+      'Built a daily trend intelligence practice combining cross-platform monitoring (TikTok, YouTube Shorts, Instagram Reels) and internal data to flag breakout content before the algorithm confirmed it',
+      'Led the Breakout Creator workstream with Data Science to surface emerging talent at scale across a 1M+ creator ecosystem',
+      'Selected content and creators featured in Times Square placements and major national Snap brand campaigns',
+      'Designed editorial workflows and documentation adopted by 10+ cross-functional teams',
+    ],
     problem: 'At 1,000+ pieces of content per day on a 900M+ MAU platform, identifying breakout creators and cultural signals before they reached algorithmic momentum required editorial judgment, not just data.',
     system: 'Built a daily programming practice combining cross-platform competitive monitoring (TikTok, YouTube Shorts, Instagram Reels), internal performance data, and editorial instinct. Led the Breakout Creator workstream with Data Science to surface high-potential talent before peak adoption.',
     impact: 'Delivered consistent above-benchmark engagement and retention lifts. Creator selections featured in Times Square takeovers and major national Snap brand campaigns.',
@@ -117,6 +132,13 @@ const COMPANIES: Company[] = [
       { value: '39%', label: 'Top Completion' },
       { value: '50+', label: 'Episodes' },
     ],
+    overview: [
+      'Wrote and produced 50+ episodes of Tiny Texts — a scripted short-form series on Snapchat built around text-message conversations',
+      'Designed story architectures calibrated for mobile retention: pacing, emotional arcs, and ending structures engineered for completion and follower conversion',
+      '25M+ total views; top episode (Cheer Squad) hit 6.3M views and a 39% completion rate',
+      'Multiple episodes drove follower spikes of 8K–20K in a single cycle',
+      'Built editorial templates, style guides, and QA frameworks that sustained quality across high-volume production',
+    ],
     problem: 'Serialized short-form storytelling on mobile requires a different architecture than traditional narrative. Retention drops off fast. The structure has to work harder than the story.',
     system: 'Designed story frameworks optimized for Snapchat\'s viewing behavior — pacing, emotional arcs, and ending structures calibrated for completion and follower conversion. Built production systems and editorial templates that sustained quality across 50+ episodes.',
     impact: '25M+ total views. 39% completion rate on the top episode. Multiple stories drove follower spikes of 8K–20K in a single cycle.',
@@ -146,6 +168,12 @@ const COMPANIES: Company[] = [
       { value: '3', label: 'Brand Shoots' },
       { value: '2', label: 'Engagements' },
     ],
+    overview: [
+      'Authored the 2024 Core Insights Report — primary research mapping Gen Z digital consumption behavior, emerging subcultures, and affinity brands across LA and NYC',
+      'Report directly informed StockX\'s 2025 marketing and brand strategy',
+      'Provided on-set production support for three brand campaign shoots featuring athletes and creators (Sydeon, Briana King, Brittney Elena)',
+      'Campaign content reached audiences across gaming, skate, and streetwear — including Times Square placements and national activations',
+    ],
     problem: 'Two separate briefs: understanding how Gen Z consumers in LA and NYC were engaging with culture and resale, and executing high-visibility creator campaign shoots.',
     system: 'Authored a Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across two markets. Provided production support on three brand campaign shoots featuring athletes and creators.',
     impact: 'Trend report directly informed StockX\'s 2025 marketing strategy. Campaign content reached audiences across gaming, skate, and streetwear — including placements in Times Square.',
@@ -168,6 +196,13 @@ const COMPANIES: Company[] = [
       { value: '4:23', label: 'Avg Time on Page' },
       { value: '~15%', label: 'Traffic Lift' },
     ],
+    overview: [
+      'Freelance editorial contributor for Collider — a film and TV platform with 30M+ monthly visitors',
+      'Identified high-intent, under-served search opportunities and wrote features calibrated for both editorial quality and search-surface eligibility',
+      'Top piece (Actors and Their Favorite Movies) hit 125K readers, 4:23 average time on page, and a top-3 Google ranking for a competitive query',
+      'Contributed to a ~15% organic traffic lift across two months',
+      'Second piece (Hardest Working Characters in Succession) hit 89K views with a 22% social share rate; third piece selected for Google Discover',
+    ],
     problem: 'High-traffic editorial platforms need content that captures search intent without sacrificing editorial quality. Most SEO content does one or the other.',
     system: 'Identified high-intent, under-served search opportunities and produced features designed to rank and hold attention — optimizing for both search surface eligibility and audience engagement.',
     impact: 'Contributed to roughly a 15% organic traffic lift in two months. Top piece hit 125K readers with a 4:23 average time on page and a top-3 Google ranking for a competitive query.',
@@ -182,14 +217,6 @@ const COMPANIES: Company[] = [
   },
 ];
 
-const ASK_SUGGESTIONS = [
-  "What is Shane's current role?",
-  "What are Shane's biggest projects?",
-  "Is Shane open to new opportunities?",
-  "What makes Shane's work distinctive?",
-];
-
-interface AskMsg { role: 'user' | 'assistant'; text: string; }
 
 function getUrlLabel(url: string) {
   try {
@@ -206,38 +233,30 @@ export default function Work() {
   const [mounted, setMounted] = useState(false);
   const [activeCompany, setActiveCompany] = useState('meta');
   const [activeInitiative, setActiveInitiative] = useState<string | null>(null);
-  const [isAsk, setIsAsk] = useState(false);
   const [publishedOpen, setPublishedOpen] = useState(true);
   const [systemsOpen, setSystemsOpen] = useState(true);
-  const [askMsgs, setAskMsgs] = useState<AskMsg[]>([]);
-  const [askQ, setAskQ] = useState('');
-  const [askLoading, setAskLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const [splitPct, setSplitPct] = useState(42);
+  const [isDraggingDivider, setIsDraggingDivider] = useState(false);
+  const [topOpen, setTopOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setMounted(true); }, []);
-  useEffect(() => { if (isAsk) setTimeout(() => inputRef.current?.focus(), 100); }, [isAsk]);
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [askMsgs, askLoading]);
 
-  const askSubmit = async (q: string) => {
-    const t = q.trim();
-    if (!t || askLoading) return;
-    const updatedMsgs: AskMsg[] = [...askMsgs, { role: 'user', text: t }];
-    setAskMsgs(updatedMsgs);
-    setAskLoading(true);
-    try {
-      const res = await fetch('/api/shanebot', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: updatedMsgs }),
-      });
-      const d = await res.json();
-      setAskMsgs(p => [...p, { role: 'assistant', text: d.answer ?? FALLBACK }]);
-    } catch { setAskMsgs(p => [...p, { role: 'assistant', text: FALLBACK }]); }
-    finally { setAskLoading(false); }
-  };
-
-  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setIsAsk(false); setPublishedOpen(true); setSystemsOpen(true); };
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      if (isDraggingDivider) {
+        const pct = Math.min(Math.max(((e.clientX - rect.left) / rect.width) * 100, 22), 72);
+        setSplitPct(pct);
+      }
+    };
+    const onUp = () => setIsDraggingDivider(false);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+  }, [isDraggingDivider]);
+  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setPublishedOpen(true); setSystemsOpen(true); setTopOpen(false); };
 
   const company = COMPANIES.find(c => c.id === activeCompany)!;
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
@@ -260,7 +279,7 @@ export default function Work() {
           </p>
           <div className="flex flex-col gap-0.5 flex-1">
             {COMPANIES.map((c) => {
-              const active = !isAsk && c.id === activeCompany;
+              const active = c.id === activeCompany;
               return (
                 <button
                   key={c.id}
@@ -281,94 +300,14 @@ export default function Work() {
             })}
           </div>
 
-          <button
-            onClick={() => { setIsAsk(true); setActiveInitiative(null); }}
-            className="text-left w-full px-3 py-2.5 rounded-lg transition-colors mt-2"
-            style={{ background: isAsk ? 'var(--t-surface)' : 'transparent' }}
-            onMouseEnter={e => { if (!isAsk) e.currentTarget.style.background = 'var(--t-surface)'; }}
-            onMouseLeave={e => { if (!isAsk) e.currentTarget.style.background = 'transparent'; }}
-          >
-            <span className="block text-[14px] font-medium" style={{ color: isAsk ? 'var(--t-primary)' : 'var(--t-accent)' }}>
-              Ask about Shane
-            </span>
-          </button>
         </div>
 
         {/* Main panel */}
         <div className="flex-1 min-h-0 overflow-hidden">
           <AnimatePresence mode="wait">
 
-            {/* ── Ask ── */}
-            {isAsk ? (
-              <motion.div
-                key="ask"
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: E }}
-                className="h-full overflow-y-auto scrollbar-none px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
-              >
-                <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>AI</p>
-                <h1 className="text-[28px] font-semibold tracking-[-0.02em] mb-2" style={{ color: 'var(--t-primary)' }}>Ask about Shane</h1>
-                <p className="text-[15px] mb-8" style={{ color: 'var(--t-secondary)' }}>Trained on resume, experience, and portfolio.</p>
-
-                <div className="flex flex-col gap-2.5 mb-6">
-                  {askMsgs.length === 0 && !askLoading && (
-                    <>
-                      <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Suggested</p>
-                      {ASK_SUGGESTIONS.map(s => (
-                        <button key={s} onClick={() => askSubmit(s)}
-                          className="text-left text-[14px] px-4 py-3 rounded-xl transition-colors"
-                          style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}
-                          onMouseEnter={e => { e.currentTarget.style.color = 'var(--t-primary)'; e.currentTarget.style.borderColor = 'var(--t-primary)'; }}
-                          onMouseLeave={e => { e.currentTarget.style.color = 'var(--t-secondary)'; e.currentTarget.style.borderColor = 'var(--t-border)'; }}
-                        >{s}</button>
-                      ))}
-                    </>
-                  )}
-                  {askMsgs.map((msg, i) => (
-                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className="max-w-[85%] px-4 py-3 rounded-2xl text-[14px] leading-relaxed"
-                        style={{
-                          background: msg.role === 'user' ? 'var(--t-primary)' : 'var(--t-surface)',
-                          color: msg.role === 'user' ? 'var(--t-bg)' : 'var(--t-primary)',
-                        }}>
-                        {msg.text}
-                      </div>
-                    </div>
-                  ))}
-                  {askLoading && (
-                    <div className="flex justify-start">
-                      <div className="px-4 py-3 rounded-2xl flex gap-1.5" style={{ background: 'var(--t-surface)' }}>
-                        {[0,1,2].map(i => (
-                          <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--t-tertiary)' }}
-                            animate={{ opacity: [0.3,1,0.3], y: [0,-3,0] }}
-                            transition={{ duration: 0.8, repeat: Infinity, delay: i*0.15 }} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div ref={bottomRef} />
-                </div>
-
-                <form onSubmit={e => { e.preventDefault(); askSubmit(askQ); setAskQ(''); }}>
-                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors"
-                    style={{ border: '1px solid var(--t-border)' }}>
-                    <input ref={inputRef} type="text" value={askQ} onChange={e => setAskQ(e.target.value)}
-                      placeholder="Ask anything about Shane..." maxLength={500}
-                      className="flex-1 text-[14px] bg-transparent outline-none"
-                      style={{ color: 'var(--t-primary)' }} />
-                    <button type="submit" disabled={!askQ.trim() || askLoading}
-                      className="w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 transition-opacity disabled:opacity-30"
-                      style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}>
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </form>
-              </motion.div>
-
-            /* ── Initiative detail ── */
-            ) : initiative ? (
+            {/* ── Initiative detail ── */}
+            {initiative ? (
               <motion.div
                 key={`d-${initiative.id}`}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -472,154 +411,198 @@ export default function Work() {
                 </p>
                 </div>{/* end flex-shrink-0 */}
 
-                {/* Two-column: Context (left) + Work (right) — fills remaining height, each column scrolls independently */}
-                <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-10 lg:gap-0" style={{ borderTop: '1px solid var(--t-divider)' }}>
+                {/* Two-column: draggable on desktop, stacked on mobile */}
+                {(() => {
+                  const published = company.initiatives.filter(i => i.url);
+                  const systems = company.initiatives.filter(i => !i.url);
 
-                  {/* Left: Context — scrollable */}
-                  <div className="flex-1 lg:pr-12 lg:min-w-0 overflow-y-auto scrollbar-none pt-7 pb-10">
-                    <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>
-                      Context
-                    </p>
-                    <div className="flex flex-col gap-5">
-                      {[
-                        { label: 'Problem', text: company.problem },
-                        { label: 'System', text: company.system },
-                        { label: 'Impact', text: company.impact },
-                      ].map(({ label, text }) => (
-                        <div key={label} className="flex gap-4">
-                          <p className="text-[10px] uppercase tracking-[0.1em] font-medium w-[52px] flex-shrink-0 pt-[3px]" style={{ color: 'var(--t-tertiary)' }}>{label}</p>
-                          <p className="text-[13px] leading-[1.65] flex-1" style={{ color: 'var(--t-secondary)' }}>{text}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  const InitRow = ({ init, idx }: { init: Initiative; idx: number }) => (
+                    <motion.button
+                      key={init.id}
+                      onClick={() => setActiveInitiative(init.id)}
+                      className="w-full text-left flex items-center justify-between py-3 group"
+                      style={{ borderBottom: '1px solid var(--t-divider)' }}
+                      initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.18, delay: 0.02 + idx * 0.02, ease: E }}
+                    >
+                      <div className="min-w-0 pr-3">
+                        <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                        <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>{init.title}</p>
+                      </div>
+                      <span className="text-[12px] flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--t-secondary)' }}>→</span>
+                    </motion.button>
+                  );
 
-                  {/* Vertical divider — desktop only */}
-                  <div className="hidden lg:block w-px flex-shrink-0" style={{ background: 'var(--t-divider)' }} />
-
-                  {/* Right: Work — published collapsible + systems list — scrollable */}
-                  <div className="flex-1 lg:pl-12 lg:min-w-0 overflow-y-auto scrollbar-none pt-7 pb-10">
-                    {(() => {
-                      const published = company.initiatives.filter(i => i.url);
-                      const systems = company.initiatives.filter(i => !i.url);
-                      const InitRow = ({ init, idx }: { init: Initiative; idx: number }) => (
-                        <motion.button
-                          key={init.id}
-                          onClick={() => setActiveInitiative(init.id)}
-                          className="w-full text-left flex items-center justify-between py-3 group"
-                          style={{ borderBottom: '1px solid var(--t-divider)' }}
-                          initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.18, delay: 0.02 + idx * 0.02, ease: E }}
-                        >
-                          <div className="min-w-0 pr-3">
-                            <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>
-                              {init.category}
-                            </p>
-                            <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>
-                              {init.title}
-                            </p>
+                  const ctxContent = (
+                    <>
+                      <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>Context</p>
+                      <div className="flex flex-col gap-5">
+                        {[
+                          { label: 'Problem', text: company.problem },
+                          { label: 'System', text: company.system },
+                          { label: 'Impact', text: company.impact },
+                        ].map(({ label, text }) => (
+                          <div key={label} className="flex gap-4">
+                            <p className="text-[10px] uppercase tracking-[0.1em] font-medium w-[52px] flex-shrink-0 pt-[3px]" style={{ color: 'var(--t-tertiary)' }}>{label}</p>
+                            <p className="text-[13px] leading-[1.65] flex-1" style={{ color: 'var(--t-secondary)' }}>{text}</p>
                           </div>
-                          <span className="text-[12px] flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--t-secondary)' }}>
-                            →
-                          </span>
-                        </motion.button>
-                      );
-                      return (
-                        <>
-                          {/* Published — collapsible accordion */}
-                          {published.length > 0 && (
-                            <div className="mb-6">
-                              <button
-                                onClick={() => setPublishedOpen(o => !o)}
-                                className="w-full flex items-center justify-between py-1 mb-1"
-                              >
-                                <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
-                                  Published&nbsp;
-                                  <span style={{ color: 'var(--t-border-strong)' }}>({published.length})</span>
-                                </p>
-                                <motion.span
-                                  animate={{ rotate: publishedOpen ? 180 : 0 }}
-                                  transition={{ duration: 0.2 }}
-                                  style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}
-                                >
-                                  ↓
-                                </motion.span>
-                              </button>
-                              <AnimatePresence>
-                                {publishedOpen && (
-                                  <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.22, ease: E }}
-                                    style={{ overflow: 'hidden' }}
-                                  >
-                                    {(() => {
-                                      const getSubgroup = (init: Initiative) => {
-                                        if (['Developer Story','Year in Review','Success Story','Creator Story'].includes(init.category)) return 'Developer Stories';
-                                        if (init.category.includes('GTM')) return 'GTM Guides';
-                                        return null;
-                                      };
-                                      const grouped = published.reduce<Record<string, Initiative[]>>((acc, init) => {
-                                        const sg = getSubgroup(init) ?? '_flat';
-                                        (acc[sg] = acc[sg] || []).push(init);
-                                        return acc;
-                                      }, {});
-                                      const keys = Object.keys(grouped);
-                                      const useSubgroups = keys.length > 1 && !keys.every(k => k === '_flat');
-                                      if (!useSubgroups) return published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />);
-                                      return keys.map(sg => (
-                                        <div key={sg}>
-                                          <p className="text-[9px] uppercase tracking-[0.14em] font-medium py-2.5" style={{ color: 'var(--t-border-strong)' }}>{sg}</p>
-                                          {grouped[sg].map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
-                                        </div>
-                                      ));
-                                    })()}
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
-                          )}
+                        ))}
+                      </div>
+                    </>
+                  );
 
-                          {/* Process & Systems — collapsible */}
-                          {systems.length > 0 && (
-                            <div>
-                              <button
-                                onClick={() => setSystemsOpen(o => !o)}
-                                className="w-full flex items-center justify-between py-1 mb-1"
-                              >
-                                <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
-                                  {published.length > 0 ? 'Process & Systems' : 'Work'}&nbsp;
-                                  <span style={{ color: 'var(--t-border-strong)' }}>({systems.length})</span>
-                                </p>
-                                <motion.span
-                                  animate={{ rotate: systemsOpen ? 180 : 0 }}
-                                  transition={{ duration: 0.2 }}
-                                  style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}
-                                >
-                                  ↓
-                                </motion.span>
-                              </button>
-                              <AnimatePresence>
-                                {systemsOpen && (
-                                  <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.22, ease: E }}
-                                    style={{ overflow: 'hidden' }}
-                                  >
-                                    {systems.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
+                  const workContent = (
+                    <>
+                      {published.length > 0 && (
+                        <div className="mb-6">
+                          <button onClick={() => setPublishedOpen(o => !o)} className="w-full flex items-center justify-between py-1 mb-1">
+                            <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
+                              Published&nbsp;<span style={{ color: 'var(--t-border-strong)' }}>({published.length})</span>
+                            </p>
+                            <motion.span animate={{ rotate: publishedOpen ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}>↓</motion.span>
+                          </button>
+                          <AnimatePresence>
+                            {publishedOpen && (
+                              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.22, ease: E }} style={{ overflow: 'hidden' }}>
+                                {(() => {
+                                  const getSubgroup = (init: Initiative) => {
+                                    if (['Developer Story','Year in Review','Success Story','Creator Story'].includes(init.category)) return 'Developer Stories';
+                                    if (init.category.includes('GTM')) return 'GTM Guides';
+                                    return null;
+                                  };
+                                  const grouped = published.reduce<Record<string, Initiative[]>>((acc, init) => {
+                                    const sg = getSubgroup(init) ?? '_flat';
+                                    (acc[sg] = acc[sg] || []).push(init);
+                                    return acc;
+                                  }, {});
+                                  const keys = Object.keys(grouped);
+                                  const useSubgroups = keys.length > 1 && !keys.every(k => k === '_flat');
+                                  if (!useSubgroups) return published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />);
+                                  return keys.map(sg => (
+                                    <div key={sg}>
+                                      <p className="text-[9px] uppercase tracking-[0.14em] font-medium py-2.5" style={{ color: 'var(--t-border-strong)' }}>{sg}</p>
+                                      {grouped[sg].map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                                    </div>
+                                  ));
+                                })()}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      )}
+                      {systems.length > 0 && (
+                        <div>
+                          <button onClick={() => setSystemsOpen(o => !o)} className="w-full flex items-center justify-between py-1 mb-1">
+                            <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
+                              {published.length > 0 ? 'Process & Systems' : 'Work'}&nbsp;<span style={{ color: 'var(--t-border-strong)' }}>({systems.length})</span>
+                            </p>
+                            <motion.span animate={{ rotate: systemsOpen ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}>↓</motion.span>
+                          </button>
+                          <AnimatePresence>
+                            {systemsOpen && (
+                              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.22, ease: E }} style={{ overflow: 'hidden' }}>
+                                {systems.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      )}
+                    </>
+                  );
+
+                  return (
+                    <div ref={containerRef} className="flex-1 min-h-0 overflow-hidden flex flex-col" style={{ borderTop: '1px solid var(--t-divider)', userSelect: isDraggingDivider ? 'none' : undefined }}>
+
+                      {/* More Context toggle */}
+                      <div className="flex-shrink-0 flex justify-center pt-3 pb-1">
+                        <button
+                          onClick={() => setTopOpen(o => !o)}
+                          className="flex flex-col items-center gap-[5px] group"
+                          style={{ outline: 'none' }}
+                        >
+                          <span className="text-[10px] uppercase tracking-[0.12em] font-medium transition-colors duration-200 group-hover:opacity-100" style={{ color: 'var(--t-tertiary)', opacity: topOpen ? 0.6 : 1 }}>
+                            {topOpen ? 'Less' : 'More Context'}
+                          </span>
+                          <motion.svg
+                            width="22" height="11" viewBox="0 0 22 11" fill="none"
+                            stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                            style={{ color: 'var(--t-tertiary)', display: 'block' }}
+                            animate={topOpen
+                              ? { rotate: 180, opacity: 1 }
+                              : { rotate: 0, opacity: [0.35, 1, 0.35] }
+                            }
+                            transition={topOpen
+                              ? { rotate: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }, opacity: { duration: 0.2 } }
+                              : { opacity: { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }
+                            }
+                          >
+                            <path d="M1 1.5l10 8 10-8" />
+                          </motion.svg>
+                        </button>
+                      </div>
+
+                      {/* Reveal panel */}
+                      <AnimatePresence>
+                        {topOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                            style={{ overflow: 'hidden', flexShrink: 0, borderBottom: '1px solid var(--t-divider)' }}
+                          >
+                            <div className="px-8 lg:px-14 py-5">
+                              <ul className="flex flex-col gap-2.5 max-w-[720px]">
+                                {company.overview.map((point, i) => (
+                                  <li key={i} className="flex items-start gap-3 text-[13px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
+                                    <span className="mt-[7px] w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: 'var(--t-border-strong)' }} />
+                                    {point}
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
-                          )}
-                        </>
-                      );
-                    })()}
-                  </div>
-                </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Columns wrapper */}
+                      <div className="flex-1 min-h-0">
+
+                      {/* Desktop: side-by-side with draggable divider */}
+                      <div className="hidden lg:flex h-full" style={{ height: '100%' }}>
+                        <div className="overflow-y-auto scrollbar-none pt-7 pb-10 pr-10 min-w-0" style={{ width: `${splitPct}%` }}>
+                          {ctxContent}
+                        </div>
+
+                        {/* Drag handle */}
+                        <div
+                          onMouseDown={e => { setIsDraggingDivider(true); e.preventDefault(); }}
+                          className="flex-shrink-0 cursor-col-resize relative flex items-start justify-center group"
+                          style={{ width: '16px' }}
+                        >
+                          <div className="w-px h-full transition-colors duration-150" style={{ background: isDraggingDivider ? 'var(--t-secondary)' : 'var(--t-border)' }} />
+                          <div className="absolute top-1/2 -translate-y-1/2 flex flex-col gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity">
+                            {[0,1,2].map(i => (
+                              <div key={i} className="w-[3px] h-[3px] rounded-full" style={{ background: isDraggingDivider ? 'var(--t-primary)' : 'var(--t-border-strong)' }} />
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="overflow-y-auto scrollbar-none pt-7 pb-10 pl-10 min-w-0" style={{ width: `calc(${100 - splitPct}% - 16px)` }}>
+                          {workContent}
+                        </div>
+                      </div>
+
+                      {/* Mobile: stacked */}
+                      <div className="lg:hidden overflow-y-auto scrollbar-none pt-7 pb-10 h-full">
+                        {ctxContent}
+                        <div className="my-6 h-px" style={{ background: 'var(--t-divider)' }} />
+                        {workContent}
+                      </div>
+                      </div>{/* end columns wrapper */}
+                    </div>
+                  );
+                })()}
               </motion.div>
             )}
           </AnimatePresence>
@@ -631,15 +614,10 @@ export default function Work() {
         {COMPANIES.map(c => (
           <button key={c.id} onClick={() => selectCompany(c.id)}
             className="flex-shrink-0 text-[13px] font-medium whitespace-nowrap transition-colors"
-            style={{ color: !isAsk && c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
+            style={{ color: c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
             {c.name}
           </button>
         ))}
-        <button onClick={() => { setIsAsk(true); setActiveInitiative(null); }}
-          className="flex-shrink-0 text-[13px] font-medium whitespace-nowrap"
-          style={{ color: isAsk ? 'var(--t-accent)' : 'var(--t-tertiary)' }}>
-          Ask
-        </button>
       </div>
     </div>
   );
