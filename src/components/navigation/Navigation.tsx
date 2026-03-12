@@ -27,7 +27,7 @@ export default function Navigation() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
           <Link
-            href="/work/portfolio"
+            href="/"
             className={`text-sm font-semibold tracking-tight hover:opacity-70 transition-opacity ${dark ? 'text-white' : 'text-gray-900'}`}
           >
             Shane Delaney

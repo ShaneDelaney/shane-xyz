@@ -30,7 +30,7 @@ export default function Home() {
         className="w-full px-6 sm:px-10"
         initial={{ opacity: 0 }}
         animate={mounted ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, ease: EASE }}
+        transition={{ duration: 0.5, ease: EASE }}
       >
         <div className="max-w-xl mx-auto">
 
@@ -49,7 +49,7 @@ export default function Home() {
 
           {/* Bio */}
           <motion.p
-            className="text-base sm:text-lg text-gray-500 leading-relaxed mb-7"
+            className="text-base sm:text-lg text-gray-500 leading-relaxed mb-8"
             initial={{ opacity: 0, y: 10 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
@@ -57,30 +57,50 @@ export default function Home() {
             Content operations and ecosystem storytelling. Project Lead for Meta Horizon&apos;s developer content program — 13 published pieces across developer stories and go-to-market guides. Previously at Snap Inc.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Primary CTA */}
           <motion.div
-            className="flex items-center gap-3 mb-9"
+            className="mb-4"
             initial={{ opacity: 0, y: 8 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.22, ease: EASE }}
           >
-            <Link
-              href="/work/portfolio?project=intro"
-              className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors"
-            >
-              View Portfolio
-            </Link>
-            <Link
-              href="/work"
-              className="px-5 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors"
-            >
+            <div className="relative inline-block">
+              {/* Pulse ring */}
+              {mounted && (
+                <motion.div
+                  className="absolute -inset-1.5 rounded-full pointer-events-none"
+                  animate={{ opacity: [0, 0.18, 0], scale: [0.92, 1.06, 0.92] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+                  style={{ background: 'rgba(17,17,17,0.15)', filter: 'blur(6px)' }}
+                />
+              )}
+              <Link
+                href="/work/portfolio"
+                className="relative inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full text-sm font-semibold hover:bg-gray-700 transition-colors"
+              >
+                <span>Enter Portfolio</span>
+                <motion.span
+                  animate={mounted ? { x: [0, 3, 0] } : {}}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                >
+                  →
+                </motion.span>
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Secondary CTAs */}
+          <motion.div
+            className="flex items-center gap-4 mb-10"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.3, ease: EASE }}
+          >
+            <Link href="/work" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
               Experience →
             </Link>
-            <a
-              href="/ShaneDelaneyResume.pdf"
-              download
-              className="px-5 py-2.5 text-sm font-medium text-gray-400 hover:text-gray-900 transition-colors"
-            >
+            <span className="text-gray-200 text-xs select-none">·</span>
+            <a href="/ShaneDelaneyResume.pdf" download className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
               Resume ↓
             </a>
           </motion.div>
@@ -88,9 +108,9 @@ export default function Home() {
           {/* Stats strip */}
           <motion.div
             className="flex items-center gap-8 pb-8 mb-8 border-b border-gray-100"
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.28, ease: EASE }}
+            transition={{ duration: 0.5, delay: 0.34, ease: EASE }}
           >
             {STATS.map((s) => (
               <div key={s.label}>
@@ -108,7 +128,7 @@ export default function Home() {
                 className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={mounted ? { opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.36 + i * 0.05, ease: EASE }}
+                transition={{ duration: 0.4, delay: 0.42 + i * 0.05, ease: EASE }}
               >
                 <Link
                   href={`/work?company=${co.id}`}
