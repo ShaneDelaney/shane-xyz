@@ -7,6 +7,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface Article {
   title: string;
+  slug: string;
   publication: string;
   year: string;
   description: string;
@@ -40,6 +41,7 @@ const CATEGORIES: Category[] = [
     articles: [
       {
         title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding',
+        slug: 'vail-vr-part-one',
         publication: 'Meta Horizon Blog', year: '2025', stat: '$15M crowdfunded',
         description: 'How AEXLAB built one of VR\'s most successful multiplayer shooters from a living room to a $15M community-funded studio.',
         scope: 'Pitched the two-part series format. Conducted all editorial interviews with AEXLAB founders, developed the crowdfunding narrative arc, wrote and revised both drafts, and managed XFN review through product, legal, and DevRel.',
@@ -48,6 +50,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'VAIL VR (Part Two): AEXLAB\'s Live Ops Engine',
+        slug: 'vail-vr-part-two',
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'A deep dive into AEXLAB\'s transition from premium to free-to-play and the live ops strategy behind their sustained growth.',
         scope: 'Developed the live ops editorial angle for part two, conducted follow-up interviews with the AEXLAB team, wrote and revised the full piece through multiple XFN review rounds.',
@@ -56,6 +59,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Saydeechan: Bringing Worlds to Japan',
+        slug: 'saydeechan',
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'A creator spotlight on how Saydeechan built a cross-cultural community inside Horizon Worlds, expanding the platform\'s reach into Japan.',
         scope: 'Identified the creator independently. Developed the cross-cultural localization angle, conducted the editorial interview, wrote and edited the full piece, managed review and publication.',
@@ -64,6 +68,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World',
+        slug: 'grow-a-farm',
         publication: 'Meta Horizon Blog', year: '2025', stat: 'Top 10 in 2 months',
         description: 'How an influencer-developer duo overcame the cold-start problem and reached the top 10 on Horizon Worlds within two months of launch.',
         scope: 'Sourced both creators, developed the platform accessibility narrative, conducted both editorial interviews, wrote the full feature, coordinated XFN review and publication.',
@@ -72,6 +77,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community',
+        slug: 'matthiaos',
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'A profile of the Flip Key Studios founder and his role in shaping the Horizon community through the Community Letters program.',
         scope: 'Identified the creator as an underrepresented story type. Developed the community-contribution angle, conducted the interview, wrote and edited the full profile.',
@@ -80,6 +86,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers',
+        slug: 'year-in-review',
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'An annual roundup of the creators and developers who defined Horizon\'s growth in 2025, with key platform trends and takeaways.',
         scope: 'Synthesized platform data across 2025, developed the editorial framework, wrote and edited the full feature, coordinated multi-team review.',
@@ -88,6 +95,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Kawaii.Creator: Success Story',
+        slug: 'kawaii-creator',
         publication: 'Meta Horizon', year: '2025',
         description: 'A platform success story on how a distinctive visual identity and aesthetic commitment translate directly into audience growth on Horizon.',
         scope: 'Developed the visual-identity success story angle, conducted the creator interview, wrote the piece, managed publication on the Horizon platform.',
@@ -102,6 +110,7 @@ const CATEGORIES: Category[] = [
     articles: [
       {
         title: 'Develop a Marketing Plan for Your VR App',
+        slug: 'gtm-marketing-plan',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 1',
         description: 'The anchor guide in the series. Strategy, audience research, channel selection, and the foundational thinking every VR developer needs before launch.',
         scope: 'Researched and outlined the full GTM marketing framework for VR developers. Wrote the anchor guide, coordinated accuracy review with Product and DevRel, published to the Horizon developer resource library.',
@@ -110,6 +119,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Leverage Influencer Partnerships for Your VR App',
+        slug: 'gtm-influencer',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 2',
         description: 'A practical framework for identifying, pitching, and activating creator partnerships to drive discovery and installs for VR apps.',
         scope: 'Researched influencer partnership models specific to VR and gaming. Wrote the full guide covering discovery, outreach, contracts, and measurement. Coordinated review with DevRel and marketing.',
@@ -118,6 +128,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Build Social Media and Community Engagement for Your VR App',
+        slug: 'gtm-social-media',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 3',
         description: 'Community-building and social media strategy for VR developers, covering pre-launch, launch, and post-launch audience development.',
         scope: 'Developed the community-building framework for VR developer needs, wrote the guide covering the full pre/launch/post-launch arc, coordinated cross-team review.',
@@ -126,6 +137,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Master Marketing Assets for Your VR App',
+        slug: 'gtm-assets',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 4',
         description: 'How to build a complete asset library for a VR app launch, from screenshots and trailers to store page copy and press kits.',
         scope: 'Researched VR app store creative best practices. Wrote the guide covering screenshots, trailers, icons, and social assets. Coordinated review with Design and DevRel.',
@@ -134,6 +146,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'PR Strategy for Your VR App',
+        slug: 'gtm-pr',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 5',
         description: 'A developer-focused PR playbook covering media outreach, press release structure, and how to earn coverage in a crowded VR market.',
         scope: 'Researched PR frameworks applicable to VR game launches. Wrote the full guide covering press outreach, media kits, and coverage amplification. Coordinated review with communications and DevRel.',
@@ -142,6 +155,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Create App Demos That Convert',
+        slug: 'gtm-demos',
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 6',
         description: 'How to design and deliver app demos that move users from curiosity to download, with specific guidance for VR\'s unique onboarding challenges.',
         scope: 'Researched demo design principles for VR app conversion. Wrote the final guide in the series with tactical best practices and worked examples. Coordinated review with Product and DevRel.',
@@ -254,7 +268,24 @@ export default function Published() {
   const [mounted, setMounted] = useState(false);
   const [activeCategory, setActiveCategory] = useState('platform');
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      for (const cat of CATEGORIES) {
+        const match = cat.articles.find(a => a.slug === hash);
+        if (match) {
+          setActiveCategory(cat.id);
+          setExpandedId(match.title);
+          setTimeout(() => {
+            const el = document.getElementById(hash);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 350);
+          break;
+        }
+      }
+    }
+  }, []);
 
   const category = CATEGORIES.find(c => c.id === activeCategory) ?? CATEGORIES[0];
 
@@ -269,10 +300,10 @@ export default function Published() {
 
   return (
     <div
-      className="h-screen overflow-hidden flex flex-col pt-[52px]"
+      className="min-h-screen md:h-screen md:overflow-hidden flex flex-col pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
-       <div className="flex flex-1 min-h-0">
+       <div className="flex flex-1 md:min-h-0">
         {/* Left: category nav */}
         <motion.div
           className="hidden md:flex flex-col w-[220px] flex-shrink-0 py-10 px-6"
@@ -361,6 +392,7 @@ export default function Published() {
                   return (
                     <motion.div
                       key={article.title}
+                      id={article.slug}
                       initial={{ opacity: 0, y: 4 }}
                       animate={mounted ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.22, delay: i * 0.04, ease: EASE }}

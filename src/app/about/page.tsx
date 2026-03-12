@@ -21,10 +21,10 @@ export default function About() {
 
   return (
     <div
-      className="h-screen overflow-hidden flex items-center pt-[52px]"
+      className="min-h-screen md:h-screen md:overflow-hidden flex items-start md:items-center pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
-      <div className="w-full px-6 sm:px-10">
+      <div className="w-full px-6 sm:px-10 py-10 md:py-0">
         <div className="max-w-3xl mx-auto">
 
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">

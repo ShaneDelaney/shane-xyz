@@ -11,19 +11,19 @@ const CARDS = [
     label: 'Meta Horizon Blog',
     title: 'VAIL VR: From Couch Surfing to $15M in Crowdfunding',
     tag: 'Creator Spotlight',
-    url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/',
+    href: '/published#vail-vr-part-one',
   },
   {
     label: 'Meta Horizon',
     title: 'Year in Review: Insights from 2025\'s Breakout Creators',
     tag: 'Platform Ecosystems',
-    url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
+    href: '/published#year-in-review',
   },
   {
     label: 'Meta Horizon',
     title: 'Develop a Marketing Plan for Your VR App',
     tag: 'GTM Series, Part 1',
-    url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
+    href: '/published#gtm-marketing-plan',
   },
 ];
 
@@ -33,17 +33,17 @@ export default function Home() {
 
   return (
     <div
-      className="h-screen overflow-hidden flex flex-col justify-center pt-[52px]"
+      className="min-h-screen flex flex-col justify-center pt-[52px] pb-8"
       style={{ background: 'var(--t-bg)' }}
     >
       <div className="w-full px-6 sm:px-10">
-        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-16">
 
           {/* Left: text */}
           <div className="flex-1 min-w-0">
             {/* Eyebrow */}
             <motion.p
-              className="text-[11px] uppercase tracking-[0.12em] font-medium mb-5"
+              className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4 sm:mb-5"
               style={{ color: 'var(--t-tertiary)' }}
               initial={{ opacity: 0 }}
               animate={m ? { opacity: 1 } : {}}
@@ -54,7 +54,7 @@ export default function Home() {
 
             {/* Name */}
             <motion.h1
-              className="text-[48px] sm:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5"
+              className="text-[40px] sm:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-4 sm:mb-5"
               style={{ color: 'var(--t-primary)' }}
               initial={{ opacity: 0, y: 10 }}
               animate={m ? { opacity: 1, y: 0 } : {}}
@@ -65,7 +65,7 @@ export default function Home() {
 
             {/* Tagline */}
             <motion.p
-              className="text-[17px] leading-[1.65] mb-8 max-w-[420px]"
+              className="text-[15px] sm:text-[17px] leading-[1.65] mb-7 sm:mb-8 max-w-[420px]"
               style={{ color: 'var(--t-secondary)' }}
               initial={{ opacity: 0, y: 8 }}
               animate={m ? { opacity: 1, y: 0 } : {}}
@@ -76,21 +76,21 @@ export default function Home() {
 
             {/* CTAs */}
             <motion.div
-              className="flex items-center gap-5 mb-10"
+              className="flex items-center gap-4 sm:gap-5 mb-8 sm:mb-10"
               initial={{ opacity: 0, y: 6 }}
               animate={m ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.22, ease: E }}
             >
               <Link
                 href="/work"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-medium transition-opacity hover:opacity-75"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] sm:text-[14px] font-medium transition-opacity hover:opacity-75"
                 style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
               >
                 View Work
               </Link>
               <Link
                 href="/published"
-                className="text-[14px] font-medium transition-opacity hover:opacity-60"
+                className="text-[13px] sm:text-[14px] font-medium transition-opacity hover:opacity-60"
                 style={{ color: 'var(--t-secondary)' }}
               >
                 Published
@@ -99,16 +99,16 @@ export default function Home() {
 
             {/* Platform credits */}
             <motion.div
-              className="flex items-center gap-5 flex-wrap"
+              className="flex items-center gap-4 sm:gap-5 flex-wrap"
               initial={{ opacity: 0 }}
               animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.3, ease: E }}
             >
               {([['Meta','meta'],['Snap Inc.','snap'],['StockX','stockx'],['Phony Content','phony'],['Collider','collider']] as [string,string][]).map(([co, id], i, arr) => (
-                <span key={co} className="flex items-center gap-5">
+                <span key={co} className="flex items-center gap-4 sm:gap-5">
                   <Link
                     href={`/work?company=${id}`}
-                    className="text-[12px] transition-colors"
+                    className="text-[11px] sm:text-[12px] transition-colors"
                     style={{ color: 'var(--t-border-strong)' }}
                     onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-border-strong)')}
@@ -123,27 +123,22 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Right: visual card stack */}
+          {/* Right: visual card stack — visible on lg+, shown below text on mobile */}
           <motion.div
-            className="hidden lg:flex flex-col gap-3 w-[320px] flex-shrink-0"
-            initial={{ opacity: 0, x: 16 }}
-            animate={m ? { opacity: 1, x: 0 } : {}}
+            className="flex flex-col gap-3 w-full lg:w-[320px] lg:flex-shrink-0"
+            initial={{ opacity: 0, x: 0, y: 12 }}
+            animate={m ? { opacity: 1, x: 0, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25, ease: E }}
           >
             {CARDS.map((card, i) => (
-              <motion.a
+              <Link
                 key={card.title}
-                href={card.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={card.href}
                 className="block rounded-xl p-4 transition-opacity hover:opacity-80"
                 style={{
                   background: 'var(--t-surface)',
                   border: '1px solid var(--t-border)',
                 }}
-                initial={{ opacity: 0, y: 8 }}
-                animate={m ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.08, ease: E }}
               >
                 <div className="flex items-center justify-between mb-2">
                   <span
@@ -173,9 +168,9 @@ export default function Home() {
                   className="text-[11px] mt-2"
                   style={{ color: 'var(--t-tertiary)' }}
                 >
-                  ↗ Read on Meta Horizon Developer Blog
+                  View in Published Work →
                 </p>
-              </motion.a>
+              </Link>
             ))}
           </motion.div>
 
