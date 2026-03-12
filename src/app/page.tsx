@@ -6,22 +6,24 @@ import { useState, useEffect } from 'react';
 
 const E = [0.16, 1, 0.3, 1] as const;
 
-const PILLARS = [
+const CARDS = [
   {
-    title: 'Editorial Judgment at Scale',
-    body: 'Final decision maker on high-volume content amplification, balancing brand, culture, creators, and business goals under time pressure.',
+    label: 'Meta Horizon Blog',
+    title: 'VAIL VR: From Couch Surfing to $15M in Crowdfunding',
+    tag: 'Creator Spotlight',
+    url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/',
   },
   {
-    title: 'Data Integrity & XFN Translation',
-    body: 'Verifying metrics end-to-end and translating complex data into clear, actionable frameworks for cross-functional teams and leadership.',
+    label: 'Meta Horizon',
+    title: 'Year in Review: Insights from 2025\'s Breakout Creators',
+    tag: 'Platform Ecosystems',
+    url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
   },
   {
-    title: 'Narrative Systems',
-    body: 'Building the editorial pipelines and story frameworks that translate platform activity into published content at scale.',
-  },
-  {
-    title: 'Cross-Functional Execution',
-    body: 'End-to-end ownership across product, marketing, legal, and data science, shipping complex initiatives without losing speed or quality.',
+    label: 'Meta Horizon',
+    title: 'Develop a Marketing Plan for Your VR App',
+    tag: 'GTM Series, Part 1',
+    url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
   },
 ];
 
@@ -31,127 +33,149 @@ export default function Home() {
 
   return (
     <div
-      className="h-screen overflow-hidden flex items-center pt-[52px]"
+      className="h-screen overflow-hidden flex flex-col justify-center pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
       <div className="w-full px-6 sm:px-10">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
 
-          {/* Eyebrow */}
-          <motion.p
-            className="text-[11px] uppercase tracking-[0.12em] font-medium mb-5"
-            style={{ color: 'var(--t-tertiary)' }}
-            initial={{ opacity: 0 }}
-            animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.05, ease: E }}
-          >
-            Los Angeles, Platform Content Strategist
-          </motion.p>
-
-          {/* Name */}
-          <motion.h1
-            className="text-[54px] sm:text-[70px] font-semibold tracking-[-0.035em] leading-[1.02] mb-6"
-            style={{ color: 'var(--t-primary)' }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={m ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.08, ease: E }}
-          >
-            Shane Delaney
-          </motion.h1>
-
-          {/* Hero tagline */}
-          <motion.p
-            className="text-[18px] leading-[1.65] mb-10 max-w-[500px]"
-            style={{ color: 'var(--t-secondary)' }}
-            initial={{ opacity: 0, y: 8 }}
-            animate={m ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.14, ease: E }}
-          >
-            I build the storytelling systems that help platforms surface the creators shaping their ecosystems.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            className="flex items-center gap-5 mb-14"
-            initial={{ opacity: 0, y: 6 }}
-            animate={m ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.22, ease: E }}
-          >
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-medium transition-opacity hover:opacity-75"
-              style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
-            >
-              View Work
-            </Link>
-            <Link
-              href="/published"
-              className="text-[15px] font-medium transition-opacity hover:opacity-60"
-              style={{ color: 'var(--t-secondary)' }}
-            >
-              Published Content
-            </Link>
-          </motion.div>
-
-          {/* How I Work pillars */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.3, ease: E }}
-          >
-            <p
-              className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5"
+          {/* Left: text */}
+          <div className="flex-1 min-w-0">
+            {/* Eyebrow */}
+            <motion.p
+              className="text-[11px] uppercase tracking-[0.12em] font-medium mb-5"
               style={{ color: 'var(--t-tertiary)' }}
+              initial={{ opacity: 0 }}
+              animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.05, ease: E }}
             >
-              How I Work
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-[680px]">
-              {PILLARS.map((p, i) => (
-                <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={m ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.34 + i * 0.06, ease: E }}
-                >
-                  <p
-                    className="text-[13px] font-medium mb-1.5 leading-snug"
-                    style={{ color: 'var(--t-primary)' }}
+              Los Angeles · Platform Content Strategist
+            </motion.p>
+
+            {/* Name */}
+            <motion.h1
+              className="text-[48px] sm:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5"
+              style={{ color: 'var(--t-primary)' }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={m ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.08, ease: E }}
+            >
+              Shane Delaney
+            </motion.h1>
+
+            {/* Tagline */}
+            <motion.p
+              className="text-[17px] leading-[1.65] mb-8 max-w-[420px]"
+              style={{ color: 'var(--t-secondary)' }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={m ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.14, ease: E }}
+            >
+              I build the storytelling systems that help platforms surface the creators shaping their ecosystems.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              className="flex items-center gap-5 mb-10"
+              initial={{ opacity: 0, y: 6 }}
+              animate={m ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.22, ease: E }}
+            >
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-medium transition-opacity hover:opacity-75"
+                style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
+              >
+                View Work
+              </Link>
+              <Link
+                href="/published"
+                className="text-[14px] font-medium transition-opacity hover:opacity-60"
+                style={{ color: 'var(--t-secondary)' }}
+              >
+                Published
+              </Link>
+            </motion.div>
+
+            {/* Platform credits */}
+            <motion.div
+              className="flex items-center gap-5 flex-wrap"
+              initial={{ opacity: 0 }}
+              animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.3, ease: E }}
+            >
+              {([['Meta','meta'],['Snap Inc.','snap'],['StockX','stockx'],['Phony Content','phony'],['Collider','collider']] as [string,string][]).map(([co, id], i, arr) => (
+                <span key={co} className="flex items-center gap-5">
+                  <Link
+                    href={`/work?company=${id}`}
+                    className="text-[12px] transition-colors"
+                    style={{ color: 'var(--t-border-strong)' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-border-strong)')}
                   >
-                    {p.title}
-                  </p>
-                  <p
-                    className="text-[12px] leading-[1.6]"
+                    {co}
+                  </Link>
+                  {i < arr.length - 1 && (
+                    <span style={{ color: 'var(--t-border)' }}>·</span>
+                  )}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right: visual card stack */}
+          <motion.div
+            className="hidden lg:flex flex-col gap-3 w-[320px] flex-shrink-0"
+            initial={{ opacity: 0, x: 16 }}
+            animate={m ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.25, ease: E }}
+          >
+            {CARDS.map((card, i) => (
+              <motion.a
+                key={card.title}
+                href={card.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl p-4 transition-opacity hover:opacity-80"
+                style={{
+                  background: 'var(--t-surface)',
+                  border: '1px solid var(--t-border)',
+                }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={m ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.08, ease: E }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span
+                    className="text-[10px] uppercase tracking-[0.1em] font-medium"
                     style={{ color: 'var(--t-tertiary)' }}
                   >
-                    {p.body}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Platform credits */}
-          <motion.div
-            className="flex items-center gap-6 mt-10"
-            initial={{ opacity: 0 }}
-            animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.52, ease: E }}
-          >
-            {([['Meta','meta'],['Snap Inc.','snap'],['StockX','stockx'],['Phony Content','phony'],['Collider','collider']] as [string,string][]).map(([co, id], i, arr) => (
-              <span key={co} className="flex items-center gap-6">
-                <Link
-                  href={`/work?company=${id}`}
-                  className="text-[12px] transition-colors"
-                  style={{ color: 'var(--t-border-strong)' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-border-strong)')}
+                    {card.label}
+                  </span>
+                  <span
+                    className="text-[10px] px-2 py-0.5 rounded-full"
+                    style={{
+                      background: 'var(--t-bg)',
+                      color: 'var(--t-secondary)',
+                      border: '1px solid var(--t-border)',
+                    }}
+                  >
+                    {card.tag}
+                  </span>
+                </div>
+                <p
+                  className="text-[13px] font-medium leading-snug"
+                  style={{ color: 'var(--t-primary)' }}
                 >
-                  {co}
-                </Link>
-                {i < arr.length - 1 && (
-                  <span style={{ color: 'var(--t-border)' }}>·</span>
-                )}
-              </span>
+                  {card.title}
+                </p>
+                <p
+                  className="text-[11px] mt-2"
+                  style={{ color: 'var(--t-tertiary)' }}
+                >
+                  ↗ Read on Meta Horizon Developer Blog
+                </p>
+              </motion.a>
             ))}
           </motion.div>
 

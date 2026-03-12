@@ -272,11 +272,11 @@ export default function Published() {
       className="h-screen overflow-hidden flex flex-col pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
-      <div className="flex flex-1 min-h-0 px-6 sm:px-10 gap-10 py-8">
-
+       <div className="flex flex-1 min-h-0">
         {/* Left: category nav */}
         <motion.div
-          className="hidden md:flex flex-col w-[200px] flex-shrink-0"
+          className="hidden md:flex flex-col w-[220px] flex-shrink-0 py-10 px-6"
+          style={{ borderRight: '1px solid var(--t-border)' }}
           initial={{ opacity: 0 }}
           animate={mounted ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE }}
@@ -320,7 +320,7 @@ export default function Published() {
         </motion.div>
 
         {/* Right: article list */}
-        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none">
+        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none px-8 lg:px-12 py-10">
 
           {/* Mobile category pills */}
           <div className="flex items-center gap-2 flex-wrap mb-6 md:hidden">
