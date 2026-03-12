@@ -86,8 +86,8 @@ export default function Navigation() {
 
             {/* Resume CTA */}
             <a
-              href="/ShaneDelaneyResume.pdf"
-              download
+              href="/ShaneDelaney_Resume.pdf"
+              download="ShaneDelaney_Resume.pdf"
               className="text-[13px] font-medium px-4 py-1.5 rounded-full transition-opacity hover:opacity-75"
               style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
             >
@@ -151,8 +151,8 @@ export default function Navigation() {
               </Link>
             ))}
             <a
-              href="/ShaneDelaneyResume.pdf"
-              download
+              href="/ShaneDelaney_Resume.pdf"
+              download="ShaneDelaney_Resume.pdf"
               onClick={() => setMenuOpen(false)}
               className="py-2.5 text-[15px]"
               style={{ color: 'var(--t-secondary)' }}
