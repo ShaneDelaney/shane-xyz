@@ -22,7 +22,7 @@ export default function About() {
             animate={mounted ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            Editorial operations<br />and content strategy.
+            Content operations<br />and ecosystem storytelling.
           </motion.h1>
 
           <motion.div
@@ -32,19 +32,19 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
           >
             <p>
-              Marketing and Editorial Operations Specialist with a track record of managing high-volume content pipelines, coordinating cross-functional teams, and building editorial systems that scale.
+              Content marketing and editorial operations specialist with a track record of managing high-volume production pipelines, coordinating cross-functional teams, and building editorial systems that scale.
             </p>
             <p>
-              At Meta, Shane leads the end-to-end editorial content lifecycle for the Horizon Developer Blog. He builds story templates, manages the formal stat review process with Data Science, coordinates feedback loops across Marketing, Product, and Legal, and maintains DRI trackers to keep global delivery dates on track.
+              At Meta, Shane served as Project Lead and System Owner for the Horizon Developer Blog content program — leading production on 7 builder story spotlights and a 6-part Go-To-Market developer guide series published on the Meta developers portal. He owned the full editorial lifecycle from sourcing and interviews through XFN review with Product, DevRel, Design, Legal, and Data Science, through to publication.
             </p>
             <p>
               Previously at Snap Inc., Shane served as Programming Lead for Spotlight, synthesizing daily performance data to surface breakout trends, developing standardized editorial processes, and managing a pipeline of 1,000+ pieces of content per day across a platform with 500M+ monthly viewers.
             </p>
             <p>
-              Shane bridges creative strategy and operational execution, building the processes that let teams move fast without losing quality.
+              Shane bridges creative strategy and operational execution — building the systems that let editorial teams move fast without losing quality or accuracy.
             </p>
             <p>
-              Alongside that, he has gone deep on AI-native work. At Meta, he is actively building systems, dashboards, and internal tools using AI, taking on responsibility as an early AI-first practitioner on his team. Proficient with Claude Code, Cursor, GitHub, and SuperWhisper. Built this site entirely with Claude Code.
+              He has also gone deep on AI-native work, building internal tools, automated workflows, and prototypes using AI. Proficient with Claude Code, Cursor, GitHub, and SuperWhisper. Built this site entirely with Claude Code.
             </p>
           </motion.div>
 
@@ -56,7 +56,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
           >
             <div className="bg-white px-5 py-5">
-              <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">Currently</p>
+              <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-2">Most Recently</p>
               <p className="text-sm font-semibold text-gray-900 mb-0.5">Meta</p>
               <p className="text-xs text-gray-400">Content Marketing Coordinator II</p>
             </div>
