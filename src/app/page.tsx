@@ -9,7 +9,7 @@ const E = [0.16, 1, 0.3, 1] as const;
 const PILLARS = [
   {
     title: 'Editorial Judgment at Scale',
-    body: 'Final decision maker on high-volume content amplification — balancing brand, culture, creators, and business goals under time pressure.',
+    body: 'Final decision maker on high-volume content amplification, balancing brand, culture, creators, and business goals under time pressure.',
   },
   {
     title: 'Data Integrity & XFN Translation',
@@ -21,7 +21,7 @@ const PILLARS = [
   },
   {
     title: 'Cross-Functional Execution',
-    body: 'End-to-end ownership across product, marketing, legal, and data science — shipping complex initiatives without losing speed or quality.',
+    body: 'End-to-end ownership across product, marketing, legal, and data science, shipping complex initiatives without losing speed or quality.',
   },
 ];
 
@@ -45,7 +45,7 @@ export default function Home() {
             animate={m ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.05, ease: E }}
           >
-            Los Angeles — Platform Content Strategist
+            Los Angeles, Platform Content Strategist
           </motion.p>
 
           {/* Name */}

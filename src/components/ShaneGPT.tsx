@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
+const FALLBACK = "I don't have a specific answer for that. Reach Shane directly at shanedelaney11@gmail.com.";
 
 // Renders **bold**, - bullet lines, and \n line breaks
 function renderMarkdown(text: string) {
@@ -279,7 +279,7 @@ export default function ShaneGPT() {
                         className="flex flex-col gap-1.5"
                       >
                         <p className="text-xs text-gray-400 mb-1">
-                          Suggested — {CONTEXTS.find(c => c.key === context)?.label}
+                          Suggested: {CONTEXTS.find(c => c.key === context)?.label}
                         </p>
                         {suggestions.map((s, i) => (
                           <motion.button

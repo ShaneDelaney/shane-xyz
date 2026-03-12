@@ -22,7 +22,7 @@ const ALL_ARTICLES: Article[] = [
   { title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World', publication: 'Meta Horizon Blog', year: '2025', stat: 'Top 10 in 2 months', url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/', category: 'Platform & Creator Economy' },
   { title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community', publication: 'Meta Horizon Blog', year: '2025', url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/', category: 'Platform & Creator Economy' },
   { title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers', publication: 'Meta Horizon Blog', year: '2025', url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/', category: 'Platform & Creator Economy' },
-  { title: 'Kawaii.Creator — Success Story', publication: 'Meta Horizon', year: '2025', url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/', category: 'Platform & Creator Economy' },
+  { title: 'Kawaii.Creator: Success Story', publication: 'Meta Horizon', year: '2025', url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/', category: 'Platform & Creator Economy' },
   // Resources & Guides
   { title: 'Develop a Marketing Plan for Your VR App', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 1', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/', category: 'Resources & Guides' },
   { title: 'Leverage Influencer Partnerships for Your VR App', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 2', url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/', category: 'Resources & Guides' },
@@ -31,11 +31,11 @@ const ALL_ARTICLES: Article[] = [
   { title: 'PR Strategy for Your VR App', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 5', url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/', category: 'Resources & Guides' },
   { title: 'Create App Demos That Convert', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 6', url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/', category: 'Resources & Guides' },
   // Narrative & Storytelling
-  { title: 'Tiny Texts — Cheer Squad', publication: 'Snapchat / Phony Content', year: '2024', stat: '6.3M views · 39% completion', url: 'https://snapchat.com/t/J2MP13US', category: 'Narrative & Storytelling' },
-  { title: 'Tiny Texts — Inhaler', publication: 'Snapchat / Phony Content', year: '2024', stat: '4.39M views · 20.3K followers', url: 'https://snapchat.com/t/wPotqUYw', category: 'Narrative & Storytelling' },
-  { title: 'Tiny Texts — Mr. Shower', publication: 'Snapchat / Phony Content', year: '2024', stat: '3.01M views · 8.43K followers', category: 'Narrative & Storytelling' },
-  { title: 'Tiny Texts — Sleepover', publication: 'Snapchat / Phony Content', year: '2024', stat: '2.2M views · 9.4K followers', category: 'Narrative & Storytelling' },
-  { title: 'Tiny Texts — Snap Score', publication: 'Snapchat / Phony Content', year: '2024', stat: '2.08M views · 5.73K followers', url: 'https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168', category: 'Narrative & Storytelling' },
+  { title: 'Tiny Texts: Cheer Squad', publication: 'Snapchat / Phony Content', year: '2024', stat: '6.3M views · 39% completion', url: 'https://snapchat.com/t/J2MP13US', category: 'Narrative & Storytelling' },
+  { title: 'Tiny Texts: Inhaler', publication: 'Snapchat / Phony Content', year: '2024', stat: '4.39M views · 20.3K followers', url: 'https://snapchat.com/t/wPotqUYw', category: 'Narrative & Storytelling' },
+  { title: 'Tiny Texts: Mr. Shower', publication: 'Snapchat / Phony Content', year: '2024', stat: '3.01M views · 8.43K followers', category: 'Narrative & Storytelling' },
+  { title: 'Tiny Texts: Sleepover', publication: 'Snapchat / Phony Content', year: '2024', stat: '2.2M views · 9.4K followers', category: 'Narrative & Storytelling' },
+  { title: 'Tiny Texts: Snap Score', publication: 'Snapchat / Phony Content', year: '2024', stat: '2.08M views · 5.73K followers', url: 'https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168', category: 'Narrative & Storytelling' },
   // Editorial & Brand
   { title: 'Actors and Their Favorite Movies', publication: 'Collider', year: '2022', stat: '125K readers · 4:23 avg time', url: 'https://collider.com/actors-and-their-favorite-movies/', category: 'Editorial & Brand' },
   { title: 'Hardest Working Characters in Succession, Ranked', publication: 'Collider', year: '2022', stat: '89K views · 22% social share', url: 'https://collider.com/hardest-workers-in-succession-ranked/', category: 'Editorial & Brand' },

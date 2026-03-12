@@ -58,7 +58,7 @@ export default function About() {
                 className="text-[15px] leading-[1.7] mb-8 max-w-sm"
                 style={{ color: 'var(--t-secondary)' }}
               >
-                I operate across editorial, data, and cross-functional teams — verifying what's true, translating what's complex, and publishing what matters.
+                I operate across editorial, data, and cross-functional teams, verifying what's true, translating what's complex, and publishing what matters.
               </p>
 
               <div className="flex flex-col gap-2.5">
