@@ -9,11 +9,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const PLATFORMS = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
 const FOCUS_AREAS = [
-  'Platform Ecosystems',
-  'Creator Economy',
-  'Content Discovery',
+  'Editorial Judgment at Scale',
+  'Data Integrity & XFN Translation',
   'Narrative Systems',
-  'Emerging Technology',
+  'Cross-Functional Execution',
 ];
 
 export default function About() {
@@ -53,13 +52,13 @@ export default function About() {
                 className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                 style={{ color: 'var(--t-secondary)' }}
               >
-                I work inside large platform ecosystems identifying the creators, products, and cultural signals shaping them.
+                Platform content strategist with experience at Meta and Snap Inc. I build the editorial systems and story pipelines that help platforms surface the creators and products shaping their ecosystems.
               </p>
               <p
                 className="text-[15px] leading-[1.7] mb-8 max-w-sm"
                 style={{ color: 'var(--t-secondary)' }}
               >
-                My work focuses on translating complex platforms into stories that help audiences understand what’s being built and why it matters.
+                I operate across editorial, data, and cross-functional teams — verifying what's true, translating what's complex, and publishing what matters.
               </p>
 
               <div className="flex flex-col gap-2.5">
