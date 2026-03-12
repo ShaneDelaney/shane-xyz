@@ -95,30 +95,51 @@
   }
 }
 
+/* ── Apple-style design tokens ──────────────────────────────────────────── */
+:root {
+  --t-bg: #ffffff;
+  --t-surface: #f5f5f7;
+  --t-border: #d2d2d7;
+  --t-primary: #1d1d1f;
+  --t-secondary: #6e6e73;
+  --t-tertiary: #aeaeb2;
+  --t-accent: #0071e3;
+  --t-nav: rgba(255, 255, 255, 0.85);
+}
+
+.dark {
+  --t-bg: #000000;
+  --t-surface: #1c1c1e;
+  --t-border: rgba(255, 255, 255, 0.1);
+  --t-primary: #f5f5f7;
+  --t-secondary: rgba(255, 255, 255, 0.55);
+  --t-tertiary: rgba(255, 255, 255, 0.28);
+  --t-accent: #4da3ff;
+  --t-nav: rgba(0, 0, 0, 0.85);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
-  /* Smooth scrolling for all browsers */
+
   html {
     scroll-behavior: smooth;
   }
-  
-  /* Better font rendering */
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide {
+
+  .scrollbar-hide, .scrollbar-none {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
-  .scrollbar-hide::-webkit-scrollbar {
+
+  .scrollbar-hide::-webkit-scrollbar,
+  .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
 }

@@ -1,10 +1,10 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const E = [0.16, 1, 0.3, 1] as const;
+const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
 
 interface Initiative {
   id: string;
@@ -20,20 +20,13 @@ interface Company {
   role: string;
   period: string;
   overview: string;
-  bg: string;
-  accent: string;
   metrics: { value: string; label: string }[];
   initiatives: Initiative[];
 }
 
 const COMPANIES: Company[] = [
   {
-    id: 'meta',
-    name: 'Meta',
-    role: 'Content Marketing Coordinator II',
-    period: 'Oct 2025 – Mar 2026',
-    bg: 'linear-gradient(145deg, #0D1B3E 0%, #162252 100%)',
-    accent: '#60A5FA',
+    id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
     metrics: [{ value: '13', label: 'Published pieces' }, { value: '5', label: 'XFN teams' }, { value: '100%', label: 'Stat accuracy' }],
     overview: 'Meta Horizon is a developer ecosystem and VR platform for creators building worlds, games, and experiences. As Project Lead, I managed the full storytelling pipeline for the Horizon Developer Blog — developer success stories, go-to-market guides, and cross-functional editorial coordination.',
     initiatives: [
@@ -45,7 +38,7 @@ const COMPANIES: Company[] = [
       { id: 'saydeechan', category: 'Developer Story', title: 'Saydeechan: Bringing Worlds to Japan', description: 'One creator decided Horizon Worlds needed a home in Japan. So they built it. A story about localization, community building, and what it means to represent a culture on a new platform.', url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/' },
       { id: 'grow-farm', category: 'Developer Story', title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World', description: 'Two YouTubers with no dev experience hit the top 10 in two months. A story about platform accessibility and what the tools of Horizon enable for creators with an audience but no technical background.', url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/' },
       { id: 'matthiaos', category: 'Developer Story', title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community', description: 'The most important builders aren\'t always the ones with the highest numbers. A profile of a creator whose contribution to Horizon is measured in community trust, not installs.', url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/' },
-      { id: 'year-review', category: 'Year in Review', title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers', description: 'A year-in-review surfacing what scaled, what didn\'t, and who defined 2025 in the Horizon developer ecosystem. Pattern recognition across a year of published developer stories.', url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/' },
+      { id: 'year-review', category: 'Year in Review', title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers', description: 'A year-in-review surfacing what scaled, what didn\'t, and who defined 2025 in the Horizon developer ecosystem.', url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/' },
       { id: 'kawaii', category: 'Success Story', title: 'Kawaii.Creator — Success Story', description: 'A distinctive visual world, built inside ours. Platform success story highlighting how creative identity and aesthetic commitment translate into platform growth.', url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/' },
       { id: 'gtm-marketing', category: 'GTM Guide', title: 'Develop a Marketing Plan for Your VR App', description: 'The anchor guide in the series — strategy, audience research, channel selection, and the foundational thinking every VR developer needs before launch.', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/' },
       { id: 'gtm-influencer', category: 'GTM Guide', title: 'Leverage Influencer Partnerships for Your VR App', description: 'A practical guide to building influencer partnerships for VR developers. Identifying the right creators, structuring relationships, and measuring what works.', url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/' },
@@ -56,17 +49,12 @@ const COMPANIES: Company[] = [
     ],
   },
   {
-    id: 'snap',
-    name: 'Snap Inc.',
-    role: 'Trend Producer',
-    period: 'Mar – Oct 2025',
-    bg: 'linear-gradient(145deg, #111111 0%, #1c1c1c 100%)',
-    accent: '#FDE047',
+    id: 'snap', name: 'Snap Inc.', role: 'Trend Producer', period: 'Mar – Oct 2025',
     metrics: [{ value: '500M+', label: 'Monthly viewers' }, { value: '1,000+', label: 'Videos daily' }, { value: '1M+', label: 'Creators influenced' }],
-    overview: 'Spotlight is Snapchat\'s discovery surface for short-form video, reaching hundreds of millions of viewers. My role focused on identifying breakout creators and cultural trends within a high-velocity content pipeline — programming editorial decisions at scale across one of the largest UGC surfaces in social media.',
+    overview: 'Spotlight is Snapchat\'s discovery surface for short-form video, reaching hundreds of millions of viewers. My role focused on identifying breakout creators and cultural trends within a high-velocity content pipeline — programming editorial decisions at scale.',
     initiatives: [
       { id: 'snap-spotlight', category: 'Content Programming', title: 'Spotlight Programming Lead', description: 'Daily editorial oversight of a 1,000+ piece pipeline across one of the largest UGC surfaces in social media. Every programming decision shaped what 500M+ monthly viewers saw first.' },
-      { id: 'snap-trend', category: 'Trend Intelligence', title: 'Trend Intelligence & Cultural Signals', description: 'Detecting breakout content across a 1,000+ piece daily pipeline — identifying cultural signals before they reached algorithmic momentum. The work of understanding what\'s next before the numbers confirm it.' },
+      { id: 'snap-trend', category: 'Trend Intelligence', title: 'Trend Intelligence & Cultural Signals', description: 'Detecting breakout content across a 1,000+ piece daily pipeline — identifying cultural signals before they reached algorithmic momentum. Understanding what\'s next before the numbers confirm it.' },
       { id: 'snap-nux', category: 'Product Collaboration', title: 'New User Experience Curation', description: 'Curating the first screen a new user sees — 300+ pieces reviewed per cohort. The NUX determines whether someone comes back. Every selection is a statement about what Spotlight is.' },
       { id: 'snap-boosted', category: 'Data & Creator Strategy', title: 'Creator Identification System', description: 'A creator identification system built with Data Science to surface emerging talent earlier at scale. Contributed to the criteria that determine who gets boosted across the platform.' },
       { id: 'snap-campaign', category: 'Campaign Sourcing', title: 'Marketing Campaign Content Sourcing', description: 'Identifying standout creator content for platform marketing campaigns. Contributed selections used in Times Square placements and other high-visibility Snap brand activations.' },
@@ -76,18 +64,13 @@ const COMPANIES: Company[] = [
     ],
   },
   {
-    id: 'phony',
-    name: 'Phony Content',
-    role: 'Content Manager',
-    period: 'May 2024 – Mar 2025',
-    bg: 'linear-gradient(145deg, #180D35 0%, #240f4f 100%)',
-    accent: '#C084FC',
+    id: 'phony', name: 'Phony Content', role: 'Content Manager', period: 'May 2024 – Mar 2025',
     metrics: [{ value: '25M+', label: 'Total views' }, { value: '50+', label: 'Stories produced' }, { value: '39%', label: 'Top completion rate' }],
     overview: 'Tiny Texts is a scripted short-form storytelling series on Snapchat built around conversational text message narratives. My role focused on developing the story architecture, production systems, and engagement frameworks that drove consistent audience retention across 50+ episodes.',
     initiatives: [
       { id: 'phony-architecture', category: 'Narrative Design', title: 'Viral Story Architecture', description: 'Designing conversational stories engineered for retention — structure, pacing, and emotional arcs calibrated for short-form audience behavior. These aren\'t just scripts; they\'re systems for keeping someone reading.' },
-      { id: 'phony-engagement', category: 'Audience Strategy', title: 'Audience Engagement Analysis', description: 'Understanding how conversational storytelling retains audiences. Analyzing completion rates and retention patterns to identify which structural choices drove behavior — and applying those findings to future production.' },
-      { id: 'phony-production', category: 'Editorial Pipeline', title: 'High-Volume Story Production', description: 'Producing serialized conversational stories at scale across 50+ episodes. Editorial calendars, style guides, and QA frameworks that made consistent quality achievable without slowing production.' },
+      { id: 'phony-engagement', category: 'Audience Strategy', title: 'Audience Engagement Analysis', description: 'Analyzing completion rates and retention patterns to identify which structural choices drove behavior — and applying those findings to future production. Led to the 39% peak on Cheer Squad.' },
+      { id: 'phony-production', category: 'Editorial Pipeline', title: 'High-Volume Story Production', description: 'Editorial calendars, style guides, and QA frameworks for high-volume serialized story production across 50+ episodes. Built the infrastructure that made consistent quality achievable at scale.' },
       { id: 'phony-cheersquad', category: 'Scripted Series', title: 'Tiny Texts — Cheer Squad', description: '6.3M views and a 39% completion rate. The highest-performing episode in the Tiny Texts catalog — a story whose structure was deliberately engineered for hold.', url: 'https://snapchat.com/t/J2MP13US' },
       { id: 'phony-inhaler', category: 'Scripted Series', title: 'Tiny Texts — Inhaler', description: '4.39M views and 20.3K followers added to the account in one story cycle. A story that converted viewers into subscribers at a rate well above series average.', url: 'https://snapchat.com/t/wPotqUYw' },
       { id: 'phony-shower', category: 'Scripted Series', title: 'Tiny Texts — Mr. Shower', description: '3.01M views and 8.43K followers added. Part of the core Tiny Texts run that established the series as a consistent performer on the platform.' },
@@ -96,14 +79,9 @@ const COMPANIES: Company[] = [
     ],
   },
   {
-    id: 'stockx',
-    name: 'StockX',
-    role: 'Brand Creative Production (Freelance)',
-    period: 'Sep 2021 & Dec 2024',
-    bg: 'linear-gradient(145deg, #0A2010 0%, #122a18 100%)',
-    accent: '#4ADE80',
+    id: 'stockx', name: 'StockX', role: 'Brand Creative Production (Freelance)', period: 'Sep 2021 & Dec 2024',
     metrics: [{ value: '10M+', label: 'Campaign impressions' }, { value: '3', label: 'Major shoots' }, { value: '2', label: 'Markets researched' }],
-    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods. My contributions spanned research and production support — from a Gen Z consumer insights report that informed 2025 marketing strategy, to supporting high-visibility campaign shoots with major creators and athletes.',
+    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods. My contributions spanned research and production support — from a Gen Z consumer insights report that informed 2025 marketing strategy, to supporting high-visibility campaign shoots.',
     initiatives: [
       { id: 'stockx-report', category: 'Research Report', title: '2024 Core Insights Report', description: 'A Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across LA and NYC. Directly informed StockX\'s 2025 marketing strategy.' },
       { id: 'stockx-sydeon', category: 'Campaign', title: 'Behind the Streams with Sydeon', description: 'Gaming culture and resale culture — one campaign at the intersection. Production support for a creator partnership that reached audiences across both worlds.', url: 'https://www.youtube.com/watch?v=0uBuJh7sEjU' },
@@ -112,12 +90,7 @@ const COMPANIES: Company[] = [
     ],
   },
   {
-    id: 'collider',
-    name: 'Collider',
-    role: 'Editorial Content Specialist (Freelance)',
-    period: 'Aug – Oct 2022',
-    bg: 'linear-gradient(145deg, #1C0800 0%, #2d1200 100%)',
-    accent: '#FB923C',
+    id: 'collider', name: 'Collider', role: 'Editorial Content Specialist (Freelance)', period: 'Aug – Oct 2022',
     metrics: [{ value: '30M+', label: 'Monthly visitors' }, { value: '125K+', label: 'Top article views' }, { value: '~15%', label: 'Traffic lift' }],
     overview: 'Collider is a film and television platform with 30M+ monthly visitors. My role as a freelance editorial specialist focused on producing SEO-optimized features that captured high-intent search traffic while delivering genuine editorial value to a film-literate audience.',
     initiatives: [
@@ -128,11 +101,6 @@ const COMPANIES: Company[] = [
   },
 ];
 
-const ASK_BG = 'linear-gradient(145deg, #0d0d0d 0%, #181818 100%)';
-const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
-
-interface AskMessage { role: 'user' | 'assistant'; text: string; }
-
 const ASK_SUGGESTIONS = [
   "What is Shane's current role?",
   "What are Shane's biggest projects?",
@@ -140,49 +108,17 @@ const ASK_SUGGESTIONS = [
   "What makes Shane's work distinctive?",
 ];
 
-function renderMarkdown(text: string) {
-  const lines = text.split('\n');
-  const elements: React.ReactNode[] = [];
-  let bullets: string[] = [];
-  const flushBullets = (key: string) => {
-    if (bullets.length === 0) return;
-    elements.push(
-      <ul key={key} className="mt-1.5 space-y-1 pl-1">
-        {bullets.map((b, i) => (
-          <li key={i} className="flex items-start gap-1.5">
-            <span className="mt-[5px] w-1 h-1 rounded-full bg-white/40 flex-shrink-0" />
-            <span dangerouslySetInnerHTML={{ __html: b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
-          </li>
-        ))}
-      </ul>
-    );
-    bullets = [];
-  };
-  lines.forEach((line, i) => {
-    if (line.startsWith('- ')) {
-      bullets.push(line.slice(2));
-    } else {
-      flushBullets(`b-${i}`);
-      if (line.trim()) {
-        elements.push(
-          <p key={i} className={i > 0 ? 'mt-1.5' : ''} dangerouslySetInnerHTML={{ __html: line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
-        );
-      }
-    }
-  });
-  flushBullets('bend');
-  return <>{elements}</>;
-}
+interface AskMsg { role: 'user' | 'assistant'; text: string; }
 
-function getUrlLabel(url: string): string {
+function getUrlLabel(url: string) {
   try {
-    const host = new URL(url).hostname;
-    if (host.includes('snapchat')) return 'Open in Snap';
-    if (host.includes('youtube')) return 'Watch';
-    if (host.includes('collider')) return 'Read';
-    if (host.includes('meta')) return 'Open on Meta';
+    const h = new URL(url).hostname;
+    if (h.includes('snapchat')) return 'Open in Snap';
+    if (h.includes('youtube')) return 'Watch on YouTube';
+    if (h.includes('collider')) return 'Read on Collider';
+    if (h.includes('meta')) return 'Open on Meta';
   } catch {}
-  return 'Open';
+  return 'Open ↗';
 }
 
 export default function Work() {
@@ -190,99 +126,68 @@ export default function Work() {
   const [activeCompany, setActiveCompany] = useState('meta');
   const [activeInitiative, setActiveInitiative] = useState<string | null>(null);
   const [isAsk, setIsAsk] = useState(false);
-
-  const [askMessages, setAskMessages] = useState<AskMessage[]>([]);
-  const [askQuestion, setAskQuestion] = useState('');
+  const [askMsgs, setAskMsgs] = useState<AskMsg[]>([]);
+  const [askQ, setAskQ] = useState('');
   const [askLoading, setAskLoading] = useState(false);
-  const askInputRef = useRef<HTMLInputElement>(null);
-  const askBottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setMounted(true); }, []);
-
-  useEffect(() => {
-    if (isAsk) setTimeout(() => askInputRef.current?.focus(), 120);
-  }, [isAsk]);
-
-  useEffect(() => {
-    askBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [askMessages, askLoading]);
+  useEffect(() => { if (isAsk) setTimeout(() => inputRef.current?.focus(), 100); }, [isAsk]);
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [askMsgs, askLoading]);
 
   const askSubmit = async (q: string) => {
-    const trimmed = q.trim();
-    if (!trimmed || askLoading) return;
-    setAskMessages(prev => [...prev, { role: 'user', text: trimmed }]);
+    const t = q.trim();
+    if (!t || askLoading) return;
+    setAskMsgs(p => [...p, { role: 'user', text: t }]);
     setAskLoading(true);
     try {
-      const res = await fetch('/api/shanebot', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: trimmed }),
-      });
-      const data = await res.json();
-      setAskMessages(prev => [...prev, { role: 'assistant', text: data.answer ?? FALLBACK }]);
-    } catch {
-      setAskMessages(prev => [...prev, { role: 'assistant', text: FALLBACK }]);
-    } finally {
-      setAskLoading(false);
-    }
+      const res = await fetch('/api/shanebot', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: t }) });
+      const d = await res.json();
+      setAskMsgs(p => [...p, { role: 'assistant', text: d.answer ?? FALLBACK }]);
+    } catch { setAskMsgs(p => [...p, { role: 'assistant', text: FALLBACK }]); }
+    finally { setAskLoading(false); }
   };
 
-  const selectCompany = (id: string) => {
-    setActiveCompany(id);
-    setActiveInitiative(null);
-    setIsAsk(false);
-  };
+  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setIsAsk(false); };
 
-  const company = COMPANIES.find(c => c.id === activeCompany) ?? COMPANIES[0];
+  const company = COMPANIES.find(c => c.id === activeCompany)!;
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
 
-  const SITE_BG = 'linear-gradient(145deg, #0d0f14 0%, #111318 100%)';
-
-  if (!mounted) {
-    return <div className="h-screen overflow-hidden flex flex-col pt-14" style={{ background: SITE_BG }} />;
-  }
+  if (!mounted) return <div className="h-screen pt-[52px]" style={{ background: 'var(--t-bg)' }} />;
 
   return (
-    <div
-      className="h-screen overflow-hidden flex flex-col pt-14"
-      style={{ background: SITE_BG }}
-    >
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-6 lg:px-10 py-3 flex-shrink-0">
-        <Link href="/" className="text-sm text-white/40 hover:text-white transition-colors">
-          ← Home
-        </Link>
-        <span className="text-sm text-white/40">
-          {isAsk ? 'Ask about Shane' : company.name}
-        </span>
-      </div>
+    <div className="h-screen overflow-hidden flex flex-col pt-[52px]" style={{ background: 'var(--t-bg)' }}>
 
       {/* Body */}
-      <div className="flex flex-1 min-h-0 px-6 lg:px-10 gap-8 pb-4">
+      <div className="flex flex-1 min-h-0">
 
         {/* Sidebar */}
-        <div className="hidden lg:flex flex-col w-44 flex-shrink-0 py-6">
+        <div
+          className="hidden lg:flex flex-col w-[210px] flex-shrink-0 py-8 px-5"
+          style={{ borderRight: '1px solid var(--t-border)' }}
+        >
+          <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>
+            Experience
+          </p>
           <div className="flex flex-col gap-0.5 flex-1">
             {COMPANIES.map((c) => {
-              const isActive = !isAsk && c.id === activeCompany;
+              const active = !isAsk && c.id === activeCompany;
               return (
                 <button
                   key={c.id}
                   onClick={() => selectCompany(c.id)}
-                  className="text-left px-3 py-2.5 rounded-lg transition-all"
-                  style={isActive ? { backgroundColor: c.accent + '18' } : {}}
+                  className="text-left w-full px-3 py-2.5 rounded-lg transition-colors"
+                  style={{ background: active ? 'var(--t-surface)' : 'transparent' }}
+                  onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'var(--t-surface)'; }}
+                  onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
                 >
-                  <span
-                    className="block text-[11px] font-medium transition-colors"
-                    style={{ color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.28)' }}
-                  >
+                  <span className="block text-[14px] font-medium transition-colors" style={{ color: active ? 'var(--t-primary)' : 'var(--t-secondary)' }}>
                     {c.name}
                   </span>
-                  {isActive && (
-                    <span className="block text-[9px] mt-0.5" style={{ color: c.accent + '99' }}>
-                      {c.role.split(' ').slice(0, 3).join(' ')}
-                    </span>
-                  )}
+                  <span className="block text-[11px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>
+                    {c.period}
+                  </span>
                 </button>
               );
             })}
@@ -290,14 +195,13 @@ export default function Work() {
 
           <button
             onClick={() => { setIsAsk(true); setActiveInitiative(null); }}
-            className="text-left px-3 py-2.5 rounded-lg transition-all mt-4"
-            style={isAsk ? { backgroundColor: 'rgba(255,255,255,0.08)' } : {}}
+            className="text-left w-full px-3 py-2.5 rounded-lg transition-colors mt-2"
+            style={{ background: isAsk ? 'var(--t-surface)' : 'transparent' }}
+            onMouseEnter={e => { if (!isAsk) e.currentTarget.style.background = 'var(--t-surface)'; }}
+            onMouseLeave={e => { if (!isAsk) e.currentTarget.style.background = 'transparent'; }}
           >
-            <span
-              className="block text-[11px] font-medium transition-colors"
-              style={{ color: isAsk ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.28)' }}
-            >
-              ✦ Ask about Shane
+            <span className="block text-[14px] font-medium" style={{ color: isAsk ? 'var(--t-primary)' : 'var(--t-accent)' }}>
+              Ask about Shane
             </span>
           </button>
         </div>
@@ -305,230 +209,168 @@ export default function Work() {
         {/* Main panel */}
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none">
           <AnimatePresence mode="wait">
-            {isAsk ? (
 
-              /* ── Ask view ── */
+            {/* ── Ask ── */}
+            {isAsk ? (
               <motion.div
                 key="ask"
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: EASE }}
-                className="flex flex-col py-8 pb-16 max-w-lg"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: E }}
+                className="px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
               >
-                <div className="mb-8">
-                  <h1 className="text-3xl lg:text-4xl font-semibold text-white leading-none mb-2">
-                    Ask about Shane
-                  </h1>
-                  <p className="text-sm text-white/40">
-                    Trained on resume, experience, and portfolio.
-                  </p>
-                </div>
+                <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>AI</p>
+                <h1 className="text-[28px] font-semibold tracking-[-0.02em] mb-2" style={{ color: 'var(--t-primary)' }}>Ask about Shane</h1>
+                <p className="text-[15px] mb-8" style={{ color: 'var(--t-secondary)' }}>Trained on resume, experience, and portfolio.</p>
 
-                <div className="flex flex-col gap-2.5 mb-4">
-                  <AnimatePresence>
-                    {askMessages.length === 0 && !askLoading && (
-                      <motion.div
-                        key="suggestions"
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2, ease: EASE }}
-                        className="flex flex-col gap-2"
-                      >
-                        <p className="text-[10px] uppercase tracking-widest text-white/25 mb-2">Suggested</p>
-                        {ASK_SUGGESTIONS.map((s, i) => (
-                          <motion.button
-                            key={s}
-                            initial={{ opacity: 0, x: 6 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.18, delay: i * 0.04, ease: EASE }}
-                            onClick={() => askSubmit(s)}
-                            className="text-left text-xs text-white/50 px-4 py-3 rounded-xl border border-white/8 hover:border-white/20 hover:text-white/80 transition-all"
-                          >
-                            {s}
-                          </motion.button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  {askMessages.map((msg, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, ease: EASE }}
-                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div className={`max-w-[86%] px-4 py-3 rounded-2xl text-xs leading-relaxed ${
-                        msg.role === 'user'
-                          ? 'bg-white/10 text-white rounded-br-sm'
-                          : 'bg-white/5 text-white/70 rounded-bl-sm'
-                      }`}>
-                        {msg.role === 'assistant' ? renderMarkdown(msg.text) : msg.text}
+                <div className="flex flex-col gap-2.5 mb-6">
+                  {askMsgs.length === 0 && !askLoading && (
+                    <>
+                      <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Suggested</p>
+                      {ASK_SUGGESTIONS.map(s => (
+                        <button key={s} onClick={() => askSubmit(s)}
+                          className="text-left text-[14px] px-4 py-3 rounded-xl transition-colors"
+                          style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}
+                          onMouseEnter={e => { e.currentTarget.style.color = 'var(--t-primary)'; e.currentTarget.style.borderColor = 'var(--t-primary)'; }}
+                          onMouseLeave={e => { e.currentTarget.style.color = 'var(--t-secondary)'; e.currentTarget.style.borderColor = 'var(--t-border)'; }}
+                        >{s}</button>
+                      ))}
+                    </>
+                  )}
+                  {askMsgs.map((msg, i) => (
+                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className="max-w-[85%] px-4 py-3 rounded-2xl text-[14px] leading-relaxed"
+                        style={{
+                          background: msg.role === 'user' ? 'var(--t-primary)' : 'var(--t-surface)',
+                          color: msg.role === 'user' ? 'var(--t-bg)' : 'var(--t-primary)',
+                        }}>
+                        {msg.text}
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
-
-                  <AnimatePresence>
-                    {askLoading && (
-                      <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex justify-start">
-                        <div className="bg-white/5 rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
-                          {[0, 1, 2].map(i => (
-                            <motion.span key={i} className="w-1.5 h-1.5 bg-white/30 rounded-full"
-                              animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
-                              transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
-                            />
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <div ref={askBottomRef} />
+                  {askLoading && (
+                    <div className="flex justify-start">
+                      <div className="px-4 py-3 rounded-2xl flex gap-1.5" style={{ background: 'var(--t-surface)' }}>
+                        {[0,1,2].map(i => (
+                          <motion.span key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--t-tertiary)' }}
+                            animate={{ opacity: [0.3,1,0.3], y: [0,-3,0] }}
+                            transition={{ duration: 0.8, repeat: Infinity, delay: i*0.15 }} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  <div ref={bottomRef} />
                 </div>
 
-                <form onSubmit={(e) => { e.preventDefault(); askSubmit(askQuestion); setAskQuestion(''); }}>
-                  <div className="flex items-center gap-3 border border-white/12 rounded-xl px-4 py-3 focus-within:border-white/30 transition-colors bg-white/5">
-                    <input
-                      ref={askInputRef}
-                      type="text"
-                      value={askQuestion}
-                      onChange={e => setAskQuestion(e.target.value)}
-                      placeholder="Ask anything about Shane..."
-                      maxLength={500}
-                      className="flex-1 text-sm text-white placeholder-white/30 bg-transparent outline-none"
-                    />
-                    <motion.button
-                      type="submit"
-                      disabled={!askQuestion.trim() || askLoading}
-                      className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-white/15 text-white disabled:opacity-20 hover:bg-white/25 transition-colors"
-                      whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-                    >
+                <form onSubmit={e => { e.preventDefault(); askSubmit(askQ); setAskQ(''); }}>
+                  <div className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors"
+                    style={{ border: '1px solid var(--t-border)' }}>
+                    <input ref={inputRef} type="text" value={askQ} onChange={e => setAskQ(e.target.value)}
+                      placeholder="Ask anything about Shane..." maxLength={500}
+                      className="flex-1 text-[14px] bg-transparent outline-none"
+                      style={{ color: 'var(--t-primary)' }} />
+                    <button type="submit" disabled={!askQ.trim() || askLoading}
+                      className="w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0 transition-opacity disabled:opacity-30"
+                      style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}>
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
-                    </motion.button>
+                    </button>
                   </div>
                 </form>
               </motion.div>
 
+            /* ── Initiative detail ── */
             ) : initiative ? (
-
-              /* ── Initiative detail view ── */
               <motion.div
-                key={`initiative-${initiative.id}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3, ease: EASE }}
-                className="flex flex-col py-8 pb-16 max-w-lg"
+                key={`d-${initiative.id}`}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: E }}
+                className="px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
               >
-                <button
-                  onClick={() => setActiveInitiative(null)}
-                  className="flex items-center gap-2 text-xs text-white/35 hover:text-white/70 transition-colors mb-8 self-start"
-                >
+                <button onClick={() => setActiveInitiative(null)}
+                  className="flex items-center gap-1.5 text-[13px] mb-8 transition-colors"
+                  style={{ color: 'var(--t-secondary)' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-secondary)')}>
                   ← {company.name}
                 </button>
 
-                <p
-                  className="text-[9px] uppercase tracking-widest font-medium mb-3"
-                  style={{ color: company.accent + '99' }}
-                >
+                <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
                   {initiative.category}
                 </p>
-                <h2 className="text-2xl lg:text-3xl font-semibold text-white leading-snug mb-6">
+                <h2 className="text-[24px] font-semibold tracking-[-0.015em] leading-snug mb-5" style={{ color: 'var(--t-primary)' }}>
                   {initiative.title}
                 </h2>
-                <p className="text-sm text-white/60 leading-relaxed mb-8 max-w-md">
+                <p className="text-[15px] leading-[1.65] mb-8 max-w-[480px]" style={{ color: 'var(--t-secondary)' }}>
                   {initiative.description}
                 </p>
-
                 {initiative.url && (
-                  <a
-                    href={initiative.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-60 self-start"
-                    style={{ color: company.accent }}
-                  >
-                    {getUrlLabel(initiative.url)} ↗
+                  <a href={initiative.url} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[14px] font-medium"
+                    style={{ color: 'var(--t-accent)' }}>
+                    {getUrlLabel(initiative.url)}
                   </a>
                 )}
               </motion.div>
 
+            /* ── Company overview ── */
             ) : (
-
-              /* ── Company overview ── */
               <motion.div
-                key={`company-${activeCompany}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: EASE }}
-                className="py-8 pb-16"
+                key={`c-${activeCompany}`}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: E }}
+                className="px-8 lg:px-12 py-10 pb-20"
               >
                 {/* Header */}
-                <div className="mb-10">
-                  <h1 className="text-3xl lg:text-4xl font-semibold text-white leading-none mb-2">
+                <div className="mb-10 max-w-[620px]">
+                  <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
+                    {company.role}
+                  </p>
+                  <h1 className="text-[32px] font-semibold tracking-[-0.02em] leading-tight mb-1" style={{ color: 'var(--t-primary)' }}>
                     {company.name}
                   </h1>
-                  <p className="text-sm text-white/40 mb-6">{company.role} · {company.period}</p>
-                  <div className="flex items-center gap-10">
-                    {company.metrics.map((m) => (
+                  <p className="text-[15px] mb-8" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+
+                  <div className="flex items-center gap-10 mb-10 pb-10" style={{ borderBottom: '1px solid var(--t-border)' }}>
+                    {company.metrics.map(m => (
                       <div key={m.label}>
-                        <p className="text-xl font-semibold text-white leading-none mb-1">{m.value}</p>
-                        <p className="text-[9px] text-white/35 uppercase tracking-wider">{m.label}</p>
+                        <p className="text-[22px] font-semibold tracking-[-0.01em] leading-none mb-1" style={{ color: 'var(--t-primary)' }}>{m.value}</p>
+                        <p className="text-[11px] uppercase tracking-[0.06em]" style={{ color: 'var(--t-tertiary)' }}>{m.label}</p>
                       </div>
                     ))}
                   </div>
+
+                  <p className="text-[15px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
+                    {company.overview}
+                  </p>
                 </div>
 
-                {/* Overview */}
-                <p className="text-sm text-white/55 leading-relaxed mb-10 max-w-lg border-l-2 pl-4" style={{ borderColor: company.accent + '40' }}>
-                  {company.overview}
-                </p>
-
-                {/* Initiative cards */}
-                <div>
-                  <p
-                    className="text-[9px] uppercase tracking-widest font-medium mb-5"
-                    style={{ color: company.accent }}
-                  >
-                    Initiatives
+                {/* Initiative list */}
+                <div className="max-w-[620px]">
+                  <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                    Initiatives — {company.initiatives.length}
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
                     {company.initiatives.map((init, i) => (
                       <motion.button
                         key={init.id}
                         onClick={() => setActiveInitiative(init.id)}
-                        className="text-left p-5 rounded-xl border border-white/8 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.06] transition-all group"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25, delay: 0.04 + i * 0.03, ease: EASE }}
+                        className="w-full text-left flex items-center justify-between py-4 group transition-colors"
+                        style={{ borderBottom: '1px solid var(--t-border)' }}
+                        initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2, delay: 0.03 + i * 0.025, ease: E }}
                       >
-                        <p
-                          className="text-[9px] uppercase tracking-widest font-medium mb-2"
-                          style={{ color: company.accent + '70' }}
-                        >
-                          {init.category}
-                        </p>
-                        <p className="text-sm font-medium text-white/80 group-hover:text-white transition-colors leading-snug mb-3">
-                          {init.title}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          {init.url ? (
-                            <span className="text-[10px] text-white/25 group-hover:text-white/50 transition-colors">↗ link</span>
-                          ) : (
-                            <span />
-                          )}
-                          <span
-                            className="text-xs opacity-0 group-hover:opacity-50 transition-opacity"
-                            style={{ color: company.accent }}
-                          >
-                            →
-                          </span>
+                        <div>
+                          <p className="text-[11px] uppercase tracking-[0.08em] mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                            {init.category}
+                          </p>
+                          <p className="text-[15px] font-medium" style={{ color: 'var(--t-primary)' }}>
+                            {init.title}
+                          </p>
                         </div>
+                        <span className="text-[14px] ml-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--t-accent)' }}>
+                          →
+                        </span>
                       </motion.button>
                     ))}
                   </div>
@@ -539,30 +381,20 @@ export default function Work() {
         </div>
       </div>
 
-      {/* Bottom company strip */}
-      <div className="flex-shrink-0 px-6 lg:px-10 py-4 border-t border-white/8">
-        <div className="flex items-center gap-6 overflow-x-auto scrollbar-none lg:justify-center">
-          {COMPANIES.map((c) => {
-            const isActive = !isAsk && c.id === activeCompany;
-            return (
-              <button
-                key={c.id}
-                onClick={() => selectCompany(c.id)}
-                className="flex-shrink-0 text-xs font-medium whitespace-nowrap transition-colors"
-                style={{ color: isActive ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.22)' }}
-              >
-                {c.name}
-              </button>
-            );
-          })}
-          <button
-            onClick={() => { setIsAsk(true); setActiveInitiative(null); }}
-            className="flex-shrink-0 text-xs font-medium whitespace-nowrap transition-colors"
-            style={{ color: isAsk ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.22)' }}
-          >
-            ✦ Ask
+      {/* Mobile bottom company strip */}
+      <div className="lg:hidden flex-shrink-0 px-6 py-3 overflow-x-auto scrollbar-none flex items-center gap-5" style={{ borderTop: '1px solid var(--t-border)' }}>
+        {COMPANIES.map(c => (
+          <button key={c.id} onClick={() => selectCompany(c.id)}
+            className="flex-shrink-0 text-[13px] font-medium whitespace-nowrap transition-colors"
+            style={{ color: !isAsk && c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
+            {c.name}
           </button>
-        </div>
+        ))}
+        <button onClick={() => { setIsAsk(true); setActiveInitiative(null); }}
+          className="flex-shrink-0 text-[13px] font-medium whitespace-nowrap"
+          style={{ color: isAsk ? 'var(--t-accent)' : 'var(--t-tertiary)' }}>
+          Ask
+        </button>
       </div>
     </div>
   );

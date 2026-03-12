@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -79,27 +78,26 @@ export default function Published() {
   const category = CATEGORIES.find(c => c.id === activeCategory) ?? CATEGORIES[0];
 
   return (
-    <div className="h-screen overflow-hidden bg-white flex flex-col pt-14">
-
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-6 sm:px-10 py-3 flex-shrink-0 border-b border-gray-100">
-        <Link href="/" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
-          ← Home
-        </Link>
-        <span className="text-sm text-gray-400">Published</span>
-      </div>
-
+    <div
+      className="h-screen overflow-hidden flex flex-col pt-[52px]"
+      style={{ background: 'var(--t-bg)' }}
+    >
       {/* Body */}
-      <div className="flex flex-1 min-h-0 px-6 sm:px-10 gap-10 py-6">
+      <div className="flex flex-1 min-h-0 px-6 sm:px-10 gap-10 py-8">
 
         {/* Left: category nav */}
         <motion.div
-          className="hidden md:flex flex-col w-52 flex-shrink-0"
-          initial={{ opacity: 0, x: -8 }}
-          animate={mounted ? { opacity: 1, x: 0 } : {}}
+          className="hidden md:flex flex-col w-[200px] flex-shrink-0"
+          initial={{ opacity: 0 }}
+          animate={mounted ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE }}
         >
-          <p className="text-[9px] uppercase tracking-widest text-gray-400 font-medium mb-4">Categories</p>
+          <p
+            className="text-[10px] uppercase tracking-[0.1em] font-medium mb-5"
+            style={{ color: 'var(--t-tertiary)' }}
+          >
+            Categories
+          </p>
           <div className="flex flex-col gap-0.5">
             {CATEGORIES.map((cat) => {
               const isActive = cat.id === activeCategory;
@@ -107,11 +105,14 @@ export default function Published() {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`text-left px-3 py-2.5 rounded-lg text-sm transition-all ${
-                    isActive
-                      ? 'bg-gray-100 text-gray-900 font-medium'
-                      : 'text-gray-400 hover:text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className="text-left px-3 py-2 rounded-lg text-[13px] transition-colors"
+                  style={{
+                    background: isActive ? 'var(--t-surface)' : 'transparent',
+                    color: isActive ? 'var(--t-primary)' : 'var(--t-secondary)',
+                    fontWeight: isActive ? '500' : '400',
+                  }}
+                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = 'var(--t-primary)'; }}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = 'var(--t-secondary)'; }}
                 >
                   {cat.label}
                 </button>
@@ -119,8 +120,11 @@ export default function Published() {
             })}
           </div>
 
-          <div className="mt-auto">
-            <p className="text-[10px] text-gray-300 leading-relaxed">
+          <div className="mt-auto pt-6">
+            <p
+              className="text-[11px]"
+              style={{ color: 'var(--t-tertiary)' }}
+            >
               {CATEGORIES.reduce((sum, c) => sum + c.articles.length, 0)} published pieces
             </p>
           </div>
@@ -128,41 +132,47 @@ export default function Published() {
 
         {/* Right: article list */}
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none">
+
+          {/* Mobile category pills */}
+          <div className="flex items-center gap-2 flex-wrap mb-6 md:hidden">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className="text-[12px] px-3 py-1.5 rounded-full border transition-all"
+                style={{
+                  borderColor: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-border)',
+                  background: cat.id === activeCategory ? 'var(--t-primary)' : 'transparent',
+                  color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
+                }}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
-            animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.3, ease: EASE }}
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.25, ease: EASE }}
           >
-            <p className="text-[9px] uppercase tracking-widest text-gray-400 font-medium mb-6 md:hidden">
+            <p
+              className="text-[10px] uppercase tracking-[0.1em] font-medium mb-6 hidden md:block"
+              style={{ color: 'var(--t-tertiary)' }}
+            >
               {category.label}
             </p>
-
-            {/* Mobile category pills */}
-            <div className="flex items-center gap-2 flex-wrap mb-6 md:hidden">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
-                    cat.id === activeCategory
-                      ? 'border-gray-900 bg-gray-900 text-white'
-                      : 'border-gray-200 text-gray-500 hover:border-gray-400'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
 
             <div className="flex flex-col">
               {category.articles.map((article, i) => (
                 <motion.div
                   key={article.title}
-                  initial={{ opacity: 0, y: 6 }}
+                  initial={{ opacity: 0, y: 4 }}
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.25, delay: i * 0.03, ease: EASE }}
-                  className="flex items-start justify-between py-4 border-b border-gray-100 group"
+                  transition={{ duration: 0.25, delay: i * 0.04, ease: EASE }}
+                  className="flex items-start justify-between py-4 group"
+                  style={{ borderBottom: '1px solid var(--t-border)' }}
                 >
                   <div className="flex-1 min-w-0 pr-4">
                     {article.url ? (
@@ -170,17 +180,29 @@ export default function Published() {
                         href={article.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-medium text-gray-900 hover:text-gray-500 transition-colors leading-snug block mb-1"
+                        className="text-[14px] font-medium leading-snug block mb-1.5 transition-colors"
+                        style={{ color: 'var(--t-primary)' }}
+                        onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-secondary)')}
+                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-primary)')}
                       >
                         {article.title}
                       </a>
                     ) : (
-                      <p className="text-sm font-medium text-gray-900 leading-snug mb-1">{article.title}</p>
+                      <p
+                        className="text-[14px] font-medium leading-snug mb-1.5"
+                        style={{ color: 'var(--t-primary)' }}
+                      >
+                        {article.title}
+                      </p>
                     )}
                     <div className="flex items-center gap-3 flex-wrap">
-                      <p className="text-xs text-gray-400">{article.publication} — {article.year}</p>
+                      <p className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
+                        {article.publication} · {article.year}
+                      </p>
                       {article.stat && (
-                        <p className="text-xs text-gray-300">{article.stat}</p>
+                        <p className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
+                          {article.stat}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -189,7 +211,10 @@ export default function Published() {
                       href={article.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-shrink-0 text-gray-300 group-hover:text-gray-600 transition-colors text-sm mt-0.5"
+                      className="flex-shrink-0 text-[13px] mt-0.5 transition-colors"
+                      style={{ color: 'var(--t-tertiary)' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
                       aria-label="Open"
                     >
                       ↗
