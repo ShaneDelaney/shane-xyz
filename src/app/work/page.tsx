@@ -235,16 +235,17 @@ export default function Work() {
 
   const company = COMPANIES.find(c => c.id === activeCompany) ?? COMPANIES[0];
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
-  const activeBg = isAsk ? ASK_BG : company.bg;
+
+  const SITE_BG = 'linear-gradient(145deg, #0d0f14 0%, #111318 100%)';
 
   if (!mounted) {
-    return <div className="h-screen overflow-hidden flex flex-col pt-14" style={{ background: COMPANIES[0].bg }} />;
+    return <div className="h-screen overflow-hidden flex flex-col pt-14" style={{ background: SITE_BG }} />;
   }
 
   return (
     <div
       className="h-screen overflow-hidden flex flex-col pt-14"
-      style={{ background: activeBg, transition: 'background 0.7s ease' }}
+      style={{ background: SITE_BG }}
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 lg:px-10 py-3 flex-shrink-0">
@@ -302,7 +303,7 @@ export default function Work() {
         </div>
 
         {/* Main panel */}
-        <div className="flex-1 min-h-0 flex flex-col">
+        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none">
           <AnimatePresence mode="wait">
             {isAsk ? (
 
@@ -313,7 +314,7 @@ export default function Work() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="flex flex-col h-full py-6 max-w-lg"
+                className="flex flex-col py-8 pb-16 max-w-lg"
               >
                 <div className="mb-8">
                   <h1 className="text-3xl lg:text-4xl font-semibold text-white leading-none mb-2">
@@ -324,7 +325,7 @@ export default function Work() {
                   </p>
                 </div>
 
-                <div className="flex-1 flex flex-col gap-2.5 overflow-y-auto scrollbar-none mb-4">
+                <div className="flex flex-col gap-2.5 mb-4">
                   <AnimatePresence>
                     {askMessages.length === 0 && !askLoading && (
                       <motion.div
@@ -421,7 +422,7 @@ export default function Work() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3, ease: EASE }}
-                className="flex flex-col py-6 max-w-lg"
+                className="flex flex-col py-8 pb-16 max-w-lg"
               >
                 <button
                   onClick={() => setActiveInitiative(null)}
@@ -465,63 +466,69 @@ export default function Work() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="flex flex-col py-6 max-w-2xl"
+                className="py-8 pb-16"
               >
-                <div className="mb-8">
+                {/* Header */}
+                <div className="mb-10">
                   <h1 className="text-3xl lg:text-4xl font-semibold text-white leading-none mb-2">
                     {company.name}
                   </h1>
-                  <p className="text-sm text-white/40 mb-5">{company.role} · {company.period}</p>
-                  <div className="flex items-center gap-8">
+                  <p className="text-sm text-white/40 mb-6">{company.role} · {company.period}</p>
+                  <div className="flex items-center gap-10">
                     {company.metrics.map((m) => (
                       <div key={m.label}>
-                        <p className="text-lg font-semibold text-white leading-none mb-0.5">{m.value}</p>
+                        <p className="text-xl font-semibold text-white leading-none mb-1">{m.value}</p>
                         <p className="text-[9px] text-white/35 uppercase tracking-wider">{m.label}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <p className="text-sm text-white/55 leading-relaxed mb-8 max-w-lg">
+                {/* Overview */}
+                <p className="text-sm text-white/55 leading-relaxed mb-10 max-w-lg border-l-2 pl-4" style={{ borderColor: company.accent + '40' }}>
                   {company.overview}
                 </p>
 
+                {/* Initiative cards */}
                 <div>
                   <p
-                    className="text-[9px] uppercase tracking-widest font-medium mb-4"
+                    className="text-[9px] uppercase tracking-widest font-medium mb-5"
                     style={{ color: company.accent }}
                   >
                     Initiatives
                   </p>
-                  <div className="flex flex-col">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {company.initiatives.map((init, i) => (
                       <motion.button
                         key={init.id}
                         onClick={() => setActiveInitiative(init.id)}
-                        className="flex items-center justify-between py-3 border-b border-white/6 group text-left hover:border-white/15 transition-colors"
-                        initial={{ opacity: 0, x: -6 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.25, delay: 0.05 + i * 0.04, ease: EASE }}
+                        className="text-left p-5 rounded-xl border border-white/8 hover:border-white/20 bg-white/[0.03] hover:bg-white/[0.06] transition-all group"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.25, delay: 0.04 + i * 0.03, ease: EASE }}
                       >
-                        <div className="flex items-center gap-4">
-                          <span className="text-[9px] text-white/20 tabular-nums w-4 flex-shrink-0">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <div>
-                            <p className="text-[9px] uppercase tracking-widest mb-0.5 font-medium" style={{ color: company.accent + '60' }}>
-                              {init.category}
-                            </p>
-                            <p className="text-sm font-medium text-white/80 group-hover:text-white transition-colors">
-                              {init.title}
-                            </p>
-                          </div>
-                        </div>
-                        <span
-                          className="text-xs opacity-0 group-hover:opacity-60 transition-opacity flex-shrink-0 ml-4"
-                          style={{ color: company.accent }}
+                        <p
+                          className="text-[9px] uppercase tracking-widest font-medium mb-2"
+                          style={{ color: company.accent + '70' }}
                         >
-                          →
-                        </span>
+                          {init.category}
+                        </p>
+                        <p className="text-sm font-medium text-white/80 group-hover:text-white transition-colors leading-snug mb-3">
+                          {init.title}
+                        </p>
+                        <div className="flex items-center justify-between">
+                          {init.url ? (
+                            <span className="text-[10px] text-white/25 group-hover:text-white/50 transition-colors">↗ link</span>
+                          ) : (
+                            <span />
+                          )}
+                          <span
+                            className="text-xs opacity-0 group-hover:opacity-50 transition-opacity"
+                            style={{ color: company.accent }}
+                          >
+                            →
+                          </span>
+                        </div>
                       </motion.button>
                     ))}
                   </div>
