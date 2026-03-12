@@ -12,6 +12,7 @@ interface Role {
   title: string;
   period: string;
   location: string;
+  portfolioId?: string;
   stats: { value: string; label: string }[];
   bullets: string[];
 }
@@ -23,15 +24,16 @@ const roles: Role[] = [
     title: 'Content Marketing Coordinator II',
     period: 'Oct 2025 – Present',
     location: 'Los Angeles, CA',
+    portfolioId: 'vail-vr-part-one',
     stats: [
       { value: '13', label: 'Published Pieces' },
       { value: '2', label: 'Programs Led' },
       { value: '100%', label: 'Stat Accuracy Rate' },
-      { value: '5 Teams', label: 'XFN Coordinated' },
+      { value: '5', label: 'XFN Teams' },
     ],
     bullets: [
-      'Served as Project Lead and System Owner for the Horizon Developer Blog content pipeline — owning sourcing, narrative development, cross-functional review, and publication across all active workstreams.',
-      'Led editorial direction for a 6-part Go-To-Market Developer Guide series (marketing plan, influencer partnerships, social media, marketing assets, PR, app demos) — now a cornerstone resource on the Meta developers portal.',
+      'Project Lead and System Owner for the Horizon Developer Blog content pipeline — owning sourcing, narrative development, cross-functional review, and publication across all active workstreams.',
+      'Led editorial direction for a 6-part Go-To-Market Developer Guide series — now a cornerstone resource on the Meta developers portal.',
       'Coordinated XFN reviews across Product, DevRel, Design, Legal, and Data Science for all high-visibility launches; ran formal stat verification prior to publication.',
       'Led 7 builder story spotlights end-to-end — defined story angles, sourced and interviewed creators, guided agency partners, and managed the full pipeline from sourcing through launch.',
       'Maintained DRI trackers and editorial calendars to manage concurrent workstreams and global delivery dates.',
@@ -43,18 +45,19 @@ const roles: Role[] = [
     title: 'Trend Producer',
     period: 'Mar 2025 – Oct 2025',
     location: 'Santa Monica, CA',
+    portfolioId: 'snap-spotlight',
     stats: [
-      { value: '500M', label: 'Monthly Spotlight Viewers' },
-      { value: '1,000+', label: 'Daily Content Pipeline' },
-      { value: '500K+', label: 'Campaign Daily Impressions' },
+      { value: '500M+', label: 'Monthly Viewers' },
+      { value: '1,000+', label: 'Daily Pipeline' },
       { value: '1M+', label: 'Creators Influenced' },
+      { value: '10+', label: 'XFN Teams' },
     ],
     bullets: [
-      'Served as Programming Lead for Spotlight — one of Snapchat\'s highest-scale content surfaces, reaching 500M+ monthly viewers.',
-      'Managed a high-volume daily content pipeline of 1,000+ Snaps, ensuring all assets met strict quality, safety, and brand-safe policy standards.',
-      'Synthesized daily performance data to identify breakout trends and inform real-time amplification decisions; led daily editorial syncs to translate findings into actionable creative direction.',
-      'Developed standardized Editorial Instructions (EIs) and content brief templates that reduced operational friction and accelerated the creative QA cycle.',
-      'Collaborated with Data Science to build a custom creator identification system; developed internal documentation for 10+ cross-functional teams and influenced monetization strategy across 1M+ creators.',
+      'Programming Lead for Spotlight — one of Snapchat\'s highest-scale content surfaces, reaching 500M+ monthly viewers.',
+      'Managed a daily pipeline of 1,000+ Snaps across quality, safety, and brand-safe policy standards.',
+      'Synthesized daily performance data to identify breakout trends; led editorial syncs translating findings into real-time amplification decisions.',
+      'Developed standardized Editorial Instructions and content brief templates that reduced operational friction and accelerated creative QA.',
+      'Collaborated with Data Science to build a creator identification system; developed documentation for 10+ cross-functional teams.',
     ],
   },
   {
@@ -63,6 +66,7 @@ const roles: Role[] = [
     title: 'Content Manager',
     period: 'May 2024 – Mar 2025',
     location: 'Los Angeles, CA',
+    portfolioId: 'tiny-texts-cheer-squad',
     stats: [
       { value: '25M+', label: 'Total Views' },
       { value: '6.3M', label: 'Top Story Views' },
@@ -70,9 +74,8 @@ const roles: Role[] = [
       { value: '50+', label: 'Stories Managed' },
     ],
     bullets: [
-      'Led editorial operations for Tiny Texts, a Snapchat scripted content channel, managing 50+ stories from concept through publication.',
-      'Contributed to 25M+ total views across the channel, with the top story (Cheer Squad) reaching 6.32M views and a 39% completion rate.',
-      'Managed resource allocation and creative QA through agile sprint planning, keeping production on schedule across all active stories.',
+      'Led editorial operations for Tiny Texts on Snapchat — managing 50+ scripted stories from concept through publication.',
+      'Contributed to 25M+ total views; top story (Cheer Squad) reached 6.3M views and a 39% completion rate.',
       'Built centralized documentation frameworks and editorial systems that standardized the production workflow end-to-end.',
     ],
   },
@@ -82,16 +85,17 @@ const roles: Role[] = [
     title: 'Editorial Content Specialist (Freelance)',
     period: 'Aug 2022 – Oct 2022',
     location: 'Los Angeles, CA',
+    portfolioId: 'collider-actors-movies',
     stats: [
-      { value: '30M+', label: 'Monthly Platform Visitors' },
+      { value: '30M+', label: 'Monthly Visitors' },
       { value: '125K+', label: 'Top Article Views' },
       { value: '4:23', label: 'Avg. Time on Page' },
       { value: '~15%', label: 'Organic Traffic Lift' },
     ],
     bullets: [
-      'Produced SEO-optimized features for Collider, an entertainment platform with 30M+ monthly visitors, adhering to complex style guides and metadata protocols.',
-      'Top article: "Actors and Their Favorite Movies" — 125K+ views, 4:23 avg. time on page, top 3 Google result.',
-      'Lifted organic web traffic by approximately 15% in two months through targeted content and metadata strategy.',
+      'Produced SEO-optimized features for Collider, an entertainment platform with 30M+ monthly visitors.',
+      'Top article: "Actors and Their Favorite Movies" — 125K+ views, 4:23 avg. time on page, top-3 Google result.',
+      'Lifted organic traffic approximately 15% in two months through targeted content and metadata strategy.',
     ],
   },
   {
@@ -100,15 +104,16 @@ const roles: Role[] = [
     title: 'Brand Creative Production (Freelance)',
     period: 'Sep 2021 & Dec 2024',
     location: 'Los Angeles, CA',
+    portfolioId: 'stockx-core-insights',
     stats: [
       { value: '10M+', label: 'Campaign Impressions' },
-      { value: '3', label: 'Major Shoots Supported' },
+      { value: '3', label: 'Major Shoots' },
       { value: '2', label: 'Markets Researched' },
     ],
     bullets: [
-      'Authored the 2024 Core Insights Report analyzing Gen Z digital consumption patterns across LA and NYC, directly informing StockX\'s 2025 marketing strategy.',
-      'Supported 3 high-visibility campaign shoots — "Behind the Streams with Sydeon," "Briana King Joins StockX," and "What Drives Brittney Elena" — generating 10M+ cross-platform impressions.',
-      'Managed production timelines and coordinated logistics across creative, talent, and brand teams.',
+      'Authored the 2024 Core Insights Report analyzing Gen Z digital consumption across LA and NYC, directly informing StockX\'s 2025 marketing strategy.',
+      'Supported 3 high-visibility campaign shoots generating 10M+ cross-platform impressions.',
+      'Managed production logistics across creative, talent, and brand teams.',
     ],
   },
 ];
@@ -135,95 +140,97 @@ export default function Work() {
   const role = roles[active];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <section className="flex-1 w-full px-4 sm:px-6 pt-20 pb-0">
-        <div className="max-w-5xl mx-auto h-full">
+    <div className="h-screen overflow-hidden bg-white flex flex-col pt-14">
+      <div className="flex-1 flex flex-col min-h-0 w-full px-4 sm:px-8 lg:px-12">
+        <div className="max-w-5xl mx-auto w-full flex flex-col flex-1 min-h-0">
 
+          {/* Header */}
           <motion.div
-            className="flex items-baseline justify-between pt-8 sm:pt-14 pb-6 sm:pb-8"
+            className="flex items-baseline justify-between py-5 sm:py-7 flex-shrink-0"
             initial={{ opacity: 0 }}
             animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, ease: EASE }}
+            transition={{ duration: 0.4, ease: EASE }}
           >
-            <h1 className="text-3xl font-semibold tracking-tight text-gray-900">Experience</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Experience</h1>
             <Link href="/work/portfolio" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
               Portfolio →
             </Link>
           </motion.div>
 
-          {/* Mobile: flat stacked layout */}
-          <div className="sm:hidden">
-            {/* Company tab strip */}
+          {/* Mobile layout */}
+          <div className="sm:hidden overflow-y-auto flex-1">
             <div className="flex gap-2 overflow-x-auto pb-4 -mx-4 px-4">
-              {roles.map((r, i) => {
-                const isActive = i === active;
-                return (
-                  <button
-                    key={r.id}
-                    onClick={() => select(i)}
-                    className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all duration-150 ${
-                      isActive
-                        ? 'bg-gray-900 text-white font-medium'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                    }`}
-                  >
-                    {r.company}
-                  </button>
-                );
-              })}
+              {roles.map((r, i) => (
+                <button
+                  key={r.id}
+                  onClick={() => select(i)}
+                  className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all ${
+                    i === active ? 'bg-gray-900 text-white font-medium' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  }`}
+                >
+                  {r.company}
+                </button>
+              ))}
             </div>
 
-            {/* Role content */}
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={role.id}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.22, ease: EASE }}
-                className="pt-6"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, ease: EASE }}
+                className="pt-5 pb-12"
               >
-                <div className="mb-6">
-                  <h2 className="text-xl font-semibold tracking-tight text-gray-900 mb-1">{role.company}</h2>
+                <div className="mb-5">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-0.5">{role.company}</h2>
                   <p className="text-sm text-gray-500">{role.title}</p>
                   <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-2 mb-8">
-                  {role.stats.map(stat => (
-                    <div key={stat.label} className="bg-gray-50 rounded-xl px-4 py-3">
-                      <p className="text-lg font-semibold text-gray-900 tracking-tight leading-none mb-1">{stat.value}</p>
-                      <p className="text-[10px] text-gray-400 leading-snug">{stat.label}</p>
+                <div className="grid grid-cols-2 gap-2 mb-6">
+                  {role.stats.map(s => (
+                    <div key={s.label} className="bg-gray-50 rounded-xl px-4 py-3">
+                      <p className="text-lg font-semibold text-gray-900 leading-none mb-1">{s.value}</p>
+                      <p className="text-[10px] text-gray-400">{s.label}</p>
                     </div>
                   ))}
                 </div>
-                <div className="space-y-4 pb-10">
-                  {role.bullets.map((bullet, i) => (
+                <div className="space-y-3 mb-5">
+                  {role.bullets.map((b, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-                      <p className="text-sm text-gray-600 leading-relaxed">{bullet}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">{b}</p>
                     </div>
                   ))}
                 </div>
+                {role.portfolioId && (
+                  <Link
+                    href={`/work/portfolio?project=${role.portfolioId}`}
+                    className="text-sm text-gray-400 hover:text-gray-900 transition-colors"
+                  >
+                    See in portfolio →
+                  </Link>
+                )}
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Desktop: two-panel card */}
+          {/* Desktop two-panel */}
           <motion.div
-            className="hidden sm:flex gap-0 border border-gray-100 rounded-2xl overflow-hidden sm:h-[calc(100vh-14rem)]"
-            initial={{ opacity: 0, y: 16 }}
+            className="hidden sm:flex flex-1 min-h-0 border border-gray-100 rounded-2xl overflow-hidden mb-6"
+            initial={{ opacity: 0, y: 12 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
           >
-            {/* Left: company selector */}
-            <div className="w-44 flex-shrink-0 border-r border-gray-100 py-4 flex flex-col gap-0.5 overflow-y-auto">
+            {/* Sidebar */}
+            <div className="w-44 flex-shrink-0 border-r border-gray-100 py-3 flex flex-col overflow-y-auto">
               {roles.map((r, i) => {
                 const isActive = i === active;
                 return (
                   <button
                     key={r.id}
                     onClick={() => select(i)}
-                    className={`w-full text-left px-4 py-3 transition-all duration-150 relative ${
+                    className={`w-full text-left px-4 py-3 transition-all relative ${
                       isActive ? 'bg-gray-50' : 'hover:bg-gray-50/60'
                     }`}
                   >
@@ -245,41 +252,53 @@ export default function Work() {
               })}
             </div>
 
-            {/* Right: spotlight */}
+            {/* Detail panel */}
             <div className="flex-1 overflow-y-auto">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={role.id}
-                  initial={{ opacity: 0, x: direction * 24 }}
+                  initial={{ opacity: 0, x: direction * 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: direction * -24 }}
-                  transition={{ duration: 0.26, ease: EASE }}
+                  exit={{ opacity: 0, x: direction * -20 }}
+                  transition={{ duration: 0.22, ease: EASE }}
                   className="p-8"
                 >
-                  <div className="mb-6">
-                    <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-1">{role.company}</h2>
-                    <p className="text-sm text-gray-500">{role.title}</p>
-                    <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-0.5">{role.company}</h2>
+                      <p className="text-sm text-gray-500">{role.title}</p>
+                      <p className="text-xs text-gray-400 mt-1">{role.location} · {role.period}</p>
+                    </div>
+                    {role.portfolioId && (
+                      <Link
+                        href={`/work/portfolio?project=${role.portfolioId}`}
+                        className="flex-shrink-0 text-xs text-gray-400 hover:text-gray-900 transition-colors mt-1"
+                      >
+                        See in portfolio →
+                      </Link>
+                    )}
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-8">
-                    {role.stats.map(stat => (
-                      <div key={stat.label} className="bg-gray-50 rounded-xl px-4 py-3">
-                        <p className="text-lg font-semibold text-gray-900 tracking-tight leading-none mb-1">{stat.value}</p>
-                        <p className="text-[10px] text-gray-400 leading-snug">{stat.label}</p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-7">
+                    {role.stats.map(s => (
+                      <div key={s.label} className="bg-gray-50 rounded-xl px-4 py-3">
+                        <p className="text-lg font-semibold text-gray-900 leading-none mb-1">{s.value}</p>
+                        <p className="text-[10px] text-gray-400">{s.label}</p>
                       </div>
                     ))}
                   </div>
+
                   <div className="space-y-3">
-                    {role.bullets.map((bullet, i) => (
+                    {role.bullets.map((b, i) => (
                       <motion.div
                         key={i}
-                        initial={{ opacity: 0, y: 8 }}
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.22, delay: 0.08 + i * 0.055, ease: EASE }}
+                        transition={{ duration: 0.2, delay: 0.06 + i * 0.05, ease: EASE }}
                         className="flex items-start gap-3"
                       >
                         <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-                        <p className="text-sm text-gray-600 leading-relaxed">{bullet}</p>
+                        <p className="text-sm text-gray-600 leading-relaxed">{b}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -288,9 +307,8 @@ export default function Work() {
             </div>
           </motion.div>
 
-          <div className="pb-8" />
         </div>
-      </section>
+      </div>
     </div>
   );
 }
