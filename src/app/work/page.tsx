@@ -179,10 +179,15 @@ export default function Work() {
   const askSubmit = async (q: string) => {
     const t = q.trim();
     if (!t || askLoading) return;
-    setAskMsgs(p => [...p, { role: 'user', text: t }]);
+    const updatedMsgs: AskMsg[] = [...askMsgs, { role: 'user', text: t }];
+    setAskMsgs(updatedMsgs);
     setAskLoading(true);
     try {
-      const res = await fetch('/api/shanebot', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: t }) });
+      const res = await fetch('/api/shanebot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: updatedMsgs }),
+      });
       const d = await res.json();
       setAskMsgs(p => [...p, { role: 'assistant', text: d.answer ?? FALLBACK }]);
     } catch { setAskMsgs(p => [...p, { role: 'assistant', text: FALLBACK }]); }

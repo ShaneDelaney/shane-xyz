@@ -63,21 +63,34 @@ Open to full-time roles in content strategy, editorial operations, or content ma
 
 const client = new Anthropic();
 
+interface ChatMessage { role: 'user' | 'assistant'; text: string; }
+
+export async function GET() {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  return NextResponse.json({ ok: !!apiKey, model: 'claude-haiku-4-5' });
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { question } = await req.json();
+    const body = await req.json();
 
-    if (!question || typeof question !== 'string' || question.trim().length === 0) {
-      return NextResponse.json({ answer: FALLBACK });
+    // Support both old { question } and new { messages } format
+    let messages: ChatMessage[] = body.messages ?? [];
+    if (!messages.length && body.question) {
+      messages = [{ role: 'user', text: body.question }];
     }
 
-    if (question.trim().length > 500) {
+    if (!messages.length) return NextResponse.json({ answer: FALLBACK });
+
+    const lastUserMsg = messages.filter(m => m.role === 'user').at(-1)?.text ?? '';
+    if (lastUserMsg.length > 500) {
       return NextResponse.json({ answer: "Try asking something more specific and I'll give you a better answer." });
     }
 
-    const cached = findCachedAnswer(question.trim());
-    if (cached) {
-      return NextResponse.json({ answer: cached });
+    // Only use cache on the first message (no prior context)
+    if (messages.length === 1) {
+      const cached = findCachedAnswer(lastUserMsg);
+      if (cached) return NextResponse.json({ answer: cached });
     }
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -89,7 +102,10 @@ export async function POST(req: NextRequest) {
       model: 'claude-haiku-4-5',
       max_tokens: 200,
       system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: question.trim() }],
+      messages: messages.map(m => ({
+        role: m.role,
+        content: m.text,
+      })),
     });
 
     const answer = message.content[0].type === 'text' ? message.content[0].text : FALLBACK;
