@@ -7,146 +7,117 @@ export const cache: CacheEntry[] = [
   // --- META ---
   {
     keywords: [['meta'], ['role', 'do', 'job', 'work', 'position', 'title', 'current']],
-    answer: "**Content Marketing Coordinator II at Meta** (Oct 2025–present), Los Angeles.\n- Owns the full editorial lifecycle for the Horizon Developer Blog\n- Runs XFN coordination across Product, DevRel, Design, and Legal\n- Manages stat review with Data Science before every launch",
+    answer: "Content Marketing Coordinator II at Meta (Oct 2025 – Mar 2026), Los Angeles. Shane owned the full editorial lifecycle for the Horizon Developer Blog — from creator sourcing and interviews through XFN coordination and publication. 13 pieces published total.",
   },
   {
     keywords: [['meta', 'horizon'], ['blog', 'developer', 'content', 'editorial']],
-    answer: "Shane owns the Horizon Developer Blog end-to-end — from story ideation to publication. He manages DRI trackers, editorial calendars, XFN feedback loops, and the formal stat review process with Data Science.",
+    answer: "Shane was the sole DRI for the Meta Horizon Developer Blog — sourcing creators, conducting editorial interviews, writing developer stories and GTM guides, managing cross-functional review across Product, DevRel, Legal, Design, and Data Science, and publishing. He also built a formal stat-verification process with Data Science confirming 100% metric accuracy.",
   },
   {
-    keywords: [['gtm', 'go-to-market', 'developer guide', 'vr', 'horizon worlds']],
-    answer: "**4-part Meta Horizon GTM Guide Series** — cornerstone resource on the Meta developers portal.\n- Owned all copy and editorial direction\n- Coordinated XFN reviews (Product, DevRel, Design, Legal)\n- On-schedule delivery across all four guides",
+    keywords: [['gtm', 'go-to-market', 'developer guide']],
+    answer: "Shane wrote a 6-part GTM guide series for Meta Horizon — covering marketing planning, influencer partnerships, social and community strategy, marketing assets, PR, and app demos. He owned all copy and editorial direction, coordinated XFN review, and delivered the series on schedule.",
   },
   {
-    keywords: [['builder stor', 'spotlight', 'creator', 'narrative']],
-    answer: "**6-part Builder Story Spotlight Series** on the Meta Horizon Developers Blog.\n- Defined story angles and conducted creator interviews\n- Guided agency partners on execution\n- Managed full pipeline from sourcing through launch",
-  },
-  {
-    keywords: [['xfn', 'cross-functional', 'stakeholder', 'coordination', 'legal', 'product']],
-    answer: "Shane is the editorial bridge between Marketing, Product, and Legal at Meta — synthesizing XFN feedback, managing stat verification with Data Science, and producing internal status reports for leadership.",
+    keywords: [['xfn', 'cross-functional', 'stakeholder', 'coordination']],
+    answer: "Shane ran XFN review cycles across Product, DevRel, Design, Legal, and Data Science for every piece of Horizon content. He was the editorial bridge between teams — synthesizing feedback, managing stat verification, and producing internal status reports for leadership.",
   },
 
   // --- SNAP ---
   {
-    keywords: [['snap', 'snapchat'], ['role', 'do', 'job', 'work', 'position', 'title', 'experience']],
-    answer: "**Trend Producer at Snap Inc.** (Mar–Oct 2025), Santa Monica.\n- Programming Lead for Spotlight — 500M+ monthly viewers\n- Managed a daily pipeline of 1,000+ Snaps\n- Led daily editorial syncs to translate data into creative direction",
+    keywords: [['snap', 'snapchat'], ['role', 'do', 'job', 'position', 'title', 'experience']],
+    answer: "Trend Producer at Snap Inc. (Mar – Oct 2025), Santa Monica. Shane was the programming lead for Spotlight, reviewing and programming 1,000+ videos daily for a surface with 500M+ monthly viewers. He identified breakout content before it hit algorithmic momentum and curated new user experience feeds for teen cohorts.",
   },
   {
-    keywords: [['spotlight', 'programming lead', 'trend', 'amplification']],
-    answer: "As **Programming Lead for Snapchat Spotlight**, Shane synthesized daily performance data to identify breakout content and drive real-time amplification decisions across one of Snap's highest-scale surfaces.",
+    keywords: [['spotlight', 'programming', 'trend']],
+    answer: "As programming lead for Snapchat Spotlight, Shane reviewed 1,000+ pieces of content daily and made editorial calls on what 500M+ monthly viewers saw first. He flagged breakout content before the algorithm confirmed it and built workflow documentation used across 10+ cross-functional teams.",
   },
   {
-    keywords: [['nux', 'new user', 'onboarding', 'retention', 'teen']],
-    answer: "Shane curated personalized UGC feeds for Snap's New User Experience targeting teens (13–17). **10% higher retention** than platform averages — 300+ pieces reviewed per cohort using data-driven segmentation guidelines.",
+    keywords: [['nux', 'new user', 'onboarding', 'retention']],
+    answer: "Shane curated personalized content feeds for Snapchat's New User Experience targeting teens 13–17, reviewing 300+ pieces per cohort. His selections contributed to 10% higher retention than platform averages.",
   },
   {
-    keywords: [['times square', 'say it in a snap', 'campaign', 'outdoor', 'subway', 'nyc']],
-    answer: "**Say It in a Snap — Times Square takeover.** Shane led editorial curation for NYC subway placements, generating **500K+ daily impressions** through standout UGC selection and cross-team collaboration.",
+    keywords: [['times square', 'campaign', 'say it in a snap']],
+    answer: "Shane sourced creator content for Snap's Times Square and NYC subway brand campaign — Say It in a Snap — contributing selections that generated 500K+ daily impressions.",
   },
   {
-    keywords: [['boosted content', 'data science', 'creator', 'monetization', 'emerging']],
-    answer: "Shane partnered with Snap's data science team to build a custom creator identification system. The initiative influenced monetization strategy across **1M+ creators** and produced documentation for 10+ XFN teams.",
+    keywords: [['boosted', 'data science', 'creator', 'identification']],
+    answer: "Shane partnered with Snap's Data Science team to build a creator identification system that surfaced emerging talent earlier at scale. The system influenced monetization strategy across 1M+ creators and produced documentation for 10+ cross-functional teams.",
   },
 
   // --- PHONY CONTENT ---
   {
-    keywords: [['phony content', 'tiny texts', 'snapchat stories', 'scripted']],
-    answer: "**Content Manager for Tiny Texts at Phony Content** — scripted Snapchat stories.\n- 50+ stories managed end-to-end\n- **4M+ views**, 40K+ new followers, 90% viewership boost\n- Top story: 6.32M views, 39% completion rate",
-  },
-  {
-    keywords: [['4 million', '4m', 'views', 'followers', 'viral', 'viewership boost']],
-    answer: "Through Tiny Texts on Snapchat: **4M+ views**, 40K+ new followers, 90% viewership boost across 50+ scripted stories. Top stories hit 6M+ views individually with 39–42% completion rates.",
+    keywords: [['phony', 'tiny texts', 'scripted', 'snapchat stories']],
+    answer: "Content Manager for Tiny Texts at Phony Content — a scripted short-form series on Snapchat. Shane wrote scripts, designed narrative structures for retention, and built the production systems for 50+ episodes. 25M+ total views. Top episode: Cheer Squad at 6.3M views and a 39% completion rate.",
   },
 
   // --- STOCKX ---
   {
-    keywords: [['stockx'], ['role', 'work', 'experience', 'do', 'project']],
-    answer: "Shane worked with StockX on a freelance basis in 2021 and 2024 — authoring the **2024 Core Insights Report** (Gen Z consumer behavior in LA/NYC) and supporting three high-visibility campaign shoots that generated **10M+ impressions**.",
-  },
-  {
-    keywords: [['core insights', 'gen z', 'trend report', 'consumer', 'research']],
-    answer: "**StockX 2024 Core Insights Report** — Gen Z consumer behavior analysis across LA and NYC that directly informed StockX's 2025 marketing strategy. Mapped digital behaviors, identified subcultures, and flagged affinity brands for targeting.",
+    keywords: [['stockx'], ['role', 'work', 'experience', 'project']],
+    answer: "Shane worked with StockX on a freelance basis in 2021 and 2024. He authored the 2024 Core Insights Report on Gen Z consumer behavior across LA and NYC — which informed StockX's 2025 marketing strategy — and provided production support on three major campaign shoots generating 10M+ combined impressions.",
   },
 
   // --- COLLIDER ---
   {
-    keywords: [['collider'], ['role', 'work', 'experience', 'write', 'seo']],
-    answer: "**Editorial Content Specialist at Collider** (30M+ monthly visitors). Produced SEO-optimized features adhering to complex style guides — lifted organic traffic ~**15% in two months**. Top article: 125K+ views, 4:23 avg time on page, top 3 Google result.",
+    keywords: [['collider'], ['role', 'work', 'experience', 'write']],
+    answer: "Editorial Content Specialist at Collider (Aug – Oct 2022), a film and TV platform with 30M+ monthly visitors. Shane produced SEO-optimized features and contributed to roughly a 15% organic traffic lift in two months. Top piece: Actors and Their Favorite Movies — 125K readers, 4:23 average time on page, top-3 Google result.",
   },
 
-  // --- SKILLS / TOOLS ---
+  // --- SKILLS ---
   {
-    keywords: [['skill', 'tool', 'software', 'platform', 'use', 'know', 'proficient']],
-    answer: "Shane's strongest areas: **editorial operations** (pipeline management, DRIs, stat review, EIs), **XFN coordination**, and **AI-native tooling** (Claude Code, Cursor, GitHub). Ops stack includes Airtable, Jira, Confluence, and Asana. Ask about a specific area for more detail.",
-  },
-  {
-    keywords: [['airtable', 'jira', 'confluence', 'asana', 'salesforce', 'figma', 'cms']],
-    answer: "Ops toolkit: **Airtable, Jira, Confluence, Asana, Salesforce, Figma,** and various CMS platforms — used daily for project governance, editorial tracking, and cross-functional collaboration.",
+    keywords: [['skill', 'tool', 'software', 'platform', 'proficient', 'know', 'good at']],
+    answer: "Shane's core strengths are editorial operations — pipeline management, DRIs, stat review — XFN coordination, and AI-native tooling. His ops stack includes Airtable, Jira, Confluence, and Asana. On the AI and dev side: Claude Code, Cursor, GitHub, and SuperWhisper. Ask about a specific area for more detail.",
   },
 
   // --- AI ---
   {
-    keywords: [['ai', 'artificial intelligence'], ['native', 'first', 'tools', 'build', 'use', 'work', 'skill']],
-    answer: "Shane is an **early AI-first practitioner** at Meta — actively building internal systems, dashboards, and tools using AI. Daily stack: **Claude Code, Cursor, GitHub, SuperWhisper.** Built this site entirely with Claude Code.",
+    keywords: [['ai', 'artificial intelligence'], ['native', 'tools', 'build', 'use', 'skill']],
+    answer: "Shane is an early AI-first practitioner — he built this portfolio site with Claude Code and uses it alongside Cursor, GitHub, and SuperWhisper daily. He's applied AI tooling to build internal systems and automations, and is actively pursuing roles at the intersection of content and AI.",
   },
   {
-    keywords: [['claude code', 'cursor', 'superwhisper', 'github', 'ai tool', 'dev tool']],
-    answer: "Shane's AI/dev stack: **Claude Code, Cursor, GitHub, SuperWhisper.** He built this portfolio site with Claude Code and uses these tools daily to build automations and internal tools at Meta.",
-  },
-  {
-    keywords: [['website', 'site', 'portfolio', 'built', 'made', 'created', 'developed', 'coded']],
-    answer: "Shane built this site himself with **Claude Code** — reflecting his broader AI-native approach. He actively builds with AI tools at Meta and in his own projects.",
+    keywords: [['website', 'site', 'portfolio', 'built', 'coded', 'developed', 'created']],
+    answer: "Shane built this site himself using Claude Code — which reflects his broader AI-native approach. He actively builds with AI tools and sees that skill set as core to his work, not just a side interest.",
   },
 
   // --- EDUCATION ---
   {
-    keywords: [['education', 'school', 'college', 'university', 'degree', 'study', 'lmu', 'loyola']],
-    answer: "**LMU (Loyola Marymount University)** — B.A. in English & Screenwriting, 2023. The writing-intensive background directly informs his editorial strategy and content quality standards.",
+    keywords: [['education', 'school', 'college', 'degree', 'lmu', 'loyola']],
+    answer: "Shane studied at LMU (Loyola Marymount University), graduating in 2023 with a B.A. in English and Screenwriting. The writing-intensive background is directly reflected in his editorial voice and content quality standards.",
   },
 
   // --- AVAILABILITY ---
   {
-    keywords: [['available', 'open to', 'hiring', 'opportunity', 'hire', 'recruit']],
-    answer: "Shane is open to full-time roles, freelance projects, and creative collaborations. Based in **Los Angeles, CA** — reach him at shanedelaney11@gmail.com.",
-  },
-  // More specific: "what kind of roles / what roles is Shane looking for"
-  {
-    keywords: [['role', 'roles', 'position'], ['looking', 'seeking', 'want', 'interest', 'open']],
-    answer: "Shane is targeting roles in **content marketing, editorial operations, or content strategy** — especially at the intersection of content and AI. Full-time preferred, open to remote or hybrid. Reach him at shanedelaney11@gmail.com.",
+    keywords: [['available', 'hiring', 'open to', 'opportunity', 'hire', 'recruit']],
+    answer: "Shane is open to full-time roles in content strategy, editorial operations, or content marketing — especially at companies at the intersection of content and technology. Based in Los Angeles. Reach him at shanedelaney11@gmail.com.",
   },
   {
-    keywords: [['freelance', 'contract', 'part-time', 'side project']],
-    answer: "Yes — Shane takes on freelance and contract work. Previous clients include **StockX** and **Phony Content**. Reach him at shanedelaney11@gmail.com.",
+    keywords: [['role', 'position'], ['looking', 'seeking', 'want', 'interested', 'targeting']],
+    answer: "Shane is targeting content strategy, editorial operations, and content marketing roles — especially where content meets platform scale or AI. Full-time preferred, open to remote or hybrid. Reach him at shanedelaney11@gmail.com.",
   },
 
   // --- CONTACT ---
   {
-    keywords: [['contact', 'reach', 'email', 'linkedin', 'get in touch', 'message']],
-    answer: "**shanedelaney11@gmail.com** — or find him on LinkedIn (Shane Delaney). Based in Los Angeles, open to new opportunities.",
+    keywords: [['contact', 'reach', 'email', 'linkedin', 'get in touch']],
+    answer: "Reach Shane at shanedelaney11@gmail.com or on LinkedIn (Shane Delaney). Based in Los Angeles and open to new opportunities.",
   },
 
-  // --- BACKGROUND ---
+  // --- BACKGROUND / OVERVIEW ---
   {
-    keywords: [['who is', 'tell me about', 'background', 'about shane', 'summary', 'overview']],
-    answer: "**Shane Delaney** — Marketing & Editorial Operations Specialist, Los Angeles.\n- Currently: Content Marketing Coordinator II at Meta\n- Previously: Trend Producer at Snap Inc.\n- Specializes in editorial operations, content strategy, and AI-native tooling",
+    keywords: [['who is', 'background', 'about shane', 'summary', 'overview', 'tell me']],
+    answer: "Shane Delaney is a content strategist based in Los Angeles. He's spent the last few years building editorial programs and content pipelines at companies like Meta, Snap Inc., Phony Content, StockX, and Collider — working at the intersection of storytelling, platform operations, and emerging technology.",
   },
   {
-    keywords: [['what makes shane', 'stand out', 'unique', 'different', 'why hire', 'strengths']],
-    answer: "Shane sits at the intersection of **editorial rigor and operational systems thinking** — rare for a content role. He builds the processes, tools, and documentation that let teams move fast without losing quality, and is one of the few content practitioners going deep on AI-native work.",
+    keywords: [['distinctive', 'stand out', 'unique', 'different', 'why hire', 'strengths', 'what makes']],
+    answer: "Shane sits at the intersection of editorial rigor and operational systems thinking — which is rare in a content role. He doesn't just make things; he builds the processes and tools that let content programs scale without losing quality. Add an AI-native work style on top of that, and he's a different kind of content hire.",
   },
   {
-    keywords: [['year', 'how many', 'experience', 'long', 'career']],
-    answer: "Building since 2021 — StockX, Collider, Phony Content, Snap Inc., and Meta. Full-time in content operations since May 2024, LMU grad 2023.",
+    keywords: [['how long', 'years', 'experience', 'career', 'history']],
+    answer: "Shane has been building since 2021 — starting with StockX and Collider, then Phony Content, Snap Inc., and most recently Meta. Full-time in content operations since May 2024, LMU grad in 2023.",
   },
 
-  // --- PORTFOLIO ---
+  // --- LOCATION ---
   {
-    keywords: [['portfolio', 'project', 'case study', 'example', 'work sample', 'show me']],
-    answer: "**Key projects:**\n- Meta Horizon GTM Guide Series (4-part)\n- Meta Horizon Builder Story Spotlights (6-part)\n- Snap NUX Curation + Times Square Campaign\n- Tiny Texts (4M+ views)\n- StockX Core Insights Report\n\n→ shanedelaney.xyz/work/portfolio",
-  },
-  {
-    keywords: [['location', 'based', 'where', 'city', 'los angeles', 'la', 'remote']],
-    answer: "Based in **Los Angeles, CA**. Has worked on-site in LA and Santa Monica — open to remote or hybrid depending on the role.",
+    keywords: [['location', 'based', 'where', 'city', 'los angeles', 'remote']],
+    answer: "Based in Los Angeles, CA. Has worked on-site in LA and Santa Monica — open to remote or hybrid depending on the role.",
   },
 ];
 
@@ -167,7 +138,21 @@ export function findCachedAnswer(question: string): string | null {
     }
   }
 
-  return bestScore >= 1 ? bestAnswer : null;
+  // Require all keyword groups to match before using a cached answer
+  return bestScore >= entry_count_check(bestScore, cache, q) ? bestAnswer : null;
+}
+
+function entry_count_check(bestScore: number, entries: CacheEntry[], q: string): number {
+  // Find the entry that produced the best score and require all its groups match
+  for (const entry of entries) {
+    const score = entry.keywords.reduce((acc, group) => {
+      return acc + (group.some(k => q.includes(k)) ? 1 : 0);
+    }, 0);
+    if (score === bestScore) {
+      return entry.keywords.length; // require all groups to match
+    }
+  }
+  return 999;
 }
 
 export const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
