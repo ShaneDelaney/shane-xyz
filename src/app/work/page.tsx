@@ -435,16 +435,16 @@ export default function Work() {
 
                   const ctxContent = (
                     <>
-                      <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>Context</p>
-                      <div className="flex flex-col gap-5">
+                      <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-6" style={{ color: 'var(--t-tertiary)' }}>Context</p>
+                      <div className="flex flex-col">
                         {[
                           { label: 'Problem', text: company.problem },
                           { label: 'System', text: company.system },
                           { label: 'Impact', text: company.impact },
-                        ].map(({ label, text }) => (
-                          <div key={label} className="flex gap-4">
-                            <p className="text-[10px] uppercase tracking-[0.1em] font-medium w-[52px] flex-shrink-0 pt-[3px]" style={{ color: 'var(--t-tertiary)' }}>{label}</p>
-                            <p className="text-[13px] leading-[1.65] flex-1" style={{ color: 'var(--t-secondary)' }}>{text}</p>
+                        ].map(({ label, text }, i) => (
+                          <div key={label} className="pb-5" style={{ borderTop: i > 0 ? '1px solid var(--t-divider)' : 'none', paddingTop: i > 0 ? '20px' : '0' }}>
+                            <p className="text-[10px] uppercase tracking-[0.1em] font-semibold mb-2" style={{ color: 'var(--t-secondary)' }}>{label}</p>
+                            <p className="text-[13px] leading-[1.7]" style={{ color: 'var(--t-secondary)' }}>{text}</p>
                           </div>
                         ))}
                       </div>
@@ -455,11 +455,12 @@ export default function Work() {
                     <>
                       {published.length > 0 && (
                         <div className="mb-6">
-                          <button onClick={() => setPublishedOpen(o => !o)} className="w-full flex items-center justify-between py-1 mb-1">
-                            <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
-                              Published&nbsp;<span style={{ color: 'var(--t-border-strong)' }}>({published.length})</span>
-                            </p>
-                            <motion.span animate={{ rotate: publishedOpen ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}>↓</motion.span>
+                          <button onClick={() => setPublishedOpen(o => !o)} className="w-full flex items-center justify-between pb-3 mb-1">
+                            <div className="flex items-center gap-2">
+                              <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>Published</p>
+                              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)' }}>{published.length}</span>
+                            </div>
+                            <motion.svg width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--t-tertiary)', display: 'block', flexShrink: 0 }} animate={{ rotate: publishedOpen ? 180 : 0 }} transition={{ duration: 0.25, ease: E }}><path d="M1 1l5 4.5L11 1"/></motion.svg>
                           </button>
                           <AnimatePresence>
                             {publishedOpen && (
@@ -480,7 +481,7 @@ export default function Work() {
                                   if (!useSubgroups) return published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />);
                                   return keys.map(sg => (
                                     <div key={sg}>
-                                      <p className="text-[9px] uppercase tracking-[0.14em] font-medium py-2.5" style={{ color: 'var(--t-border-strong)' }}>{sg}</p>
+                                      <p className="text-[9px] uppercase tracking-[0.12em] font-semibold pt-3 pb-2" style={{ color: 'var(--t-secondary)' }}>{sg}</p>
                                       {grouped[sg].map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
                                     </div>
                                   ));
@@ -492,11 +493,12 @@ export default function Work() {
                       )}
                       {systems.length > 0 && (
                         <div>
-                          <button onClick={() => setSystemsOpen(o => !o)} className="w-full flex items-center justify-between py-1 mb-1">
-                            <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
-                              {published.length > 0 ? 'Process & Systems' : 'Work'}&nbsp;<span style={{ color: 'var(--t-border-strong)' }}>({systems.length})</span>
-                            </p>
-                            <motion.span animate={{ rotate: systemsOpen ? 180 : 0 }} transition={{ duration: 0.2 }} style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}>↓</motion.span>
+                          <button onClick={() => setSystemsOpen(o => !o)} className="w-full flex items-center justify-between pb-3 mb-1">
+                            <div className="flex items-center gap-2">
+                              <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>{published.length > 0 ? 'Process & Systems' : 'Work'}</p>
+                              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)' }}>{systems.length}</span>
+                            </div>
+                            <motion.svg width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--t-tertiary)', display: 'block', flexShrink: 0 }} animate={{ rotate: systemsOpen ? 180 : 0 }} transition={{ duration: 0.25, ease: E }}><path d="M1 1l5 4.5L11 1"/></motion.svg>
                           </button>
                           <AnimatePresence>
                             {systemsOpen && (
