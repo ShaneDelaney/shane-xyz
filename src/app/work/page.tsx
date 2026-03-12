@@ -207,7 +207,8 @@ export default function Work() {
   const [activeCompany, setActiveCompany] = useState('meta');
   const [activeInitiative, setActiveInitiative] = useState<string | null>(null);
   const [isAsk, setIsAsk] = useState(false);
-  const [publishedOpen, setPublishedOpen] = useState(false);
+  const [publishedOpen, setPublishedOpen] = useState(true);
+  const [systemsOpen, setSystemsOpen] = useState(true);
   const [askMsgs, setAskMsgs] = useState<AskMsg[]>([]);
   const [askQ, setAskQ] = useState('');
   const [askLoading, setAskLoading] = useState(false);
@@ -236,7 +237,7 @@ export default function Work() {
     finally { setAskLoading(false); }
   };
 
-  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setIsAsk(false); setPublishedOpen(false); };
+  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setIsAsk(false); setPublishedOpen(true); setSystemsOpen(true); };
 
   const company = COMPANIES.find(c => c.id === activeCompany)!;
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
@@ -482,7 +483,7 @@ export default function Work() {
                   <div className="hidden lg:block w-px flex-shrink-0" style={{ background: 'var(--t-divider)' }} />
 
                   {/* Right: Work — published collapsible + systems list */}
-                  <div className="flex-1 lg:pl-12 lg:min-w-0">
+                  <div className="flex-1 lg:pl-12 lg:min-w-0 lg:overflow-y-auto lg:max-h-[calc(100vh-260px)] scrollbar-none">
                     {(() => {
                       const published = company.initiatives.filter(i => i.url);
                       const systems = company.initiatives.filter(i => !i.url);
@@ -545,13 +546,38 @@ export default function Work() {
                             </div>
                           )}
 
-                          {/* Process & Systems */}
+                          {/* Process & Systems — collapsible */}
                           {systems.length > 0 && (
                             <div>
-                              <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>
-                                {published.length > 0 ? 'Process & Systems' : 'Work'}
-                              </p>
-                              {systems.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                              <button
+                                onClick={() => setSystemsOpen(o => !o)}
+                                className="w-full flex items-center justify-between py-1 mb-1"
+                              >
+                                <p className="text-[10px] uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--t-tertiary)' }}>
+                                  {published.length > 0 ? 'Process & Systems' : 'Work'}&nbsp;
+                                  <span style={{ color: 'var(--t-border-strong)' }}>({systems.length})</span>
+                                </p>
+                                <motion.span
+                                  animate={{ rotate: systemsOpen ? 180 : 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: '10px' }}
+                                >
+                                  ↓
+                                </motion.span>
+                              </button>
+                              <AnimatePresence>
+                                {systemsOpen && (
+                                  <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.22, ease: E }}
+                                    style={{ overflow: 'hidden' }}
+                                  >
+                                    {systems.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
                             </div>
                           )}
                         </>
