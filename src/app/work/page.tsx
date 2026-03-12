@@ -240,7 +240,11 @@ export default function Work() {
   const [topOpen, setTopOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    const param = new URLSearchParams(window.location.search).get('company');
+    if (param && COMPANIES.find(c => c.id === param)) setActiveCompany(param);
+  }, []);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {

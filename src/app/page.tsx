@@ -137,10 +137,10 @@ export default function Home() {
             animate={m ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.52, ease: E }}
           >
-            {['Meta', 'Snap Inc.', 'StockX', 'Phony Content', 'Collider'].map((co, i, arr) => (
+            {([['Meta','meta'],['Snap Inc.','snap'],['StockX','stockx'],['Phony Content','phony'],['Collider','collider']] as [string,string][]).map(([co, id], i, arr) => (
               <span key={co} className="flex items-center gap-6">
                 <Link
-                  href="/work"
+                  href={`/work?company=${id}`}
                   className="text-[12px] transition-colors"
                   style={{ color: 'var(--t-border-strong)' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
