@@ -37,11 +37,16 @@ const COMPANIES: [string, string][] = [
 
 export default function Home() {
   const [m, setM] = useState(false);
-  useEffect(() => { setM(true); }, []);
+  useEffect(() => {
+    setM(true);
+    // Lock scroll on mobile home page
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   return (
     <div
-      className="min-h-screen flex flex-col justify-center pt-[52px] pb-8"
+      className="h-screen flex flex-col justify-center pt-[52px] pb-8 overflow-hidden"
       style={{ background: 'var(--t-bg)' }}
     >
       <div className="w-full px-6 sm:px-10">
@@ -113,9 +118,9 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            {/* Company chips */}
+            {/* Company chips — desktop only */}
             <motion.div
-              className="flex items-center gap-2 flex-wrap"
+              className="hidden sm:flex items-center gap-2 flex-wrap"
               initial={{ opacity: 0 }}
               animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.26, ease: E }}
@@ -136,6 +141,17 @@ export default function Home() {
                 </Link>
               ))}
             </motion.div>
+
+            {/* TLDR — mobile only */}
+            <motion.p
+              className="sm:hidden text-[14px] leading-[1.6] max-w-[340px]"
+              style={{ color: 'var(--t-secondary)' }}
+              initial={{ opacity: 0 }}
+              animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.26, ease: E }}
+            >
+              I've led content strategy at Meta, Snap, and StockX — building the editorial systems that help platforms grow their creator ecosystems.
+            </motion.p>
           </div>
 
           {/* ── Right: article cards — hidden on mobile ── */}
