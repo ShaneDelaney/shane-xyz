@@ -378,7 +378,7 @@ const CARDS: Card[] = [
     id: 'tiny-texts-bf-sleepover',
     company: 'Phony Content',
     category: 'Scripted Series',
-    title: 'Tiny Texts — BF Sleepover',
+    title: 'Tiny Texts — Sleepover',
     hook: '2.2M views and 9.4K followers added.',
     about: 'A consistently strong performer in the Tiny Texts series — notable for its follower conversion relative to view count.',
     impact: 'Led editorial operations across the full Tiny Texts slate. Built the style guides, editorial calendars, and documentation frameworks that standardized the production workflow end-to-end.',
