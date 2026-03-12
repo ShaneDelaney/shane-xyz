@@ -73,7 +73,15 @@ export default function Home() {
           >
             {['Meta', 'Snap Inc.', 'StockX', 'Phony Content', 'Collider'].map((co, i) => (
               <span key={co} className="flex items-center gap-6">
-                <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>{co}</span>
+                <Link
+                  href="/work"
+                  className="text-[13px] transition-colors"
+                  style={{ color: 'var(--t-tertiary)' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
+                >
+                  {co}
+                </Link>
                 {i < 4 && <span style={{ color: 'var(--t-border)' }}>·</span>}
               </span>
             ))}
