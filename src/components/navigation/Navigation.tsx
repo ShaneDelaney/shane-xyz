@@ -15,16 +15,21 @@ export default function Navigation() {
     { href: '/contact', label: 'Contact' },
   ];
 
+  const dark = pathname.startsWith('/work/portfolio');
+
   return (
     <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl"
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-700 ${dark ? 'bg-transparent' : 'bg-white/80 backdrop-blur-xl'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
-          <Link href="/" className="text-sm font-semibold text-gray-900 tracking-tight hover:opacity-70 transition-opacity">
+          <Link
+            href="/work/portfolio"
+            className={`text-sm font-semibold tracking-tight hover:opacity-70 transition-opacity ${dark ? 'text-white' : 'text-gray-900'}`}
+          >
             Shane Delaney
           </Link>
 
@@ -36,7 +41,11 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm transition-colors ${isActive ? 'text-gray-900' : 'text-gray-400 hover:text-gray-900'}`}
+                  className={`text-sm transition-colors ${
+                    dark
+                      ? isActive ? 'text-white' : 'text-white/45 hover:text-white'
+                      : isActive ? 'text-gray-900' : 'text-gray-400 hover:text-gray-900'
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -45,7 +54,7 @@ export default function Navigation() {
             <a
               href="/ShaneDelaneyResume.pdf"
               download
-              className="text-sm px-4 py-1.5 rounded-full bg-gray-900 text-white hover:bg-gray-700 transition-colors"
+              className={`text-sm px-4 py-1.5 rounded-full transition-colors ${dark ? 'bg-white/12 text-white hover:bg-white/20' : 'bg-gray-900 text-white hover:bg-gray-700'}`}
             >
               Resume
             </a>
@@ -54,7 +63,7 @@ export default function Navigation() {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-500 hover:text-gray-900 transition-colors"
+            className={`md:hidden p-2 transition-colors ${dark ? 'text-white/50 hover:text-white' : 'text-gray-500 hover:text-gray-900'}`}
             aria-label="Toggle menu"
           >
             <svg className="w-5 h-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,13 +74,13 @@ export default function Navigation() {
       </div>
 
       {/* Hairline */}
-      <div className="h-px bg-gray-200/60" />
+      <div className={`h-px transition-colors duration-700 ${dark ? 'bg-white/8' : 'bg-gray-200/60'}`} />
 
       {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="md:hidden bg-white/95 backdrop-blur-xl"
+            className={`md:hidden backdrop-blur-xl ${dark ? 'bg-black/50' : 'bg-white/95'}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -83,7 +92,7 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`py-2.5 text-sm ${pathname === link.href ? 'text-gray-900 font-medium' : 'text-gray-500'}`}
+                  className={`py-2.5 text-sm ${pathname === link.href ? (dark ? 'text-white font-medium' : 'text-gray-900 font-medium') : (dark ? 'text-white/50' : 'text-gray-500')}`}
                 >
                   {link.label}
                 </Link>
@@ -92,7 +101,7 @@ export default function Navigation() {
                 href="/ShaneDelaneyResume.pdf"
                 download
                 onClick={() => setIsMenuOpen(false)}
-                className="py-2.5 text-sm text-gray-500"
+                className={`py-2.5 text-sm ${dark ? 'text-white/50' : 'text-gray-500'}`}
               >
                 Resume
               </a>

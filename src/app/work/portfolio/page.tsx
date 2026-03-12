@@ -21,7 +21,30 @@ interface Card {
   accent: string;
 }
 
+const INTRO_SECTIONS = [
+  { company: 'Meta',          count: 13, label: 'pieces' },
+  { company: 'Snap Inc.',     count: 8,  label: 'projects' },
+  { company: 'Phony Content', count: 5,  label: 'stories' },
+  { company: 'StockX',        count: 4,  label: 'campaigns' },
+  { company: 'Collider',      count: 3,  label: 'features' },
+];
+
 const CARDS: Card[] = [
+  // ── INTRO ─────────────────────────────────────────────────────────────────
+  {
+    id: 'intro',
+    company: 'Shane Delaney',
+    category: 'Content Operations & Ecosystem Storytelling',
+    title: 'Introduction',
+    hook: 'Los Angeles. Five companies. Editorial operations, content strategy, and ecosystem storytelling.',
+    about: 'Use ← → to navigate or swipe on mobile. Click any company below to jump to that section.',
+    impact: 'Content Marketing Coordinator II at Meta — Project Lead for Horizon\'s developer content program. Previously Trend Producer at Snap Inc. Editorial production, systems design, and content strategy across media, tech, and consumer platforms.',
+    period: '2021 – Present',
+    tags: [],
+    bg: 'linear-gradient(145deg, #0a0a0a 0%, #141414 100%)',
+    accent: '#e5e5e5',
+  },
+
   // ── META — BUILDER STORIES ────────────────────────────────────────────────
   {
     id: 'vail-vr-part-one',
@@ -513,7 +536,7 @@ const CARDS: Card[] = [
   },
 ];
 
-const COMPANY_ORDER = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
+const COMPANY_ORDER = ['Shane Delaney', 'Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
 function parseMetric(m: string): { value: string; label: string } {
   const match = m.match(/^([0-9$£€.,+%MKBx~\-]+\+?)\s*(.*)/);
@@ -791,6 +814,26 @@ function PortfolioInner() {
                     {getUrlLabel(card.url)} →
                   </a>
                 </>
+              ) : card.id === 'intro' ? (
+                <div className="w-full flex flex-col justify-center px-10">
+                  <p className="text-[9px] uppercase tracking-widest text-white/25 mb-5">What&apos;s inside</p>
+                  <div className="flex flex-col gap-0 border-t border-white/8">
+                    {INTRO_SECTIONS.map((s) => {
+                      const firstIdx = CARDS.findIndex(c => c.company === s.company);
+                      return (
+                        <button
+                          key={s.company}
+                          onClick={() => { setDirection(1); setIndex(firstIdx); }}
+                          className="flex items-center justify-between py-3.5 border-b border-white/8 group text-left"
+                        >
+                          <span className="text-sm text-white/60 group-hover:text-white transition-colors">{s.company}</span>
+                          <span className="text-[11px] text-white/25 group-hover:text-white/50 transition-colors tabular-nums">{s.count} {s.label} →</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-[10px] text-white/20 mt-5">← → to navigate · swipe on mobile</p>
+                </div>
               ) : (
                 <>
                   {metricPairs.length > 0 && (

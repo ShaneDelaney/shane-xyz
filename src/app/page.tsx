@@ -65,7 +65,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.22, ease: EASE }}
           >
             <Link
-              href="/work/portfolio"
+              href="/work/portfolio?project=intro"
               className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-700 transition-colors"
             >
               View Portfolio
