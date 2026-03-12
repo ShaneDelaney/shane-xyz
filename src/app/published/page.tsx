@@ -311,7 +311,7 @@ export default function Published() {
 
   return (
     <div
-      className="min-h-screen flex flex-col pt-[52px]"
+      className="flex flex-col pt-[52px] md:min-h-screen"
       style={{ background: 'var(--t-bg)' }}
     >
 

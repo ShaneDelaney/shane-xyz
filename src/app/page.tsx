@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col justify-center pt-[52px] pb-8"
+      className="flex flex-col justify-start md:justify-center pt-16 pb-24 md:min-h-screen md:pt-[52px] md:pb-8"
       style={{ background: 'var(--t-bg)' }}
     >
       <div className="w-full px-6 sm:px-10">
