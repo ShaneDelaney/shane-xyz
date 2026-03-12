@@ -29,7 +29,7 @@ const CARDS: Card[] = [
     category: 'Developer Story',
     title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding',
     url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/',
-    hook: 'A VR studio raised $15M from players who hadn\'t played the game yet. This is the story of how.',
+    hook: 'A VR studio raised $15M from players who hadn\'t played the game yet — before it was even free to play.',
     about: 'Part one of a two-part spotlight on AEXLAB and VAIL VR — tracking the studio\'s journey from couch-surfing origins to one of VR gaming\'s most successful crowdfunding campaigns.',
     impact: 'Production lead across five documented meetings over two weeks. Shaped the narrative arc, coordinated the Scout House interview, managed developer approval with AEXLAB\'s Chandler Steele, and drove XFN review through to publication.',
     period: 'Nov 2025',
@@ -101,7 +101,7 @@ const CARDS: Card[] = [
     category: 'Year in Review',
     title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers',
     url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
-    hook: 'This is what it looked like when VR content creation finally started to work.',
+    hook: 'A year-in-review editorial surfacing what scaled, what didn\'t, and who defined 2025 in the Horizon ecosystem.',
     about: 'A 2025 year-in-review editorial surfacing patterns from the platform\'s breakout creators and developers — what scaled, what didn\'t, and what defined the year.',
     impact: 'Editorial lead and production owner. Developed the concept, owned all copy and narrative direction, ran stat verification with Data Science, and coordinated XFN review across Product, DevRel, Design, and Legal.',
     period: 'Feb 2026',
@@ -131,7 +131,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'Develop a Marketing Plan for Your VR App',
     url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
-    hook: 'Great VR apps don\'t market themselves. This guide is the missing piece.',
+    hook: 'The anchor guide in a six-part series — marketing strategy, audience research, and channel selection for VR app launches.',
     about: 'The anchor guide in a six-part series — covers marketing strategy, audience research, and channel identification, with supplementary worksheets and checklists designed to be used during a live launch sprint.',
     impact: 'Primary author and editorial lead. Owned all copy from outline through publication. Created the supplementary worksheets and checklists. Coordinated XFN review across five teams and ran formal stat verification with Data Science.',
     period: 'Jan 2026',
@@ -146,7 +146,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'Leverage Influencer Partnerships for Your VR App',
     url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/',
-    hook: 'The right creator partnership doesn\'t just reach an audience. It becomes part of one.',
+    hook: 'A practical guide to building influencer partnerships for VR developers entering creator marketing.',
     about: 'Practical strategy for building influencer partnerships to grow VR app visibility — covering tiers, outreach, and campaign structure for developers new to creator marketing.',
     impact: 'Primary author and editorial lead. Owned all copy and direction. Managed XFN review across five teams and formal stat verification before launch.',
     period: 'Jan 2026',
@@ -161,7 +161,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'Build Social Media and Community Engagement for Your VR App',
     url: 'https://developers.meta.com/horizon/resources/gtm-social-media/',
-    hook: 'Build the community before the launch. That community becomes your launch.',
+    hook: 'Community-building and social media strategy for VR developers launching on Meta Horizon.',
     about: 'Community-building tactics and social media strategies tailored for VR developers on Meta Horizon — covering channel selection, content cadence, and community management.',
     impact: 'Primary author and editorial lead. Owned all copy and direction. Managed XFN review and publication schedule across all five teams.',
     period: 'Jan 2026',
@@ -176,7 +176,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'Master Marketing Assets for Your VR App',
     url: 'https://developers.meta.com/horizon/resources/gtm-marketing-assets/',
-    hook: 'Your marketing assets are the first thing players see. Make them feel like the game.',
+    hook: 'Best practices for VR app marketing assets — store page screenshots, trailers, and social creative.',
     about: 'Covers creating effective marketing assets for promoting VR apps and Horizon Worlds experiences — from store page screenshots to trailers and social creative.',
     impact: 'Primary author and editorial lead. Owned all copy and direction. Managed XFN review and publication.',
     period: 'Jan 2026',
@@ -191,7 +191,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'PR Strategy for Your VR App',
     url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/',
-    hook: 'VR press coverage doesn\'t follow the same rules as mobile. This guide rewrites them.',
+    hook: 'PR strategy for VR developers — navigating press cycles, review coverage, and journalist relationships specific to the VR space.',
     about: 'Public relations strategy and media outreach for VR developers — navigating press cycles, review coverage, and journalist relationships specific to the VR space.',
     impact: 'Co-authored with Roger Wong (Documentation Engineer, Meta). Collaborated on copy and editorial direction while managing production logistics, XFN review coordination, and the publication pipeline.',
     period: 'Feb 2026',
@@ -206,7 +206,7 @@ const CARDS: Card[] = [
     category: 'GTM Guide',
     title: 'Create App Demos That Convert',
     url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/',
-    hook: 'The best app demo doesn\'t show everything. It shows the one thing that makes someone say yes.',
+    hook: 'Best practices for building VR app demos that convert player interest into installs.',
     about: 'Best practices for building compelling app demos that convert player interest into installs — the final guide in the six-part GTM series.',
     impact: 'Co-authored with Roger Wong (Documentation Engineer, Meta). Collaborated on copy and editorial direction through to publication.',
     period: 'Feb 2026',
@@ -222,7 +222,7 @@ const CARDS: Card[] = [
     company: 'Snap Inc.',
     category: 'Content Programming',
     title: 'Spotlight Programming Lead',
-    hook: '500 million people see Spotlight every month. This was the work of deciding what they see.',
+    hook: 'Daily editorial oversight of a 1,000+ piece pipeline across one of the highest-scale content surfaces in social media.',
     about: 'Snapchat Spotlight is one of the highest-scale content surfaces in social media. As Programming Lead, owned the full daily editorial pipeline — quality, safety, amplification decisions — across 1,000+ pieces of content per day.',
     impact: 'Synthesized performance data daily to surface breakout trends, led editorial syncs translating data into real-time amplification decisions, and developed standardized EIs and content brief templates that reduced operational friction across the team.',
     period: 'Mar – Oct 2025',
@@ -236,7 +236,7 @@ const CARDS: Card[] = [
     company: 'Snap Inc.',
     category: 'Product Collaboration',
     title: 'New User Experience Curation',
-    hook: 'The first thing a new user sees determines whether they become a real user.',
+    hook: 'Curating the first screen a new user sees — 300+ pieces reviewed per cohort, segmented by interest.',
     about: 'Snapchat\'s New User Experience shapes what new users see on the platform. The teen NUX (13–17) required editorial judgment layered on algorithmic signals to build personalized onboarding feeds that drove retention.',
     impact: 'Curated personalized UGC feeds for teen cohorts using data-driven guidelines, reviewing 300+ pieces per cohort segmented by interest. Collaborated with product engineering teams. Achieved 10% higher retention than platform average.',
     period: 'Mar – Oct 2025',
@@ -250,7 +250,7 @@ const CARDS: Card[] = [
     company: 'Snap Inc.',
     category: 'Data & Creator Strategy',
     title: 'Creator Identification System',
-    hook: 'We built a system to find the next breakout creator before the algorithm did.',
+    hook: 'A creator identification system built with Data Science to surface emerging talent earlier at scale.',
     about: 'Snap\'s boosted content initiative required identifying emerging creators earlier than algorithmic signals could surface them at scale — built in collaboration with Data Science to create a systematic early-identification approach.',
     impact: 'Collaborated with Data Science to build the creator identification system. Translated complex data findings into strategic content guidance, created internal documentation for 10+ XFN teams, and influenced monetization strategy across 1M+ creators.',
     period: 'Mar – Oct 2025',
@@ -267,7 +267,7 @@ const CARDS: Card[] = [
     category: 'Scripted Series',
     title: 'Tiny Texts — Cheer Squad',
     url: 'https://snapchat.com/t/J2MP13US',
-    hook: '6.3 million views. 39% completion rate. On Snapchat, that\'s a breakout.',
+    hook: '6.3M views and a 39% completion rate — the top-performing story in the Tiny Texts series.',
     about: 'The top-performing story in the Tiny Texts scripted series on Snapchat — the breakout title in a show that generated 25M+ total views across 50+ episodes.',
     impact: 'Led editorial operations for the full Tiny Texts slate. Oversaw creative direction, QA, and production cadence — built the style guides, editorial calendars, and documentation frameworks that made Cheer Squad and the series possible at scale.',
     period: '2024–2025',
@@ -282,7 +282,7 @@ const CARDS: Card[] = [
     category: 'Scripted Series',
     title: 'Tiny Texts — Inhaler',
     url: 'https://snapchat.com/t/wPotqUYw',
-    hook: '4.4 million views. A 42% completion rate. Proof the first wasn\'t a fluke.',
+    hook: '4.39M views. 42% completion rate. Second highest in the Tiny Texts catalog.',
     about: 'Second highest-performing story in the Tiny Texts series — demonstrating the show\'s ability to sustain strong completion rates across different narrative formats and emotional tones.',
     impact: 'Led editorial operations across the full series. Managed creative QA, writing team coordination, and the production systems that maintained consistent quality across 50+ stories.',
     period: '2024–2025',
@@ -313,7 +313,7 @@ const CARDS: Card[] = [
     company: 'StockX',
     category: 'Research Report',
     title: '2024 Core Insights Report',
-    hook: 'Gen Z doesn\'t just buy. They curate. This report mapped what that means.',
+    hook: 'A Gen Z trend report mapping digital consumption behavior, subcultures, and affinity patterns across LA and NYC.',
     about: 'A Gen Z trend report analyzing digital consumption behavior among 18–25 males in LA and NYC — mapping emerging subcultures, affinity brands, and behavioral patterns that directly informed StockX\'s 2025 marketing strategy.',
     impact: 'Sole author. Identified emerging subcultures (Gorp Core, DIY, archive styling), mapped digital behaviors including curated sharing and resale culture, surfaced affinity figures for campaign targeting, and delivered strategic recommendations that shaped 2025 programming.',
     period: 'Dec 2024',
@@ -375,7 +375,7 @@ const CARDS: Card[] = [
     category: 'Editorial Feature',
     title: 'Actors and Their Favorite Movies',
     url: 'https://collider.com/actors-and-their-favorite-movies/',
-    hook: '125,000 readers. 4 minutes and 23 seconds. Top-3 on Google. This is what it looks like to get it right.',
+    hook: '125K readers. 4:23 average time on page. Top-3 Google result for its query.',
     about: 'Evergreen editorial feature for Collider — a 30M+ monthly visitor film platform. Designed to capture high-intent search traffic while providing genuine editorial value to a film-literate audience.',
     impact: 'Sole author. Developed the concept, executed the SEO strategy, and wrote the piece to balance optimization with editorial quality. Became the top-performing article from the engagement — 125K+ views, top-3 Google result, featured in multiple follow-up roundups.',
     period: 'Aug–Oct 2022',
@@ -390,7 +390,7 @@ const CARDS: Card[] = [
     category: 'Editorial Feature',
     title: 'Hardest Working Characters in Succession, Ranked',
     url: 'https://collider.com/hardest-workers-in-succession-ranked/',
-    hook: '89,000 views. 22% social share rate. Some articles are built to be argued about.',
+    hook: 'A piece timed to Succession\'s cultural peak — 89K views, 22% social share rate.',
     about: 'Editorial feature on Succession capitalizing on peak cultural interest — optimized for both search traffic and social sharing among the show\'s highly engaged fan base.',
     impact: 'Sole author. Developed concept, executed SEO strategy, and wrote the feature. The 22% social share rate reflects an intentionally designed piece built to generate opinion and debate.',
     period: 'Aug–Oct 2022',
@@ -405,7 +405,7 @@ const CARDS: Card[] = [
     category: 'Editorial Feature',
     title: 'Movies To Get You Ready For Fall',
     url: 'https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/',
-    hook: 'Google Discover doesn\'t feature everything. It features what people actually want to read.',
+    hook: 'A seasonal editorial piece selected for Google Discover. 76K readers.',
     about: 'Seasonal editorial feature designed to capture timely search and discovery traffic during the fall content cycle — selected for inclusion in Google Discover.',
     impact: 'Sole author. Developed concept, wrote the feature against a seasonal brief, and optimized for discovery. Featured in Google Discover — an algorithmic signal of high engagement and relevance.',
     period: 'Aug–Oct 2022',
@@ -423,6 +423,17 @@ function parseMetric(m: string): { value: string; label: string } {
   if (match && match[2]) return { value: match[1], label: match[2] };
   const parts = m.split(' ');
   return { value: parts[0], label: parts.slice(1).join(' ') };
+}
+
+function getUrlLabel(url: string): string {
+  try {
+    const host = new URL(url).hostname;
+    if (host.includes('snapchat')) return 'Open in Snap ↗';
+    if (host.includes('youtube')) return 'Watch on YouTube ↗';
+    if (host.includes('collider')) return 'Read on Collider ↗';
+    if (host.includes('meta')) return 'Open on Meta ↗';
+  } catch {}
+  return 'Open ↗';
 }
 
 const contentVariants = {
@@ -583,17 +594,15 @@ function PortfolioInner() {
                 </div>
               )}
 
-              {card.url ? (
+              {card.url && (
                 <a
                   href={card.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors self-start"
                 >
-                  Read Article ↗
+                  {getUrlLabel(card.url)}
                 </a>
-              ) : (
-                <span className="text-sm text-white/20 font-medium">No public link</span>
               )}
             </motion.div>
           </AnimatePresence>
@@ -655,14 +664,67 @@ function PortfolioInner() {
                       className="relative inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-all hover:scale-105 hover:brightness-110"
                       style={{ background: card.accent, color: '#000' }}
                     >
-                      Open Article ↗
+                      {getUrlLabel(card.url!)}
                     </a>
                   </div>
                 </>
               ) : (
-                <div className="flex-1 flex items-center justify-center">
-                  <p className="text-white/20 text-sm">Internal project — no public link</p>
-                </div>
+                <>
+                  {/* Panel header — internal indicator */}
+                  <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/8 flex-shrink-0">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                    </div>
+                    <span className="text-[11px] text-white/25 font-mono ml-1">Internal Project</span>
+                  </div>
+
+                  {/* Metrics + tags display */}
+                  <div className="flex-1 flex flex-col items-center justify-center px-12 relative overflow-hidden">
+                    {/* Subtle grid */}
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        opacity: 0.04,
+                        backgroundImage: `linear-gradient(${card.accent} 1px, transparent 1px), linear-gradient(90deg, ${card.accent} 1px, transparent 1px)`,
+                        backgroundSize: '36px 36px',
+                      }}
+                    />
+                    {/* Accent glow */}
+                    <div
+                      className="absolute inset-0 opacity-8 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(ellipse 70% 55% at 50% 50%, ${card.accent}, transparent)`,
+                      }}
+                    />
+
+                    {metricPairs.length > 0 && (
+                      <div className="flex flex-wrap justify-center gap-8 mb-8 relative">
+                        {metricPairs.map((m, i) => (
+                          <div key={i} className="text-center">
+                            <p className="text-4xl lg:text-5xl font-bold leading-none mb-1.5" style={{ color: card.accent }}>{m.value}</p>
+                            <p className="text-[10px] text-white/35 uppercase tracking-wider">{m.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap justify-center gap-2 mb-6 relative">
+                      {card.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-[10px] font-medium px-2.5 py-1 rounded-full"
+                          style={{ backgroundColor: card.accent + '18', color: card.accent + 'bb' }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <p className="text-[10px] text-white/20 uppercase tracking-widest relative">{card.period}</p>
+                  </div>
+                </>
               )}
             </motion.div>
           </AnimatePresence>
