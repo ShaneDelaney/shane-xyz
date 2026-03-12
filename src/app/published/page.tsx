@@ -170,6 +170,7 @@ const CATEGORIES: Category[] = [
     articles: [
       {
         title: 'Tiny Texts: Cheer Squad',
+        slug: 'tiny-texts-cheer-squad',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '6.3M views · 39% completion',
         description: 'The highest-performing episode in the Tiny Texts catalog. A story whose structure was deliberately engineered for audience hold.',
         scope: 'Developed the concept, characters, and narrative arc. Wrote and revised the full script with structural techniques designed specifically to maximize completion — hook placement, pacing beats, and a calibrated ending.',
@@ -178,6 +179,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Tiny Texts: Inhaler',
+        slug: 'tiny-texts-inhaler',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '4.39M views · 20.3K followers',
         description: 'A story that converted viewers into subscribers at a rate well above series average, driven by a calibrated hook and ending structure.',
         scope: 'Developed the story concept and character dynamics. Wrote and edited the full script, specifically calibrating the ending structure for follower conversion rather than just completion.',
@@ -186,6 +188,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Tiny Texts: Mr. Shower',
+        slug: 'tiny-texts-mr-shower',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '3.01M views · 8.43K followers',
         description: 'Part of the core Tiny Texts run that established the series as a consistent performer on Snapchat Spotlight.',
         scope: 'Developed the story concept and character voice. Wrote and edited the script as part of the core series run, applying pacing and structural patterns developed across earlier episodes.',
@@ -193,6 +196,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Tiny Texts: Sleepover',
+        slug: 'tiny-texts-sleepover',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '2.2M views · 9.4K followers',
         description: 'A story that consistently outperformed its view count in follower conversion, driven by a strong emotional hook and payoff.',
         scope: 'Developed the story concept and emotional hook. Designed the ending to drive above-average follower conversion, wrote and edited the full script.',
@@ -200,6 +204,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Tiny Texts: Snap Score',
+        slug: 'tiny-texts-snap-score',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '2.08M views · 5.73K followers',
         description: 'A story timed to a culturally resonant prompt that drove broad engagement across the Snapchat audience.',
         scope: 'Identified the Snap Score topic as a high-resonance cultural prompt for the Snapchat audience. Wrote and edited the full script, timed release to maximize cultural relevance and reach.',
@@ -214,6 +219,7 @@ const CATEGORIES: Category[] = [
     articles: [
       {
         title: 'Actors and Their Favorite Movies',
+        slug: 'actors-favorite-movies',
         publication: 'Collider', year: '2022', stat: '125K readers · 4:23 avg time on page',
         description: 'A deep editorial feature that became a top-3 Google result for a competitive query and held audience attention well above site average.',
         scope: 'Identified the topic as a high-intent, under-served search opportunity. Researched and compiled the editorial content across a broad actor catalog. Wrote and optimized the full piece for both editorial quality and search performance.',
@@ -222,6 +228,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Hardest Working Characters in Succession, Ranked',
+        slug: 'succession-hardest-workers',
         publication: 'Collider', year: '2022', stat: '89K views · 22% social share rate',
         description: 'A piece timed to Succession\'s cultural peak that achieved a 22% social share rate, well above Collider\'s baseline.',
         scope: 'Identified the timing window during Succession\'s peak cultural moment. Developed the ranking framework and wrote the full editorial piece for Collider\'s film-literate audience.',
@@ -230,6 +237,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Movies To Get You Ready For Fall',
+        slug: 'movies-for-fall',
         publication: 'Collider', year: '2022', stat: '76K readers · Google Discover',
         description: 'A seasonal editorial piece selected for Google Discover, demonstrating the intersection of editorial sensibility and search-surface optimization.',
         scope: 'Developed the seasonal concept and editorial selection criteria. Wrote and optimized the feature for both search and Google Discover eligibility — structure, metadata, and quality all considered.',
@@ -238,6 +246,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Behind the Streams with Sydeon',
+        slug: 'behind-the-streams-sydeon',
         publication: 'StockX', year: '2021',
         description: 'A creator partnership campaign at the intersection of gaming culture and resale culture, reaching audiences across both worlds.',
         scope: 'On-set production support throughout the shoot. Talent coordination and creative logistics — bridging the gaming creator world and the StockX brand environment.',
@@ -246,6 +255,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'Briana King Joins StockX',
+        slug: 'briana-king-stockx',
         publication: 'StockX', year: '2021',
         description: 'A brand partnership announcement video positioning StockX within the gaming and creator economy space.',
         scope: 'On-set production support for the brand campaign shoot. Talent coordination and shoot logistics — supporting a campaign at the intersection of skate identity and the StockX brand.',
@@ -254,6 +264,7 @@ const CATEGORIES: Category[] = [
       },
       {
         title: 'What Drives Brittney Elena',
+        slug: 'what-drives-brittney-elena',
         publication: 'StockX', year: '2024',
         description: 'A creator profile exploring the intersection of athletic identity, personal brand, and platform culture.',
         scope: 'On-set production support across the campaign shoot. Creative direction and talent-facing logistics for a campaign built on authentic athlete storytelling.',
