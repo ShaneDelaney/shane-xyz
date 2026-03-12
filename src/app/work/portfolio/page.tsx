@@ -699,7 +699,7 @@ function PortfolioInner() {
         </div>
 
         {/* Left — editorial panel */}
-        <div className="lg:flex-1 flex flex-col justify-center lg:pr-4 py-2 lg:py-6 min-h-0">
+        <div className="lg:flex-1 flex flex-col justify-center py-2 lg:py-8 min-h-0">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={card.id}
@@ -709,34 +709,29 @@ function PortfolioInner() {
               animate="center"
               exit="exit"
               transition={contentTransition}
-              className="flex flex-col"
+              className="flex flex-col max-w-sm"
             >
-              <div className="mb-4">
-                <span
-                  className="inline-block text-[11px] font-semibold px-3 py-1.5 rounded-full"
-                  style={{ backgroundColor: card.accent + '22', color: card.accent }}
-                >
-                  {card.category}
-                </span>
-              </div>
+              <p
+                className="text-[10px] uppercase tracking-widest font-medium mb-4"
+                style={{ color: card.accent }}
+              >
+                {card.category}
+              </p>
 
-              <h1 className="text-2xl lg:text-3xl font-semibold text-white leading-snug mb-4">
+              <h1 className="text-xl lg:text-2xl font-semibold text-white leading-snug mb-5">
                 {card.hook}
               </h1>
 
-              <p className="text-sm text-white/50 leading-relaxed mb-5 italic">{card.title}</p>
+              <div className="w-8 h-px bg-white/15 mb-5" />
 
-              <div className="w-10 h-px bg-white/15 mb-5" />
-
-              <p className="text-[9px] uppercase tracking-widest text-white/30 mb-1.5">My Role</p>
-              <p className="text-sm text-white/80 leading-relaxed mb-6 font-medium">{card.impact}</p>
+              <p className="text-sm text-white/55 leading-relaxed mb-6">{card.impact}</p>
 
               {metricPairs.length > 0 && (
-                <div className="flex gap-6 mb-6">
+                <div className="flex gap-6 mb-7">
                   {metricPairs.map((m, i) => (
                     <div key={i}>
-                      <p className="text-xl lg:text-2xl font-bold text-white leading-none mb-1">{m.value}</p>
-                      <p className="text-[10px] text-white/40">{m.label}</p>
+                      <p className="text-lg font-semibold text-white leading-none mb-1">{m.value}</p>
+                      <p className="text-[10px] text-white/35">{m.label}</p>
                     </div>
                   ))}
                 </div>
@@ -747,131 +742,68 @@ function PortfolioInner() {
                   href={card.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors self-start"
+                  className="text-sm font-medium transition-colors self-start"
+                  style={{ color: card.accent }}
                 >
-                  {getUrlLabel(card.url)}
+                  {getUrlLabel(card.url)} →
                 </a>
               )}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Right — article preview panel (desktop only) */}
-        <div className="hidden lg:flex lg:w-7/12 py-6 min-h-0">
+        {/* Right — preview panel (desktop only) */}
+        <div className="hidden lg:flex lg:w-[52%] py-6 min-h-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={card.id + '-preview'}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full h-full rounded-2xl overflow-hidden border border-white/10 flex flex-col"
-              style={{ background: 'rgba(255,255,255,0.04)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-full rounded-2xl border border-white/8 flex flex-col items-center justify-center px-12 text-center"
+              style={{ background: 'rgba(255,255,255,0.03)' }}
             >
               {card.url ? (
                 <>
-                  {/* Panel header */}
-                  <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/8 flex-shrink-0">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                    </div>
-                    <span className="text-[11px] text-white/25 font-mono ml-1 truncate">{domain}</span>
-                  </div>
+                  <p
+                    className="text-[10px] uppercase tracking-widest font-medium mb-5"
+                    style={{ color: card.accent + 'aa' }}
+                  >
+                    {card.category}
+                  </p>
 
-                  {/* Preview body */}
-                  <div className="flex-1 flex flex-col items-center justify-center px-12 text-center relative overflow-hidden">
-                    {/* Accent glow */}
-                    <div
-                      className="absolute inset-0 opacity-10 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${card.accent}, transparent)`,
-                      }}
-                    />
+                  <h2 className="text-lg lg:text-xl font-semibold text-white leading-snug mb-4 max-w-xs">
+                    {card.title}
+                  </h2>
 
-                    <span
-                      className="text-[10px] font-semibold px-2.5 py-1 rounded-full mb-6 relative"
-                      style={{ backgroundColor: card.accent + '20', color: card.accent }}
-                    >
-                      {card.category}
-                    </span>
+                  <p className="text-sm text-white/40 leading-relaxed mb-8 max-w-xs">
+                    {card.about}
+                  </p>
 
-                    <h2 className="text-xl lg:text-2xl font-semibold text-white leading-snug mb-4 relative">
-                      {card.title}
-                    </h2>
-
-                    <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-sm relative">
-                      {card.about}
-                    </p>
-
-                    <a
-                      href={card.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-all hover:scale-105 hover:brightness-110"
-                      style={{ background: card.accent, color: '#000' }}
-                    >
-                      {getUrlLabel(card.url!)}
-                    </a>
-                  </div>
+                  <a
+                    href={card.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium transition-opacity hover:opacity-70"
+                    style={{ color: card.accent }}
+                  >
+                    {getUrlLabel(card.url)} →
+                  </a>
                 </>
               ) : (
                 <>
-                  {/* Panel header — internal indicator */}
-                  <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/8 flex-shrink-0">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                    </div>
-                    <span className="text-[11px] text-white/25 font-mono ml-1">Internal Project</span>
-                  </div>
-
-                  {/* Metrics + tags display */}
-                  <div className="flex-1 flex flex-col items-center justify-center px-12 relative overflow-hidden">
-                    {/* Subtle grid */}
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        opacity: 0.04,
-                        backgroundImage: `linear-gradient(${card.accent} 1px, transparent 1px), linear-gradient(90deg, ${card.accent} 1px, transparent 1px)`,
-                        backgroundSize: '36px 36px',
-                      }}
-                    />
-                    {/* Accent glow */}
-                    <div
-                      className="absolute inset-0 opacity-8 pointer-events-none"
-                      style={{
-                        background: `radial-gradient(ellipse 70% 55% at 50% 50%, ${card.accent}, transparent)`,
-                      }}
-                    />
-
-                    {metricPairs.length > 0 && (
-                      <div className="flex flex-wrap justify-center gap-8 mb-8 relative">
-                        {metricPairs.map((m, i) => (
-                          <div key={i} className="text-center">
-                            <p className="text-4xl lg:text-5xl font-bold leading-none mb-1.5" style={{ color: card.accent }}>{m.value}</p>
-                            <p className="text-[10px] text-white/35 uppercase tracking-wider">{m.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap justify-center gap-2 mb-6 relative">
-                      {card.tags.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] font-medium px-2.5 py-1 rounded-full"
-                          style={{ backgroundColor: card.accent + '18', color: card.accent + 'bb' }}
-                        >
-                          {tag}
-                        </span>
+                  {metricPairs.length > 0 && (
+                    <div className="flex flex-wrap justify-center gap-10 mb-6">
+                      {metricPairs.map((m, i) => (
+                        <div key={i} className="text-center">
+                          <p className="text-3xl lg:text-4xl font-semibold leading-none mb-2" style={{ color: card.accent }}>{m.value}</p>
+                          <p className="text-[10px] text-white/30 uppercase tracking-wider">{m.label}</p>
+                        </div>
                       ))}
                     </div>
-
-                    <p className="text-[10px] text-white/20 uppercase tracking-widest relative">{card.period}</p>
-                  </div>
+                  )}
+                  <p className="text-[10px] text-white/20 uppercase tracking-widest">{card.period}</p>
                 </>
               )}
             </motion.div>
