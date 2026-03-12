@@ -32,9 +32,9 @@ const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
     summary: 'Editorial DRI for the Developer Ecosystem Success team at Meta Horizon — the platform where developers build worlds, games, and apps for VR. In five months, I designed the team\'s full content pipeline: sourcing creators, developing story angles, running multi-stage XFN review across product, analytics, and legal, and publishing 13 pieces. Alongside editorial, I built the Growth Systems Toolkit and a Horizon Creator Studio prototype presented to C-suite to inform future creator tooling.',
-    problem: 'Developers building successful worlds had no visibility outside the ecosystem. There was no pipeline to identify them, develop their stories, and publish them at scale. No internal tooling to support the team\'s growth strategy.',
-    system: 'Designed a full content engine: sourcing creators, developing narrative angles, conducting editorial interviews, coordinating XFN review across product, marketing, analytics, and legal, and managing publication end-to-end. Built the Growth Systems Toolkit (three AI-powered tools deployed on Vercel) and a functional Creator Studio prototype spec\'d for C-suite review.',
-    impact: 'Published 13 pieces across developer stories and go-to-market guides. Authored an external whitepaper with research firm NRG. Internal tooling used in 2026 growth strategy presentations. Creator Studio prototype informed product roadmap decisions.',
+    problem: 'Horizon had breakout developers building successful worlds — but no way to tell their stories publicly, no editorial pipeline to support it, and no internal tools to back the team\'s strategy work.',
+    system: 'Built the content operation from zero: sourcing, interviews, 8-stage XFN review across five teams, and publication management for 13 pieces. In parallel: three AI-powered internal tools (the Growth Systems Toolkit) and a Creator Studio prototype taken to C-suite.',
+    impact: '13 pieces out in 5 months. NRG whitepaper co-authored. Growth Systems Toolkit active in 2026 planning. Creator Studio prototype on the product roadmap.',
     stats: [
       { value: '13', label: 'Pieces Published' },
       { value: '5', label: 'XFN Teams' },
@@ -408,11 +408,24 @@ export default function Work() {
                   </div>
                 )}
                 {initiative.url && (
-                  <a href={initiative.url} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[14px] font-medium"
-                    style={{ color: 'var(--t-accent)' }}>
-                    {getUrlLabel(initiative.url)}
-                  </a>
+                  <div className="mt-8 pt-6" style={{ borderTop: '1px solid var(--t-divider)' }}>
+                    <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
+                      Read the work
+                    </p>
+                    <a href={initiative.url} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-between p-4 rounded-xl transition-opacity hover:opacity-70 group"
+                      style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                      <div>
+                        <p className="text-[13px] font-medium leading-snug" style={{ color: 'var(--t-primary)' }}>
+                          {getUrlLabel(initiative.url)}
+                        </p>
+                        <p className="text-[11px] mt-1" style={{ color: 'var(--t-tertiary)' }}>
+                          {(() => { try { return new URL(initiative.url).hostname.replace('www.',''); } catch { return ''; } })()}
+                        </p>
+                      </div>
+                      <span className="text-[20px] flex-shrink-0 ml-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ color: 'var(--t-secondary)' }}>↗</span>
+                    </a>
+                  </div>
                 )}
               </motion.div>
 
@@ -539,7 +552,27 @@ export default function Work() {
                                     transition={{ duration: 0.22, ease: E }}
                                     style={{ overflow: 'hidden' }}
                                   >
-                                    {published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                                    {(() => {
+                                      const getSubgroup = (init: Initiative) => {
+                                        if (['Developer Story','Year in Review','Success Story','Creator Story'].includes(init.category)) return 'Developer Stories';
+                                        if (init.category.includes('GTM')) return 'GTM Guides';
+                                        return null;
+                                      };
+                                      const grouped = published.reduce<Record<string, Initiative[]>>((acc, init) => {
+                                        const sg = getSubgroup(init) ?? '_flat';
+                                        (acc[sg] = acc[sg] || []).push(init);
+                                        return acc;
+                                      }, {});
+                                      const keys = Object.keys(grouped);
+                                      const useSubgroups = keys.length > 1 && !keys.every(k => k === '_flat');
+                                      if (!useSubgroups) return published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />);
+                                      return keys.map(sg => (
+                                        <div key={sg}>
+                                          <p className="text-[9px] uppercase tracking-[0.14em] font-medium py-2.5" style={{ color: 'var(--t-border-strong)' }}>{sg}</p>
+                                          {grouped[sg].map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                                        </div>
+                                      ));
+                                    })()}
                                   </motion.div>
                                 )}
                               </AnimatePresence>
