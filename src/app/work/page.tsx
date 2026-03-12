@@ -21,15 +21,19 @@ interface Company {
   role: string;
   period: string;
   overview: string;
-  metrics: { value: string; label: string }[];
+  problem: string;
+  system: string;
+  impact: string;
   initiatives: Initiative[];
 }
 
 const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
-    metrics: [{ value: '13', label: 'Published pieces' }, { value: '5', label: 'XFN teams' }, { value: '100%', label: 'Stat accuracy' }],
-    overview: 'Meta Horizon is a developer ecosystem and VR platform for creators building worlds, games, and experiences. I managed the full content pipeline for the Horizon Developer Blog — developer success stories, go-to-market guides, and cross-functional editorial coordination — producing 13 pieces end-to-end.',
+    overview: 'Meta Horizon is a developer ecosystem where creators build worlds, games, and experiences for VR.',
+    problem: 'Developers building successful worlds were not visible outside the ecosystem. There was no pipeline to identify them, develop their stories, and publish them at scale.',
+    system: 'Designed a developer storytelling pipeline — sourcing creators, developing narrative angles, conducting editorial interviews, coordinating cross-functional review across product, marketing, analytics, and legal, and managing publication end-to-end.',
+    impact: 'Published 13 pieces across developer stories and go-to-market guides. Surfaced creators generating millions of plays and shaping the Horizon ecosystem.',
     initiatives: [
       { id: 'meta-pipeline', category: 'Content System', title: 'Developer Story Pipeline', description: 'Sole DRI across all production stages for the Horizon Developer Blog — sourcing creators, developing narratives, conducting interviews, coordinating XFN review, and managing publication. 13 pieces published across developer stories and GTM guides.',
         responsibilities: ['Owned the full content lifecycle from creator sourcing to publication', 'Conducted all editorial interviews with VR developers and creators', 'Developed narrative angles and story structures for each piece', 'Managed editorial timelines across concurrent projects'] },
@@ -67,8 +71,10 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'snap', name: 'Snap Inc.', role: 'Trend Producer', period: 'Mar – Oct 2025',
-    metrics: [{ value: '500M+', label: 'Monthly viewers' }, { value: '1,000+', label: 'Videos daily' }, { value: '1M+', label: 'Creators influenced' }],
-    overview: 'Spotlight is Snapchat\'s discovery surface for short-form video, reaching hundreds of millions of viewers. My role focused on identifying breakout creators and cultural trends within a high-velocity content pipeline — programming editorial decisions at scale.',
+    overview: 'Spotlight is Snapchat\'s short-form video discovery surface, reaching hundreds of millions of viewers daily.',
+    problem: 'At 1,000+ pieces of content per day, identifying breakout creators and cultural signals before they reached algorithmic momentum required more than data — it required editorial judgment at scale.',
+    system: 'Built a daily programming practice combining cultural pattern recognition, platform data, and editorial instinct. Contributed to a creator identification system with Data Science to surface emerging talent earlier and at scale.',
+    impact: 'Shaped what 500M+ monthly viewers saw first. Contributed creator selections used in Times Square and other high-visibility Snap brand campaigns.',
     initiatives: [
       { id: 'snap-spotlight', category: 'Content Programming', title: 'Spotlight Programming Lead', description: 'Daily editorial oversight of a 1,000+ piece pipeline across one of the largest UGC surfaces in social media. Every programming decision shaped what 500M+ monthly viewers saw first.',
         responsibilities: ['Reviewed and programmed 1,000+ videos daily across Spotlight', 'Made editorial decisions directly shaping what 500M+ monthly viewers saw first', 'Balanced trend velocity, quality, and audience fit in every programming call', 'Maintained consistent editorial standards at high volume and speed'] },
@@ -90,8 +96,10 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'phony', name: 'Phony Content', role: 'Content Manager', period: 'May 2024 – Mar 2025',
-    metrics: [{ value: '25M+', label: 'Total views' }, { value: '50+', label: 'Stories produced' }, { value: '39%', label: 'Top completion rate' }],
-    overview: 'Tiny Texts is a scripted short-form storytelling series on Snapchat built around conversational text message narratives. My role focused on developing the story architecture, production systems, and engagement frameworks that drove consistent audience retention across 50+ episodes.',
+    overview: 'Tiny Texts is a scripted short-form series on Snapchat built around text-message conversations — a platform-native format designed for mobile viewing behavior.',
+    problem: 'Serialized short-form storytelling on mobile requires a different architecture than traditional narrative. Retention drops off fast. The structure has to work harder than the story.',
+    system: 'Designed story frameworks optimized for Snapchat\'s viewing behavior — pacing, emotional arcs, and ending structures calibrated for completion and follower conversion. Built production systems and editorial templates that sustained quality across 50+ episodes.',
+    impact: '25M+ total views. 39% completion rate on the top episode. Multiple stories drove follower spikes of 8K–20K in a single cycle.',
     initiatives: [
       { id: 'phony-architecture', category: 'Narrative Design', title: 'Viral Story Architecture', description: 'Designing conversational stories engineered for retention — structure, pacing, and emotional arcs calibrated for short-form audience behavior. These aren\'t just scripts; they\'re systems for keeping someone reading.',
         responsibilities: ['Designed story frameworks optimized for Snapchat\'s short-form viewing behavior', 'Developed pacing and emotional arc structures calibrated for high completion rates', 'Established repeatable narrative templates used across 50+ episodes', 'Iterated on structure based on per-episode performance data'] },
@@ -113,8 +121,10 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'stockx', name: 'StockX', role: 'Brand Creative Production (Freelance)', period: 'Sep 2021 & Dec 2024',
-    metrics: [{ value: '10M+', label: 'Campaign impressions' }, { value: '3', label: 'Major shoots' }, { value: '2', label: 'Markets researched' }],
-    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods. I contributed on a freelance basis across two engagements — authoring a Gen Z consumer insights report that informed 2025 marketing strategy, and providing production support on three high-visibility campaign shoots.',
+    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods.',
+    problem: 'Two separate briefs: understanding how Gen Z consumers in LA and NYC were engaging with culture and resale, and executing high-visibility creator campaign shoots.',
+    system: 'Authored a Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across two markets. Provided production support on three brand campaign shoots featuring athletes and creators.',
+    impact: 'Trend report directly informed StockX\'s 2025 marketing strategy. Campaign content reached audiences across gaming, skate, and streetwear — including placements in Times Square.',
     initiatives: [
       { id: 'stockx-report', category: 'Research Report', title: '2024 Core Insights Report', description: 'A Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across LA and NYC. Directly informed StockX\'s 2025 marketing strategy.',
         responsibilities: ['Conducted primary and secondary research across LA and NYC Gen Z demographics', 'Mapped digital consumption behaviors, emerging subcultures, and affinity brand patterns', 'Synthesized findings into a structured trend report', 'Delivered insights that directly informed StockX\'s 2025 marketing and brand strategy'] },
@@ -128,8 +138,10 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'collider', name: 'Collider', role: 'Editorial Content Specialist (Freelance)', period: 'Aug – Oct 2022',
-    metrics: [{ value: '30M+', label: 'Monthly visitors' }, { value: '125K+', label: 'Top article views' }, { value: '~15%', label: 'Traffic lift' }],
-    overview: 'Collider is a film and television platform with 30M+ monthly visitors. As a freelance editorial specialist, I produced SEO-optimized features designed to capture high-intent search traffic — contributing to roughly a 15% organic traffic lift in two months.',
+    overview: 'Collider is a film and television platform with 30M+ monthly visitors.',
+    problem: 'High-traffic editorial platforms need content that captures search intent without sacrificing editorial quality. Most SEO content does one or the other.',
+    system: 'Identified high-intent, under-served search opportunities and produced features designed to rank and hold attention — optimizing for both search surface eligibility and audience engagement.',
+    impact: 'Contributed to roughly a 15% organic traffic lift in two months. Top piece hit 125K readers with a 4:23 average time on page and a top-3 Google ranking for a competitive query.',
     initiatives: [
       { id: 'collider-actors', category: 'Editorial Feature', title: 'Actors and Their Favorite Movies', description: '125K readers. 4:23 average time on page. Top-3 Google result for a competitive search query. An editorial piece that found the right audience and kept them.',
         responsibilities: ['Identified the topic as a high-intent, under-served search opportunity', 'Researched and compiled the editorial content across a broad actor catalog', 'Wrote and optimized the full piece for both editorial quality and search performance', 'Achieved top-3 Google ranking for a competitive query; 4:23 average time on page'], url: 'https://collider.com/actors-and-their-favorite-movies/' },
@@ -209,10 +221,10 @@ export default function Work() {
 
         {/* Sidebar */}
         <div
-          className="hidden lg:flex flex-col w-[210px] flex-shrink-0 py-8 px-5"
+          className="hidden lg:flex flex-col w-[220px] flex-shrink-0 py-10 px-6"
           style={{ borderRight: '1px solid var(--t-border)' }}
         >
-          <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>
+          <p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-6" style={{ color: 'var(--t-tertiary)' }}>
             Experience
           </p>
           <div className="flex flex-col gap-0.5 flex-1">
@@ -222,12 +234,12 @@ export default function Work() {
                 <button
                   key={c.id}
                   onClick={() => selectCompany(c.id)}
-                  className="text-left w-full px-3 py-2.5 rounded-lg transition-colors"
+                  className="text-left w-full px-3 py-2.5 rounded-lg transition-all"
                   style={{ background: active ? 'var(--t-surface)' : 'transparent' }}
                   onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'var(--t-surface)'; }}
                   onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
                 >
-                  <span className="block text-[14px] font-medium transition-colors" style={{ color: active ? 'var(--t-primary)' : 'var(--t-secondary)' }}>
+                  <span className="block text-[14px] transition-colors" style={{ color: active ? 'var(--t-primary)' : 'var(--t-secondary)', fontWeight: active ? 500 : 400 }}>
                     {c.name}
                   </span>
                   <span className="block text-[11px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>
@@ -379,35 +391,39 @@ export default function Work() {
                 key={`c-${activeCompany}`}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: E }}
-                className="px-8 lg:px-12 py-10 pb-20"
+                className="px-8 lg:px-14 py-12 pb-24 max-w-[640px]"
               >
                 {/* Header */}
-                <div className="mb-10 max-w-[620px]">
-                  <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
+                <div className="mb-12 max-w-[580px]">
+                  <p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}>
                     {company.role}
                   </p>
-                  <h1 className="text-[32px] font-semibold tracking-[-0.02em] leading-tight mb-1" style={{ color: 'var(--t-primary)' }}>
+                  <h1 className="text-[36px] font-semibold tracking-[-0.025em] leading-tight mb-1.5" style={{ color: 'var(--t-primary)' }}>
                     {company.name}
                   </h1>
-                  <p className="text-[15px] mb-8" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+                  <p className="text-[14px] mb-10" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
 
-                  <div className="flex items-center gap-10 mb-10 pb-10" style={{ borderBottom: '1px solid var(--t-border)' }}>
-                    {company.metrics.map(m => (
-                      <div key={m.label}>
-                        <p className="text-[22px] font-semibold tracking-[-0.01em] leading-none mb-1" style={{ color: 'var(--t-primary)' }}>{m.value}</p>
-                        <p className="text-[11px] uppercase tracking-[0.06em]" style={{ color: 'var(--t-tertiary)' }}>{m.label}</p>
+                  <p className="text-[16px] leading-[1.7] mb-10" style={{ color: 'var(--t-secondary)' }}>
+                    {company.overview}
+                  </p>
+
+                  <div className="flex flex-col gap-6 pb-10" style={{ borderBottom: '1px solid var(--t-divider)' }}>
+                    {[
+                      { label: 'Problem', text: company.problem },
+                      { label: 'System', text: company.system },
+                      { label: 'Impact', text: company.impact },
+                    ].map(({ label, text }) => (
+                      <div key={label} className="flex gap-6">
+                        <p className="text-[11px] uppercase tracking-[0.1em] font-medium w-[60px] flex-shrink-0 pt-[3px]" style={{ color: 'var(--t-tertiary)' }}>{label}</p>
+                        <p className="text-[14px] leading-[1.65] flex-1" style={{ color: 'var(--t-secondary)' }}>{text}</p>
                       </div>
                     ))}
                   </div>
-
-                  <p className="text-[15px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
-                    {company.overview}
-                  </p>
                 </div>
 
                 {/* Initiative list */}
-                <div className="max-w-[620px]">
-                  <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                <div className="max-w-[580px]">
+                  <p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-0 mt-10" style={{ color: 'var(--t-tertiary)' }}>
                     Initiatives — {company.initiatives.length}
                   </p>
                   <div>
@@ -416,15 +432,15 @@ export default function Work() {
                         key={init.id}
                         onClick={() => setActiveInitiative(init.id)}
                         className="w-full text-left flex items-center justify-between py-4 group transition-colors"
-                        style={{ borderBottom: '1px solid var(--t-border)' }}
+                        style={{ borderBottom: '1px solid var(--t-divider)' }}
                         initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2, delay: 0.03 + i * 0.025, ease: E }}
                       >
                         <div>
-                          <p className="text-[11px] uppercase tracking-[0.08em] mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                          <p className="text-[11px] uppercase tracking-[0.08em] mb-1.5" style={{ color: 'var(--t-tertiary)' }}>
                             {init.category}
                           </p>
-                          <p className="text-[15px] font-medium" style={{ color: 'var(--t-primary)' }}>
+                          <p className="text-[15px]" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>
                             {init.title}
                           </p>
                         </div>

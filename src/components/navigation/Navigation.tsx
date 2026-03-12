@@ -12,17 +12,25 @@ export default function Navigation() {
 
   const links = [
     { href: '/work', label: 'Work' },
-    { href: '/published', label: 'Published Content' },
+    { href: '/published', label: 'Published' },
     { href: '/about', label: 'About' },
   ];
+
+  const isActive = (href: string) =>
+    pathname === href || (pathname.startsWith(href) && href !== '/');
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
-      style={{ background: 'var(--t-nav)', borderBottom: '1px solid var(--t-border)' }}
+      style={{
+        background: 'var(--t-nav)',
+        borderBottom: '1px solid var(--t-border)',
+      }}
     >
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-2xl mx-auto px-6 sm:px-10">
         <div className="flex items-center justify-between h-[52px]">
+
+          {/* Wordmark */}
           <Link
             href="/"
             className="text-[15px] font-semibold tracking-tight transition-opacity hover:opacity-60"
@@ -31,80 +39,91 @@ export default function Navigation() {
             Shane Delaney
           </Link>
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-7">
-            {links.map((link) => {
-              const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== '/');
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[15px] transition-colors"
-                  style={{ color: isActive ? 'var(--t-primary)' : 'var(--t-secondary)' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = isActive ? 'var(--t-primary)' : 'var(--t-secondary)')}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-6">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[14px] transition-opacity"
+                style={{
+                  color: isActive(link.href) ? 'var(--t-primary)' : 'var(--t-secondary)',
+                  opacity: isActive(link.href) ? 1 : undefined,
+                  fontWeight: isActive(link.href) ? 500 : 400,
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                onMouseLeave={e => (e.currentTarget.style.color = isActive(link.href) ? 'var(--t-primary)' : 'var(--t-secondary)')}
+              >
+                {link.label}
+              </Link>
+            ))}
 
             {/* Theme toggle */}
             <button
               onClick={toggle}
               aria-label="Toggle theme"
-              className="w-8 h-8 flex items-center justify-center rounded-full transition-colors"
+              className="w-7 h-7 flex items-center justify-center rounded-full transition-opacity hover:opacity-60"
               style={{ color: 'var(--t-secondary)' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-secondary)')}
             >
               {theme === 'dark' ? (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                  <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
               ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                 </svg>
               )}
             </button>
 
+            {/* Resume CTA */}
             <a
               href="/ShaneDelaneyResume.pdf"
               download
-              className="text-[14px] font-medium px-4 py-1.5 rounded-full transition-colors"
+              className="text-[13px] font-medium px-4 py-1.5 rounded-full transition-opacity hover:opacity-75"
               style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
             >
               Resume
             </a>
           </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile controls */}
           <div className="md:hidden flex items-center gap-3">
             <button
               onClick={toggle}
-              className="w-8 h-8 flex items-center justify-center rounded-full"
+              className="w-7 h-7 flex items-center justify-center"
               style={{ color: 'var(--t-secondary)' }}
+              aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                  <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <line x1="12" y1="1" x2="12" y2="3" />
+                  <line x1="12" y1="21" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="3" y2="12" />
+                  <line x1="21" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
               ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                 </svg>
               )}
             </button>
             <button
               onClick={() => setMenuOpen(o => !o)}
-              className="p-1.5"
+              className="p-1"
               style={{ color: 'var(--t-secondary)' }}
               aria-label="Toggle menu"
             >
@@ -119,14 +138,14 @@ export default function Navigation() {
       {/* Mobile menu */}
       {menuOpen && (
         <div style={{ background: 'var(--t-bg)', borderBottom: '1px solid var(--t-border)' }}>
-          <div className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-0.5">
+          <div className="max-w-2xl mx-auto px-6 sm:px-10 py-4 flex flex-col gap-0.5">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="py-2.5 text-[15px]"
-                style={{ color: pathname === link.href ? 'var(--t-primary)' : 'var(--t-secondary)' }}
+                style={{ color: isActive(link.href) ? 'var(--t-primary)' : 'var(--t-secondary)' }}
               >
                 {link.label}
               </Link>

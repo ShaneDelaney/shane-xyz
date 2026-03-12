@@ -6,13 +6,14 @@ import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const PLATFORMS = ['Meta', 'Snap Inc.', 'StockX', 'Phony Content', 'Collider'];
+const PLATFORMS = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
 const FOCUS_AREAS = [
-  'Content Strategy',
-  'Creator Ecosystems',
-  'Platform Growth',
+  'Platform Ecosystems',
+  'Creator Economy',
+  'Content Discovery',
   'Narrative Systems',
+  'Emerging Technology',
 ];
 
 export default function About() {
@@ -37,7 +38,7 @@ export default function About() {
               transition={{ duration: 0.5, ease: EASE }}
             >
               <p
-                className="text-[10px] uppercase tracking-[0.1em] font-medium mb-4"
+                className="text-[10px] uppercase tracking-[0.12em] font-medium mb-4"
                 style={{ color: 'var(--t-tertiary)' }}
               >
                 About
@@ -49,10 +50,16 @@ export default function About() {
                 Shane Delaney
               </h1>
               <p
-                className="text-[15px] leading-[1.65] mb-8 max-w-sm"
+                className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                 style={{ color: 'var(--t-secondary)' }}
               >
-                Content strategist focused on platform ecosystems, creator growth, and editorial operations. My work sits at the intersection of storytelling systems and platform scale — building the infrastructure that makes content programs run.
+                I work inside large platform ecosystems identifying the creators, products, and cultural signals shaping them.
+              </p>
+              <p
+                className="text-[15px] leading-[1.7] mb-8 max-w-sm"
+                style={{ color: 'var(--t-secondary)' }}
+              >
+                My work focuses on translating complex platforms into stories that help audiences understand what’s being built and why it matters.
               </p>
 
               <div className="flex flex-col gap-2.5">
@@ -67,7 +74,7 @@ export default function About() {
                     <p className="text-[10px] uppercase tracking-[0.08em] font-medium mb-0.5" style={{ color: 'var(--t-tertiary)' }}>Email</p>
                     <p className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>shanedelaney11@gmail.com</p>
                   </div>
-                  <span className="text-[13px] transition-colors" style={{ color: 'var(--t-tertiary)' }}>↗</span>
+                  <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↗</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/shane-delaney-546445179/"
@@ -82,7 +89,7 @@ export default function About() {
                     <p className="text-[10px] uppercase tracking-[0.08em] font-medium mb-0.5" style={{ color: 'var(--t-tertiary)' }}>LinkedIn</p>
                     <p className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>Shane Delaney</p>
                   </div>
-                  <span className="text-[13px] transition-colors" style={{ color: 'var(--t-tertiary)' }}>↗</span>
+                  <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↗</span>
                 </a>
                 <a
                   href="/ShaneDelaneyResume.pdf"
@@ -96,7 +103,7 @@ export default function About() {
                     <p className="text-[10px] uppercase tracking-[0.08em] font-medium mb-0.5" style={{ color: 'var(--t-tertiary)' }}>Resume</p>
                     <p className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>ShaneDelaney_Resume.pdf</p>
                   </div>
-                  <span className="text-[13px] transition-colors" style={{ color: 'var(--t-tertiary)' }}>↓</span>
+                  <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↓</span>
                 </a>
               </div>
             </motion.div>
@@ -112,7 +119,7 @@ export default function About() {
 
                 <div>
                   <p
-                    className="text-[10px] font-medium uppercase tracking-[0.1em] mb-3"
+                    className="text-[10px] font-medium uppercase tracking-[0.12em] mb-3"
                     style={{ color: 'var(--t-tertiary)' }}
                   >
                     Platforms
@@ -126,7 +133,7 @@ export default function About() {
 
                 <div>
                   <p
-                    className="text-[10px] font-medium uppercase tracking-[0.1em] mb-3"
+                    className="text-[10px] font-medium uppercase tracking-[0.12em] mb-3"
                     style={{ color: 'var(--t-tertiary)' }}
                   >
                     Focus Areas
@@ -140,13 +147,14 @@ export default function About() {
 
                 <div>
                   <p
-                    className="text-[10px] font-medium uppercase tracking-[0.1em] mb-3"
+                    className="text-[10px] font-medium uppercase tracking-[0.12em] mb-3"
                     style={{ color: 'var(--t-tertiary)' }}
                   >
                     Background
                   </p>
                   <p className="text-[13px]" style={{ color: 'var(--t-secondary)' }}>LMU</p>
                   <p className="text-[12px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>B.A. English & Screenwriting</p>
+                  <p className="text-[12px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>Los Angeles</p>
                 </div>
 
               </div>

@@ -6,6 +6,21 @@ import { useState, useEffect } from 'react';
 
 const E = [0.16, 1, 0.3, 1] as const;
 
+const PILLARS = [
+  {
+    title: 'Signal Detection',
+    body: 'Identifying emerging creators, trends, and cultural signals inside large platform ecosystems.',
+  },
+  {
+    title: 'Narrative Systems',
+    body: 'Designing editorial pipelines that translate platform activity into stories.',
+  },
+  {
+    title: 'Platform Storytelling',
+    body: 'Explaining complex products through creators and real-world use cases.',
+  },
+];
+
 export default function Home() {
   const [m, setM] = useState(false);
   useEffect(() => { setM(true); }, []);
@@ -18,73 +33,120 @@ export default function Home() {
       <div className="w-full px-6 sm:px-10">
         <div className="max-w-2xl mx-auto">
 
+          {/* Eyebrow */}
           <motion.p
-            className="text-[11px] uppercase tracking-[0.1em] font-medium mb-5"
+            className="text-[11px] uppercase tracking-[0.12em] font-medium mb-5"
             style={{ color: 'var(--t-tertiary)' }}
-            initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
+            initial={{ opacity: 0 }}
+            animate={m ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.05, ease: E }}
           >
-            Los Angeles — Content Strategist
+            Los Angeles — Platform Content Strategist
           </motion.p>
 
+          {/* Name */}
           <motion.h1
-            className="text-[52px] sm:text-[68px] font-semibold tracking-[-0.03em] leading-[1.04] mb-6"
+            className="text-[54px] sm:text-[70px] font-semibold tracking-[-0.035em] leading-[1.02] mb-6"
             style={{ color: 'var(--t-primary)' }}
-            initial={{ opacity: 0, y: 10 }} animate={m ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, y: 10 }}
+            animate={m ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.08, ease: E }}
           >
             Shane Delaney
           </motion.h1>
 
+          {/* Hero tagline */}
           <motion.p
-            className="text-[17px] leading-[1.6] mb-10 max-w-[440px]"
+            className="text-[18px] leading-[1.65] mb-10 max-w-[500px]"
             style={{ color: 'var(--t-secondary)' }}
-            initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, y: 8 }}
+            animate={m ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.14, ease: E }}
           >
-            Content strategist working at the intersection of platforms, creators, and emerging technology.
+            I build the storytelling systems that help platforms surface the creators shaping their ecosystems.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
-            className="flex flex-col gap-4 mb-12"
-            initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}}
+            className="flex items-center gap-5 mb-14"
+            initial={{ opacity: 0, y: 6 }}
+            animate={m ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.22, ease: E }}
           >
-            <div className="flex items-center gap-4">
-              <Link
-                href="/work"
-                className="inline-flex items-center gap-2 px-[22px] py-[11px] rounded-full text-[15px] font-medium transition-opacity hover:opacity-80"
-                style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
-              >
-                View Work
-              </Link>
-              <Link
-                href="/published"
-                className="text-[15px] font-medium transition-opacity hover:opacity-60"
-                style={{ color: 'var(--t-accent)' }}
-              >
-                Published Content
-              </Link>
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-medium transition-opacity hover:opacity-75"
+              style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
+            >
+              View Work
+            </Link>
+            <Link
+              href="/published"
+              className="text-[15px] font-medium transition-opacity hover:opacity-60"
+              style={{ color: 'var(--t-secondary)' }}
+            >
+              Published Content
+            </Link>
+          </motion.div>
+
+          {/* How I Work pillars */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={m ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.3, ease: E }}
+          >
+            <p
+              className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5"
+              style={{ color: 'var(--t-tertiary)' }}
+            >
+              How I Work
+            </p>
+            <div className="grid grid-cols-3 gap-8 max-w-[560px]">
+              {PILLARS.map((p, i) => (
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={m ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.34 + i * 0.06, ease: E }}
+                >
+                  <p
+                    className="text-[13px] font-medium mb-1.5 leading-snug"
+                    style={{ color: 'var(--t-primary)' }}
+                  >
+                    {p.title}
+                  </p>
+                  <p
+                    className="text-[12px] leading-[1.6]"
+                    style={{ color: 'var(--t-tertiary)' }}
+                  >
+                    {p.body}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
+          {/* Platform credits */}
           <motion.div
-            className="flex items-center gap-6"
-            initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.32, ease: E }}
+            className="flex items-center gap-6 mt-10"
+            initial={{ opacity: 0 }}
+            animate={m ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.52, ease: E }}
           >
-            {['Meta', 'Snap Inc.', 'StockX', 'Phony Content', 'Collider'].map((co, i) => (
+            {['Meta', 'Snap Inc.', 'StockX', 'Phony Content', 'Collider'].map((co, i, arr) => (
               <span key={co} className="flex items-center gap-6">
                 <Link
                   href="/work"
-                  className="text-[13px] transition-colors"
-                  style={{ color: 'var(--t-tertiary)' }}
+                  className="text-[12px] transition-colors"
+                  style={{ color: 'var(--t-border-strong)' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-border-strong)')}
                 >
                   {co}
                 </Link>
-                {i < 4 && <span style={{ color: 'var(--t-border)' }}>·</span>}
+                {i < arr.length - 1 && (
+                  <span style={{ color: 'var(--t-border)' }}>·</span>
+                )}
               </span>
             ))}
           </motion.div>

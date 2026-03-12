@@ -22,7 +22,7 @@ interface Category {
 const CATEGORIES: Category[] = [
   {
     id: 'platform',
-    label: 'Platform & Creator Economy',
+    label: 'Platform Ecosystems',
     articles: [
       { title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding', publication: 'Meta Horizon Blog', year: '2025', stat: '$15M crowdfunded', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/' },
       { title: 'VAIL VR (Part Two): AEXLAB\'s Live Ops Engine', publication: 'Meta Horizon Blog', year: '2025', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/' },
@@ -35,7 +35,7 @@ const CATEGORIES: Category[] = [
   },
   {
     id: 'guides',
-    label: 'Resources & Guides',
+    label: 'Product & Platform Storytelling',
     articles: [
       { title: 'Develop a Marketing Plan for Your VR App', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 1', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/' },
       { title: 'Leverage Influencer Partnerships for Your VR App', publication: 'Meta Horizon', year: '2025', stat: 'GTM Series · Part 2', url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/' },
@@ -47,7 +47,7 @@ const CATEGORIES: Category[] = [
   },
   {
     id: 'narrative',
-    label: 'Narrative & Storytelling',
+    label: 'Creator Economy',
     articles: [
       { title: 'Tiny Texts — Cheer Squad', publication: 'Snapchat / Phony Content', year: '2024', stat: '6.3M views · 39% completion', url: 'https://snapchat.com/t/J2MP13US' },
       { title: 'Tiny Texts — Inhaler', publication: 'Snapchat / Phony Content', year: '2024', stat: '4.39M views · 20.3K followers', url: 'https://snapchat.com/t/wPotqUYw' },
@@ -58,7 +58,7 @@ const CATEGORIES: Category[] = [
   },
   {
     id: 'editorial',
-    label: 'Editorial & Brand',
+    label: 'Media & Culture',
     articles: [
       { title: 'Actors and Their Favorite Movies', publication: 'Collider', year: '2022', stat: '125K readers · 4:23 avg time', url: 'https://collider.com/actors-and-their-favorite-movies/' },
       { title: 'Hardest Working Characters in Succession, Ranked', publication: 'Collider', year: '2022', stat: '89K views · 22% social share', url: 'https://collider.com/hardest-workers-in-succession-ranked/' },
@@ -82,7 +82,6 @@ export default function Published() {
       className="h-screen overflow-hidden flex flex-col pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
-      {/* Body */}
       <div className="flex flex-1 min-h-0 px-6 sm:px-10 gap-10 py-8">
 
         {/* Left: category nav */}
@@ -93,7 +92,7 @@ export default function Published() {
           transition={{ duration: 0.4, ease: EASE }}
         >
           <p
-            className="text-[10px] uppercase tracking-[0.1em] font-medium mb-5"
+            className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5"
             style={{ color: 'var(--t-tertiary)' }}
           >
             Categories
@@ -121,10 +120,7 @@ export default function Published() {
           </div>
 
           <div className="mt-auto pt-6">
-            <p
-              className="text-[11px]"
-              style={{ color: 'var(--t-tertiary)' }}
-            >
+            <p className="text-[11px]" style={{ color: 'var(--t-tertiary)' }}>
               {CATEGORIES.reduce((sum, c) => sum + c.articles.length, 0)} published pieces
             </p>
           </div>
@@ -158,7 +154,7 @@ export default function Published() {
             transition={{ duration: 0.25, ease: EASE }}
           >
             <p
-              className="text-[10px] uppercase tracking-[0.1em] font-medium mb-6 hidden md:block"
+              className="text-[10px] uppercase tracking-[0.12em] font-medium mb-6 hidden md:block"
               style={{ color: 'var(--t-tertiary)' }}
             >
               {category.label}
@@ -172,7 +168,7 @@ export default function Published() {
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.25, delay: i * 0.04, ease: EASE }}
                   className="flex items-start justify-between py-4 group"
-                  style={{ borderBottom: '1px solid var(--t-border)' }}
+                  style={{ borderBottom: '1px solid var(--t-divider)' }}
                 >
                   <div className="flex-1 min-w-0 pr-4">
                     {article.url ? (
@@ -180,10 +176,8 @@ export default function Published() {
                         href={article.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[14px] font-medium leading-snug block mb-1.5 transition-colors"
+                        className="text-[14px] font-medium leading-snug block mb-1.5 transition-opacity hover:opacity-60"
                         style={{ color: 'var(--t-primary)' }}
-                        onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-secondary)')}
-                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-primary)')}
                       >
                         {article.title}
                       </a>
@@ -196,13 +190,20 @@ export default function Published() {
                       </p>
                     )}
                     <div className="flex items-center gap-3 flex-wrap">
-                      <p className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
-                        {article.publication} · {article.year}
-                      </p>
+                      <span className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
+                        {article.publication}
+                      </span>
+                      <span className="text-[12px]" style={{ color: 'var(--t-border-strong)' }}>·</span>
+                      <span className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
+                        {article.year}
+                      </span>
                       {article.stat && (
-                        <p className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
-                          {article.stat}
-                        </p>
+                        <>
+                          <span className="text-[12px]" style={{ color: 'var(--t-border-strong)' }}>·</span>
+                          <span className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>
+                            {article.stat}
+                          </span>
+                        </>
                       )}
                     </div>
                   </div>
@@ -211,10 +212,8 @@ export default function Published() {
                       href={article.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-shrink-0 text-[13px] mt-0.5 transition-colors"
+                      className="flex-shrink-0 text-[13px] mt-0.5 transition-opacity hover:opacity-60"
                       style={{ color: 'var(--t-tertiary)' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
                       aria-label="Open"
                     >
                       ↗
