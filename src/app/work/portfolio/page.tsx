@@ -513,37 +513,34 @@ function PortfolioInner() {
   if (!mounted) {
     return (
       <div
-        className="min-h-screen flex flex-col pt-14"
-        style={{ background: CARDS[0].bg, transition: 'background 0.7s ease' }}
+        className="h-screen overflow-hidden flex flex-col pt-14"
+        style={{ background: CARDS[0].bg }}
       />
     );
   }
 
+  const domain = card.url ? new URL(card.url).hostname.replace('www.', '') : null;
+
   return (
     <div
-      className="min-h-screen flex flex-col pt-14"
+      className="h-screen overflow-hidden flex flex-col pt-14"
       style={{ background: card.bg, transition: 'background 0.7s ease' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 lg:px-16 py-4">
-        <Link
-          href="/work"
-          className="text-sm text-white/40 hover:text-white transition-colors"
-        >
+      <div className="flex items-center justify-between px-6 lg:px-16 py-3 flex-shrink-0">
+        <Link href="/work" className="text-sm text-white/40 hover:text-white transition-colors">
           ← Back
         </Link>
-        <span className="text-sm text-white/40">
-          {card.company} · {coIdx}/{coCards.length}
-        </span>
+        <span className="text-sm text-white/40">{card.company} · {coIdx}/{coCards.length}</span>
       </div>
 
       {/* Main body */}
-      <div className="flex flex-col lg:flex-row flex-1 px-6 lg:px-16 pb-2 gap-6 lg:gap-0 min-h-0">
+      <div className="flex flex-col lg:flex-row flex-1 min-h-0 px-6 lg:px-16 gap-6 lg:gap-8 pb-2">
 
         {/* Left — editorial panel */}
-        <div className="lg:w-5/12 flex flex-col justify-center lg:pr-10 py-4 lg:py-8">
+        <div className="lg:w-5/12 flex flex-col justify-center lg:pr-4 py-2 lg:py-6 min-h-0">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={card.id}
@@ -555,8 +552,7 @@ function PortfolioInner() {
               transition={contentTransition}
               className="flex flex-col"
             >
-              {/* Category badge */}
-              <div className="mb-5">
+              <div className="mb-4">
                 <span
                   className="inline-block text-[11px] font-semibold px-3 py-1.5 rounded-full"
                   style={{ backgroundColor: card.accent + '22', color: card.accent }}
@@ -565,87 +561,107 @@ function PortfolioInner() {
                 </span>
               </div>
 
-              {/* Hook */}
-              <h1 className="text-3xl lg:text-4xl font-semibold text-white leading-snug mb-5">
+              <h1 className="text-2xl lg:text-3xl font-semibold text-white leading-snug mb-4">
                 {card.hook}
               </h1>
 
-              {/* Title */}
-              <p className="text-sm text-white/50 leading-relaxed mb-6 italic">
-                {card.title}
-              </p>
+              <p className="text-sm text-white/50 leading-relaxed mb-5 italic">{card.title}</p>
 
-              {/* Rule */}
-              <div className="w-12 h-px bg-white/15 mb-6" />
+              <div className="w-10 h-px bg-white/15 mb-5" />
 
-              {/* My Role */}
-              <p className="text-[9px] uppercase tracking-widest text-white/30 mb-2">My Role</p>
-              <p className="text-sm text-white/80 leading-relaxed mb-8 font-medium">
-                {card.impact}
-              </p>
+              <p className="text-[9px] uppercase tracking-widest text-white/30 mb-1.5">My Role</p>
+              <p className="text-sm text-white/80 leading-relaxed mb-6 font-medium">{card.impact}</p>
 
-              {/* Metrics */}
               {metricPairs.length > 0 && (
-                <div className="flex gap-6 mb-8">
+                <div className="flex gap-6 mb-6">
                   {metricPairs.map((m, i) => (
                     <div key={i}>
-                      <p className="text-2xl font-bold text-white leading-none mb-1">{m.value}</p>
+                      <p className="text-xl lg:text-2xl font-bold text-white leading-none mb-1">{m.value}</p>
                       <p className="text-[10px] text-white/40">{m.label}</p>
                     </div>
                   ))}
                 </div>
               )}
 
-              {/* CTA */}
               {card.url ? (
-                <div>
-                  <a
-                    href={card.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors"
-                  >
-                    Read Article ↗
-                  </a>
-                  {/* Mobile-only full-width button */}
-                  <a
-                    href={card.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="lg:hidden mt-4 flex items-center justify-center gap-1 bg-white text-gray-900 font-semibold text-sm px-5 py-3 rounded-full hover:bg-white/90 transition-colors w-full"
-                  >
-                    View Published Work ↗
-                  </a>
-                </div>
+                <a
+                  href={card.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors self-start"
+                >
+                  Read Article ↗
+                </a>
               ) : (
-                <span className="text-sm text-white/20 font-medium">No public link available</span>
+                <span className="text-sm text-white/20 font-medium">No public link</span>
               )}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Right — iframe panel (desktop only) */}
-        <div className="hidden lg:flex lg:w-7/12 lg:py-6 lg:pr-8 lg:pl-4 min-h-0">
+        {/* Right — article preview panel (desktop only) */}
+        <div className="hidden lg:flex lg:w-7/12 py-6 min-h-0">
           <AnimatePresence mode="wait">
             <motion.div
-              key={card.id + '-iframe'}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="w-full h-full min-h-0 bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+              key={card.id + '-preview'}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full h-full rounded-2xl overflow-hidden border border-white/10 flex flex-col"
+              style={{ background: 'rgba(255,255,255,0.04)' }}
             >
               {card.url ? (
-                <iframe
-                  src={card.url}
-                  title={card.title}
-                  sandbox="allow-scripts allow-same-origin allow-forms"
-                  className="w-full h-full"
-                  style={{ minHeight: '100%' }}
-                />
+                <>
+                  {/* Panel header */}
+                  <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/8 flex-shrink-0">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                    </div>
+                    <span className="text-[11px] text-white/25 font-mono ml-1 truncate">{domain}</span>
+                  </div>
+
+                  {/* Preview body */}
+                  <div className="flex-1 flex flex-col items-center justify-center px-12 text-center relative overflow-hidden">
+                    {/* Accent glow */}
+                    <div
+                      className="absolute inset-0 opacity-10 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(ellipse 80% 60% at 50% 50%, ${card.accent}, transparent)`,
+                      }}
+                    />
+
+                    <span
+                      className="text-[10px] font-semibold px-2.5 py-1 rounded-full mb-6 relative"
+                      style={{ backgroundColor: card.accent + '20', color: card.accent }}
+                    >
+                      {card.category}
+                    </span>
+
+                    <h2 className="text-xl lg:text-2xl font-semibold text-white leading-snug mb-4 relative">
+                      {card.title}
+                    </h2>
+
+                    <p className="text-sm text-white/50 leading-relaxed mb-8 max-w-sm relative">
+                      {card.about}
+                    </p>
+
+                    <a
+                      href={card.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 rounded-full transition-all hover:scale-105 hover:brightness-110"
+                      style={{ background: card.accent, color: '#000' }}
+                    >
+                      Open Article ↗
+                    </a>
+                  </div>
+                </>
               ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <p className="text-white/20 text-sm">No public link</p>
+                <div className="flex-1 flex items-center justify-center">
+                  <p className="text-white/20 text-sm">Internal project — no public link</p>
                 </div>
               )}
             </motion.div>
