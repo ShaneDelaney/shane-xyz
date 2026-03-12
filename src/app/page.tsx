@@ -66,27 +66,6 @@ export default function Home() {
                 Published Content
               </Link>
             </div>
-            <div className="flex items-center gap-5">
-              <Link
-                href="/about"
-                className="text-[14px] transition-colors"
-                style={{ color: 'var(--t-tertiary)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
-              >
-                About
-              </Link>
-              <a
-                href="/ShaneDelaneyResume.pdf"
-                download
-                className="text-[14px] transition-colors"
-                style={{ color: 'var(--t-tertiary)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
-              >
-                Resume
-              </a>
-            </div>
           </motion.div>
 
           <motion.div

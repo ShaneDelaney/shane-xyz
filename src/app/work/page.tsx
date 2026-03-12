@@ -29,7 +29,7 @@ const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
     metrics: [{ value: '13', label: 'Published pieces' }, { value: '5', label: 'XFN teams' }, { value: '100%', label: 'Stat accuracy' }],
-    overview: 'I was the sole content DRI for the Meta Horizon Developer Blog — owning the full production pipeline from creator sourcing and editorial interviews to XFN coordination and publication. I produced 13 pieces across developer success stories and a 6-part go-to-market guide series, managing every stage end-to-end.',
+    overview: 'Meta Horizon is a developer ecosystem and VR platform for creators building worlds, games, and experiences. I managed the full content pipeline for the Horizon Developer Blog — developer success stories, go-to-market guides, and cross-functional editorial coordination — producing 13 pieces end-to-end.',
     initiatives: [
       { id: 'meta-pipeline', category: 'Content System', title: 'Developer Story Pipeline', description: 'Sole DRI across all production stages for the Horizon Developer Blog — sourcing creators, developing narratives, conducting interviews, coordinating XFN review, and managing publication. 13 pieces published across developer stories and GTM guides.',
         responsibilities: ['Owned the full content lifecycle from creator sourcing to publication', 'Conducted all editorial interviews with VR developers and creators', 'Developed narrative angles and story structures for each piece', 'Managed editorial timelines across concurrent projects'] },
