@@ -20,7 +20,7 @@ interface Company {
   name: string;
   role: string;
   period: string;
-  overview: string;
+  summary: string;
   problem: string;
   system: string;
   impact: string;
@@ -30,7 +30,7 @@ interface Company {
 const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
-    overview: 'Meta Horizon is a developer ecosystem where creators build worlds, games, and experiences for VR. Sole content DRI for the Developer Ecosystem Success team across editorial, research, and internal tooling.',
+    summary: 'Editorial DRI for the Developer Ecosystem Success team at Meta Horizon — the platform where developers build worlds, games, and apps for VR. In five months, I designed the team\'s full content pipeline: sourcing creators, developing story angles, running multi-stage XFN review across product, analytics, and legal, and publishing 13 pieces. Alongside editorial, I built the Growth Systems Toolkit — three AI-powered internal tools used in the team\'s 2026 strategy presentations.',
     problem: 'Developers building successful worlds had no visibility outside the ecosystem. There was no pipeline to identify them, develop their stories, and publish them at scale. No internal tooling to support the team\'s growth strategy.',
     system: 'Designed a full content engine: sourcing creators, developing narrative angles, conducting editorial interviews, coordinating XFN review across product, marketing, analytics, and legal, and managing publication end-to-end. Also built an internal Growth Systems Toolkit: three AI-powered tools for strategy validation and stakeholder demos, deployed on Vercel.',
     impact: 'Published 13 pieces across developer stories and go-to-market guides. Authored an external whitepaper with research firm NRG. Built internal tooling used for 2026 growth strategy demos.',
@@ -71,7 +71,7 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'snap', name: 'Snap Inc.', role: 'Trend Producer', period: 'Mar – Oct 2025',
-    overview: 'Spotlight is Snapchat\'s short-form video discovery surface on a platform with 900M+ monthly active users. Promoted from Trend Curator to Trend Producer, serving as final decision maker on content amplification.',
+    summary: 'Trend Producer on Snapchat Spotlight — a short-form discovery surface with 900M+ monthly active users and 1,000+ pieces of content reviewed daily. Promoted from Trend Curator to Trend Producer, taking on final decision-making authority for content amplification. Built the curation systems, flagged breakout creators before the algorithm confirmed them, and sourced content featured in Times Square placements and national Snap brand campaigns.',
     problem: 'At 1,000+ pieces of content per day on a 900M+ MAU platform, identifying breakout creators and cultural signals before they reached algorithmic momentum required editorial judgment, not just data.',
     system: 'Built a daily programming practice combining cross-platform competitive monitoring (TikTok, YouTube Shorts, Instagram Reels), internal performance data, and editorial instinct. Led the Breakout Creator workstream with Data Science to surface high-potential talent before peak adoption.',
     impact: 'Delivered consistent above-benchmark engagement and retention lifts. Creator selections featured in Times Square takeovers and major national Snap brand campaigns.',
@@ -96,7 +96,7 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'phony', name: 'Phony Content', role: 'Content Manager', period: 'May 2024 – Mar 2025',
-    overview: 'Tiny Texts is a scripted short-form series on Snapchat built around text-message conversations — a platform-native format designed for mobile viewing behavior.',
+    summary: 'Content manager for Tiny Texts, a scripted short-form series on Snapchat built around text-message conversations — a format engineered for mobile viewing behavior. Wrote and produced 50+ episodes, designing story structures specifically for retention and follower conversion. The series generated 25M+ total views; top episode reached 6.3M views with a 39% completion rate.',
     problem: 'Serialized short-form storytelling on mobile requires a different architecture than traditional narrative. Retention drops off fast. The structure has to work harder than the story.',
     system: 'Designed story frameworks optimized for Snapchat\'s viewing behavior — pacing, emotional arcs, and ending structures calibrated for completion and follower conversion. Built production systems and editorial templates that sustained quality across 50+ episodes.',
     impact: '25M+ total views. 39% completion rate on the top episode. Multiple stories drove follower spikes of 8K–20K in a single cycle.',
@@ -121,7 +121,7 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'stockx', name: 'StockX', role: 'Brand Creative Production (Freelance)', period: 'Sep 2021 & Dec 2024',
-    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods.',
+    summary: 'Freelance researcher and on-set production support for StockX across two engagements in 2021 and 2024. Authored the 2024 Core Insights Report — a primary-research trend report mapping Gen Z digital consumption behavior and affinity brands across LA and NYC — and provided production support on three brand campaign shoots featuring athletes and creators.',
     problem: 'Two separate briefs: understanding how Gen Z consumers in LA and NYC were engaging with culture and resale, and executing high-visibility creator campaign shoots.',
     system: 'Authored a Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across two markets. Provided production support on three brand campaign shoots featuring athletes and creators.',
     impact: 'Trend report directly informed StockX\'s 2025 marketing strategy. Campaign content reached audiences across gaming, skate, and streetwear — including placements in Times Square.',
@@ -138,7 +138,7 @@ const COMPANIES: Company[] = [
   },
   {
     id: 'collider', name: 'Collider', role: 'Editorial Content Specialist (Freelance)', period: 'Aug – Oct 2022',
-    overview: 'Collider is a film and television platform with 30M+ monthly visitors.',
+    summary: 'Freelance editorial contributor for Collider, a film and television platform with 30M+ monthly visitors. Identified high-intent, under-served search opportunities and wrote editorial features calibrated for both audience hold and search-surface eligibility. Contributed to a ~15% organic traffic lift over two months; top piece hit 125K readers with a 4:23 average time on page.',
     problem: 'High-traffic editorial platforms need content that captures search intent without sacrificing editorial quality. Most SEO content does one or the other.',
     system: 'Identified high-intent, under-served search opportunities and produced features designed to rank and hold attention — optimizing for both search surface eligibility and audience engagement.',
     impact: 'Contributed to roughly a 15% organic traffic lift in two months. Top piece hit 125K readers with a 4:23 average time on page and a top-3 Google ranking for a competitive query.',
@@ -393,16 +393,25 @@ export default function Work() {
                 transition={{ duration: 0.2, ease: E }}
                 className="px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
               >
-                {/* Header */}
-                <div className="mb-10 max-w-[560px]">
+                {/* Layer 1: Header + Summary */}
+                <div className="mb-0 max-w-[560px]">
                   <p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
                     {company.role}
                   </p>
                   <h1 className="text-[28px] font-semibold tracking-[-0.02em] leading-tight mb-1" style={{ color: 'var(--t-primary)' }}>
                     {company.name}
                   </h1>
-                  <p className="text-[13px] mb-8" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+                  <p className="text-[13px] mb-6" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+                  <p className="text-[15px] leading-[1.7] max-w-[520px]" style={{ color: 'var(--t-secondary)' }}>
+                    {company.summary}
+                  </p>
+                </div>
 
+                {/* Layer 2: Context */}
+                <div className="max-w-[560px] pt-7 mt-7" style={{ borderTop: '1px solid var(--t-divider)' }}>
+                  <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>
+                    Context
+                  </p>
                   <div className="flex flex-col gap-5 pb-8" style={{ borderBottom: '1px solid var(--t-divider)' }}>
                     {[
                       { label: 'Problem', text: company.problem },
@@ -417,36 +426,57 @@ export default function Work() {
                   </div>
                 </div>
 
-                {/* Initiative list */}
-                <div className="max-w-[560px]">
-                  <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-0 mt-8" style={{ color: 'var(--t-tertiary)' }}>
-                    Work
-                  </p>
-                  <div>
-                    {company.initiatives.map((init, i) => (
-                      <motion.button
-                        key={init.id}
-                        onClick={() => setActiveInitiative(init.id)}
-                        className="w-full text-left flex items-center justify-between py-3.5 group transition-colors"
-                        style={{ borderBottom: '1px solid var(--t-divider)' }}
-                        initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2, delay: 0.03 + i * 0.025, ease: E }}
-                      >
-                        <div>
-                          <p className="text-[10px] uppercase tracking-[0.08em] mb-1" style={{ color: 'var(--t-tertiary)' }}>
-                            {init.category}
+                {/* Layer 3: Work — split Published vs Process & Systems */}
+                {(() => {
+                  const published = company.initiatives.filter(i => i.url);
+                  const systems = company.initiatives.filter(i => !i.url);
+                  const InitRow = ({ init, idx, offset = 0 }: { init: Initiative; idx: number; offset?: number }) => (
+                    <motion.button
+                      key={init.id}
+                      onClick={() => setActiveInitiative(init.id)}
+                      className="w-full text-left flex items-center justify-between py-3.5 group transition-colors"
+                      style={{ borderBottom: '1px solid var(--t-divider)' }}
+                      initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, delay: 0.03 + (idx + offset) * 0.025, ease: E }}
+                    >
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.08em] mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                          {init.category}
+                        </p>
+                        <p className="text-[14px]" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>
+                          {init.title}
+                        </p>
+                      </div>
+                      <span className="text-[14px] ml-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--t-secondary)' }}>
+                        →
+                      </span>
+                    </motion.button>
+                  );
+                  return (
+                    <div className="max-w-[560px]">
+                      {published.length > 0 && (
+                        <>
+                          <p className="text-[10px] uppercase tracking-[0.12em] font-medium mt-8 mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                            Published
                           </p>
-                          <p className="text-[14px]" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>
-                            {init.title}
+                          <div>
+                            {published.map((init, i) => <InitRow key={init.id} init={init} idx={i} />)}
+                          </div>
+                        </>
+                      )}
+                      {systems.length > 0 && (
+                        <>
+                          <p className="text-[10px] uppercase tracking-[0.12em] font-medium mt-8 mb-1" style={{ color: 'var(--t-tertiary)' }}>
+                            {published.length > 0 ? 'Process & Systems' : 'Work'}
                           </p>
-                        </div>
-                        <span className="text-[14px] ml-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--t-accent)' }}>
-                          →
-                        </span>
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
+                          <div>
+                            {systems.map((init, i) => <InitRow key={init.id} init={init} idx={i} offset={published.length} />)}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  );
+                })()}
               </motion.div>
             )}
           </AnimatePresence>
