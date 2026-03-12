@@ -12,7 +12,7 @@ export default function Navigation() {
 
   const links = [
     { href: '/work', label: 'Work' },
-    { href: '/published', label: 'Published' },
+    { href: '/published', label: 'Published Content' },
     { href: '/about', label: 'About' },
   ];
 

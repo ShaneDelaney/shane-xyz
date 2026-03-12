@@ -114,7 +114,7 @@ const COMPANIES: Company[] = [
   {
     id: 'stockx', name: 'StockX', role: 'Brand Creative Production (Freelance)', period: 'Sep 2021 & Dec 2024',
     metrics: [{ value: '10M+', label: 'Campaign impressions' }, { value: '3', label: 'Major shoots' }, { value: '2', label: 'Markets researched' }],
-    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods. My contributions spanned research and production support — from a Gen Z consumer insights report that informed 2025 marketing strategy, to supporting high-visibility campaign shoots.',
+    overview: 'StockX is a global marketplace at the intersection of streetwear, sneakers, and cultural goods. I contributed on a freelance basis across two engagements — authoring a Gen Z consumer insights report that informed 2025 marketing strategy, and providing production support on three high-visibility campaign shoots.',
     initiatives: [
       { id: 'stockx-report', category: 'Research Report', title: '2024 Core Insights Report', description: 'A Gen Z trend report mapping digital consumption behavior, emerging subcultures, and affinity brands across LA and NYC. Directly informed StockX\'s 2025 marketing strategy.',
         responsibilities: ['Conducted primary and secondary research across LA and NYC Gen Z demographics', 'Mapped digital consumption behaviors, emerging subcultures, and affinity brand patterns', 'Synthesized findings into a structured trend report', 'Delivered insights that directly informed StockX\'s 2025 marketing and brand strategy'] },
@@ -129,7 +129,7 @@ const COMPANIES: Company[] = [
   {
     id: 'collider', name: 'Collider', role: 'Editorial Content Specialist (Freelance)', period: 'Aug – Oct 2022',
     metrics: [{ value: '30M+', label: 'Monthly visitors' }, { value: '125K+', label: 'Top article views' }, { value: '~15%', label: 'Traffic lift' }],
-    overview: 'Collider is a film and television platform with 30M+ monthly visitors. My role as a freelance editorial specialist focused on producing SEO-optimized features that captured high-intent search traffic while delivering genuine editorial value to a film-literate audience.',
+    overview: 'Collider is a film and television platform with 30M+ monthly visitors. As a freelance editorial specialist, I produced SEO-optimized features designed to capture high-intent search traffic — contributing to roughly a 15% organic traffic lift in two months.',
     initiatives: [
       { id: 'collider-actors', category: 'Editorial Feature', title: 'Actors and Their Favorite Movies', description: '125K readers. 4:23 average time on page. Top-3 Google result for a competitive search query. An editorial piece that found the right audience and kept them.',
         responsibilities: ['Identified the topic as a high-intent, under-served search opportunity', 'Researched and compiled the editorial content across a broad actor catalog', 'Wrote and optimized the full piece for both editorial quality and search performance', 'Achieved top-3 Google ranking for a competitive query; 4:23 average time on page'], url: 'https://collider.com/actors-and-their-favorite-movies/' },

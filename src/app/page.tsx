@@ -46,24 +46,47 @@ export default function Home() {
           </motion.p>
 
           <motion.div
-            className="flex items-center gap-4 mb-12"
+            className="flex flex-col gap-4 mb-12"
             initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.22, ease: E }}
           >
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 px-[22px] py-[11px] rounded-full text-[15px] font-medium transition-opacity hover:opacity-80"
-              style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
-            >
-              View Work
-            </Link>
-            <Link
-              href="/published"
-              className="text-[15px] font-medium transition-opacity hover:opacity-60"
-              style={{ color: 'var(--t-accent)' }}
-            >
-              Published Content
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-2 px-[22px] py-[11px] rounded-full text-[15px] font-medium transition-opacity hover:opacity-80"
+                style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
+              >
+                View Work
+              </Link>
+              <Link
+                href="/published"
+                className="text-[15px] font-medium transition-opacity hover:opacity-60"
+                style={{ color: 'var(--t-accent)' }}
+              >
+                Published Content
+              </Link>
+            </div>
+            <div className="flex items-center gap-5">
+              <Link
+                href="/about"
+                className="text-[14px] transition-colors"
+                style={{ color: 'var(--t-tertiary)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
+              >
+                About
+              </Link>
+              <a
+                href="/ShaneDelaneyResume.pdf"
+                download
+                className="text-[14px] transition-colors"
+                style={{ color: 'var(--t-tertiary)' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-tertiary)')}
+              >
+                Resume
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
