@@ -37,16 +37,11 @@ const COMPANIES: [string, string][] = [
 
 export default function Home() {
   const [m, setM] = useState(false);
-  useEffect(() => {
-    setM(true);
-    // Lock scroll on mobile home page
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
+  useEffect(() => { setM(true); }, []);
 
   return (
     <div
-      className="h-screen flex flex-col justify-center pt-[52px] pb-8 overflow-hidden"
+      className="min-h-screen flex flex-col justify-center pt-[52px] pb-8"
       style={{ background: 'var(--t-bg)' }}
     >
       <div className="w-full px-6 sm:px-10">
