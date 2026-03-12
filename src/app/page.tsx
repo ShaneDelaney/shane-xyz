@@ -12,8 +12,8 @@ const PILLARS = [
     body: 'Final decision maker on high-volume content amplification — balancing brand, culture, creators, and business goals under time pressure.',
   },
   {
-    title: 'Platform & Competitive Intelligence',
-    body: 'Systematic cross-platform monitoring to identify format shifts, creator behaviors, and parity gaps before peak adoption.',
+    title: 'Data Integrity & XFN Translation',
+    body: 'Verifying metrics end-to-end and translating complex data into clear, actionable frameworks for cross-functional teams and leadership.',
   },
   {
     title: 'Narrative Systems',
