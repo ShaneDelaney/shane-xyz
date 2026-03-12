@@ -311,9 +311,115 @@ export default function Published() {
 
   return (
     <div
-      className="min-h-screen md:h-screen md:overflow-hidden flex flex-col pt-[52px]"
+      className="min-h-screen flex flex-col pt-[52px]"
       style={{ background: 'var(--t-bg)' }}
     >
+
+      {/* ── Mobile layout ── */}
+      <div className="md:hidden flex flex-col flex-1">
+        {/* Category pills — horizontal scroll */}
+        <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => handleCategoryChange(cat.id)}
+              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all"
+              style={{
+                background: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-surface)',
+                color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
+                border: '1px solid var(--t-border)',
+              }}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Article list */}
+        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
+              transition={{ duration: 0.18, ease: EASE }}
+            >
+              {category.articles.map((article, i) => {
+                const isExpanded = expandedId === article.title;
+                return (
+                  <motion.div
+                    key={article.title}
+                    id={article.slug}
+                    initial={{ opacity: 0, y: 3 }}
+                    animate={mounted ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.18, delay: i * 0.03, ease: EASE }}
+                  >
+                    {/* Row */}
+                    <button
+                      onClick={() => toggleExpanded(article.title)}
+                      className="w-full text-left py-3.5 flex items-center justify-between gap-3"
+                      style={{ borderBottom: isExpanded ? 'none' : '1px solid var(--t-divider)' }}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[13px] font-medium leading-snug" style={{ color: 'var(--t-primary)' }}>
+                          {article.title}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1 flex-wrap">
+                          <span className="text-[11px]" style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
+                          {article.stat && (
+                            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)' }}>
+                              {article.stat}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <motion.span
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.2, ease: EASE }}
+                        className="flex-shrink-0 text-[10px]"
+                        style={{ color: 'var(--t-tertiary)', display: 'inline-block' }}
+                      >↓</motion.span>
+                    </button>
+
+                    {/* Expanded — description (one sentence) + link only */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.22, ease: EASE }}
+                          style={{ overflow: 'hidden', borderBottom: '1px solid var(--t-divider)' }}
+                        >
+                          <div className="pb-4 pt-1">
+                            <p className="text-[12px] leading-[1.6] mb-3" style={{ color: 'var(--t-secondary)' }}>
+                              {article.description}
+                            </p>
+                            {article.url && (
+                              <a
+                                href={article.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={e => e.stopPropagation()}
+                                className="inline-flex items-center gap-1.5 text-[12px] font-medium transition-opacity hover:opacity-70"
+                                style={{ color: 'var(--t-primary)' }}
+                              >
+                                {getLinkLabel(article.url)} ↗
+                              </a>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ── Desktop layout ── */}
+      <div className="hidden md:flex flex-1 min-h-0 md:h-[calc(100vh-52px)] md:overflow-hidden">
        <div className="flex flex-1 md:min-h-0">
         {/* Left: category nav */}
         <motion.div
@@ -363,24 +469,6 @@ export default function Published() {
 
         {/* Right: article list */}
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none px-8 lg:px-12 py-10">
-
-          {/* Mobile category pills */}
-          <div className="flex items-center gap-2 flex-wrap mb-6 md:hidden">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                className="text-[12px] px-3 py-1.5 rounded-full border transition-all"
-                style={{
-                  borderColor: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-border)',
-                  background: cat.id === activeCategory ? 'var(--t-primary)' : 'transparent',
-                  color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
-                }}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -529,7 +617,8 @@ export default function Published() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </div>{/* end desktop inner */}
+      </div>{/* end desktop wrapper */}
     </div>
   );
 }

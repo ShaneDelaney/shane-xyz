@@ -27,6 +27,14 @@ const CARDS = [
   },
 ];
 
+const COMPANIES: [string, string][] = [
+  ['Meta', 'meta'],
+  ['Snap Inc.', 'snap'],
+  ['StockX', 'stockx'],
+  ['Phony Content', 'phony'],
+  ['Collider', 'collider'],
+];
+
 export default function Home() {
   const [m, setM] = useState(false);
   useEffect(() => { setM(true); }, []);
@@ -39,11 +47,12 @@ export default function Home() {
       <div className="w-full px-6 sm:px-10">
         <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-16">
 
-          {/* Left: text */}
+          {/* ── Left: text ── */}
           <div className="flex-1 min-w-0">
+
             {/* Eyebrow */}
             <motion.p
-              className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4 sm:mb-5"
+              className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4"
               style={{ color: 'var(--t-tertiary)' }}
               initial={{ opacity: 0 }}
               animate={m ? { opacity: 1 } : {}}
@@ -63,9 +72,9 @@ export default function Home() {
               Shane Delaney
             </motion.h1>
 
-            {/* Tagline */}
+            {/* Tagline — hidden on mobile, shown on sm+ */}
             <motion.p
-              className="text-[15px] sm:text-[17px] leading-[1.65] mb-7 sm:mb-8 max-w-[420px]"
+              className="hidden sm:block text-[17px] leading-[1.65] mb-8 max-w-[420px]"
               style={{ color: 'var(--t-secondary)' }}
               initial={{ opacity: 0, y: 8 }}
               animate={m ? { opacity: 1, y: 0 } : {}}
@@ -76,61 +85,67 @@ export default function Home() {
 
             {/* CTAs */}
             <motion.div
-              className="flex items-center gap-4 sm:gap-5 mb-8 sm:mb-10"
+              className="flex items-center gap-3 mb-7 sm:mb-10"
               initial={{ opacity: 0, y: 6 }}
               animate={m ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.22, ease: E }}
+              transition={{ duration: 0.4, delay: 0.18, ease: E }}
             >
               <Link
                 href="/work"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] sm:text-[14px] font-medium transition-opacity hover:opacity-75"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
                 style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}
               >
-                View Work
+                Work
               </Link>
               <Link
                 href="/published"
-                className="text-[13px] sm:text-[14px] font-medium transition-opacity hover:opacity-60"
-                style={{ color: 'var(--t-secondary)' }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
+                style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}
               >
                 Published
               </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75 hidden sm:inline-flex"
+                style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}
+              >
+                About
+              </Link>
             </motion.div>
 
-            {/* Platform credits */}
+            {/* Company chips */}
             <motion.div
-              className="flex items-center gap-4 sm:gap-5 flex-wrap"
+              className="flex items-center gap-2 flex-wrap"
               initial={{ opacity: 0 }}
               animate={m ? { opacity: 1 } : {}}
-              transition={{ duration: 0.4, delay: 0.3, ease: E }}
+              transition={{ duration: 0.4, delay: 0.26, ease: E }}
             >
-              {([['Meta','meta'],['Snap Inc.','snap'],['StockX','stockx'],['Phony Content','phony'],['Collider','collider']] as [string,string][]).map(([co, id], i, arr) => (
-                <span key={co} className="flex items-center gap-4 sm:gap-5">
-                  <Link
-                    href={`/work?company=${id}`}
-                    className="text-[11px] sm:text-[12px] transition-colors"
-                    style={{ color: 'var(--t-border-strong)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--t-primary)')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--t-border-strong)')}
-                  >
-                    {co}
-                  </Link>
-                  {i < arr.length - 1 && (
-                    <span style={{ color: 'var(--t-border)' }}>·</span>
-                  )}
-                </span>
+              {COMPANIES.map(([co, id]) => (
+                <Link
+                  key={co}
+                  href={`/work?company=${id}`}
+                  className="text-[11px] px-2.5 py-1 rounded-full transition-colors"
+                  style={{
+                    border: '1px solid var(--t-border)',
+                    color: 'var(--t-tertiary)',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--t-primary)'; e.currentTarget.style.borderColor = 'var(--t-secondary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--t-tertiary)'; e.currentTarget.style.borderColor = 'var(--t-border)'; }}
+                >
+                  {co}
+                </Link>
               ))}
             </motion.div>
           </div>
 
-          {/* Right: visual card stack — visible on lg+, shown below text on mobile */}
+          {/* ── Right: article cards — hidden on mobile ── */}
           <motion.div
-            className="flex flex-col gap-3 w-full lg:w-[320px] lg:flex-shrink-0"
-            initial={{ opacity: 0, x: 0, y: 12 }}
-            animate={m ? { opacity: 1, x: 0, y: 0 } : {}}
+            className="hidden lg:flex flex-col gap-3 w-[320px] flex-shrink-0"
+            initial={{ opacity: 0, y: 12 }}
+            animate={m ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25, ease: E }}
           >
-            {CARDS.map((card, i) => (
+            {CARDS.map((card) => (
               <Link
                 key={card.title}
                 href={card.href}
@@ -168,7 +183,7 @@ export default function Home() {
                   className="text-[11px] mt-2"
                   style={{ color: 'var(--t-tertiary)' }}
                 >
-                  View in Published Work →
+                  View in Published →
                 </p>
               </Link>
             ))}

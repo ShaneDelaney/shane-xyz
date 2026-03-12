@@ -268,10 +268,101 @@ export default function Work() {
   if (!mounted) return <div className="h-screen pt-[52px]" style={{ background: 'var(--t-bg)' }} />;
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col pt-[52px]" style={{ background: 'var(--t-bg)' }}>
+    <div className="min-h-screen md:h-screen md:overflow-hidden flex flex-col pt-[52px]" style={{ background: 'var(--t-bg)' }}>
 
-      {/* Body */}
-      <div className="flex flex-1 min-h-0">
+      {/* ── Mobile layout ── */}
+      <div className="md:hidden flex flex-col flex-1">
+        {/* Company strip */}
+        <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2">
+          {COMPANIES.map(c => (
+            <button
+              key={c.id}
+              onClick={() => selectCompany(c.id)}
+              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all"
+              style={{
+                background: c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-surface)',
+                color: c.id === activeCompany ? 'var(--t-bg)' : 'var(--t-secondary)',
+                border: '1px solid var(--t-border)',
+              }}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Company content */}
+        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`m-${activeCompany}`}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.18, ease: E }}
+            >
+              {/* Role + period */}
+              <div className="pt-5 pb-4" style={{ borderBottom: '1px solid var(--t-border)' }}>
+                <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{company.role}</p>
+                <p className="text-[22px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--t-primary)' }}>{company.name}</p>
+                <p className="text-[12px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+              </div>
+
+              {/* Stat chips */}
+              {company.stats && company.stats.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap py-4" style={{ borderBottom: '1px solid var(--t-border)' }}>
+                  {company.stats.map(s => (
+                    <div key={s.label} className="px-3 py-1.5 rounded-full" style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                      <span className="text-[13px] font-semibold" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
+                      <span className="text-[11px] ml-1.5" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Work items — published (with links) */}
+              {company.initiatives.filter(i => i.url).length > 0 && (
+                <div className="pt-4">
+                  <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Published</p>
+                  {company.initiatives.filter(i => i.url).map(init => (
+                    <a
+                      key={init.id}
+                      href={init.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between py-3 group"
+                      style={{ borderBottom: '1px solid var(--t-divider)' }}
+                    >
+                      <div className="min-w-0 pr-3">
+                        <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                        <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>{init.title}</p>
+                      </div>
+                      <span className="text-[14px] flex-shrink-0" style={{ color: 'var(--t-tertiary)' }}>↗</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Work items — systems/internal (no links) */}
+              {company.initiatives.filter(i => !i.url).length > 0 && (
+                <div className="pt-4">
+                  <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Systems & Process</p>
+                  {company.initiatives.filter(i => !i.url).map(init => (
+                    <div
+                      key={init.id}
+                      className="py-3"
+                      style={{ borderBottom: '1px solid var(--t-divider)' }}
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                      <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>{init.title}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Body — desktop only */}
+      <div className="hidden md:flex flex-1 min-h-0">
 
         {/* Sidebar */}
         <div
@@ -601,12 +692,7 @@ export default function Work() {
                         </div>
                       </div>
 
-                      {/* Mobile: stacked */}
-                      <div className="lg:hidden overflow-y-auto scrollbar-none pt-7 pb-10 h-full">
-                        {ctxContent}
-                        <div className="my-6 h-px" style={{ background: 'var(--t-divider)' }} />
-                        {workContent}
-                      </div>
+
                       </div>{/* end columns wrapper */}
                     </div>
                   );
@@ -615,18 +701,8 @@ export default function Work() {
             )}
           </AnimatePresence>
         </div>
-      </div>
+      </div>{/* end desktop body */}
 
-      {/* Mobile bottom company strip */}
-      <div className="lg:hidden flex-shrink-0 px-6 py-3 overflow-x-auto scrollbar-none flex items-center gap-5" style={{ borderTop: '1px solid var(--t-border)' }}>
-        {COMPANIES.map(c => (
-          <button key={c.id} onClick={() => selectCompany(c.id)}
-            className="flex-shrink-0 text-[13px] font-medium whitespace-nowrap transition-colors"
-            style={{ color: c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
-            {c.name}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
