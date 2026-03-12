@@ -340,13 +340,22 @@ const CARDS: Card[] = [
 ];
 
 const COMPANY_ORDER = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
-const COMPANY_ACCENT: Record<string, { badge: string; dot: string }> = {
-  'Meta':          { badge: 'bg-blue-50 text-blue-600',   dot: 'bg-blue-500'   },
-  'Snap Inc.':     { badge: 'bg-yellow-50 text-yellow-600', dot: 'bg-yellow-400' },
-  'Phony Content': { badge: 'bg-purple-50 text-purple-600', dot: 'bg-purple-500' },
-  'StockX':        { badge: 'bg-emerald-50 text-emerald-600', dot: 'bg-emerald-500' },
-  'Collider':      { badge: 'bg-orange-50 text-orange-500', dot: 'bg-orange-400' },
+const COMPANY_ACCENT: Record<string, { badge: string; dot: string; header: string; btn: string }> = {
+  'Meta':          { badge: 'bg-blue-50 text-blue-600',     dot: 'bg-blue-500',    header: 'bg-blue-50/60',    btn: 'bg-blue-600 hover:bg-blue-700'     },
+  'Snap Inc.':     { badge: 'bg-yellow-50 text-yellow-700', dot: 'bg-yellow-400',  header: 'bg-yellow-50/60',  btn: 'bg-yellow-500 hover:bg-yellow-600'  },
+  'Phony Content': { badge: 'bg-purple-50 text-purple-600', dot: 'bg-purple-500',  header: 'bg-purple-50/60',  btn: 'bg-purple-600 hover:bg-purple-700'  },
+  'StockX':        { badge: 'bg-emerald-50 text-emerald-700', dot: 'bg-emerald-500', header: 'bg-emerald-50/60', btn: 'bg-emerald-600 hover:bg-emerald-700' },
+  'Collider':      { badge: 'bg-orange-50 text-orange-600', dot: 'bg-orange-400',  header: 'bg-orange-50/60',  btn: 'bg-orange-500 hover:bg-orange-600'  },
 };
+
+// Split "500M+ monthly viewers" → { value: "500M+", label: "monthly viewers" }
+function parseMetric(m: string): { value: string; label: string } {
+  const match = m.match(/^([0-9$£€.,+%MKBx~]+\+?)\s*(.*)/);
+  if (match) return { value: match[1], label: match[2] };
+  // fallback: first word is value
+  const parts = m.split(' ');
+  return { value: parts[0], label: parts.slice(1).join(' ') };
+}
 
 function PortfolioInner() {
   const [index, setIndex] = useState(0);
@@ -474,75 +483,73 @@ function PortfolioInner() {
                 exit="exit"
                 transition={SPRING}
                 className="relative z-20 bg-white rounded-3xl overflow-hidden cursor-pointer select-none"
-                style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.07)' }}
+                style={{ boxShadow: '0 2px 24px rgba(0,0,0,0.08)' }}
                 onClick={() => hasNext && go(1)}
               >
-                {/* Card top */}
-                <div className="px-5 sm:px-7 pt-5 sm:pt-6 pb-4 sm:pb-5">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                {/* ── Header — company-tinted ── */}
+                <div className={`${accent.header} px-5 sm:px-7 pt-5 sm:pt-6 pb-5`}>
+                  <div className="flex items-center justify-between mb-3">
                     <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${accent.badge}`}>
                       {card.category}
                     </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] text-gray-400 tabular-nums">
-                        {coIdx}/{coCards.length}
-                      </span>
-                      {/* Next hint */}
-                      {hasNext && (
-                        <span className="text-[10px] text-gray-300">→</span>
-                      )}
-                    </div>
+                    <span className="text-[10px] text-gray-400 tabular-nums">{coIdx} / {coCards.length}</span>
                   </div>
 
-                  {/* Title — stop propagation so click doesn't also advance card */}
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-900 leading-snug mb-1">
+                    {card.title}
+                  </h2>
+                  <p className="text-[11px] text-gray-500 mb-4">{card.company} · {card.period}</p>
+
+                  {/* Primary CTA */}
                   {card.url ? (
                     <a
                       href={card.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-start justify-between gap-3 mb-1"
                       onClick={e => e.stopPropagation()}
+                      className={`inline-flex items-center gap-1.5 text-white text-xs font-semibold px-4 py-2 rounded-full transition-colors ${accent.btn}`}
                     >
-                      <h2 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug group-hover:text-gray-500 transition-colors">
-                        {card.title}
-                      </h2>
-                      <span className="text-gray-300 group-hover:text-gray-600 transition-colors text-sm flex-shrink-0 mt-0.5">↗</span>
+                      Read Published Work ↗
                     </a>
                   ) : (
-                    <h2 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug mb-1">
-                      {card.title}
-                    </h2>
+                    <span className="inline-flex items-center text-[11px] text-gray-400 font-medium">
+                      Internal project — no public link
+                    </span>
                   )}
-                  <p className="text-[11px] text-gray-400">{card.period}</p>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-gray-50 mx-5 sm:mx-7" />
+                {/* ── Metrics strip ── */}
+                {card.metrics && card.metrics.length > 0 && (
+                  <div
+                    className="flex divide-x divide-gray-100 border-t border-b border-gray-100"
+                    onClick={e => e.stopPropagation()}
+                  >
+                    {card.metrics.map((m, i) => {
+                      const { value, label } = parseMetric(m);
+                      return (
+                        <div key={i} className="flex-1 px-4 py-3 min-w-0">
+                          <p className="text-base sm:text-lg font-bold text-gray-900 leading-none mb-0.5 truncate">{value}</p>
+                          <p className="text-[10px] text-gray-400 leading-snug truncate">{label}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
 
-                {/* Card body — stop propagation on scroll area so drag doesn't fire card click */}
+                {/* ── Body ── */}
                 <div
-                  className="px-5 sm:px-7 py-4 sm:py-5 max-h-[42vh] sm:max-h-[46vh] overflow-y-auto space-y-4 sm:space-y-5"
+                  className="px-5 sm:px-7 py-5 max-h-[34vh] sm:max-h-[38vh] overflow-y-auto space-y-4"
                   onClick={e => e.stopPropagation()}
                 >
                   <div>
-                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">About</p>
+                    <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">About</p>
                     <p className="text-sm text-gray-500 leading-relaxed">{card.about}</p>
                   </div>
 
                   <div>
-                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">My Role</p>
-                    <p className="text-sm text-gray-700 leading-relaxed">{card.contribution}</p>
+                    <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">My Role</p>
+                    <p className="text-sm font-medium text-gray-800 leading-relaxed">{card.contribution}</p>
                   </div>
-
-                  {card.metrics && card.metrics.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {card.metrics.map((m, i) => (
-                        <span key={i} className="text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full">
-                          {m}
-                        </span>
-                      ))}
-                    </div>
-                  )}
 
                   <div className="flex flex-wrap gap-1.5 pb-1">
                     {card.tags.map((t, i) => (
@@ -553,11 +560,11 @@ function PortfolioInner() {
                   </div>
                 </div>
 
-                {/* Bottom tap-to-advance bar */}
+                {/* ── Tap to advance ── */}
                 {hasNext && (
-                  <div className="px-5 sm:px-7 py-3 border-t border-gray-50 flex items-center justify-end gap-1.5">
-                    <span className="text-[10px] text-gray-300">Tap to advance</span>
-                    <span className="text-[10px] text-gray-300">→</span>
+                  <div className="px-5 sm:px-7 py-3 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-[10px] text-gray-300">{CARDS[index + 1].title.slice(0, 40)}{CARDS[index + 1].title.length > 40 ? '…' : ''}</span>
+                    <span className="text-[10px] font-medium text-gray-400">Next →</span>
                   </div>
                 )}
               </motion.div>
