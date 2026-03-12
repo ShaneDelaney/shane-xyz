@@ -295,7 +295,7 @@ export default function Work() {
         </div>
 
         {/* Main panel */}
-        <div className="flex-1 min-h-0 overflow-y-auto scrollbar-none">
+        <div className="flex-1 min-h-0 overflow-hidden">
           <AnimatePresence mode="wait">
 
             {/* ── Ask ── */}
@@ -304,7 +304,7 @@ export default function Work() {
                 key="ask"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: E }}
-                className="px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
+                className="h-full overflow-y-auto scrollbar-none px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
               >
                 <p className="text-[11px] uppercase tracking-[0.1em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>AI</p>
                 <h1 className="text-[28px] font-semibold tracking-[-0.02em] mb-2" style={{ color: 'var(--t-primary)' }}>Ask about Shane</h1>
@@ -373,7 +373,7 @@ export default function Work() {
                 key={`d-${initiative.id}`}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: E }}
-                className="px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
+                className="h-full overflow-y-auto scrollbar-none px-8 lg:px-12 py-10 pb-20 max-w-[620px]"
               >
                 <button onClick={() => setActiveInitiative(null)}
                   className="flex items-center gap-1.5 text-[13px] mb-8 transition-colors"
@@ -435,9 +435,10 @@ export default function Work() {
                 key={`c-${activeCompany}`}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, ease: E }}
-                className="px-8 lg:px-14 py-10 pb-20"
+                className="h-full flex flex-col px-8 lg:px-14"
               >
-                {/* Header: role + name/period left, stats right */}
+                {/* Header: role + name/period left, stats right — fixed, doesn't scroll */}
+                <div className="flex-shrink-0 pt-8 pb-0">
                 <div className="flex items-start justify-between gap-8 mb-6 flex-wrap">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>
@@ -466,15 +467,16 @@ export default function Work() {
                 </div>
 
                 {/* Summary */}
-                <p className="text-[15px] leading-[1.7] mb-10 max-w-[620px]" style={{ color: 'var(--t-secondary)' }}>
+                <p className="text-[15px] leading-[1.7] mb-6 max-w-[620px]" style={{ color: 'var(--t-secondary)' }}>
                   {company.summary}
                 </p>
+                </div>{/* end flex-shrink-0 */}
 
-                {/* Two-column: Context (left) + Work (right) */}
-                <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 pt-8" style={{ borderTop: '1px solid var(--t-divider)' }}>
+                {/* Two-column: Context (left) + Work (right) — fills remaining height, each column scrolls independently */}
+                <div className="flex-1 min-h-0 flex flex-col lg:flex-row gap-10 lg:gap-0" style={{ borderTop: '1px solid var(--t-divider)' }}>
 
-                  {/* Left: Context */}
-                  <div className="flex-1 lg:pr-12 lg:min-w-0">
+                  {/* Left: Context — scrollable */}
+                  <div className="flex-1 lg:pr-12 lg:min-w-0 overflow-y-auto scrollbar-none pt-7 pb-10">
                     <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-5" style={{ color: 'var(--t-tertiary)' }}>
                       Context
                     </p>
@@ -495,8 +497,8 @@ export default function Work() {
                   {/* Vertical divider — desktop only */}
                   <div className="hidden lg:block w-px flex-shrink-0" style={{ background: 'var(--t-divider)' }} />
 
-                  {/* Right: Work — published collapsible + systems list */}
-                  <div className="flex-1 lg:pl-12 lg:min-w-0 lg:overflow-y-auto lg:max-h-[calc(100vh-260px)] scrollbar-none">
+                  {/* Right: Work — published collapsible + systems list — scrollable */}
+                  <div className="flex-1 lg:pl-12 lg:min-w-0 overflow-y-auto scrollbar-none pt-7 pb-10">
                     {(() => {
                       const published = company.initiatives.filter(i => i.url);
                       const systems = company.initiatives.filter(i => !i.url);
