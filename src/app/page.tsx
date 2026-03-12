@@ -155,17 +155,11 @@ export default function Home() {
                 >
                   {co.name}
                 </Link>
-                <span className="text-gray-200 text-xs select-none">·</span>
+                {i < COMPANIES.length - 1 && (
+                  <span className="text-gray-200 text-xs select-none">·</span>
+                )}
               </motion.span>
             ))}
-            <motion.span
-              className="text-xs text-gray-300 tracking-wide"
-              initial={{ opacity: 0 }}
-              animate={mounted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.62 + COMPANIES.length * 0.07, ease: EASE }}
-            >
-              © {new Date().getFullYear()} Shane Delaney
-            </motion.span>
           </div>
 
         </div>

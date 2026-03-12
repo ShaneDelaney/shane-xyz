@@ -2,10 +2,11 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const SPRING = { type: 'spring', stiffness: 320, damping: 32 } as const;
+const EASE   = [0.16, 1, 0.3, 1] as const;
 
 interface Project {
   id: string;
@@ -14,527 +15,494 @@ interface Project {
   role: string;
   timeline: string;
   description: string;
-  longDescription?: string;
   details: string[];
   tags: string[];
   metrics?: string[];
-  relatedLinks?: {
-    title: string;
-    url: string;
-    description?: string;
-  }[];
+  relatedLinks?: { title: string; url: string; description?: string }[];
 }
 
-const projects: Project[] = [
+const PROJECTS: Project[] = [
   {
-    id: "meta-horizon-gtm-guides",
-    title: "Meta Horizon Go-To-Market Developer Guides",
-    company: "Meta",
-    role: "Content Marketing Coordinator II",
-    timeline: "2025",
-    description: "Led end-to-end editorial lifecycle for a six-part GTM guide series — owned all copy, coordinated XFN reviews across five teams, and managed publication from outline through launch.",
-    longDescription: "Led the end-to-end creation of a six-part Meta Horizon Go-To-Market guide series for VR developers. Owned all copy and editorial direction for the initial four guides, managing the full project lifecycle from outline to web publication. Coordinated cross-functional reviews with Product, Developer Relations, Design, Legal, and Data Science — running formal stat verification before each launch. Collaborated with Roger Wong (Documentation Engineer, Meta) on two additional guides published in February. The series covers marketing strategy, influencer partnerships, social media, marketing asset creation, PR, and app demos.",
+    id: 'meta-horizon-builder-stories',
+    title: 'Meta Horizon Builder Story Spotlights',
+    company: 'Meta',
+    role: 'Content Marketing Coordinator II',
+    timeline: 'Oct 2025 – Mar 2026',
+    description: 'Served as Project Lead and System Owner for the Builder Stories program — led end-to-end production on 7 developer success stories published on the Meta Horizon developers portal. Formally RACI-designated as Responsible across all stages: narrative development, outreach, interviews, copy-editing, assets, XFN review, and reporting.',
     details: [
-      "Owned all copy and editorial direction for the four primary guides (Jan 2025)",
-      "Collaborated with Meta's documentation team (Roger Wong) on two additional guides (Feb 2025)",
-      "Ran the formal stat review and verification process with Data Science prior to each launch",
-      "Coordinated XFN feedback loops across Product, DevRel, Design, Legal, and Data Science",
-      "Maintained editorial calendar and delivery schedule across all six guides",
-      "Created supplementary worksheets and checklists for the Marketing Plan guide",
-      "Ensured consistent developer-friendly tone aligned with Meta brand voice guidelines",
+      'Sourced and pitched creator stories; built and maintained external developer relationships',
+      'Led interviews and shaped narrative direction for each spotlight',
+      'Coordinated asset collection and agency execution with Scout House (29 check-ins)',
+      'Drove XFN review cycles across Product, DevRel, Design, Legal, and Data Science',
+      'Served as Project Lead and System Owner for the 8-step Builder Stories production workflow',
     ],
-    tags: ["Editorial Lifecycle", "XFN Coordination", "Content Strategy", "Project Management", "Developer Education"],
-    metrics: ["6-part guide series", "Cornerstone resource on Meta developers portal"],
+    tags: ['Narrative Direction', 'Production Lead', 'Agency Management', 'XFN Coordination'],
+    metrics: ['7 stories published', 'Meta Horizon Developers Blog'],
     relatedLinks: [
-      { title: "Develop a Marketing Plan for Your VR App", url: "https://developers.meta.com/horizon/resources/gtm-marketing-plan/", description: "High-level marketing strategy, audience research, and channel identification for VR apps." },
-      { title: "Leverage Influencer Partnerships", url: "https://developers.meta.com/horizon/resources/gtm-influencer-marketing/", description: "Building strategic influencer partnerships to grow VR app visibility." },
-      { title: "Build Social Media and Community Engagement", url: "https://developers.meta.com/horizon/resources/gtm-social-media/", description: "Community-building tactics and social media strategies for VR developers." },
-      { title: "Master Marketing Assets for VR Apps", url: "https://developers.meta.com/horizon/resources/gtm-marketing-assets/", description: "Creating effective marketing assets for promoting VR apps and Horizon Worlds experiences." },
-      { title: "PR Strategy for VR Apps", url: "https://developers.meta.com/horizon/resources/gtm-pr-for-vr/", description: "Public relations strategy and media outreach for VR developers." },
-      { title: "Creating App Demos That Convert", url: "https://developers.meta.com/horizon/resources/gtm-app-demos/", description: "Best practices for building compelling app demos that drive installs." },
-    ]
+      { title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/', description: "AEXLAB's journey from humble beginnings to $15M in crowdfunding." },
+      { title: 'VAIL VR (Part Two): AEXLAB\'s Live Ops Engine', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/', description: 'How AEXLAB transitioned VAIL VR to free-to-play with data-driven live ops.' },
+      { title: 'Saydeechan: Bringing Worlds to Japan', url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/', description: "A solo creator's journey to help launch Horizon Worlds in Japan." },
+      { title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World', url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/', description: 'Two influencers with no dev experience create a top-ranked Horizon world.' },
+      { title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community', url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/', description: 'Community-driven worldbuilding inside Horizon Worlds.' },
+      { title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers', url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/', description: 'How rapid iteration drove commercial success in VR in 2025.' },
+      { title: 'Kawaii.Creator — Success Story', url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/', description: 'Creator success story featured on the Meta Horizon developer portal.' },
+    ],
   },
   {
-    id: "meta-horizon-builder-stories",
-    title: "Meta Horizon Builder Story Spotlights",
-    company: "Meta",
-    role: "Content Marketing Coordinator II",
-    timeline: "2025",
-    description: "Led production end-to-end for 7 builder story spotlights on the Meta Horizon Developers Blog — sourcing, interviews, narrative development, agency coordination, and XFN review through to publication.",
-    longDescription: "Led production end-to-end for 7 builder story spotlights published on the Meta Horizon Developers Blog and success stories portal. For each story, managed the full production lifecycle: sourcing and pitching the creator, coordinating interviews, shaping the narrative, collecting assets, guiding the agency on execution, and driving cross-functional review across Product, Developer Relations, Design, and Legal through to final publication. Stories range from crowdfunding campaigns and top-ranked worlds to cultural localization and community-driven live ops.",
+    id: 'meta-horizon-gtm-guides',
+    title: 'Meta Horizon Go-To-Market Developer Guide Series',
+    company: 'Meta',
+    role: 'Content Marketing Coordinator II',
+    timeline: 'Jan – Feb 2026',
+    description: 'Editorial lead on a six-part GTM guide series for VR developers — owned all copy and direction for four guides, collaborated with Meta Documentation Engineer Roger Wong on two. Managed full publication lifecycle with XFN review across five teams and formal stat verification before each launch.',
     details: [
-      "Sourced and pitched creator stories; built and maintained external developer relationships",
-      "Led interviews and shaped narrative direction for each spotlight",
-      "Coordinated asset collection and agency execution with Scout House",
-      "Drove XFN review cycles across Product, DevRel, Design, and Legal",
-      "Owned DRI tracking and publication pipeline across all active story workstreams",
-      "Served as Project Lead and System Owner for the 8-step Builder Stories production workflow",
+      'Owned copy and editorial direction for four primary guides (Jan 2026)',
+      'Collaborated with Roger Wong (Documentation Engineer, Meta) on two additional guides (Feb 2026)',
+      'Ran formal stat verification with Data Science to confirm 100% metric accuracy pre-launch',
+      'Coordinated XFN review across Product, DevRel, Design, Legal, and Data Science',
+      'Created supplementary worksheets and checklists for the Marketing Plan guide',
     ],
-    tags: ["Narrative Direction", "Production Lead", "Agency Management", "Developer Stories", "XFN Coordination"],
-    metrics: ["7 stories published", "Meta Horizon Developers Blog"],
+    tags: ['Editorial Lifecycle', 'XFN Coordination', 'Content Strategy', 'Developer Education'],
+    metrics: ['6 guides published', 'Meta Horizon developers portal'],
     relatedLinks: [
-      { title: "VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding", url: "https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/", description: "AEXLAB's journey from humble beginnings to raising $15M in crowdfunding." },
-      { title: "VAIL VR (Part Two): AEXLAB's Live Ops Engine", url: "https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/", description: "How AEXLAB transitioned VAIL VR to free-to-play with data-driven live ops." },
-      { title: "Saydeechan: Bringing Worlds to Japan", url: "https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/", description: "A solo creator's journey to help launch Horizon Worlds in Japan through cultural storytelling." },
-      { title: "Grow a Farm: How Two Gaming Influencers Built a Top Ranked World", url: "https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/", description: "Two gaming influencers with no dev experience create a top-ranked Horizon world in two months." },
-      { title: "Matthiaos: Pioneering Change in Worlds Through Passion and Community", url: "https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/", description: "Creator spotlight on community-driven worldbuilding inside Horizon Worlds." },
-      { title: "Year in Review: Insights from 2025's Breakout Creators and Developers", url: "https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/", description: "How rapid iteration drove commercial success in VR in 2025." },
-      { title: "Kawaii.Creator — Success Story", url: "https://developers.meta.com/horizon/discover/success-stories/kawaii-creator", description: "Creator success story featured on the Meta Horizon developer portal." },
-    ]
+      { title: 'Develop a Marketing Plan for Your VR App', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/', description: 'High-level marketing strategy, audience research, and channel identification.' },
+      { title: 'Leverage Influencer Partnerships', url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/', description: 'Building strategic influencer partnerships to grow VR app visibility.' },
+      { title: 'Build Social Media and Community Engagement', url: 'https://developers.meta.com/horizon/resources/gtm-social-media/', description: 'Community-building tactics and social media strategies for VR developers.' },
+      { title: 'Master Marketing Assets for VR Apps', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-assets/', description: 'Creating effective marketing assets for promoting VR apps.' },
+      { title: 'PR Strategy for VR Apps', url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/', description: 'Public relations strategy and media outreach for VR developers.' },
+      { title: 'Creating App Demos That Convert', url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/', description: 'Best practices for building compelling app demos that drive installs.' },
+    ],
   },
   {
-    id: "nux-project",
-    title: "NUX Curation Project",
-    company: "Snap Inc.",
-    role: "Trend Producer",
-    timeline: "2025",
-    description: "Curated personalized UGC feeds for Snapchat's New User Experience for teens (13–17), achieving 10% higher retention than platform averages.",
-    longDescription: "Developed personalized onboarding content flows for new Snapchat users, combining algorithmic signals with human editorial judgment to surface high-performing UGC for teen cohorts (13–17). Used data-driven curation guidelines (M1.2 incremental data) to balance engagement and demographic fit.",
+    id: 'snap-spotlight',
+    title: 'Spotlight Programming Lead',
+    company: 'Snap Inc.',
+    role: 'Trend Producer',
+    timeline: 'Mar – Oct 2025',
+    description: "Served as Programming Lead for Spotlight — Snapchat's highest-scale content surface reaching 500M+ monthly viewers. Managed a daily pipeline of 1,000+ pieces of content and led editorial syncs translating daily performance data into real-time amplification decisions.",
     details: [
-      "Reviewed and recommended 300+ content pieces per teen cohort segmented by interest",
-      "Filtered content using data-driven cohort guidelines",
-      "Collaborated with product engineering teams through dedicated Slack channels",
-      "Ensured demographic fit while maintaining editorial quality standards",
+      'Managed daily pipeline of 1,000+ pieces of content across quality, safety, and brand-safe policy',
+      'Synthesized daily performance data to surface breakout trends',
+      'Led editorial syncs translating data findings into real-time amplification decisions',
+      'Developed standardized Editorial Instructions (EIs) and content brief templates',
     ],
-    tags: ["Content Curation", "Data-Driven Programming", "Cohort Segmentation", "Product Collaboration"],
-    metrics: ["300+ pieces per cohort", "10% higher retention than platform average"],
+    tags: ['Editorial Pipeline', 'Trend Analysis', 'Content Programming', 'Scale'],
+    metrics: ['500M+ monthly viewers', '1,000+ pieces/day'],
   },
   {
-    id: "say-it-in-a-snap",
-    title: "Say It in a Snap: Times Square Campaign",
-    company: "Snap Inc.",
-    role: "Trend Producer",
-    timeline: "2025",
-    description: "Led editorial curation for Snap's Times Square takeover, selecting standout UGC for NYC subway placements generating 500K+ daily impressions.",
-    longDescription: "Curated authentic user-generated content for Snap's high-profile Times Square campaign, selecting standout UGC that showcased the platform's creative community across outdoor media placements in NYC subway stations.",
+    id: 'snap-nux',
+    title: 'New User Experience Curation',
+    company: 'Snap Inc.',
+    role: 'Trend Producer',
+    timeline: '2025',
+    description: 'Curated personalized UGC feeds for Snapchat\'s New User Experience for teens (13–17), achieving 10% higher retention than platform averages using data-driven cohort guidelines and algorithmic + editorial judgment.',
     details: [
-      "Selected standout UGC for Times Square and subway takeover placements",
-      "Collaborated with marketing on content merchandising and placement strategy",
-      "Aligned creator content with brand campaign messaging and visual standards",
+      'Reviewed and recommended 300+ content pieces per teen cohort segmented by interest',
+      'Filtered content using data-driven cohort guidelines (M1.2 incremental data)',
+      'Collaborated with product engineering teams through dedicated Slack channels',
+      'Ensured demographic fit while maintaining editorial quality standards',
     ],
-    tags: ["UGC Curation", "Campaign Collaboration", "Content Merchandising"],
-    metrics: ["500K+ daily impressions", "NYC subway placements"],
+    tags: ['Content Curation', 'Data-Driven Programming', 'Cohort Segmentation'],
+    metrics: ['300+ pieces per cohort', '10% higher retention than platform average'],
   },
   {
-    id: "boosted-content",
-    title: "Boosted Content Initiative",
-    company: "Snap Inc.",
-    role: "Trend Producer",
-    timeline: "2025",
-    description: "Built a custom content system with Snap's data science team to surface emerging creators, influencing monetization strategy across 1M+ creators.",
-    longDescription: "Collaborated with data science and product teams to develop an internal system for identifying promising creator content. Translated complex data findings into strategic content guidance, created internal documentation for 10+ cross-functional teams, and built a supporting web app tool.",
+    id: 'snap-boosted',
+    title: 'Boosted Content & Creator Identification System',
+    company: 'Snap Inc.',
+    role: 'Trend Producer',
+    timeline: '2025',
+    description: 'Collaborated with Snap\'s Data Science team to build a custom creator identification system to surface emerging creators. Developed internal documentation for 10+ XFN teams and influenced monetization strategy across 1M+ creators.',
     details: [
-      "Translated complex data findings into strategic content guidance for editorial teams",
-      "Created internal documentation and process templates for 10+ XFN teams",
-      "Built custom web app tool to streamline creator identification workflow",
-      "Developed standardized Editorial Instructions (EIs) for the initiative",
+      'Translated complex data findings into strategic content guidance for editorial teams',
+      'Created internal documentation and process templates for 10+ XFN teams',
+      'Built custom web app tool to streamline creator identification workflow',
+      'Developed standardized Editorial Instructions (EIs) for the initiative',
     ],
-    tags: ["Data Strategy", "Process Documentation", "XFN Collaboration", "Creator Tools"],
-    metrics: ["1M+ monetized creators", "10+ XFN teams served"],
+    tags: ['Data Strategy', 'Process Documentation', 'XFN Collaboration', 'Creator Tools'],
+    metrics: ['1M+ monetized creators', '10+ XFN teams served'],
   },
   {
-    id: "tiny-texts",
-    title: "Tiny Texts",
-    company: "Phony Content",
-    role: "Content Manager",
-    timeline: "2024–2025",
-    description: "Led editorial operations for 50+ scripted Snapchat stories, generating 4M+ views and 40K+ new followers with a 90% viewership boost.",
-    longDescription: "Led project governance for Tiny Texts on Snapchat, managing resource allocation, creative QA, and editorial systems across a rotating writing team. Built style guides, voice/tone documentation, and editorial calendars to standardize production at scale.",
+    id: 'tiny-texts',
+    title: 'Tiny Texts on Snapchat',
+    company: 'Phony Content',
+    role: 'Content Manager',
+    timeline: 'May 2024 – Mar 2025',
+    description: 'Led editorial operations for Tiny Texts — 50+ scripted Snapchat stories generating 25M+ total views. Top story (Cheer Squad) reached 6.3M views and a 39% completion rate. Built production infrastructure including style guides, editorial calendars, and documentation frameworks.',
     details: [
-      "Led agile sprint planning and creative QA for 50+ scripted digital stories",
-      "Built centralized style guides and voice/tone documentation for writing team consistency",
-      "Managed editorial calendar across rotating writers to maintain publishing cadence",
-      "Optimized content for engagement metrics, achieving 90% viewership boost",
+      'Led agile sprint planning and creative QA for 50+ scripted digital stories',
+      'Built centralized style guides and voice/tone documentation for writing team consistency',
+      'Managed editorial calendar across rotating writers to maintain publishing cadence',
+      'Optimized content for engagement metrics across 25M+ total views',
     ],
-    tags: ["Editorial Operations", "Content Systems", "Team Management", "Short-Form Content"],
-    metrics: ["4M+ views", "40K+ new followers", "90% viewership boost", "35–45% completion rate"],
+    tags: ['Editorial Operations', 'Content Systems', 'Short-Form Content'],
+    metrics: ['25M+ total views', '6.3M views (top story)', '39% completion rate'],
     relatedLinks: [
-      { title: "Cheer Squad", url: "https://snapchat.com/t/J2MP13US", description: "6.32M views · 43K followers · 39% completion rate" },
-      { title: "Inhaler", url: "https://snapchat.com/t/wPotqUYw", description: "4.39M views · 20.3K followers · 42% completion rate" },
-      { title: "Snapscore", url: "https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168", description: "3.59M views · 10K followers · 35% completion rate" },
-    ]
+      { title: 'Cheer Squad', url: 'https://snapchat.com/t/J2MP13US', description: '6.32M views · 43K followers · 39% completion rate' },
+      { title: 'Inhaler', url: 'https://snapchat.com/t/wPotqUYw', description: '4.39M views · 20.3K followers · 42% completion rate' },
+      { title: 'Snapscore', url: 'https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168', description: '3.59M views · 10K followers · 35% completion rate' },
+    ],
   },
   {
-    id: "core-insights-research",
-    title: "Core Insights Report",
-    company: "StockX",
-    role: "Brand Creative Production",
-    timeline: "December 2024",
-    description: "Authored StockX's 2024 Gen Z trend report analyzing consumer behavior in LA + NYC to inform the 2025 marketing strategy.",
-    longDescription: "Authored a comprehensive trend report identifying key cultural figures, digital behaviors, and emerging subcultures that shaped StockX's 2025 brand strategy and campaign planning. Focused on the 18–25 male demographic in LA and NYC markets.",
+    id: 'stockx-insights',
+    title: '2024 Core Insights Report',
+    company: 'StockX',
+    role: 'Brand Creative Production',
+    timeline: 'December 2024',
+    description: "Authored StockX's 2024 Gen Z trend report analyzing digital consumption behavior among 18–25 males in LA and NYC — directly informing their 2025 marketing strategy and campaign planning.",
     details: [
-      "Mapped digital behaviors including curated sharing and resale culture",
-      "Highlighted emerging subcultures: Gorp Core, DIY, archive styling",
-      "Identified affinity brands and figures for campaign targeting",
-      "Delivered strategic recommendations for 2025 programming and creative direction",
+      'Mapped digital behaviors including curated sharing and resale culture',
+      'Highlighted emerging subcultures: Gorp Core, DIY, archive styling',
+      'Identified affinity brands and figures for campaign targeting',
+      'Delivered strategic recommendations for 2025 programming and creative direction',
     ],
-    tags: ["Strategic Reporting", "Trend Research", "Gen Z Strategy", "Consumer Insights"],
-    metrics: ["18–25 male demographic", "LA & NYC markets", "Informed 2025 campaign strategy"],
+    tags: ['Strategic Reporting', 'Trend Research', 'Gen Z Strategy', 'Consumer Insights'],
+    metrics: ['18–25 male demographic', 'LA & NYC markets', 'Informed 2025 campaign strategy'],
     relatedLinks: [
-      { title: "Trend Report Excerpt", url: "/assets/StockXCoreInsights.pdf", description: "Strategic analysis of Gen Z consumer behavior in key markets" },
-    ]
+      { title: 'Trend Report Excerpt', url: '/assets/StockXCoreInsights.pdf', description: 'Strategic analysis of Gen Z consumer behavior in key markets' },
+    ],
   },
   {
-    id: "campaign-shoot-highlights",
-    title: "Campaign Production Highlights",
-    company: "StockX",
-    role: "Brand Creative Production",
-    timeline: "2021–2024",
-    description: "Managed production logistics for 3 major campaign shoots, coordinating talent, location, and asset workflows across 10M+ impressions.",
-    longDescription: "Coordinated production logistics across multiple high-profile campaign shoots, managing talent schedules, location details, and digital asset organization while supporting the creative direction team.",
+    id: 'stockx-campaigns',
+    title: 'Campaign Production Highlights',
+    company: 'StockX',
+    role: 'Brand Creative Production',
+    timeline: 'Sep 2021 & Dec 2024',
+    description: 'Managed production logistics for 3 high-profile campaign shoots coordinating talent, location, and asset workflows across campaigns generating 10M+ cross-platform impressions.',
     details: [
-      "Managed talent scheduling, location coordination, and asset organization for 3 campaigns",
-      "Supported on-set visual execution and creative direction",
-      "Organized digital assets for post-production workflows",
+      'Managed talent scheduling, location coordination, and asset organization for 3 campaigns',
+      'Supported on-set visual execution and creative direction',
+      'Organized digital assets for post-production workflows',
     ],
-    tags: ["Production Coordination", "Timeline Management", "Campaign Execution"],
-    metrics: ["10M+ cross-platform impressions", "3 major campaigns"],
+    tags: ['Production Coordination', 'Campaign Execution'],
+    metrics: ['10M+ cross-platform impressions', '3 major campaigns'],
     relatedLinks: [
-      { title: "Behind the Streams with Sydeon", url: "https://www.youtube.com/watch?v=0uBuJh7sEjU", description: "Gaming influencer campaign" },
-      { title: "Briana King Joins StockX", url: "https://www.youtube.com/watch?v=V8sx2CJ9x4s", description: "Skate community leader campaign" },
-      { title: "What Drives Brittney Elena", url: "https://www.youtube.com/watch?v=3-loqESOCMI", description: "Basketball influencer profile" },
-    ]
+      { title: 'Behind the Streams with Sydeon', url: 'https://www.youtube.com/watch?v=0uBuJh7sEjU', description: 'Gaming influencer campaign' },
+      { title: 'Briana King Joins StockX', url: 'https://www.youtube.com/watch?v=V8sx2CJ9x4s', description: 'Skate community leader campaign' },
+      { title: 'What Drives Brittney Elena', url: 'https://www.youtube.com/watch?v=3-loqESOCMI', description: 'Basketball influencer profile' },
+    ],
   },
   {
-    id: "collider-seo",
-    title: "Film & TV Editorial Features",
-    company: "Collider",
-    role: "Editorial Content Specialist",
-    timeline: "2022",
-    description: "Produced SEO-optimized editorial features for a 30M+ monthly visitor platform, boosting organic traffic by ~15% in two months.",
-    longDescription: "Produced SEO-optimized articles on film and television for Collider, balancing keyword strategy with editorial quality while adhering to complex style guides and metadata protocols in a fast-paced newsroom environment.",
+    id: 'collider-seo',
+    title: 'Film & TV Editorial Features',
+    company: 'Collider',
+    role: 'Editorial Content Specialist',
+    timeline: 'Aug – Oct 2022',
+    description: 'Produced SEO-optimized editorial features for a 30M+ monthly visitor platform. Top article generated 125K+ views, a 4:23 avg. time on page, and a top-3 Google result — lifting organic traffic approximately 15% in two months.',
     details: [
-      "Produced features adhering to complex style guides and SEO metadata protocols",
-      "Balanced keyword strategy with editorial quality for sustained organic traffic",
-      "Created evergreen content with high reader retention and time-on-page",
+      'Produced features adhering to complex style guides and SEO metadata protocols',
+      'Balanced keyword strategy with editorial quality for sustained organic traffic',
+      'Created evergreen content with high reader retention and time-on-page',
     ],
-    tags: ["Editorial Compliance", "SEO", "Content Strategy", "Evergreen Content"],
-    metrics: ["30M+ monthly visitors", "15%+ organic traffic growth"],
+    tags: ['SEO', 'Editorial', 'Evergreen Content'],
+    metrics: ['30M+ monthly visitors', '~15% organic traffic growth'],
     relatedLinks: [
-      { title: "Actors and Their Favorite Movies", url: "https://collider.com/actors-and-their-favorite-movies/", description: "125K+ organic views · 4:23 avg time on page · top 3 Google result" },
-      { title: "Hardest Working Characters in Succession", url: "https://collider.com/hardest-workers-in-succession-ranked/", description: "89K+ views · 22% social share rate" },
-      { title: "Movies To Get You Ready For Fall", url: "https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/", description: "76K+ views · featured in Google Discover" },
-    ]
+      { title: 'Actors and Their Favorite Movies', url: 'https://collider.com/actors-and-their-favorite-movies/', description: '125K+ views · 4:23 avg time on page · top 3 Google result' },
+      { title: 'Hardest Working Characters in Succession', url: 'https://collider.com/hardest-workers-in-succession-ranked/', description: '89K+ views · 22% social share rate' },
+      { title: 'Movies To Get You Ready For Fall', url: 'https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/', description: '76K+ views · featured in Google Discover' },
+    ],
   },
 ];
 
-const companyOrder = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
-
-const ProjectRow = ({ project, onSelect }: { project: Project; onSelect: () => void }) => (
-  <button
-    id={project.id}
-    onClick={onSelect}
-    className="w-full text-left py-4 border-b border-gray-100 last:border-0 group flex items-start justify-between gap-4"
-  >
-    <div className="flex-1 min-w-0">
-      <p className="text-[10px] text-gray-400 mb-1">{project.company} · {project.timeline}</p>
-      <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-snug">{project.title}</h3>
-      <p className="text-xs text-gray-400 leading-relaxed line-clamp-2 mb-2">{project.description}</p>
-      {project.metrics && project.metrics.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {project.metrics.slice(0, 3).map((m, i) => (
-            <span key={i} className="text-[10px] text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md">{m}</span>
-          ))}
-        </div>
-      )}
-    </div>
-    <span className="text-gray-300 group-hover:text-gray-500 transition-colors text-sm flex-shrink-0 mt-0.5">→</span>
-  </button>
-);
-
-const ProjectDetail = ({ project, onBack }: { project: Project; onBack: () => void }) => (
-  <div className="px-4 sm:px-8 pt-4 sm:pt-6 pb-8 h-full overflow-y-auto">
-    <button
-      onClick={onBack}
-      className="text-sm text-gray-400 hover:text-gray-900 transition-colors mb-8 inline-flex items-center gap-1.5"
-    >
-      ← Back
-    </button>
-
-    <div className="mb-6">
-      <p className="text-[10px] text-gray-400 mb-2">{project.company} · {project.role} · {project.timeline}</p>
-      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 mb-3">{project.title}</h2>
-      <p className="text-sm text-gray-500 leading-relaxed">{project.longDescription || project.description}</p>
-    </div>
-
-    {project.metrics && project.metrics.length > 0 && (
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-8">
-        {project.metrics.map((m, i) => (
-          <div key={i} className="bg-gray-50 rounded-xl px-4 py-3">
-            <p className="text-sm font-semibold text-gray-900 tracking-tight leading-snug">{m}</p>
-          </div>
-        ))}
-      </div>
-    )}
-
-    {project.details.length > 0 && (
-      <div className="mb-8">
-        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Contributions</p>
-        <div className="space-y-3">
-          {project.details.map((d, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-              <p className="text-sm text-gray-600 leading-relaxed">{d}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    )}
-
-    {project.relatedLinks && project.relatedLinks.length > 0 && (
-      <div>
-        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Links</p>
-        <div>
-          {project.relatedLinks.map((link, i) => (
-            link.url ? (
-              <a
-                key={i}
-                href={link.url}
-                target={link.url.startsWith('http') ? '_blank' : '_self'}
-                rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
-                className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0 group/link"
-              >
-                <span className="text-sm font-medium text-gray-900 group-hover/link:text-gray-500 transition-colors">{link.title}</span>
-                <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs">↗</span>
-              </a>
-            ) : (
-              <div key={i} className="py-3 border-b border-gray-100 last:border-0">
-                <span className="text-sm text-gray-400">{link.title}</span>
-              </div>
-            )
-          ))}
-        </div>
-      </div>
-    )}
-  </div>
-);
+const COMPANY_ORDER = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
+const COMPANY_COLORS: Record<string, string> = {
+  'Meta':          'bg-blue-50 text-blue-600',
+  'Snap Inc.':     'bg-yellow-50 text-yellow-600',
+  'Phony Content': 'bg-purple-50 text-purple-600',
+  'StockX':        'bg-green-50 text-green-600',
+  'Collider':      'bg-orange-50 text-orange-600',
+};
 
 function PortfolioInner() {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [mounted, setMounted] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState('all');
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
-  const [panelDirection, setPanelDirection] = useState(1);
-  const [companyDirection, setCompanyDirection] = useState(1);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     setMounted(true);
     const projectId = searchParams.get('project');
     if (projectId) {
-      const found = projects.find(p => p.id === projectId);
-      if (found) {
-        setActiveProject(found);
-        setSelectedCompany(found.company);
-      }
+      const i = PROJECTS.findIndex(p => p.id === projectId);
+      if (i !== -1) setIndex(i);
     }
   }, [searchParams]);
 
-  const companies = ['all', ...companyOrder];
-  const filtered = selectedCompany === 'all' ? projects : projects.filter(p => p.company === selectedCompany);
-  const countByCompany = companyOrder.reduce((acc, c) => {
-    acc[c] = projects.filter(p => p.company === c).length;
-    return acc;
-  }, {} as Record<string, number>);
+  const go = useCallback((dir: 1 | -1) => {
+    const next = index + dir;
+    if (next < 0 || next >= PROJECTS.length) return;
+    setDirection(dir);
+    setIndex(next);
+  }, [index]);
 
-  const selectCompany = (company: string) => {
-    const fromIdx = companies.indexOf(selectedCompany);
-    const toIdx = companies.indexOf(company);
-    setCompanyDirection(toIdx > fromIdx ? 1 : -1);
-    setActiveProject(null);
-    setSelectedCompany(company);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [go]);
+
+  const project = PROJECTS[index];
+  const companyColor = COMPANY_COLORS[project.company] ?? 'bg-gray-100 text-gray-600';
+
+  // Company progress
+  const companyProjects = PROJECTS.filter(p => p.company === project.company);
+  const companyIndex = companyProjects.findIndex(p => p.id === project.id) + 1;
+
+  // Ghost card offsets (next cards peeking behind)
+  const ghosts = [1, 2].map(offset => PROJECTS[index + offset]).filter(Boolean);
+
+  const cardVariants = {
+    enter: (d: number) => ({ x: d > 0 ? 80 : -80, opacity: 0, rotate: d > 0 ? 3 : -3, scale: 0.97 }),
+    center: { x: 0, opacity: 1, rotate: 0, scale: 1 },
+    exit:  (d: number) => ({ x: d > 0 ? -80 : 80, opacity: 0, rotate: d > 0 ? -3 : 3, scale: 0.97 }),
   };
-
-  const openProject = (project: Project) => {
-    setPanelDirection(1);
-    setActiveProject(project);
-  };
-
-  const closeProject = () => {
-    setPanelDirection(-1);
-    setActiveProject(null);
-  };
-
-  // Panel key: when no project open, key is the company; when project open, key is project id
-  const panelKey = activeProject ? activeProject.id : selectedCompany;
-  const panelDir = activeProject ? panelDirection : companyDirection;
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <section className="flex-1 w-full px-4 sm:px-6 pt-20 pb-0">
-        <div className="max-w-5xl mx-auto h-full">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 sm:px-8 pt-20 sm:pt-24 pb-6 max-w-2xl mx-auto w-full">
+        <motion.h1
+          className="text-sm font-semibold text-gray-900 tracking-tight"
+          initial={{ opacity: 0 }}
+          animate={mounted ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4, ease: EASE }}
+        >
+          Portfolio
+        </motion.h1>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={mounted ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4, ease: EASE }}
+        >
+          <Link href="/work" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
+            ← Experience
+          </Link>
+        </motion.div>
+      </div>
 
+      {/* Card area */}
+      <div className="flex-1 flex flex-col items-center justify-center px-5 sm:px-8 pb-10">
+        <div className="w-full max-w-2xl">
+
+          {/* Stack container */}
           <motion.div
-            className="flex items-baseline justify-between pt-8 sm:pt-14 pb-6 sm:pb-8"
-            initial={{ opacity: 0 }}
-            animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, ease: EASE }}
-          >
-            <h1 className="text-3xl font-semibold tracking-tight text-gray-900">Portfolio</h1>
-            <Link href="/work" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
-              ← Experience
-            </Link>
-          </motion.div>
-
-          {/* Mobile: flat layout */}
-          <div className="sm:hidden">
-            {/* Company filter pills */}
-            <div className="flex gap-2 overflow-x-auto pb-4 -mx-4 px-4">
-              {companies.map((company) => {
-                const isActive = company === selectedCompany;
-                return (
-                  <button
-                    key={company}
-                    onClick={() => selectCompany(company)}
-                    className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all duration-150 ${
-                      isActive
-                        ? 'bg-gray-900 text-white font-medium'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                    }`}
-                  >
-                    {company === 'all' ? 'All' : company}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Project list or detail */}
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={panelKey}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.22, ease: EASE }}
-              >
-                {activeProject ? (
-                  <div className="pt-4 pb-10">
-                    <button
-                      onClick={closeProject}
-                      className="text-sm text-gray-400 hover:text-gray-900 transition-colors mb-6 inline-flex items-center gap-1.5"
-                    >
-                      ← Back
-                    </button>
-                    <p className="text-[10px] text-gray-400 mb-2">{activeProject.company} · {activeProject.role} · {activeProject.timeline}</p>
-                    <h2 className="text-xl font-semibold tracking-tight text-gray-900 mb-3">{activeProject.title}</h2>
-                    <p className="text-sm text-gray-500 leading-relaxed mb-6">{activeProject.longDescription || activeProject.description}</p>
-                    {activeProject.metrics && activeProject.metrics.length > 0 && (
-                      <div className="grid grid-cols-2 gap-2 mb-8">
-                        {activeProject.metrics.map((m, i) => (
-                          <div key={i} className="bg-gray-50 rounded-xl px-4 py-3">
-                            <p className="text-sm font-semibold text-gray-900 tracking-tight leading-snug">{m}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {activeProject.details.length > 0 && (
-                      <div className="mb-8">
-                        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Contributions</p>
-                        <div className="space-y-3">
-                          {activeProject.details.map((d, i) => (
-                            <div key={i} className="flex items-start gap-3">
-                              <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-                              <p className="text-sm text-gray-600 leading-relaxed">{d}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {activeProject.relatedLinks && activeProject.relatedLinks.length > 0 && (
-                      <div>
-                        <p className="text-[9px] font-medium text-gray-400 uppercase tracking-widest mb-4">Links</p>
-                        {activeProject.relatedLinks.map((link, i) => (
-                          link.url ? (
-                            <a key={i} href={link.url} target={link.url.startsWith('http') ? '_blank' : '_self'} rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0 group/link">
-                              <span className="text-sm font-medium text-gray-900 group-hover/link:text-gray-500 transition-colors">{link.title}</span>
-                              <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs">↗</span>
-                            </a>
-                          ) : (
-                            <div key={i} className="py-3 border-b border-gray-100 last:border-0">
-                              <span className="text-sm text-gray-400">{link.title}</span>
-                            </div>
-                          )
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="pb-10">
-                    {filtered.map((project) => (
-                      <ProjectRow key={project.id} project={project} onSelect={() => openProject(project)} />
-                    ))}
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Desktop: two-panel card */}
-          <motion.div
-            className="hidden sm:flex gap-0 border border-gray-100 rounded-2xl overflow-hidden sm:h-[calc(100vh-14rem)]"
-            initial={{ opacity: 0, y: 16 }}
+            className="relative"
+            initial={{ opacity: 0, y: 24 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
           >
-            {/* Left: company selector */}
-            <div className="w-44 flex-shrink-0 border-r border-gray-100 py-4 flex flex-col gap-0.5 overflow-y-auto">
-              {companies.map((company) => {
-                const isActive = company === selectedCompany;
-                return (
-                  <button
-                    key={company}
-                    onClick={() => selectCompany(company)}
-                    className={`w-full text-left px-4 py-3 transition-all duration-150 relative ${
-                      isActive ? 'bg-gray-50' : 'hover:bg-gray-50/60'
-                    }`}
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="company-indicator"
-                        className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-900"
-                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                      />
-                    )}
-                    <p className={`text-sm transition-colors ${isActive ? 'font-semibold text-gray-900' : 'text-gray-400'}`}>
-                      {company === 'all' ? 'All' : company}
-                    </p>
-                    <p className="text-[10px] text-gray-400 mt-0.5">
-                      {company === 'all'
-                        ? `${projects.length} projects`
-                        : `${countByCompany[company]} ${countByCompany[company] === 1 ? 'project' : 'projects'}`}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
+            {/* Ghost cards */}
+            {ghosts.slice(0, 2).reverse().map((g, i) => {
+              const depth = ghosts.length === 2 ? (i === 0 ? 2 : 1) : 1;
+              return (
+                <div
+                  key={g.id}
+                  className="absolute inset-x-0 bg-white rounded-3xl border border-gray-100"
+                  style={{
+                    top: `${depth * 10}px`,
+                    left: `${depth * 5}px`,
+                    right: `${depth * 5}px`,
+                    height: '60px',
+                    transform: `scale(${1 - depth * 0.02})`,
+                    opacity: 1 - depth * 0.25,
+                    zIndex: 10 - depth,
+                    boxShadow: '0 1px 8px 0 rgba(0,0,0,0.04)',
+                  }}
+                />
+              );
+            })}
 
-            {/* Right: list or detail */}
-            <div className="flex-1 overflow-hidden">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={panelKey}
-                  initial={{ opacity: 0, x: panelDir * 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: panelDir * -24 }}
-                  transition={{ duration: 0.22, ease: EASE }}
-                  className="h-full"
-                >
-                  {activeProject ? (
-                    <ProjectDetail project={activeProject} onBack={closeProject} />
-                  ) : (
-                    <div className="px-8 pt-2 pb-8">
-                      {filtered.map((project) => (
-                        <ProjectRow key={project.id} project={project} onSelect={() => openProject(project)} />
+            {/* Active card */}
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={project.id}
+                custom={direction}
+                variants={cardVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={SPRING}
+                className="relative z-20 bg-white rounded-3xl border border-gray-100 overflow-hidden"
+                style={{ boxShadow: '0 2px 24px 0 rgba(0,0,0,0.06)' }}
+              >
+                {/* Card header */}
+                <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-gray-50">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${companyColor}`}>
+                      {project.company}
+                    </span>
+                    <span className="text-[10px] text-gray-400">
+                      {project.company} · {companyIndex} of {companyProjects.length}
+                    </span>
+                  </div>
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug mb-1">
+                    {project.title}
+                  </h2>
+                  <p className="text-xs text-gray-400">{project.role} · {project.timeline}</p>
+                </div>
+
+                {/* Card body — scrollable */}
+                <div className="px-6 sm:px-8 py-5 max-h-[52vh] overflow-y-auto space-y-6">
+
+                  {/* Published Links — first */}
+                  {project.relatedLinks && project.relatedLinks.length > 0 && (
+                    <div>
+                      <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">
+                        {project.relatedLinks.some(l => l.url.startsWith('http')) ? 'Published' : 'Links'}
+                      </p>
+                      <div className="space-y-0 -mx-1">
+                        {project.relatedLinks.map((link, i) => (
+                          link.url ? (
+                            <a
+                              key={i}
+                              href={link.url}
+                              target={link.url.startsWith('http') ? '_blank' : '_self'}
+                              rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
+                              className="flex items-start justify-between gap-3 px-1 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/link"
+                            >
+                              <div className="min-w-0">
+                                <p className="text-sm font-medium text-gray-900 leading-snug group-hover/link:text-gray-500 transition-colors">{link.title}</p>
+                                {link.description && (
+                                  <p className="text-[11px] text-gray-400 mt-0.5 leading-snug">{link.description}</p>
+                                )}
+                              </div>
+                              <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs flex-shrink-0 mt-0.5">↗</span>
+                            </a>
+                          ) : null
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <div>
+                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">Overview</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{project.description}</p>
+                  </div>
+
+                  {/* Metrics */}
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {project.metrics.map((m, i) => (
+                        <span key={i} className="text-[11px] font-medium text-gray-700 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full">
+                          {m}
+                        </span>
                       ))}
                     </div>
                   )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+
+                  {/* Details */}
+                  {project.details.length > 0 && (
+                    <div>
+                      <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">Contributions</p>
+                      <div className="space-y-2">
+                        {project.details.map((d, i) => (
+                          <div key={i} className="flex items-start gap-2.5">
+                            <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
+                            <p className="text-sm text-gray-500 leading-relaxed">{d}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Tags */}
+                  {project.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 pb-1">
+                      {project.tags.map((t, i) => (
+                        <span key={i} className="text-[10px] text-gray-400 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-100">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
 
-          <div className="pb-8" />
+          {/* Navigation */}
+          <motion.div
+            className="flex items-center justify-between mt-8"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
+          >
+            {/* Prev */}
+            <button
+              onClick={() => go(-1)}
+              disabled={index === 0}
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+            >
+              ← {index > 0 && <span className="text-xs hidden sm:inline truncate max-w-[140px]">{PROJECTS[index - 1].company}</span>}
+            </button>
+
+            {/* Dots */}
+            <div className="flex items-center gap-1.5">
+              {PROJECTS.map((p, i) => {
+                const isActive = i === index;
+                const isSameCompany = p.company === project.company;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
+                    className="transition-all duration-200"
+                    aria-label={p.title}
+                  >
+                    <div className={`rounded-full transition-all duration-300 ${
+                      isActive
+                        ? 'w-4 h-1.5 bg-gray-900'
+                        : isSameCompany
+                        ? 'w-1.5 h-1.5 bg-gray-400'
+                        : 'w-1.5 h-1.5 bg-gray-200'
+                    }`} />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next */}
+            <button
+              onClick={() => go(1)}
+              disabled={index === PROJECTS.length - 1}
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+            >
+              {index < PROJECTS.length - 1 && <span className="text-xs hidden sm:inline truncate max-w-[140px]">{PROJECTS[index + 1].company}</span>} →
+            </button>
+          </motion.div>
+
+          {/* Company progress strip */}
+          <motion.div
+            className="flex items-center justify-center gap-4 mt-5"
+            initial={{ opacity: 0 }}
+            animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.25, ease: EASE }}
+          >
+            {COMPANY_ORDER.map((co) => {
+              const isActive = co === project.company;
+              const done = PROJECTS.findIndex(p => p.company === co);
+              const isDone = done < index && co !== project.company;
+              return (
+                <button
+                  key={co}
+                  onClick={() => {
+                    const i = PROJECTS.findIndex(p => p.company === co);
+                    if (i !== -1) { setDirection(i > index ? 1 : -1); setIndex(i); }
+                  }}
+                  className={`text-[10px] font-medium transition-colors ${
+                    isActive ? 'text-gray-900' : isDone ? 'text-gray-400' : 'text-gray-300 hover:text-gray-500'
+                  }`}
+                >
+                  {co}
+                </button>
+              );
+            })}
+          </motion.div>
+
         </div>
-      </section>
+      </div>
     </div>
   );
 }
