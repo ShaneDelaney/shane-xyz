@@ -10,12 +10,12 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const links = [
-    { href: '/about', label: 'About' },
     { href: '/work', label: 'Work' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/published', label: 'Published' },
+    { href: '/about', label: 'About' },
   ];
 
-  const dark = pathname.startsWith('/work/portfolio');
+  const dark = pathname.startsWith('/work');
 
   return (
     <motion.nav
@@ -36,7 +36,7 @@ export default function Navigation() {
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
             {links.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
