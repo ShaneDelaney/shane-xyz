@@ -49,11 +49,6 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <footer className="py-8 px-6 border-t border-gray-100">
-          <div className="max-w-5xl mx-auto">
-            <p className="text-xs text-gray-400">© {new Date().getFullYear()} Shane Delaney</p>
-          </div>
-        </footer>
         <ShaneGPT />
       </body>
     </html>
