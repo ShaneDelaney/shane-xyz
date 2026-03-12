@@ -5,231 +5,372 @@ import Link from 'next/link';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-const SPRING = { type: 'spring', stiffness: 320, damping: 32 } as const;
+const SPRING = { type: 'spring', stiffness: 300, damping: 30 } as const;
 const EASE   = [0.16, 1, 0.3, 1] as const;
 
-interface Project {
+interface Card {
   id: string;
-  title: string;
   company: string;
-  role: string;
-  timeline: string;
-  description: string;
-  details: string[];
+  category: string;
+  title: string;
+  url?: string;
+  about: string;
+  contribution: string;
+  period: string;
   tags: string[];
   metrics?: string[];
-  relatedLinks?: { title: string; url: string; description?: string }[];
 }
 
-const PROJECTS: Project[] = [
+const CARDS: Card[] = [
+  // ── META — BUILDER STORIES ────────────────────────────────────────────────
   {
-    id: 'meta-horizon-builder-stories',
-    title: 'Meta Horizon Builder Story Spotlights',
+    id: 'vail-vr-part-one',
     company: 'Meta',
-    role: 'Content Marketing Coordinator II',
-    timeline: 'Oct 2025 – Mar 2026',
-    description: 'Served as Project Lead and System Owner for the Builder Stories program — led end-to-end production on 7 developer success stories published on the Meta Horizon developers portal. Formally RACI-designated as Responsible across all stages: narrative development, outreach, interviews, copy-editing, assets, XFN review, and reporting.',
-    details: [
-      'Sourced and pitched creator stories; built and maintained external developer relationships',
-      'Led interviews and shaped narrative direction for each spotlight',
-      'Coordinated asset collection and agency execution with Scout House (29 check-ins)',
-      'Drove XFN review cycles across Product, DevRel, Design, Legal, and Data Science',
-      'Served as Project Lead and System Owner for the 8-step Builder Stories production workflow',
-    ],
-    tags: ['Narrative Direction', 'Production Lead', 'Agency Management', 'XFN Coordination'],
-    metrics: ['7 stories published', 'Meta Horizon Developers Blog'],
-    relatedLinks: [
-      { title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/', description: "AEXLAB's journey from humble beginnings to $15M in crowdfunding." },
-      { title: 'VAIL VR (Part Two): AEXLAB\'s Live Ops Engine', url: 'https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/', description: 'How AEXLAB transitioned VAIL VR to free-to-play with data-driven live ops.' },
-      { title: 'Saydeechan: Bringing Worlds to Japan', url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/', description: "A solo creator's journey to help launch Horizon Worlds in Japan." },
-      { title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World', url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/', description: 'Two influencers with no dev experience create a top-ranked Horizon world.' },
-      { title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community', url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/', description: 'Community-driven worldbuilding inside Horizon Worlds.' },
-      { title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers', url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/', description: 'How rapid iteration drove commercial success in VR in 2025.' },
-      { title: 'Kawaii.Creator — Success Story', url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/', description: 'Creator success story featured on the Meta Horizon developer portal.' },
-    ],
+    category: 'Developer Story',
+    title: 'VAIL VR (Part One): From Couch Surfing to $15M in Crowdfunding',
+    url: 'https://developers.meta.com/horizon/blog/vail-vr-part-one-couch-surfing-to-15m-in-crowdfunding/',
+    about: 'Part one of a two-part spotlight on AEXLAB and their flagship VR title, VAIL VR. Documents the studio\'s journey from couch-surfing origins to raising $15M in community crowdfunding — one of the most successful funding campaigns in VR gaming.',
+    contribution: 'Production lead end-to-end across five documented meetings from October 30 through November 12. Drove narrative development, coordinated the Scout House interview, managed developer approval with AEXLAB\'s Chandler Steele, and led the piece through legal and XFN review to publication.',
+    period: 'Nov 2025',
+    tags: ['Developer Story', 'Production Lead', 'Agency Coordination', 'XFN Review'],
+    metrics: ['$15M crowdfunding', '5 production meetings'],
   },
   {
-    id: 'meta-horizon-gtm-guides',
-    title: 'Meta Horizon Go-To-Market Developer Guide Series',
+    id: 'vail-vr-part-two',
     company: 'Meta',
-    role: 'Content Marketing Coordinator II',
-    timeline: 'Jan – Feb 2026',
-    description: 'Editorial lead on a six-part GTM guide series for VR developers — owned all copy and direction for four guides, collaborated with Meta Documentation Engineer Roger Wong on two. Managed full publication lifecycle with XFN review across five teams and formal stat verification before each launch.',
-    details: [
-      'Owned copy and editorial direction for four primary guides (Jan 2026)',
-      'Collaborated with Roger Wong (Documentation Engineer, Meta) on two additional guides (Feb 2026)',
-      'Ran formal stat verification with Data Science to confirm 100% metric accuracy pre-launch',
-      'Coordinated XFN review across Product, DevRel, Design, Legal, and Data Science',
-      'Created supplementary worksheets and checklists for the Marketing Plan guide',
-    ],
-    tags: ['Editorial Lifecycle', 'XFN Coordination', 'Content Strategy', 'Developer Education'],
-    metrics: ['6 guides published', 'Meta Horizon developers portal'],
-    relatedLinks: [
-      { title: 'Develop a Marketing Plan for Your VR App', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/', description: 'High-level marketing strategy, audience research, and channel identification.' },
-      { title: 'Leverage Influencer Partnerships', url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/', description: 'Building strategic influencer partnerships to grow VR app visibility.' },
-      { title: 'Build Social Media and Community Engagement', url: 'https://developers.meta.com/horizon/resources/gtm-social-media/', description: 'Community-building tactics and social media strategies for VR developers.' },
-      { title: 'Master Marketing Assets for VR Apps', url: 'https://developers.meta.com/horizon/resources/gtm-marketing-assets/', description: 'Creating effective marketing assets for promoting VR apps.' },
-      { title: 'PR Strategy for VR Apps', url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/', description: 'Public relations strategy and media outreach for VR developers.' },
-      { title: 'Creating App Demos That Convert', url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/', description: 'Best practices for building compelling app demos that drive installs.' },
-    ],
+    category: 'Developer Story',
+    title: 'VAIL VR (Part Two): AEXLAB\'s Live Ops Engine',
+    url: 'https://developers.meta.com/horizon/blog/vail-vr-part-two-aexlabs-live-ops-engine/',
+    about: 'The second installment of the VAIL VR series — goes inside AEXLAB\'s live operations engine and documents how they transitioned VAIL VR to free-to-play using a data-driven approach to player retention and content cadence.',
+    contribution: 'Production lead end-to-end. Shaped the narrative direction toward the live ops angle, coordinated legal review given the specificity of financial and technical figures cited, and drove the full production and review cycle through to publication.',
+    period: 'Nov 2025',
+    tags: ['Developer Story', 'Production Lead', 'Legal Coordination'],
+    metrics: ['Part 2 of 2', 'Live ops angle'],
   },
+  {
+    id: 'saydeechan',
+    company: 'Meta',
+    category: 'Developer Story',
+    title: 'Saydeechan: Bringing Worlds to Japan',
+    url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/',
+    about: 'Developer story on Saydeechan, a solo creator building Horizon Worlds experiences specifically for Japanese audiences. One of the few ecosystem stories focused on cultural localization as a product strategy rather than revenue or growth metrics.',
+    contribution: 'Sourced and pitched this story. Led narrative development with the Japan localization framing at the center, managed the Scout House interview and logistics, coordinated asset collection, and drove the full cross-functional review cycle through to publication.',
+    period: 'Dec 2025',
+    tags: ['Developer Story', 'Sourcing', 'Narrative Development', 'Production Lead'],
+  },
+  {
+    id: 'grow-a-farm',
+    company: 'Meta',
+    category: 'Developer Story',
+    title: 'Grow a Farm: How Two Gaming Influencers Built a Top Ranked World',
+    url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/',
+    about: 'Builder story on SnakeThug7 (1.86M YouTube subscribers) and Dinco — two gaming influencers who built a Horizon Worlds experience with no prior dev experience. The game reached the top 10 mobile worlds within two months of launch.',
+    contribution: 'Production lead end-to-end. Attended the Scout House interview on October 29 and V1 review on November 4. Authored the internal Workplace announcement post upon publication on November 19, 2025.',
+    period: 'Nov 2025',
+    tags: ['Developer Story', 'Production Lead', 'Creator Sourcing'],
+    metrics: ['Top 10 mobile worlds', '1.86M YT creator'],
+  },
+  {
+    id: 'matthiaos',
+    company: 'Meta',
+    category: 'Developer Story',
+    title: 'Matthiaos: Pioneering Change in Worlds Through Passion and Community',
+    url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/',
+    about: 'Creator spotlight on Matthiaos — documenting community-driven worldbuilding and how one builder used Horizon Worlds as a platform for creative advocacy and player-first design.',
+    contribution: 'Production lead end-to-end. Owned sourcing, narrative development, interview coordination through Scout House, asset collection, and the full XFN review cycle from initial outreach through to publication.',
+    period: 'Feb 2026',
+    tags: ['Developer Story', 'Production Lead', 'Community Angle'],
+  },
+  {
+    id: 'year-in-review',
+    company: 'Meta',
+    category: 'Year in Review',
+    title: 'Year in Review: Insights from 2025\'s Breakout Creators and Developers',
+    url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
+    about: 'A 2025 year-in-review piece surfacing patterns and insights from the year\'s breakout creators and developers on Meta Horizon — what worked, what scaled, and what defined the platform\'s most commercially successful builders.',
+    contribution: 'Production lead end-to-end. Developed the editorial concept and framing, owned all copy and narrative direction, coordinated stat verification with Data Science, and drove cross-functional review across Product, DevRel, Design, and Legal through to publication.',
+    period: 'Feb 2026',
+    tags: ['Developer Story', 'Editorial Lead', 'Data Verification', 'XFN Review'],
+  },
+  {
+    id: 'kawaii-creator',
+    company: 'Meta',
+    category: 'Success Story',
+    title: 'Kawaii.Creator — Success Story',
+    url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/',
+    about: 'Success story featured on the Meta Horizon developer portal\'s Discover section — spotlighting Kawaii.Creator and their work building on the Horizon platform.',
+    contribution: 'Production lead end-to-end. Owned sourcing, narrative development, and the full production and review cycle through to publication on the success stories portal.',
+    period: 'Feb 2026',
+    tags: ['Success Story', 'Production Lead'],
+  },
+
+  // ── META — GTM GUIDES ─────────────────────────────────────────────────────
+  {
+    id: 'gtm-marketing-plan',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'Develop a Marketing Plan for Your VR App',
+    url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
+    about: 'The anchor guide in a six-part GTM series for VR developers — covers high-level marketing strategy, audience research, and channel identification. Includes supplementary worksheets and checklists designed to make the guide actionable during a live launch sprint, not just as reference.',
+    contribution: 'Primary author and editorial lead. Owned all copy and direction from outline through publication. Created supplementary worksheets and checklists. Coordinated XFN review across Product, DevRel, Design, Legal, and Data Science. Ran formal stat verification prior to launch.',
+    period: 'Jan 2026',
+    tags: ['GTM Guide', 'Primary Author', 'XFN Coordination', 'Stat Verification'],
+    metrics: ['Part 1 of 6', 'Includes worksheets + checklists'],
+  },
+  {
+    id: 'gtm-influencer',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'Leverage Influencer Partnerships for Your VR App',
+    url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/',
+    about: 'Second guide in the series — practical strategy for identifying and building influencer partnerships to grow VR app visibility on Meta Horizon. Covers tiers, outreach, and campaign structure.',
+    contribution: 'Primary author and editorial lead. Owned all copy and direction. Managed the full publication lifecycle including XFN review across five teams and formal stat verification before launch.',
+    period: 'Jan 2026',
+    tags: ['GTM Guide', 'Primary Author', 'XFN Coordination'],
+    metrics: ['Part 2 of 6'],
+  },
+  {
+    id: 'gtm-social',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'Build Social Media and Community Engagement for Your VR App',
+    url: 'https://developers.meta.com/horizon/resources/gtm-social-media/',
+    about: 'Third guide in the series — community-building tactics and social media strategies tailored specifically for VR developers launching on Meta Horizon, covering channel selection and content cadence.',
+    contribution: 'Primary author and editorial lead. Owned all copy and direction. Managed XFN review and publication schedule across all five teams.',
+    period: 'Jan 2026',
+    tags: ['GTM Guide', 'Primary Author', 'XFN Coordination'],
+    metrics: ['Part 3 of 6'],
+  },
+  {
+    id: 'gtm-assets',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'Master Marketing Assets for Your VR App',
+    url: 'https://developers.meta.com/horizon/resources/gtm-marketing-assets/',
+    about: 'Fourth guide in the series — covers creating effective marketing assets for promoting VR apps and Horizon Worlds experiences, from store page screenshots to trailers and social creative.',
+    contribution: 'Primary author and editorial lead. Owned all copy and direction. Managed XFN review and publication.',
+    period: 'Jan 2026',
+    tags: ['GTM Guide', 'Primary Author', 'XFN Coordination'],
+    metrics: ['Part 4 of 6'],
+  },
+  {
+    id: 'gtm-pr',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'PR Strategy for Your VR App',
+    url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/',
+    about: 'Fifth guide in the series — public relations strategy and media outreach for VR developers navigating press cycles and review coverage around app launches.',
+    contribution: 'Co-authored with Roger Wong (Documentation Engineer, Meta) in February 2026. Collaborated on copy and editorial direction while managing production logistics, XFN review coordination, and the publication pipeline.',
+    period: 'Feb 2026',
+    tags: ['GTM Guide', 'Co-Author', 'Roger Wong Collaboration'],
+    metrics: ['Part 5 of 6'],
+  },
+  {
+    id: 'gtm-app-demos',
+    company: 'Meta',
+    category: 'GTM Guide',
+    title: 'Create App Demos That Convert',
+    url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/',
+    about: 'Final guide in the series — best practices for building compelling app demos that convert player interest into installs. Closes the six-part series with execution-level tactical guidance.',
+    contribution: 'Co-authored with Roger Wong (Documentation Engineer, Meta) in February 2026. Collaborated on copy and editorial direction through to publication.',
+    period: 'Feb 2026',
+    tags: ['GTM Guide', 'Co-Author', 'Roger Wong Collaboration'],
+    metrics: ['Part 6 of 6'],
+  },
+
+  // ── SNAP INC. ─────────────────────────────────────────────────────────────
   {
     id: 'snap-spotlight',
-    title: 'Spotlight Programming Lead',
     company: 'Snap Inc.',
-    role: 'Trend Producer',
-    timeline: 'Mar – Oct 2025',
-    description: "Served as Programming Lead for Spotlight — Snapchat's highest-scale content surface reaching 500M+ monthly viewers. Managed a daily pipeline of 1,000+ pieces of content and led editorial syncs translating daily performance data into real-time amplification decisions.",
-    details: [
-      'Managed daily pipeline of 1,000+ pieces of content across quality, safety, and brand-safe policy',
-      'Synthesized daily performance data to surface breakout trends',
-      'Led editorial syncs translating data findings into real-time amplification decisions',
-      'Developed standardized Editorial Instructions (EIs) and content brief templates',
-    ],
-    tags: ['Editorial Pipeline', 'Trend Analysis', 'Content Programming', 'Scale'],
+    category: 'Content Programming',
+    title: 'Spotlight Programming Lead',
+    about: 'Snapchat\'s Spotlight surface reaches 500M+ monthly viewers. As Programming Lead, managed a daily editorial pipeline of 1,000+ pieces of content — making real-time curation and amplification decisions across quality, safety, and brand-safe policy.',
+    contribution: 'Served as Programming Lead responsible for the full daily pipeline. Synthesized performance data to surface breakout trends, led editorial syncs translating data into amplification decisions, and developed standardized Editorial Instructions (EIs) and content brief templates that reduced operational friction across the team.',
+    period: 'Mar – Oct 2025',
+    tags: ['Content Programming', 'Editorial Pipeline', 'Trend Analysis'],
     metrics: ['500M+ monthly viewers', '1,000+ pieces/day'],
   },
   {
     id: 'snap-nux',
-    title: 'New User Experience Curation',
     company: 'Snap Inc.',
-    role: 'Trend Producer',
-    timeline: '2025',
-    description: 'Curated personalized UGC feeds for Snapchat\'s New User Experience for teens (13–17), achieving 10% higher retention than platform averages using data-driven cohort guidelines and algorithmic + editorial judgment.',
-    details: [
-      'Reviewed and recommended 300+ content pieces per teen cohort segmented by interest',
-      'Filtered content using data-driven cohort guidelines (M1.2 incremental data)',
-      'Collaborated with product engineering teams through dedicated Slack channels',
-      'Ensured demographic fit while maintaining editorial quality standards',
-    ],
-    tags: ['Content Curation', 'Data-Driven Programming', 'Cohort Segmentation'],
-    metrics: ['300+ pieces per cohort', '10% higher retention than platform average'],
+    category: 'Product Collaboration',
+    title: 'New User Experience (NUX) Curation',
+    about: 'Snapchat\'s New User Experience shapes what new users see first on the platform. The teen NUX (13–17) required editorial judgment layered on top of algorithmic signals to build personalized onboarding feeds that drove retention.',
+    contribution: 'Curated personalized UGC feeds for teen cohorts using data-driven guidelines (M1.2 incremental data), reviewing 300+ content pieces per cohort segmented by interest. Collaborated with product engineering teams and maintained demographic-appropriate quality standards. Achieved 10% higher retention than platform average.',
+    period: 'Mar – Oct 2025',
+    tags: ['Content Curation', 'Cohort Segmentation', 'Data-Driven'],
+    metrics: ['300+ pieces per cohort', '10% higher retention than avg.'],
   },
   {
     id: 'snap-boosted',
-    title: 'Boosted Content & Creator Identification System',
     company: 'Snap Inc.',
-    role: 'Trend Producer',
-    timeline: '2025',
-    description: 'Collaborated with Snap\'s Data Science team to build a custom creator identification system to surface emerging creators. Developed internal documentation for 10+ XFN teams and influenced monetization strategy across 1M+ creators.',
-    details: [
-      'Translated complex data findings into strategic content guidance for editorial teams',
-      'Created internal documentation and process templates for 10+ XFN teams',
-      'Built custom web app tool to streamline creator identification workflow',
-      'Developed standardized Editorial Instructions (EIs) for the initiative',
-    ],
-    tags: ['Data Strategy', 'Process Documentation', 'XFN Collaboration', 'Creator Tools'],
+    category: 'Data & Creator Strategy',
+    title: 'Creator Identification System & Boosted Content',
+    about: 'Snap\'s boosted content initiative required identifying emerging creators before algorithmic signals could surface them at scale. Built in collaboration with Data Science to create a systematic approach to spotting and elevating creators earlier in their growth curve.',
+    contribution: 'Collaborated with Data Science to build a custom creator identification system. Translated complex data findings into strategic content guidance, created internal documentation for 10+ XFN teams, built a supporting web app tool, and influenced monetization strategy across 1M+ creators.',
+    period: 'Mar – Oct 2025',
+    tags: ['Data Strategy', 'Creator Tools', 'XFN Collaboration', 'Process Documentation'],
     metrics: ['1M+ monetized creators', '10+ XFN teams served'],
   },
+
+  // ── PHONY CONTENT ─────────────────────────────────────────────────────────
   {
-    id: 'tiny-texts',
-    title: 'Tiny Texts on Snapchat',
+    id: 'tiny-texts-cheer-squad',
     company: 'Phony Content',
-    role: 'Content Manager',
-    timeline: 'May 2024 – Mar 2025',
-    description: 'Led editorial operations for Tiny Texts — 50+ scripted Snapchat stories generating 25M+ total views. Top story (Cheer Squad) reached 6.3M views and a 39% completion rate. Built production infrastructure including style guides, editorial calendars, and documentation frameworks.',
-    details: [
-      'Led agile sprint planning and creative QA for 50+ scripted digital stories',
-      'Built centralized style guides and voice/tone documentation for writing team consistency',
-      'Managed editorial calendar across rotating writers to maintain publishing cadence',
-      'Optimized content for engagement metrics across 25M+ total views',
-    ],
-    tags: ['Editorial Operations', 'Content Systems', 'Short-Form Content'],
-    metrics: ['25M+ total views', '6.3M views (top story)', '39% completion rate'],
-    relatedLinks: [
-      { title: 'Cheer Squad', url: 'https://snapchat.com/t/J2MP13US', description: '6.32M views · 43K followers · 39% completion rate' },
-      { title: 'Inhaler', url: 'https://snapchat.com/t/wPotqUYw', description: '4.39M views · 20.3K followers · 42% completion rate' },
-      { title: 'Snapscore', url: 'https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168', description: '3.59M views · 10K followers · 35% completion rate' },
-    ],
+    category: 'Scripted Series',
+    title: 'Tiny Texts — Cheer Squad',
+    url: 'https://snapchat.com/t/J2MP13US',
+    about: 'Top-performing story in the Tiny Texts scripted series on Snapchat. Cheer Squad became the breakout title in the show\'s catalog, generating the highest view count and follower conversion in the series.',
+    contribution: 'Led editorial operations for the full Tiny Texts slate — overseeing creative direction, QA, and production cadence. Managed the writing team and editorial calendar that produced Cheer Squad and the broader series.',
+    period: 'May 2024 – Mar 2025',
+    tags: ['Scripted Series', 'Editorial Operations', 'Snapchat'],
+    metrics: ['6.3M views', '43K followers', '39% completion rate'],
   },
   {
-    id: 'stockx-insights',
+    id: 'tiny-texts-inhaler',
+    company: 'Phony Content',
+    category: 'Scripted Series',
+    title: 'Tiny Texts — Inhaler',
+    url: 'https://snapchat.com/t/wPotqUYw',
+    about: 'Second-highest performing story in the Tiny Texts series. Inhaler demonstrated the show\'s ability to sustain strong completion rates across different narrative formats and emotional tones.',
+    contribution: 'Led editorial operations across the full series. Managed creative QA, writing team coordination, and the production systems that maintained consistent output and quality across 50+ stories.',
+    period: 'May 2024 – Mar 2025',
+    tags: ['Scripted Series', 'Editorial Operations', 'Snapchat'],
+    metrics: ['4.39M views', '20.3K followers', '42% completion rate'],
+  },
+  {
+    id: 'tiny-texts-snapscore',
+    company: 'Phony Content',
+    category: 'Scripted Series',
+    title: 'Tiny Texts — Snapscore',
+    url: 'https://www.snapchat.com/p/20a7a9ee-b36c-41ac-ab33-e25c7f9174cd/530343519111168',
+    about: 'Third-highest performing story in the Tiny Texts catalog on Snapchat, demonstrating consistent performance across the series\' top titles.',
+    contribution: 'Led editorial operations for the series. Built the centralized documentation frameworks, style guides, and editorial calendars that standardized production end-to-end and enabled the team to scale output without sacrificing quality.',
+    period: 'May 2024 – Mar 2025',
+    tags: ['Scripted Series', 'Editorial Operations', 'Snapchat'],
+    metrics: ['3.59M views', '10K followers', '35% completion rate'],
+  },
+
+  // ── STOCKX ────────────────────────────────────────────────────────────────
+  {
+    id: 'stockx-core-insights',
+    company: 'StockX',
+    category: 'Research Report',
     title: '2024 Core Insights Report',
-    company: 'StockX',
-    role: 'Brand Creative Production',
-    timeline: 'December 2024',
-    description: "Authored StockX's 2024 Gen Z trend report analyzing digital consumption behavior among 18–25 males in LA and NYC — directly informing their 2025 marketing strategy and campaign planning.",
-    details: [
-      'Mapped digital behaviors including curated sharing and resale culture',
-      'Highlighted emerging subcultures: Gorp Core, DIY, archive styling',
-      'Identified affinity brands and figures for campaign targeting',
-      'Delivered strategic recommendations for 2025 programming and creative direction',
-    ],
-    tags: ['Strategic Reporting', 'Trend Research', 'Gen Z Strategy', 'Consumer Insights'],
-    metrics: ['18–25 male demographic', 'LA & NYC markets', 'Informed 2025 campaign strategy'],
-    relatedLinks: [
-      { title: 'Trend Report Excerpt', url: '/assets/StockXCoreInsights.pdf', description: 'Strategic analysis of Gen Z consumer behavior in key markets' },
-    ],
+    about: 'Gen Z trend report analyzing digital consumption behavior among 18–25 males in LA and NYC — mapping emerging subcultures, affinity brands, and behavioral patterns that directly informed StockX\'s 2025 marketing strategy.',
+    contribution: 'Sole author. Mapped digital behaviors including curated sharing and resale culture, identified emerging subcultures (Gorp Core, DIY, archive styling), surfaced affinity figures for campaign targeting, and delivered strategic recommendations that shaped 2025 programming and creative direction.',
+    period: 'Dec 2024',
+    tags: ['Research', 'Trend Analysis', 'Gen Z Strategy', 'Sole Author'],
+    metrics: ['LA & NYC markets', 'Informed 2025 strategy'],
   },
   {
-    id: 'stockx-campaigns',
-    title: 'Campaign Production Highlights',
+    id: 'stockx-sydeon',
     company: 'StockX',
-    role: 'Brand Creative Production',
-    timeline: 'Sep 2021 & Dec 2024',
-    description: 'Managed production logistics for 3 high-profile campaign shoots coordinating talent, location, and asset workflows across campaigns generating 10M+ cross-platform impressions.',
-    details: [
-      'Managed talent scheduling, location coordination, and asset organization for 3 campaigns',
-      'Supported on-set visual execution and creative direction',
-      'Organized digital assets for post-production workflows',
-    ],
-    tags: ['Production Coordination', 'Campaign Execution'],
-    metrics: ['10M+ cross-platform impressions', '3 major campaigns'],
-    relatedLinks: [
-      { title: 'Behind the Streams with Sydeon', url: 'https://www.youtube.com/watch?v=0uBuJh7sEjU', description: 'Gaming influencer campaign' },
-      { title: 'Briana King Joins StockX', url: 'https://www.youtube.com/watch?v=V8sx2CJ9x4s', description: 'Skate community leader campaign' },
-      { title: 'What Drives Brittney Elena', url: 'https://www.youtube.com/watch?v=3-loqESOCMI', description: 'Basketball influencer profile' },
-    ],
+    category: 'Campaign',
+    title: 'Behind the Streams with Sydeon',
+    url: 'https://www.youtube.com/watch?v=0uBuJh7sEjU',
+    about: 'High-visibility campaign shoot with gaming influencer Sydeon, produced as part of StockX\'s creator partnership program targeting the gaming and streaming community.',
+    contribution: 'Supported production logistics — managed talent scheduling, location coordination, and digital asset organization across the shoot. Contributed to on-set execution and post-production asset workflows.',
+    period: 'Sep 2021',
+    tags: ['Campaign Production', 'Influencer', 'Gaming'],
+    metrics: ['10M+ impressions (series total)'],
   },
   {
-    id: 'collider-seo',
-    title: 'Film & TV Editorial Features',
+    id: 'stockx-briana-king',
+    company: 'StockX',
+    category: 'Campaign',
+    title: 'Briana King Joins StockX',
+    url: 'https://www.youtube.com/watch?v=V8sx2CJ9x4s',
+    about: 'Campaign shoot with Briana King, skate community leader, produced as part of StockX\'s ongoing creator-driven content series.',
+    contribution: 'Supported production logistics across talent, location, and asset workflows. Coordinated on-set execution and digital asset organization for post-production.',
+    period: 'Sep 2021',
+    tags: ['Campaign Production', 'Skate', 'Creator'],
+    metrics: ['10M+ impressions (series total)'],
+  },
+  {
+    id: 'stockx-brittney-elena',
+    company: 'StockX',
+    category: 'Campaign',
+    title: 'What Drives Brittney Elena',
+    url: 'https://www.youtube.com/watch?v=3-loqESOCMI',
+    about: 'Campaign profile with basketball influencer Brittney Elena, part of the StockX creator content series highlighting athletes and their relationship with culture and community.',
+    contribution: 'Supported production logistics including talent scheduling, location coordination, and asset organization. Contributed to on-set execution and post-production asset workflows.',
+    period: 'Dec 2024',
+    tags: ['Campaign Production', 'Basketball', 'Creator'],
+    metrics: ['10M+ impressions (series total)'],
+  },
+
+  // ── COLLIDER ──────────────────────────────────────────────────────────────
+  {
+    id: 'collider-actors-movies',
     company: 'Collider',
-    role: 'Editorial Content Specialist',
-    timeline: 'Aug – Oct 2022',
-    description: 'Produced SEO-optimized editorial features for a 30M+ monthly visitor platform. Top article generated 125K+ views, a 4:23 avg. time on page, and a top-3 Google result — lifting organic traffic approximately 15% in two months.',
-    details: [
-      'Produced features adhering to complex style guides and SEO metadata protocols',
-      'Balanced keyword strategy with editorial quality for sustained organic traffic',
-      'Created evergreen content with high reader retention and time-on-page',
-    ],
-    tags: ['SEO', 'Editorial', 'Evergreen Content'],
-    metrics: ['30M+ monthly visitors', '~15% organic traffic growth'],
-    relatedLinks: [
-      { title: 'Actors and Their Favorite Movies', url: 'https://collider.com/actors-and-their-favorite-movies/', description: '125K+ views · 4:23 avg time on page · top 3 Google result' },
-      { title: 'Hardest Working Characters in Succession', url: 'https://collider.com/hardest-workers-in-succession-ranked/', description: '89K+ views · 22% social share rate' },
-      { title: 'Movies To Get You Ready For Fall', url: 'https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/', description: '76K+ views · featured in Google Discover' },
-    ],
+    category: 'Editorial Feature',
+    title: 'Actors and Their Favorite Movies',
+    url: 'https://collider.com/actors-and-their-favorite-movies/',
+    about: 'Evergreen editorial feature for Collider — a 30M+ monthly visitor film and TV platform. Designed to capture high-intent search traffic while providing genuine editorial value to the platform\'s film-literate audience.',
+    contribution: 'Sole author. Developed the concept, executed keyword and SEO strategy, and wrote the piece to balance search optimization with editorial quality. Became the top-performing article from the freelance engagement — 125K+ views, 4:23 avg. time on page, top-3 Google result.',
+    period: 'Aug – Oct 2022',
+    tags: ['SEO', 'Evergreen Content', 'Editorial Feature', 'Sole Author'],
+    metrics: ['125K+ views', '4:23 avg. time on page', 'Top-3 Google result'],
+  },
+  {
+    id: 'collider-succession',
+    company: 'Collider',
+    category: 'Editorial Feature',
+    title: 'Hardest Working Characters in Succession, Ranked',
+    url: 'https://collider.com/hardest-workers-in-succession-ranked/',
+    about: 'Editorial feature on Succession capitalizing on peak cultural interest in the show — optimized for both search traffic and social sharing among the show\'s highly engaged fan base.',
+    contribution: 'Sole author. Developed concept, executed SEO strategy, and wrote the feature. Generated strong social share rate reflective of the show\'s highly engaged audience.',
+    period: 'Aug – Oct 2022',
+    tags: ['SEO', 'Editorial Feature', 'Pop Culture', 'Sole Author'],
+    metrics: ['89K+ views', '22% social share rate'],
+  },
+  {
+    id: 'collider-fall-movies',
+    company: 'Collider',
+    category: 'Editorial Feature',
+    title: 'Movies To Get You Ready For Fall',
+    url: 'https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/',
+    about: 'Seasonal editorial feature designed to capture timely search and discovery traffic during the fall content cycle on Collider. Selected for inclusion in Google Discover.',
+    contribution: 'Sole author. Developed concept, wrote the feature against a seasonal brief, and optimized for discovery. The piece was featured in Google Discover — indicating strong relevance and engagement signal.',
+    period: 'Aug – Oct 2022',
+    tags: ['SEO', 'Seasonal Content', 'Editorial Feature', 'Sole Author'],
+    metrics: ['76K+ views', 'Featured in Google Discover'],
   },
 ];
 
 const COMPANY_ORDER = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
-const COMPANY_COLORS: Record<string, string> = {
-  'Meta':          'bg-blue-50 text-blue-600',
-  'Snap Inc.':     'bg-yellow-50 text-yellow-600',
-  'Phony Content': 'bg-purple-50 text-purple-600',
-  'StockX':        'bg-green-50 text-green-600',
-  'Collider':      'bg-orange-50 text-orange-600',
+const COMPANY_ACCENT: Record<string, { badge: string; dot: string }> = {
+  'Meta':          { badge: 'bg-blue-50 text-blue-600',   dot: 'bg-blue-500'   },
+  'Snap Inc.':     { badge: 'bg-yellow-50 text-yellow-600', dot: 'bg-yellow-400' },
+  'Phony Content': { badge: 'bg-purple-50 text-purple-600', dot: 'bg-purple-500' },
+  'StockX':        { badge: 'bg-emerald-50 text-emerald-600', dot: 'bg-emerald-500' },
+  'Collider':      { badge: 'bg-orange-50 text-orange-500', dot: 'bg-orange-400' },
 };
 
 function PortfolioInner() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [mounted, setMounted] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     setMounted(true);
-    const projectId = searchParams.get('project');
-    if (projectId) {
-      const i = PROJECTS.findIndex(p => p.id === projectId);
-      if (i !== -1) setIndex(i);
+    const id = searchParams.get('project');
+    if (id) {
+      const exact = CARDS.findIndex(c => c.id === id);
+      if (exact !== -1) { setIndex(exact); return; }
+      const byCompany = CARDS.findIndex(c =>
+        id.includes(c.company.toLowerCase().split(' ')[0].toLowerCase())
+      );
+      if (byCompany !== -1) setIndex(byCompany);
     }
   }, [searchParams]);
 
   const go = useCallback((dir: 1 | -1) => {
     const next = index + dir;
-    if (next < 0 || next >= PROJECTS.length) return;
+    if (next < 0 || next >= CARDS.length) return;
     setDirection(dir);
     setIndex(next);
   }, [index]);
@@ -237,61 +378,69 @@ function PortfolioInner() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') go(1);
-      if (e.key === 'ArrowLeft') go(-1);
+      if (e.key === 'ArrowLeft')  go(-1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [go]);
 
-  const project = PROJECTS[index];
-  const companyColor = COMPANY_COLORS[project.company] ?? 'bg-gray-100 text-gray-600';
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const delta = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) go(delta > 0 ? 1 : -1);
+    setTouchStart(null);
+  };
 
-  // Company progress
-  const companyProjects = PROJECTS.filter(p => p.company === project.company);
-  const companyIndex = companyProjects.findIndex(p => p.id === project.id) + 1;
+  const card    = CARDS[index];
+  const accent  = COMPANY_ACCENT[card.company] ?? { badge: 'bg-gray-100 text-gray-600', dot: 'bg-gray-400' };
+  const coCards = CARDS.filter(c => c.company === card.company);
+  const coIdx   = coCards.findIndex(c => c.id === card.id) + 1;
+  const ghosts  = [CARDS[index + 1], CARDS[index + 2]].filter(Boolean);
+  const hasNext = index < CARDS.length - 1;
 
-  // Ghost card offsets (next cards peeking behind)
-  const ghosts = [1, 2].map(offset => PROJECTS[index + offset]).filter(Boolean);
-
-  const cardVariants = {
-    enter: (d: number) => ({ x: d > 0 ? 80 : -80, opacity: 0, rotate: d > 0 ? 3 : -3, scale: 0.97 }),
+  const variants = {
+    enter:  (d: number) => ({ x: d > 0 ? 72 : -72, opacity: 0, rotate: d > 0 ? 2.5 : -2.5, scale: 0.96 }),
     center: { x: 0, opacity: 1, rotate: 0, scale: 1 },
-    exit:  (d: number) => ({ x: d > 0 ? -80 : 80, opacity: 0, rotate: d > 0 ? -3 : 3, scale: 0.97 }),
+    exit:   (d: number) => ({ x: d > 0 ? -72 : 72, opacity: 0, rotate: d > 0 ? -2.5 : 2.5, scale: 0.96 }),
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-[#f5f5f7] flex flex-col">
+
       {/* Header */}
-      <div className="flex items-center justify-between px-5 sm:px-8 pt-20 sm:pt-24 pb-6 max-w-2xl mx-auto w-full">
-        <motion.h1
-          className="text-sm font-semibold text-gray-900 tracking-tight"
-          initial={{ opacity: 0 }}
-          animate={mounted ? { opacity: 1 } : {}}
+      <div className="flex items-center justify-between px-5 sm:px-8 pt-20 sm:pt-24 pb-4 max-w-xl mx-auto w-full">
+        <motion.p
+          className="text-xs font-semibold text-gray-900 tracking-tight"
+          initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE }}
         >
           Portfolio
-        </motion.h1>
+        </motion.p>
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={mounted ? { opacity: 1 } : {}}
+          initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE }}
         >
-          <Link href="/work" className="text-sm text-gray-400 hover:text-gray-900 transition-colors">
+          <Link href="/work" className="text-xs text-gray-400 hover:text-gray-900 transition-colors">
             ← Experience
           </Link>
         </motion.div>
       </div>
 
       {/* Card area */}
-      <div className="flex-1 flex flex-col items-center justify-center px-5 sm:px-8 pb-10">
-        <div className="w-full max-w-2xl">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-8 pb-10">
+        <div className="w-full max-w-xl">
 
-          {/* Stack container */}
+          {/* Stack */}
           <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 24 }}
+            className="relative mb-5"
+            initial={{ opacity: 0, y: 20 }}
             animate={mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
+            transition={{ duration: 0.5, delay: 0.08, ease: EASE }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Ghost cards */}
             {ghosts.slice(0, 2).reverse().map((g, i) => {
@@ -299,16 +448,16 @@ function PortfolioInner() {
               return (
                 <div
                   key={g.id}
-                  className="absolute inset-x-0 bg-white rounded-3xl border border-gray-100"
+                  className="absolute bg-white rounded-3xl"
                   style={{
-                    top: `${depth * 10}px`,
-                    left: `${depth * 5}px`,
-                    right: `${depth * 5}px`,
-                    height: '60px',
-                    transform: `scale(${1 - depth * 0.02})`,
-                    opacity: 1 - depth * 0.25,
+                    top: `${depth * 9}px`,
+                    left: `${depth * 6}px`,
+                    right: `${depth * 6}px`,
+                    height: 56,
+                    opacity: 1 - depth * 0.22,
+                    transform: `scale(${1 - depth * 0.018})`,
                     zIndex: 10 - depth,
-                    boxShadow: '0 1px 8px 0 rgba(0,0,0,0.04)',
+                    boxShadow: '0 1px 6px rgba(0,0,0,0.04)',
                   }}
                 />
               );
@@ -317,188 +466,189 @@ function PortfolioInner() {
             {/* Active card */}
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
-                key={project.id}
+                key={card.id}
                 custom={direction}
-                variants={cardVariants}
+                variants={variants}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 transition={SPRING}
-                className="relative z-20 bg-white rounded-3xl border border-gray-100 overflow-hidden"
-                style={{ boxShadow: '0 2px 24px 0 rgba(0,0,0,0.06)' }}
+                className="relative z-20 bg-white rounded-3xl overflow-hidden cursor-pointer select-none"
+                style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.07)' }}
+                onClick={() => hasNext && go(1)}
               >
-                {/* Card header */}
-                <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-gray-50">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${companyColor}`}>
-                      {project.company}
+                {/* Card top */}
+                <div className="px-5 sm:px-7 pt-5 sm:pt-6 pb-4 sm:pb-5">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${accent.badge}`}>
+                      {card.category}
                     </span>
-                    <span className="text-[10px] text-gray-400">
-                      {project.company} · {companyIndex} of {companyProjects.length}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] text-gray-400 tabular-nums">
+                        {coIdx}/{coCards.length}
+                      </span>
+                      {/* Next hint */}
+                      {hasNext && (
+                        <span className="text-[10px] text-gray-300">→</span>
+                      )}
+                    </div>
                   </div>
-                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug mb-1">
-                    {project.title}
-                  </h2>
-                  <p className="text-xs text-gray-400">{project.role} · {project.timeline}</p>
+
+                  {/* Title — stop propagation so click doesn't also advance card */}
+                  {card.url ? (
+                    <a
+                      href={card.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-start justify-between gap-3 mb-1"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <h2 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug group-hover:text-gray-500 transition-colors">
+                        {card.title}
+                      </h2>
+                      <span className="text-gray-300 group-hover:text-gray-600 transition-colors text-sm flex-shrink-0 mt-0.5">↗</span>
+                    </a>
+                  ) : (
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug mb-1">
+                      {card.title}
+                    </h2>
+                  )}
+                  <p className="text-[11px] text-gray-400">{card.period}</p>
                 </div>
 
-                {/* Card body — scrollable */}
-                <div className="px-6 sm:px-8 py-5 max-h-[52vh] overflow-y-auto space-y-6">
+                {/* Divider */}
+                <div className="h-px bg-gray-50 mx-5 sm:mx-7" />
 
-                  {/* Published Links — first */}
-                  {project.relatedLinks && project.relatedLinks.length > 0 && (
-                    <div>
-                      <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">
-                        {project.relatedLinks.some(l => l.url.startsWith('http')) ? 'Published' : 'Links'}
-                      </p>
-                      <div className="space-y-0 -mx-1">
-                        {project.relatedLinks.map((link, i) => (
-                          link.url ? (
-                            <a
-                              key={i}
-                              href={link.url}
-                              target={link.url.startsWith('http') ? '_blank' : '_self'}
-                              rel={link.url.startsWith('http') ? 'noopener noreferrer' : ''}
-                              className="flex items-start justify-between gap-3 px-1 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/link"
-                            >
-                              <div className="min-w-0">
-                                <p className="text-sm font-medium text-gray-900 leading-snug group-hover/link:text-gray-500 transition-colors">{link.title}</p>
-                                {link.description && (
-                                  <p className="text-[11px] text-gray-400 mt-0.5 leading-snug">{link.description}</p>
-                                )}
-                              </div>
-                              <span className="text-gray-300 group-hover/link:text-gray-600 transition-colors text-xs flex-shrink-0 mt-0.5">↗</span>
-                            </a>
-                          ) : null
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Description */}
+                {/* Card body — stop propagation on scroll area so drag doesn't fire card click */}
+                <div
+                  className="px-5 sm:px-7 py-4 sm:py-5 max-h-[42vh] sm:max-h-[46vh] overflow-y-auto space-y-4 sm:space-y-5"
+                  onClick={e => e.stopPropagation()}
+                >
                   <div>
-                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">Overview</p>
-                    <p className="text-sm text-gray-600 leading-relaxed">{project.description}</p>
+                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">About</p>
+                    <p className="text-sm text-gray-500 leading-relaxed">{card.about}</p>
                   </div>
 
-                  {/* Metrics */}
-                  {project.metrics && project.metrics.length > 0 && (
+                  <div>
+                    <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">My Role</p>
+                    <p className="text-sm text-gray-700 leading-relaxed">{card.contribution}</p>
+                  </div>
+
+                  {card.metrics && card.metrics.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {project.metrics.map((m, i) => (
-                        <span key={i} className="text-[11px] font-medium text-gray-700 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full">
+                      {card.metrics.map((m, i) => (
+                        <span key={i} className="text-[11px] font-medium text-gray-600 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-full">
                           {m}
                         </span>
                       ))}
                     </div>
                   )}
 
-                  {/* Details */}
-                  {project.details.length > 0 && (
-                    <div>
-                      <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-widest mb-2">Contributions</p>
-                      <div className="space-y-2">
-                        {project.details.map((d, i) => (
-                          <div key={i} className="flex items-start gap-2.5">
-                            <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0 mt-[7px]" />
-                            <p className="text-sm text-gray-500 leading-relaxed">{d}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Tags */}
-                  {project.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 pb-1">
-                      {project.tags.map((t, i) => (
-                        <span key={i} className="text-[10px] text-gray-400 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-100">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="flex flex-wrap gap-1.5 pb-1">
+                    {card.tags.map((t, i) => (
+                      <span key={i} className="text-[10px] text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-lg">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Bottom tap-to-advance bar */}
+                {hasNext && (
+                  <div className="px-5 sm:px-7 py-3 border-t border-gray-50 flex items-center justify-end gap-1.5">
+                    <span className="text-[10px] text-gray-300">Tap to advance</span>
+                    <span className="text-[10px] text-gray-300">→</span>
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
           </motion.div>
 
-          {/* Navigation */}
+          {/* Navigation row */}
           <motion.div
-            className="flex items-center justify-between mt-8"
-            initial={{ opacity: 0 }}
-            animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
+            className="flex items-center justify-between px-1"
+            initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.15, ease: EASE }}
           >
-            {/* Prev */}
             <button
               onClick={() => go(-1)}
               disabled={index === 0}
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors py-2 pr-4"
             >
-              ← {index > 0 && <span className="text-xs hidden sm:inline truncate max-w-[140px]">{PROJECTS[index - 1].company}</span>}
+              ←
+              {index > 0 && (
+                <span className="text-[10px] hidden sm:inline truncate max-w-[100px] text-gray-400">
+                  {CARDS[index - 1].company}
+                </span>
+              )}
             </button>
 
-            {/* Dots */}
+            {/* Company-scoped dots */}
             <div className="flex items-center gap-1.5">
-              {PROJECTS.map((p, i) => {
-                const isActive = i === index;
-                const isSameCompany = p.company === project.company;
+              {coCards.map((c) => {
+                const isActive = c.id === card.id;
                 return (
                   <button
-                    key={p.id}
-                    onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
-                    className="transition-all duration-200"
-                    aria-label={p.title}
+                    key={c.id}
+                    onClick={() => {
+                      const globalIdx = CARDS.findIndex(x => x.id === c.id);
+                      setDirection(globalIdx > index ? 1 : -1);
+                      setIndex(globalIdx);
+                    }}
+                    className="p-1"
                   >
-                    <div className={`rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'w-4 h-1.5 bg-gray-900'
-                        : isSameCompany
-                        ? 'w-1.5 h-1.5 bg-gray-400'
-                        : 'w-1.5 h-1.5 bg-gray-200'
+                    <div className={`rounded-full transition-all duration-200 ${
+                      isActive ? `w-4 h-1.5 ${accent.dot}` : 'w-1.5 h-1.5 bg-gray-300'
                     }`} />
                   </button>
                 );
               })}
             </div>
 
-            {/* Next */}
             <button
               onClick={() => go(1)}
-              disabled={index === PROJECTS.length - 1}
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+              disabled={!hasNext}
+              className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-gray-900 disabled:opacity-20 disabled:cursor-not-allowed transition-colors py-2 pl-4"
             >
-              {index < PROJECTS.length - 1 && <span className="text-xs hidden sm:inline truncate max-w-[140px]">{PROJECTS[index + 1].company}</span>} →
+              {hasNext && (
+                <span className="text-[10px] hidden sm:inline truncate max-w-[100px] text-gray-400">
+                  {CARDS[index + 1].company}
+                </span>
+              )}
+              →
             </button>
           </motion.div>
 
-          {/* Company progress strip */}
+          {/* Company strip — horizontally scrollable on mobile */}
           <motion.div
-            className="flex items-center justify-center gap-4 mt-5"
-            initial={{ opacity: 0 }}
-            animate={mounted ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.25, ease: EASE }}
+            className="mt-4 -mx-4 px-4 sm:mx-0 sm:px-0"
+            initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
           >
-            {COMPANY_ORDER.map((co) => {
-              const isActive = co === project.company;
-              const done = PROJECTS.findIndex(p => p.company === co);
-              const isDone = done < index && co !== project.company;
-              return (
-                <button
-                  key={co}
-                  onClick={() => {
-                    const i = PROJECTS.findIndex(p => p.company === co);
-                    if (i !== -1) { setDirection(i > index ? 1 : -1); setIndex(i); }
-                  }}
-                  className={`text-[10px] font-medium transition-colors ${
-                    isActive ? 'text-gray-900' : isDone ? 'text-gray-400' : 'text-gray-300 hover:text-gray-500'
-                  }`}
-                >
-                  {co}
-                </button>
-              );
-            })}
+            <div className="flex items-center gap-4 sm:gap-5 sm:justify-center overflow-x-auto pb-1 scrollbar-none">
+              {COMPANY_ORDER.map((co) => {
+                const isActive = co === card.company;
+                const firstIdx = CARDS.findIndex(c => c.company === co);
+                const count = CARDS.filter(c => c.company === co).length;
+                return (
+                  <button
+                    key={co}
+                    onClick={() => {
+                      if (firstIdx !== -1) {
+                        setDirection(firstIdx > index ? 1 : -1);
+                        setIndex(firstIdx);
+                      }
+                    }}
+                    className={`flex-shrink-0 flex flex-col items-center gap-0.5 transition-colors ${
+                      isActive ? 'text-gray-900' : 'text-gray-300 hover:text-gray-500'
+                    }`}
+                  >
+                    <span className="text-[10px] font-medium whitespace-nowrap">{co}</span>
+                    <span className="text-[9px] tabular-nums">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
           </motion.div>
 
         </div>
