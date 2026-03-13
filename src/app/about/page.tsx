@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
@@ -17,6 +17,7 @@ const FOCUS_AREAS = [
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
   useEffect(() => { setMounted(true); }, []);
 
   return (
@@ -24,97 +25,109 @@ export default function About() {
       className="flex flex-col pt-[52px] md:min-h-screen"
       style={{ background: 'var(--t-bg)' }}
     >
-      {/* ── Mobile layout ── */}
-      <div className="md:hidden pb-24">
-        <motion.div
+      {/* ── Mobile layout — viewport-locked ── */}
+      <div className="md:hidden flex flex-col" style={{ height: 'calc(100vh - 52px)' }}>
+
+        <motion.div className="flex-1 flex flex-col min-h-0"
           initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE }}>
 
-          {/* Centered hero */}
-          <div className="flex flex-col items-center text-center px-6 pt-10 pb-8"
+          {/* Centered hero — fixed focal point */}
+          <div className="flex-shrink-0 flex flex-col items-center text-center px-6 pt-9 pb-7"
             style={{ borderBottom: '1px solid var(--t-border)' }}>
-            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5"
+            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
               style={{ color: 'var(--t-tertiary)' }}>About</p>
-            <h1 className="text-[48px] font-semibold tracking-[-0.03em] leading-[0.93] mb-6"
+            <h1 className="text-[46px] font-semibold tracking-[-0.03em] leading-[0.93] mb-5"
               style={{ color: 'var(--t-primary)' }}>
               Shane<br />Delaney
             </h1>
-            <p className="text-[15px] leading-[1.65] max-w-[280px]"
+            <p className="text-[14px] leading-[1.65] max-w-[265px]"
               style={{ color: 'var(--t-secondary)' }}>
-              Platform content strategist. I build editorial systems that help platforms surface the creators shaping their ecosystems — at Meta, Snap, and beyond.
+              Platform content strategist. Editorial systems and story pipelines at Meta, Snap, and beyond.
             </p>
           </div>
 
-          {/* Stats — focal numbers */}
-          <div className="grid grid-cols-3" style={{ borderBottom: '1px solid var(--t-border)' }}>
+          {/* Stats — fixed focal numbers */}
+          <div className="flex-shrink-0 grid grid-cols-3" style={{ borderBottom: '1px solid var(--t-border)' }}>
             {[
               { value: '13', label: 'Published' },
               { value: '25M+', label: 'Views' },
               { value: '900M+', label: 'MAU' },
             ].map((stat, i) => (
-              <div key={stat.label} className="flex flex-col items-center py-7"
+              <div key={stat.label} className="flex flex-col items-center py-6"
                 style={{ borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
-                <span className="text-[30px] font-semibold tracking-[-0.03em] leading-none"
+                <span className="text-[28px] font-semibold tracking-[-0.03em] leading-none"
                   style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
-                <span className="text-[10px] mt-2 uppercase tracking-[0.1em]"
+                <span className="text-[10px] mt-1.5 uppercase tracking-[0.1em]"
                   style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
               </div>
             ))}
           </div>
 
-          {/* Contact */}
-          <div className="px-4 py-6" style={{ borderBottom: '1px solid var(--t-border)' }}>
-            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4 px-1"
-              style={{ color: 'var(--t-tertiary)' }}>Contact</p>
-            <div className="flex flex-col gap-2">
-              <a href="mailto:shanedelaney11@gmail.com"
-                className="flex items-center justify-between px-4 py-4 rounded-2xl"
-                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>Email</span>
-                <span style={{ color: 'var(--t-tertiary)' }}>↗</span>
+          {/* Contact — fixed primary actions */}
+          <div className="flex-shrink-0 flex flex-col gap-0" style={{ borderBottom: '1px solid var(--t-border)' }}>
+            {[
+              { label: 'Email', href: 'mailto:shanedelaney11@gmail.com', right: '↗', external: false },
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shane-delaney-546445179/', right: '↗', external: true },
+              { label: 'Resume', href: '/ShaneDelaneyResume.pdf', right: 'PDF ↓', external: false, download: true },
+            ].map((item, i, arr) => (
+              <a key={item.label}
+                href={item.href}
+                {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                {...(item.download ? { download: true } : {})}
+                className="flex items-center justify-between px-5 py-4"
+                style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}>
+                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>{item.label}</span>
+                <span className="text-[11px] uppercase tracking-[0.08em]" style={{ color: 'var(--t-tertiary)' }}>{item.right}</span>
               </a>
-              <a href="https://www.linkedin.com/in/shane-delaney-546445179/"
-                target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-between px-4 py-4 rounded-2xl"
-                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>LinkedIn</span>
-                <span style={{ color: 'var(--t-tertiary)' }}>↗</span>
-              </a>
-              <a href="/ShaneDelaneyResume.pdf" download
-                className="flex items-center justify-between px-4 py-4 rounded-2xl"
-                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>Resume</span>
-                <span className="text-[10px] uppercase tracking-[0.1em]" style={{ color: 'var(--t-tertiary)' }}>PDF ↓</span>
-              </a>
-            </div>
+            ))}
           </div>
 
-          {/* Background */}
-          <div className="px-5 py-6" style={{ borderBottom: '1px solid var(--t-border)' }}>
-            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
-              style={{ color: 'var(--t-tertiary)' }}>Platforms</p>
-            <div className="flex flex-wrap gap-2">
-              {PLATFORMS.map(p => (
-                <span key={p} className="text-[12px] px-3 py-1.5 rounded-full"
-                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
-                  {p}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Focus */}
-          <div className="px-5 py-6">
-            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
-              style={{ color: 'var(--t-tertiary)' }}>Focus</p>
-            <div className="flex flex-wrap gap-2">
-              {FOCUS_AREAS.map(f => (
-                <span key={f} className="text-[12px] px-3 py-1.5 rounded-full"
-                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
-                  {f}
-                </span>
-              ))}
-            </div>
+          {/* Accordion sections for background info */}
+          <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+            {[
+              {
+                key: 'platforms', label: 'Platforms',
+                content: (
+                  <div className="flex flex-wrap gap-2 pt-1 pb-2">
+                    {PLATFORMS.map(p => (
+                      <span key={p} className="text-[13px] px-3 py-1.5 rounded-full"
+                        style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>{p}</span>
+                    ))}
+                  </div>
+                ),
+              },
+              {
+                key: 'focus', label: 'Focus Areas',
+                content: (
+                  <div className="flex flex-col gap-2.5 pt-1 pb-2">
+                    {FOCUS_AREAS.map(f => (
+                      <span key={f} className="text-[14px]" style={{ color: 'var(--t-secondary)' }}>{f}</span>
+                    ))}
+                  </div>
+                ),
+              },
+            ].map(({ key, label, content }) => {
+              const isOpen = mobileSection === key;
+              return (
+                <div key={key}
+                  className={isOpen ? 'flex-1 flex flex-col min-h-0' : 'flex-shrink-0'}
+                  style={{ borderBottom: '1px solid var(--t-border)' }}>
+                  <button onClick={() => setMobileSection(isOpen ? null : key)}
+                    className="flex-shrink-0 w-full flex items-center justify-between px-5 py-4">
+                    <span className="text-[11px] uppercase tracking-[0.15em] font-semibold"
+                      style={{ color: isOpen ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>{label}</span>
+                    <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22, ease: EASE }}
+                      style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: 12 }}>↓</motion.span>
+                  </button>
+                  {isOpen && (
+                    <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-4">
+                      {content}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
         </motion.div>

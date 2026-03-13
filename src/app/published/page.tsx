@@ -315,13 +315,15 @@ export default function Published() {
       style={{ background: 'var(--t-bg)' }}
     >
 
-      {/* ── Mobile layout ── */}
-      <div className="md:hidden flex flex-col flex-1">
-        {/* Category pills */}
-        <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2">
+      {/* ── Mobile layout — viewport-locked, accordion articles ── */}
+      <div className="md:hidden flex flex-col" style={{ height: 'calc(100vh - 52px)' }}>
+
+        {/* Category pills — fixed */}
+        <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2"
+          style={{ borderBottom: '1px solid var(--t-border)' }}>
           {CATEGORIES.map((cat) => (
             <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
-              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all"
+              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium"
               style={{
                 background: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-surface)',
                 color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
@@ -332,54 +334,66 @@ export default function Published() {
           ))}
         </div>
 
-        {/* Article cards */}
-        <div className="flex-1 overflow-y-auto scrollbar-none px-4 pt-3 pb-24">
+        {/* Article accordion list — scrollable container */}
+        <div className="flex-1 overflow-y-auto scrollbar-none">
           <AnimatePresence mode="wait">
             <motion.div key={activeCategory}
               initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
-              transition={{ duration: 0.18, ease: EASE }}
-              className="flex flex-col gap-3">
-              {category.articles.map((article, i) => (
-                <motion.div key={article.title} id={article.slug}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={mounted ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.22, delay: i * 0.04, ease: EASE }}
-                  className="rounded-2xl p-5"
-                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+              transition={{ duration: 0.18, ease: EASE }}>
+              {category.articles.map((article, i) => {
+                const isOpen = expandedId === article.title;
+                return (
+                  <div key={article.title} id={article.slug}
+                    style={{ borderBottom: '1px solid var(--t-divider)' }}>
 
-                  {/* Meta */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] uppercase tracking-[0.12em] font-medium"
-                      style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
-                    {article.stat && (
-                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
-                        style={{ background: 'var(--t-bg)', color: 'var(--t-primary)', border: '1px solid var(--t-border)' }}>
-                        {article.stat}
-                      </span>
-                    )}
+                    {/* Row header — always visible */}
+                    <button onClick={() => toggleExpanded(article.title)}
+                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] uppercase tracking-[0.1em] font-medium"
+                            style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
+                          {article.stat && (
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+                              style={{ background: 'var(--t-surface)', color: 'var(--t-primary)', border: '1px solid var(--t-border)' }}>
+                              {article.stat}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[14px] font-medium leading-snug"
+                          style={{ color: 'var(--t-primary)' }}>{article.title}</p>
+                      </div>
+                      <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22, ease: EASE }}
+                        style={{ color: 'var(--t-tertiary)', display: 'inline-block', flexShrink: 0, fontSize: 12 }}>↓</motion.span>
+                    </button>
+
+                    {/* Expanded content */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.22, ease: EASE }}
+                          style={{ overflow: 'hidden' }}>
+                          <div className="px-5 pb-5">
+                            <p className="text-[13px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>
+                              {article.description}
+                            </p>
+                            {article.url && (
+                              <a href={article.url} target="_blank" rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 text-[13px] font-medium"
+                                style={{ color: 'var(--t-primary)' }}>
+                                {getLinkLabel(article.url)} ↗
+                              </a>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-
-                  {/* Title */}
-                  <p className="text-[16px] font-semibold leading-snug mb-3"
-                    style={{ color: 'var(--t-primary)' }}>{article.title}</p>
-
-                  {/* Description */}
-                  <p className="text-[13px] leading-[1.65] mb-4"
-                    style={{ color: 'var(--t-secondary)' }}>{article.description}</p>
-
-                  {/* Link */}
-                  {article.url ? (
-                    <a href={article.url} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[12px] font-medium"
-                      style={{ color: 'var(--t-primary)' }}>
-                      {getLinkLabel(article.url)} ↗
-                    </a>
-                  ) : (
-                    <span className="text-[11px] uppercase tracking-[0.08em]"
-                      style={{ color: 'var(--t-tertiary)' }}>Internal</span>
-                  )}
-                </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
