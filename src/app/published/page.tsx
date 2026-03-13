@@ -317,71 +317,67 @@ export default function Published() {
 
       {/* ── Mobile layout ── */}
       <div className="md:hidden flex flex-col flex-1">
-        {/* Category pills — horizontal scroll */}
+        {/* Category pills */}
         <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2">
           {CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => handleCategoryChange(cat.id)}
+            <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
               className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all"
               style={{
                 background: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-surface)',
                 color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
                 border: '1px solid var(--t-border)',
-              }}
-            >
+              }}>
               {cat.label}
             </button>
           ))}
         </div>
 
-        {/* Article list */}
-        <div className="flex-1 overflow-y-auto scrollbar-none pb-24">
+        {/* Article cards */}
+        <div className="flex-1 overflow-y-auto scrollbar-none px-4 pt-3 pb-24">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
+            <motion.div key={activeCategory}
               initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: EASE }}
-            >
-              {category.articles.map((article, i, arr) => (
-                <motion.div
-                  key={article.title}
-                  id={article.slug}
-                  initial={{ opacity: 0, y: 3 }}
+              className="flex flex-col gap-3">
+              {category.articles.map((article, i) => (
+                <motion.div key={article.title} id={article.slug}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.18, delay: i * 0.03, ease: EASE }}
-                  className="px-5 py-4"
-                  style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <span className="text-[10px] uppercase tracking-[0.1em] font-medium" style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
-                        {article.stat && (
-                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)', border: '1px solid var(--t-border)' }}>
-                            {article.stat}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-[14px] font-medium leading-snug mb-2" style={{ color: 'var(--t-primary)' }}>
-                        {article.title}
-                      </p>
-                      <p className="text-[12px] leading-[1.6]" style={{ color: 'var(--t-secondary)' }}>
-                        {article.description}
-                      </p>
-                    </div>
-                    {article.url && (
-                      <a
-                        href={article.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0 mt-0.5"
-                        style={{ color: 'var(--t-tertiary)' }}
-                      >
-                        ↗
-                      </a>
+                  transition={{ duration: 0.22, delay: i * 0.04, ease: EASE }}
+                  className="rounded-2xl p-5"
+                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+
+                  {/* Meta */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] uppercase tracking-[0.12em] font-medium"
+                      style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
+                    {article.stat && (
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                        style={{ background: 'var(--t-bg)', color: 'var(--t-primary)', border: '1px solid var(--t-border)' }}>
+                        {article.stat}
+                      </span>
                     )}
                   </div>
+
+                  {/* Title */}
+                  <p className="text-[16px] font-semibold leading-snug mb-3"
+                    style={{ color: 'var(--t-primary)' }}>{article.title}</p>
+
+                  {/* Description */}
+                  <p className="text-[13px] leading-[1.65] mb-4"
+                    style={{ color: 'var(--t-secondary)' }}>{article.description}</p>
+
+                  {/* Link */}
+                  {article.url ? (
+                    <a href={article.url} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[12px] font-medium"
+                      style={{ color: 'var(--t-primary)' }}>
+                      {getLinkLabel(article.url)} ↗
+                    </a>
+                  ) : (
+                    <span className="text-[11px] uppercase tracking-[0.08em]"
+                      style={{ color: 'var(--t-tertiary)' }}>Internal</span>
+                  )}
                 </motion.div>
               ))}
             </motion.div>

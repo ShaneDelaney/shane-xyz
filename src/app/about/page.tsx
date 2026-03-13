@@ -27,114 +27,96 @@ export default function About() {
       {/* ── Mobile layout ── */}
       <div className="md:hidden pb-24">
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={mounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, ease: EASE }}
-        >
-          {/* Name + role */}
-          <div className="px-5 pt-8 pb-5" style={{ borderBottom: '1px solid var(--t-border)' }}>
-            <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>
-              About
-            </p>
-            <h1 className="text-[28px] font-semibold tracking-[-0.02em] leading-snug mb-3" style={{ color: 'var(--t-primary)' }}>
-              Shane Delaney
+          initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4, ease: EASE }}>
+
+          {/* Centered hero */}
+          <div className="flex flex-col items-center text-center px-6 pt-10 pb-8"
+            style={{ borderBottom: '1px solid var(--t-border)' }}>
+            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5"
+              style={{ color: 'var(--t-tertiary)' }}>About</p>
+            <h1 className="text-[48px] font-semibold tracking-[-0.03em] leading-[0.93] mb-6"
+              style={{ color: 'var(--t-primary)' }}>
+              Shane<br />Delaney
             </h1>
-            <p className="text-[14px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
-              Platform content strategist. I build editorial systems and story pipelines that help platforms surface the creators shaping their ecosystems — most recently at Meta and Snap.
+            <p className="text-[15px] leading-[1.65] max-w-[280px]"
+              style={{ color: 'var(--t-secondary)' }}>
+              Platform content strategist. I build editorial systems that help platforms surface the creators shaping their ecosystems — at Meta, Snap, and beyond.
             </p>
           </div>
 
-          {/* Career stats */}
+          {/* Stats — focal numbers */}
           <div className="grid grid-cols-3" style={{ borderBottom: '1px solid var(--t-border)' }}>
             {[
-              { value: '13', label: 'Pieces published' },
-              { value: '25M+', label: 'Content views' },
-              { value: '900M+', label: 'MAU platform' },
+              { value: '13', label: 'Published' },
+              { value: '25M+', label: 'Views' },
+              { value: '900M+', label: 'MAU' },
             ].map((stat, i) => (
-              <div
-                key={stat.label}
-                className="flex flex-col items-center justify-center py-5"
-                style={{ borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}
-              >
-                <span className="text-[22px] font-semibold tracking-[-0.025em] leading-none" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
-                <span className="text-[10px] mt-1.5 text-center leading-tight px-1" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
+              <div key={stat.label} className="flex flex-col items-center py-7"
+                style={{ borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
+                <span className="text-[30px] font-semibold tracking-[-0.03em] leading-none"
+                  style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
+                <span className="text-[10px] mt-2 uppercase tracking-[0.1em]"
+                  style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
               </div>
             ))}
           </div>
 
-          <div className="px-5 pt-6">
-
-          {/* Contact links */}
-          <div className="flex flex-col gap-2 mb-8">
-            <a
-              href="mailto:shanedelaney11@gmail.com"
-              className="flex items-center justify-between px-4 py-3 rounded-xl"
-              style={{ border: '1px solid var(--t-border)' }}
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-[16px]">✉</span>
-                <span className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>Email</span>
-              </div>
-              <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↗</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/shane-delaney-546445179/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between px-4 py-3 rounded-xl"
-              style={{ border: '1px solid var(--t-border)' }}
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-[16px]">in</span>
-                <span className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>LinkedIn</span>
-              </div>
-              <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↗</span>
-            </a>
-            <a
-              href="/ShaneDelaneyResume.pdf"
-              download
-              className="flex items-center justify-between px-4 py-3 rounded-xl"
-              style={{ border: '1px solid var(--t-border)' }}
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-[16px]">↓</span>
-                <span className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>Resume</span>
-              </div>
-              <span className="text-[10px] uppercase tracking-[0.08em]" style={{ color: 'var(--t-tertiary)' }}>PDF</span>
-            </a>
+          {/* Contact */}
+          <div className="px-4 py-6" style={{ borderBottom: '1px solid var(--t-border)' }}>
+            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4 px-1"
+              style={{ color: 'var(--t-tertiary)' }}>Contact</p>
+            <div className="flex flex-col gap-2">
+              <a href="mailto:shanedelaney11@gmail.com"
+                className="flex items-center justify-between px-4 py-4 rounded-2xl"
+                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>Email</span>
+                <span style={{ color: 'var(--t-tertiary)' }}>↗</span>
+              </a>
+              <a href="https://www.linkedin.com/in/shane-delaney-546445179/"
+                target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-between px-4 py-4 rounded-2xl"
+                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>LinkedIn</span>
+                <span style={{ color: 'var(--t-tertiary)' }}>↗</span>
+              </a>
+              <a href="/ShaneDelaneyResume.pdf" download
+                className="flex items-center justify-between px-4 py-4 rounded-2xl"
+                style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                <span className="text-[14px] font-medium" style={{ color: 'var(--t-primary)' }}>Resume</span>
+                <span className="text-[10px] uppercase tracking-[0.1em]" style={{ color: 'var(--t-tertiary)' }}>PDF ↓</span>
+              </a>
+            </div>
           </div>
 
-          {/* Compact tags */}
-          <div className="mb-5">
-            <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2.5" style={{ color: 'var(--t-tertiary)' }}>Platforms</p>
-            <div className="flex flex-wrap gap-1.5">
+          {/* Background */}
+          <div className="px-5 py-6" style={{ borderBottom: '1px solid var(--t-border)' }}>
+            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
+              style={{ color: 'var(--t-tertiary)' }}>Platforms</p>
+            <div className="flex flex-wrap gap-2">
               {PLATFORMS.map(p => (
-                <span key={p} className="text-[12px] px-2.5 py-1 rounded-full" style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
+                <span key={p} className="text-[12px] px-3 py-1.5 rounded-full"
+                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
                   {p}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="mb-6">
-            <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2.5" style={{ color: 'var(--t-tertiary)' }}>Focus</p>
-            <div className="flex flex-wrap gap-1.5">
+          {/* Focus */}
+          <div className="px-5 py-6">
+            <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
+              style={{ color: 'var(--t-tertiary)' }}>Focus</p>
+            <div className="flex flex-wrap gap-2">
               {FOCUS_AREAS.map(f => (
-                <span key={f} className="text-[12px] px-2.5 py-1 rounded-full" style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
+                <span key={f} className="text-[12px] px-3 py-1.5 rounded-full"
+                  style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
                   {f}
                 </span>
               ))}
             </div>
           </div>
 
-          <Link
-            href="/work"
-            className="text-[13px] font-medium"
-            style={{ color: 'var(--t-tertiary)' }}
-          >
-            View Work →
-          </Link>
-          </div>
         </motion.div>
       </div>
 
