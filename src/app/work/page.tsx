@@ -268,7 +268,16 @@ export default function Work() {
 
   useEffect(() => { activeCompanyRef.current = activeCompany; }, [activeCompany]);
 
+  // Scroll content to top when company changes
   useEffect(() => {
+    if (!mounted) return;
+    const el = mobileContentRef.current;
+    if (el) el.scrollTop = 0;
+  }, [activeCompany, mounted]);
+
+  // Touch swipe — runs after mount so mobileContentRef is populated
+  useEffect(() => {
+    if (!mounted) return;
     const el = mobileContentRef.current;
     if (!el) return;
     let sx = 0, sy = 0, horiz: boolean | null = null;
@@ -277,7 +286,8 @@ export default function Work() {
       if (horiz === null) {
         const dx = Math.abs(e.touches[0].clientX - sx);
         const dy = Math.abs(e.touches[0].clientY - sy);
-        if (dx > 8 || dy > 8) horiz = dx > dy;
+        // Require clear horizontal intent: wait for 12px movement and dx must exceed dy by 40%
+        if (dx > 12 || dy > 12) horiz = dx > dy * 1.4;
       }
       if (horiz) e.preventDefault();
     };
@@ -285,7 +295,7 @@ export default function Work() {
       if (!horiz) return;
       const dx = e.changedTouches[0].clientX - sx;
       horiz = null;
-      if (Math.abs(dx) < 50) return;
+      if (Math.abs(dx) < 45) return;
       const idx = COMPANIES.findIndex(c => c.id === activeCompanyRef.current);
       if (dx < 0 && idx < COMPANIES.length - 1) {
         setSwipeDir(1);
@@ -305,7 +315,7 @@ export default function Work() {
       el.removeEventListener('touchmove', onMove);
       el.removeEventListener('touchend', onEnd);
     };
-  }, []);
+  }, [mounted]);
 
   const company = COMPANIES.find(c => c.id === activeCompany)!;
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
@@ -337,6 +347,43 @@ export default function Work() {
           );
         })}
       </nav>
+
+      {/* ── Mobile: blinking swipe arrows ── */}
+      {(() => {
+        const curIdx = COMPANIES.findIndex(c => c.id === activeCompany);
+        return (
+          <>
+            {curIdx > 0 && (
+              <motion.div
+                key={`al-${activeCompany}`}
+                className="md:hidden fixed z-30 flex flex-col items-center gap-1.5"
+                style={{ left: 8, top: '55%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0.12, 0.5, 0.12] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}>
+                <span style={{ color: 'var(--t-secondary)', fontSize: 20, lineHeight: 1 }}>‹</span>
+                <span style={{ color: 'var(--t-tertiary)', fontSize: 8, letterSpacing: '0.12em', textTransform: 'uppercase', writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+                  {COMPANIES[curIdx - 1].name}
+                </span>
+              </motion.div>
+            )}
+            {curIdx < COMPANIES.length - 1 && (
+              <motion.div
+                key={`ar-${activeCompany}`}
+                className="md:hidden fixed z-30 flex flex-col items-center gap-1.5"
+                style={{ right: 8, top: '55%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0.12, 0.5, 0.12] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}>
+                <span style={{ color: 'var(--t-secondary)', fontSize: 20, lineHeight: 1 }}>›</span>
+                <span style={{ color: 'var(--t-tertiary)', fontSize: 8, letterSpacing: '0.12em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}>
+                  {COMPANIES[curIdx + 1].name}
+                </span>
+              </motion.div>
+            )}
+          </>
+        );
+      })()}
 
       {/* ── Mobile: swipeable content ── */}
       <div ref={mobileContentRef} data-swipe-local className="md:hidden overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>

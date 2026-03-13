@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 const PAGES = ['/', '/work', '/published'];
@@ -8,6 +8,10 @@ const PAGES = ['/', '/work', '/published'];
 export function SwipeRouter() {
   const router = useRouter();
   const pathname = usePathname();
+  const pathnameRef = useRef(pathname);
+  const navigatingRef = useRef(false);
+
+  useEffect(() => { pathnameRef.current = pathname; navigatingRef.current = false; }, [pathname]);
 
   useEffect(() => {
     let sx = 0, sy = 0, isH: boolean | null = null, hadLocal = false;
@@ -24,18 +28,23 @@ export function SwipeRouter() {
       if (isH === null) {
         const dx = Math.abs(e.touches[0].clientX - sx);
         const dy = Math.abs(e.touches[0].clientY - sy);
-        if (dx > 8 || dy > 8) isH = dx > dy;
+        if (dx > 12 || dy > 12) isH = dx > dy * 1.4;
       }
     };
 
     const onEnd = (e: TouchEvent) => {
-      if (!isH || hadLocal) return;
+      if (!isH || hadLocal || navigatingRef.current) return;
       const dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) < 60) return;
-      const idx = PAGES.indexOf(pathname);
+      if (Math.abs(dx) < 50) return;
+      const idx = PAGES.indexOf(pathnameRef.current);
       if (idx === -1) return;
-      if (dx < 0 && idx < PAGES.length - 1) router.push(PAGES[idx + 1]);
-      else if (dx > 0 && idx > 0) router.push(PAGES[idx - 1]);
+      if (dx < 0 && idx < PAGES.length - 1) {
+        navigatingRef.current = true;
+        router.push(PAGES[idx + 1]);
+      } else if (dx > 0 && idx > 0) {
+        navigatingRef.current = true;
+        router.push(PAGES[idx - 1]);
+      }
     };
 
     document.addEventListener('touchstart', onStart, { passive: true });
@@ -46,7 +55,7 @@ export function SwipeRouter() {
       document.removeEventListener('touchmove', onMove);
       document.removeEventListener('touchend', onEnd);
     };
-  }, [pathname, router]);
+  }, [router]);
 
   return null;
 }
