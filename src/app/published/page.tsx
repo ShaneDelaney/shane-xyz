@@ -336,83 +336,54 @@ export default function Published() {
         </div>
 
         {/* Article list */}
-        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-24">
+        <div className="flex-1 overflow-y-auto scrollbar-none pb-24">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: EASE }}
             >
-              {category.articles.map((article, i) => {
-                const isExpanded = expandedId === article.title;
-                return (
-                  <motion.div
-                    key={article.title}
-                    id={article.slug}
-                    initial={{ opacity: 0, y: 3 }}
-                    animate={mounted ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.18, delay: i * 0.03, ease: EASE }}
-                  >
-                    {/* Row */}
-                    <button
-                      onClick={() => toggleExpanded(article.title)}
-                      className="w-full text-left py-3.5 flex items-center justify-between gap-3"
-                      style={{ borderBottom: isExpanded ? 'none' : '1px solid var(--t-divider)' }}
-                    >
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[13px] font-medium leading-snug" style={{ color: 'var(--t-primary)' }}>
-                          {article.title}
-                        </p>
-                        <div className="flex items-center gap-2 mt-1 flex-wrap">
-                          <span className="text-[11px]" style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
-                          {article.stat && (
-                            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)' }}>
-                              {article.stat}
-                            </span>
-                          )}
-                        </div>
+              {category.articles.map((article, i, arr) => (
+                <motion.div
+                  key={article.title}
+                  id={article.slug}
+                  initial={{ opacity: 0, y: 3 }}
+                  animate={mounted ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.18, delay: i * 0.03, ease: EASE }}
+                  className="px-5 py-4"
+                  style={{ borderBottom: i < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                        <span className="text-[10px] uppercase tracking-[0.1em] font-medium" style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
+                        {article.stat && (
+                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--t-surface)', color: 'var(--t-secondary)', border: '1px solid var(--t-border)' }}>
+                            {article.stat}
+                          </span>
+                        )}
                       </div>
-                      <motion.span
-                        animate={{ rotate: isExpanded ? 180 : 0 }}
-                        transition={{ duration: 0.2, ease: EASE }}
-                        className="flex-shrink-0 text-[10px]"
-                        style={{ color: 'var(--t-tertiary)', display: 'inline-block' }}
-                      >↓</motion.span>
-                    </button>
-
-                    {/* Expanded — description (one sentence) + link only */}
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.22, ease: EASE }}
-                          style={{ overflow: 'hidden', borderBottom: '1px solid var(--t-divider)' }}
-                        >
-                          <div className="pb-4 pt-1">
-                            <p className="text-[12px] leading-[1.6] mb-3" style={{ color: 'var(--t-secondary)' }}>
-                              {article.description}
-                            </p>
-                            {article.url && (
-                              <a
-                                href={article.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={e => e.stopPropagation()}
-                                className="inline-flex items-center gap-1.5 text-[12px] font-medium transition-opacity hover:opacity-70"
-                                style={{ color: 'var(--t-primary)' }}
-                              >
-                                {getLinkLabel(article.url)} ↗
-                              </a>
-                            )}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
+                      <p className="text-[14px] font-medium leading-snug mb-2" style={{ color: 'var(--t-primary)' }}>
+                        {article.title}
+                      </p>
+                      <p className="text-[12px] leading-[1.6]" style={{ color: 'var(--t-secondary)' }}>
+                        {article.description}
+                      </p>
+                    </div>
+                    {article.url && (
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-shrink-0 mt-0.5"
+                        style={{ color: 'var(--t-tertiary)' }}
+                      >
+                        ↗
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </AnimatePresence>
         </div>

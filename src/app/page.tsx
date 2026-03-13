@@ -83,6 +83,33 @@ export default function Home() {
               I build the storytelling systems that help platforms surface the creators shaping their ecosystems.
             </motion.p>
 
+            {/* Stat strip — mobile only */}
+            <motion.div
+              className="sm:hidden flex items-stretch mb-6 rounded-xl overflow-hidden"
+              style={{ border: '1px solid var(--t-border)' }}
+              initial={{ opacity: 0 }}
+              animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.14, ease: E }}
+            >
+              {[
+                { value: '13', label: 'Pieces published' },
+                { value: '25M+', label: 'Content views' },
+                { value: '900M+', label: 'MAU platform' },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="flex-1 flex flex-col items-center justify-center py-3.5"
+                  style={{
+                    borderRight: i < 2 ? '1px solid var(--t-border)' : undefined,
+                    background: 'var(--t-surface)',
+                  }}
+                >
+                  <span className="text-[17px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
+                  <span className="text-[10px] mt-0.5 text-center leading-tight px-1" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+
             {/* CTAs */}
             <motion.div
               className="flex items-center gap-3 mb-7 sm:mb-10"

@@ -291,69 +291,104 @@ export default function Work() {
         </div>
 
         {/* Company content */}
-        <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-24">
+        <div className="flex-1 overflow-y-auto scrollbar-none pb-24">
           <AnimatePresence mode="wait">
             <motion.div
               key={`m-${activeCompany}`}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: E }}
             >
-              {/* Role + period */}
-              <div className="pt-5 pb-4" style={{ borderBottom: '1px solid var(--t-border)' }}>
+              {/* Header */}
+              <div className="px-5 pt-4 pb-5" style={{ borderBottom: '1px solid var(--t-border)' }}>
                 <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{company.role}</p>
-                <p className="text-[22px] font-semibold tracking-[-0.02em]" style={{ color: 'var(--t-primary)' }}>{company.name}</p>
-                <p className="text-[12px] mt-0.5" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
+                <p className="text-[28px] font-semibold tracking-[-0.025em] leading-tight" style={{ color: 'var(--t-primary)' }}>{company.name}</p>
+                <p className="text-[12px] mt-1" style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
               </div>
 
-              {/* Stat chips */}
+              {/* Stats — large display */}
               {company.stats && company.stats.length > 0 && (
-                <div className="flex items-center gap-2 flex-wrap py-4" style={{ borderBottom: '1px solid var(--t-border)' }}>
-                  {company.stats.map(s => (
-                    <div key={s.label} className="px-3 py-1.5 rounded-full" style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                      <span className="text-[13px] font-semibold" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
-                      <span className="text-[11px] ml-1.5" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Work items — published (with links) */}
-              {company.initiatives.filter(i => i.url).length > 0 && (
-                <div className="pt-4">
-                  <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Published</p>
-                  {company.initiatives.filter(i => i.url).map(init => (
-                    <a
-                      key={init.id}
-                      href={init.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between py-3 group"
-                      style={{ borderBottom: '1px solid var(--t-divider)' }}
-                    >
-                      <div className="min-w-0 pr-3">
-                        <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
-                        <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>{init.title}</p>
-                      </div>
-                      <span className="text-[14px] flex-shrink-0" style={{ color: 'var(--t-tertiary)' }}>↗</span>
-                    </a>
-                  ))}
-                </div>
-              )}
-
-              {/* Work items — systems/internal (no links) */}
-              {company.initiatives.filter(i => !i.url).length > 0 && (
-                <div className="pt-4">
-                  <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Systems & Process</p>
-                  {company.initiatives.filter(i => !i.url).map(init => (
+                <div
+                  className="grid py-0"
+                  style={{
+                    gridTemplateColumns: `repeat(${company.stats.length}, 1fr)`,
+                    borderBottom: '1px solid var(--t-border)',
+                  }}
+                >
+                  {company.stats.map((s, i) => (
                     <div
-                      key={init.id}
-                      className="py-3"
-                      style={{ borderBottom: '1px solid var(--t-divider)' }}
+                      key={s.label}
+                      className="flex flex-col items-center justify-center py-5"
+                      style={{ borderRight: i < company.stats!.length - 1 ? '1px solid var(--t-border)' : undefined }}
                     >
-                      <p className="text-[10px] uppercase tracking-[0.08em] mb-0.5" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
-                      <p className="text-[13px] leading-snug" style={{ color: 'var(--t-primary)', fontWeight: 450 }}>{init.title}</p>
+                      <span className="text-[26px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
+                      <span className="text-[10px] mt-1.5 text-center leading-tight px-2" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
                     </div>
                   ))}
+                </div>
+              )}
+
+              {/* Impact */}
+              <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--t-border)' }}>
+                <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>Impact</p>
+                <p className="text-[14px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>{company.impact}</p>
+              </div>
+
+              {/* What I Built */}
+              <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--t-border)' }}>
+                <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>What I Built</p>
+                <ul className="flex flex-col gap-3">
+                  {company.overview.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="mt-[8px] w-[3px] h-[3px] rounded-full flex-shrink-0" style={{ background: 'var(--t-tertiary)' }} />
+                      <span className="text-[13px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Published work items */}
+              {company.initiatives.filter(i => i.url).length > 0 && (
+                <div className="px-5 py-5" style={{ borderBottom: company.initiatives.filter(i => !i.url).length > 0 ? '1px solid var(--t-border)' : undefined }}>
+                  <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>Published</p>
+                  <div className="flex flex-col">
+                    {company.initiatives.filter(i => i.url).map((init, idx, arr) => (
+                      <a
+                        key={init.id}
+                        href={init.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start justify-between gap-3 py-3.5"
+                        style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}
+                      >
+                        <div className="min-w-0">
+                          <p className="text-[10px] uppercase tracking-[0.08em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                          <p className="text-[13px] leading-snug font-medium mb-1.5" style={{ color: 'var(--t-primary)' }}>{init.title}</p>
+                          <p className="text-[12px] leading-[1.55]" style={{ color: 'var(--t-secondary)' }}>{init.description}</p>
+                        </div>
+                        <span className="text-[13px] flex-shrink-0 mt-0.5" style={{ color: 'var(--t-tertiary)' }}>↗</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Systems & process items */}
+              {company.initiatives.filter(i => !i.url).length > 0 && (
+                <div className="px-5 py-5">
+                  <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-3" style={{ color: 'var(--t-tertiary)' }}>Systems & Process</p>
+                  <div className="flex flex-col">
+                    {company.initiatives.filter(i => !i.url).map((init, idx, arr) => (
+                      <div
+                        key={init.id}
+                        className="py-3.5"
+                        style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}
+                      >
+                        <p className="text-[10px] uppercase tracking-[0.08em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                        <p className="text-[13px] leading-snug font-medium mb-1.5" style={{ color: 'var(--t-primary)' }}>{init.title}</p>
+                        <p className="text-[12px] leading-[1.55]" style={{ color: 'var(--t-secondary)' }}>{init.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </motion.div>

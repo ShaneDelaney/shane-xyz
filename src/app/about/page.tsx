@@ -25,22 +25,44 @@ export default function About() {
       style={{ background: 'var(--t-bg)' }}
     >
       {/* ── Mobile layout ── */}
-      <div className="md:hidden px-5 pt-8 pb-24">
+      <div className="md:hidden pb-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={mounted ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, ease: EASE }}
         >
           {/* Name + role */}
-          <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>
-            About
-          </p>
-          <h1 className="text-[28px] font-semibold tracking-[-0.02em] leading-snug mb-3" style={{ color: 'var(--t-primary)' }}>
-            Shane Delaney
-          </h1>
-          <p className="text-[14px] leading-[1.6] mb-6" style={{ color: 'var(--t-secondary)' }}>
-            Platform content strategist at Meta, building editorial systems that surface the creators shaping developer ecosystems.
-          </p>
+          <div className="px-5 pt-8 pb-5" style={{ borderBottom: '1px solid var(--t-border)' }}>
+            <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-2" style={{ color: 'var(--t-tertiary)' }}>
+              About
+            </p>
+            <h1 className="text-[28px] font-semibold tracking-[-0.02em] leading-snug mb-3" style={{ color: 'var(--t-primary)' }}>
+              Shane Delaney
+            </h1>
+            <p className="text-[14px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
+              Platform content strategist. I build editorial systems and story pipelines that help platforms surface the creators shaping their ecosystems — most recently at Meta and Snap.
+            </p>
+          </div>
+
+          {/* Career stats */}
+          <div className="grid grid-cols-3" style={{ borderBottom: '1px solid var(--t-border)' }}>
+            {[
+              { value: '13', label: 'Pieces published' },
+              { value: '25M+', label: 'Content views' },
+              { value: '900M+', label: 'MAU platform' },
+            ].map((stat, i) => (
+              <div
+                key={stat.label}
+                className="flex flex-col items-center justify-center py-5"
+                style={{ borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}
+              >
+                <span className="text-[22px] font-semibold tracking-[-0.025em] leading-none" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
+                <span className="text-[10px] mt-1.5 text-center leading-tight px-1" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="px-5 pt-6">
 
           {/* Contact links */}
           <div className="flex flex-col gap-2 mb-8">
@@ -112,6 +134,7 @@ export default function About() {
           >
             View Work →
           </Link>
+          </div>
         </motion.div>
       </div>
 
