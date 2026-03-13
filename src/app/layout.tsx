@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
 import BottomNav from "@/components/navigation/BottomNav";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SwipeRouter } from "@/components/SwipeRouter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
             {children}
           </main>
           <BottomNav />
+          <SwipeRouter />
         </ThemeProvider>
       </body>
     </html>

@@ -239,7 +239,10 @@ export default function Work() {
   const [isDraggingDivider, setIsDraggingDivider] = useState(false);
   const [topOpen, setTopOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>('impact');
+  const [swipeDir, setSwipeDir] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const mobileContentRef = useRef<HTMLDivElement>(null);
+  const activeCompanyRef = useRef(activeCompany);
 
   useEffect(() => {
     setMounted(true);
@@ -263,6 +266,47 @@ export default function Work() {
   }, [isDraggingDivider]);
   const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setPublishedOpen(true); setSystemsOpen(true); setTopOpen(false); setMobileSection('impact'); };
 
+  useEffect(() => { activeCompanyRef.current = activeCompany; }, [activeCompany]);
+
+  useEffect(() => {
+    const el = mobileContentRef.current;
+    if (!el) return;
+    let sx = 0, sy = 0, horiz: boolean | null = null;
+    const onStart = (e: TouchEvent) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; horiz = null; };
+    const onMove = (e: TouchEvent) => {
+      if (horiz === null) {
+        const dx = Math.abs(e.touches[0].clientX - sx);
+        const dy = Math.abs(e.touches[0].clientY - sy);
+        if (dx > 8 || dy > 8) horiz = dx > dy;
+      }
+      if (horiz) e.preventDefault();
+    };
+    const onEnd = (e: TouchEvent) => {
+      if (!horiz) return;
+      const dx = e.changedTouches[0].clientX - sx;
+      horiz = null;
+      if (Math.abs(dx) < 50) return;
+      const idx = COMPANIES.findIndex(c => c.id === activeCompanyRef.current);
+      if (dx < 0 && idx < COMPANIES.length - 1) {
+        setSwipeDir(1);
+        setActiveCompany(COMPANIES[idx + 1].id);
+        setActiveInitiative(null);
+      } else if (dx > 0 && idx > 0) {
+        setSwipeDir(-1);
+        setActiveCompany(COMPANIES[idx - 1].id);
+        setActiveInitiative(null);
+      }
+    };
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd, { passive: true });
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+    };
+  }, []);
+
   const company = COMPANIES.find(c => c.id === activeCompany)!;
   const initiative = activeInitiative ? company.initiatives.find(i => i.id === activeInitiative) ?? null : null;
 
@@ -280,10 +324,11 @@ export default function Work() {
           WebkitBackdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--t-border)',
         }}>
-        {COMPANIES.map(c => {
+        {COMPANIES.map((c, i) => {
           const active = c.id === activeCompany;
+          const curIdx = COMPANIES.findIndex(co => co.id === activeCompany);
           return (
-            <button key={c.id} onClick={() => selectCompany(c.id)}
+            <button key={c.id} onClick={() => { setSwipeDir(i > curIdx ? 1 : -1); selectCompany(c.id); }}
               className="flex-1 flex flex-col items-center justify-center py-2.5 relative gap-[3px]"
               style={{ color: active ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
               <span className="text-[10px] font-medium">{c.name}</span>
@@ -293,43 +338,39 @@ export default function Work() {
         })}
       </nav>
 
-      {/* ── Mobile: scrollable content ── */}
-      <div className="md:hidden overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
+      {/* ── Mobile: swipeable content ── */}
+      <div ref={mobileContentRef} data-swipe-local className="md:hidden overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
         <AnimatePresence mode="wait">
           <motion.div key={`m-${activeCompany}`}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: E }}>
+            initial={{ opacity: 0, x: swipeDir * 55 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: swipeDir * -55 }}
+            transition={{ duration: 0.22, ease: E }}>
 
-            {/* Centered hero */}
+            {/* Centered hero with swipe dot indicators */}
             <div className="flex flex-col items-center text-center px-6 py-8"
               style={{ borderBottom: '1px solid var(--t-border)' }}>
               <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-3"
                 style={{ color: 'var(--t-tertiary)' }}>{company.role}</p>
               <p className="text-[46px] font-semibold tracking-[-0.03em] leading-[0.92] mb-3"
                 style={{ color: 'var(--t-primary)' }}>{company.name}</p>
-              <p className="text-[11px] uppercase tracking-[0.1em]"
+              <p className="text-[11px] uppercase tracking-[0.1em] mb-5"
                 style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
-            </div>
-
-            {/* Stats */}
-            {company.stats && company.stats.length > 0 && (
-              <div className="grid" style={{
-                gridTemplateColumns: `repeat(${company.stats.length}, 1fr)`,
-                borderBottom: '1px solid var(--t-border)',
-              }}>
-                {company.stats.map((s, i) => (
-                  <div key={s.label} className="flex flex-col items-center py-6"
-                    style={{ borderRight: i < company.stats!.length - 1 ? '1px solid var(--t-border)' : undefined }}>
-                    <span className="text-[34px] font-semibold tracking-[-0.03em] leading-none"
-                      style={{ color: 'var(--t-primary)' }}>{s.value}</span>
-                    <span className="text-[10px] mt-2 uppercase tracking-[0.1em] text-center px-1"
-                      style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
-                  </div>
+              {/* Swipe position dots */}
+              <div className="flex items-center gap-1.5">
+                {COMPANIES.map((c) => (
+                  <span key={c.id} className="transition-all duration-300" style={{
+                    display: 'block',
+                    width: c.id === activeCompany ? 16 : 6,
+                    height: 6,
+                    borderRadius: 3,
+                    background: c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-border)',
+                  }} />
                 ))}
               </div>
-            )}
+            </div>
 
-            {/* Impact — prominent pull quote */}
+            {/* Impact — prominent, FIRST */}
             <div className="flex flex-col items-center text-center px-7 py-8"
               style={{ borderBottom: '1px solid var(--t-border)', background: 'var(--t-surface)' }}>
               <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
@@ -357,7 +398,7 @@ export default function Work() {
             {/* Published work */}
             {company.initiatives.filter(i => i.url).length > 0 && (
               <div className="py-7"
-                style={{ borderBottom: company.initiatives.filter(i => !i.url).length > 0 ? '1px solid var(--t-border)' : undefined }}>
+                style={{ borderBottom: '1px solid var(--t-border)' }}>
                 <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5 px-5"
                   style={{ color: 'var(--t-tertiary)' }}>Published Work</p>
                 {company.initiatives.filter(i => i.url).map((init, idx, arr) => (
@@ -378,7 +419,7 @@ export default function Work() {
 
             {/* Systems & process */}
             {company.initiatives.filter(i => !i.url).length > 0 && (
-              <div className="py-7">
+              <div className="py-7" style={{ borderBottom: company.stats && company.stats.length > 0 ? '1px solid var(--t-border)' : undefined }}>
                 <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5 px-5"
                   style={{ color: 'var(--t-tertiary)' }}>Systems & Process</p>
                 {company.initiatives.filter(i => !i.url).map((init, idx, arr) => (
@@ -388,6 +429,21 @@ export default function Work() {
                       style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
                     <p className="text-[14px] font-medium leading-snug"
                       style={{ color: 'var(--t-primary)' }}>{init.title}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Stats — at the bottom */}
+            {company.stats && company.stats.length > 0 && (
+              <div className="grid" style={{ gridTemplateColumns: `repeat(${company.stats.length}, 1fr)` }}>
+                {company.stats.map((s, i) => (
+                  <div key={s.label} className="flex flex-col items-center py-6"
+                    style={{ borderRight: i < company.stats!.length - 1 ? '1px solid var(--t-border)' : undefined }}>
+                    <span className="text-[34px] font-semibold tracking-[-0.03em] leading-none"
+                      style={{ color: 'var(--t-primary)' }}>{s.value}</span>
+                    <span className="text-[10px] mt-2 uppercase tracking-[0.1em] text-center px-1"
+                      style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
                   </div>
                 ))}
               </div>
