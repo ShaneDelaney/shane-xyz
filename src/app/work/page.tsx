@@ -269,145 +269,129 @@ export default function Work() {
   if (!mounted) return <div className="h-screen pt-[52px]" style={{ background: 'var(--t-bg)' }} />;
 
   return (
-    <div className="min-h-screen md:h-screen md:overflow-hidden flex flex-col pt-[52px]" style={{ background: 'var(--t-bg)' }}>
+    <div className="md:h-screen md:overflow-hidden md:flex md:flex-col md:pt-[52px]" style={{ background: 'var(--t-bg)' }}>
 
-      {/* ── Mobile layout — viewport-locked with accordion sections ── */}
-      <div className="md:hidden flex flex-col" style={{ height: 'calc(100vh - 52px)' }}>
-
-        {/* Company strip */}
-        <div className="flex-shrink-0 px-5 pt-4 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2"
-          style={{ borderBottom: '1px solid var(--t-border)' }}>
-          {COMPANIES.map(c => (
+      {/* ── Mobile: fixed top company bar ── */}
+      <nav className="md:hidden fixed left-0 right-0 z-40 flex"
+        style={{
+          top: 52,
+          background: 'var(--t-nav)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid var(--t-border)',
+        }}>
+        {COMPANIES.map(c => {
+          const active = c.id === activeCompany;
+          return (
             <button key={c.id} onClick={() => selectCompany(c.id)}
-              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium"
-              style={{
-                background: c.id === activeCompany ? 'var(--t-primary)' : 'var(--t-surface)',
-                color: c.id === activeCompany ? 'var(--t-bg)' : 'var(--t-secondary)',
-                border: '1px solid var(--t-border)',
-              }}>
-              {c.name}
+              className="flex-1 flex flex-col items-center justify-center py-2.5 relative gap-[3px]"
+              style={{ color: active ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
+              <span className="text-[10px] font-medium">{c.name}</span>
+              {active && <span className="absolute bottom-1 w-4 h-[2px] rounded-full" style={{ background: 'var(--t-primary)' }} />}
             </button>
-          ))}
-        </div>
+          );
+        })}
+      </nav>
 
+      {/* ── Mobile: scrollable content ── */}
+      <div className="md:hidden overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
         <AnimatePresence mode="wait">
           <motion.div key={`m-${activeCompany}`}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.18, ease: E }}
-            className="flex-1 flex flex-col min-h-0">
+            transition={{ duration: 0.2, ease: E }}>
 
-            {/* Centered hero — fixed focal point */}
-            <div className="flex-shrink-0 flex flex-col items-center text-center px-6 pt-6 pb-5"
+            {/* Centered hero */}
+            <div className="flex flex-col items-center text-center px-6 py-8"
               style={{ borderBottom: '1px solid var(--t-border)' }}>
-              <p className="text-[10px] uppercase tracking-[0.15em] font-medium mb-2"
+              <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-3"
                 style={{ color: 'var(--t-tertiary)' }}>{company.role}</p>
-              <p className="text-[40px] font-semibold tracking-[-0.03em] leading-[0.93] mb-2"
+              <p className="text-[46px] font-semibold tracking-[-0.03em] leading-[0.92] mb-3"
                 style={{ color: 'var(--t-primary)' }}>{company.name}</p>
-              <p className="text-[11px] uppercase tracking-[0.08em]"
+              <p className="text-[11px] uppercase tracking-[0.1em]"
                 style={{ color: 'var(--t-tertiary)' }}>{company.period}</p>
             </div>
 
-            {/* Stats — fixed focal numbers */}
+            {/* Stats */}
             {company.stats && company.stats.length > 0 && (
-              <div className="flex-shrink-0 grid" style={{
+              <div className="grid" style={{
                 gridTemplateColumns: `repeat(${company.stats.length}, 1fr)`,
                 borderBottom: '1px solid var(--t-border)',
               }}>
                 {company.stats.map((s, i) => (
-                  <div key={s.label} className="flex flex-col items-center py-5"
+                  <div key={s.label} className="flex flex-col items-center py-6"
                     style={{ borderRight: i < company.stats!.length - 1 ? '1px solid var(--t-border)' : undefined }}>
-                    <span className="text-[30px] font-semibold tracking-[-0.03em] leading-none"
+                    <span className="text-[34px] font-semibold tracking-[-0.03em] leading-none"
                       style={{ color: 'var(--t-primary)' }}>{s.value}</span>
-                    <span className="text-[10px] mt-1.5 uppercase tracking-[0.1em] text-center"
+                    <span className="text-[10px] mt-2 uppercase tracking-[0.1em] text-center px-1"
                       style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Accordion sections — fill remaining height */}
-            <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-              {(
-                [
-                  {
-                    key: 'impact', label: 'Impact',
-                    content: (
-                      <div className="flex flex-col items-center text-center px-2 py-2">
-                        <p className="text-[16px] font-medium leading-[1.65]" style={{ color: 'var(--t-primary)' }}>{company.impact}</p>
-                      </div>
-                    ),
-                  },
-                  {
-                    key: 'built', label: 'What I Built',
-                    content: (
-                      <ul className="flex flex-col gap-4 py-2">
-                        {company.overview.map((item, i) => (
-                          <li key={i} className="flex items-start gap-3">
-                            <span className="mt-[9px] w-[3px] h-[3px] rounded-full flex-shrink-0" style={{ background: 'var(--t-tertiary)' }} />
-                            <span className="text-[14px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ),
-                  },
-                  ...(company.initiatives.filter(i => i.url).length > 0 ? [{
-                    key: 'published', label: 'Published',
-                    content: (
-                      <div className="flex flex-col py-1">
-                        {company.initiatives.filter(i => i.url).map((init, idx, arr) => (
-                          <a key={init.id} href={init.url} target="_blank" rel="noopener noreferrer"
-                            className="flex items-start justify-between gap-4 py-3.5"
-                            style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}>
-                            <div className="min-w-0">
-                              <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
-                              <p className="text-[13px] font-medium leading-snug mb-1" style={{ color: 'var(--t-primary)' }}>{init.title}</p>
-                              <p className="text-[12px] leading-[1.55]" style={{ color: 'var(--t-secondary)' }}>{init.description}</p>
-                            </div>
-                            <span className="flex-shrink-0 mt-0.5" style={{ color: 'var(--t-tertiary)' }}>↗</span>
-                          </a>
-                        ))}
-                      </div>
-                    ),
-                  }] : []),
-                  ...(company.initiatives.filter(i => !i.url).length > 0 ? [{
-                    key: 'systems', label: 'Systems & Process',
-                    content: (
-                      <div className="flex flex-col py-1">
-                        {company.initiatives.filter(i => !i.url).map((init, idx, arr) => (
-                          <div key={init.id} className="py-3.5"
-                            style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}>
-                            <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1" style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
-                            <p className="text-[13px] font-medium leading-snug mb-1" style={{ color: 'var(--t-primary)' }}>{init.title}</p>
-                            <p className="text-[12px] leading-[1.55]" style={{ color: 'var(--t-secondary)' }}>{init.description}</p>
-                          </div>
-                        ))}
-                      </div>
-                    ),
-                  }] : []),
-                ] as { key: string; label: string; content: React.ReactNode }[]
-              ).map(({ key, label, content }) => {
-                const isOpen = mobileSection === key;
-                return (
-                  <div key={key}
-                    className={isOpen ? 'flex-1 flex flex-col min-h-0' : 'flex-shrink-0'}
-                    style={{ borderBottom: '1px solid var(--t-border)' }}>
-                    <button
-                      onClick={() => setMobileSection(isOpen ? null : key)}
-                      className="flex-shrink-0 w-full flex items-center justify-between px-5 py-3.5">
-                      <span className="text-[11px] uppercase tracking-[0.15em] font-semibold"
-                        style={{ color: isOpen ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>{label}</span>
-                      <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22, ease: E }}
-                        style={{ color: 'var(--t-tertiary)', display: 'inline-block', fontSize: 12 }}>↓</motion.span>
-                    </button>
-                    {isOpen && (
-                      <div className="flex-1 overflow-y-auto scrollbar-none px-5 pb-4">
-                        {content}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+            {/* Impact — prominent pull quote */}
+            <div className="flex flex-col items-center text-center px-7 py-8"
+              style={{ borderBottom: '1px solid var(--t-border)', background: 'var(--t-surface)' }}>
+              <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-4"
+                style={{ color: 'var(--t-tertiary)' }}>My Impact</p>
+              <p className="text-[17px] font-medium leading-[1.7] max-w-[300px]"
+                style={{ color: 'var(--t-primary)' }}>{company.impact}</p>
             </div>
+
+            {/* What I Built */}
+            <div className="px-5 py-7" style={{ borderBottom: '1px solid var(--t-border)' }}>
+              <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5"
+                style={{ color: 'var(--t-tertiary)' }}>What I Built</p>
+              <ul className="flex flex-col gap-4">
+                {company.overview.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="mt-[9px] w-[3px] h-[3px] rounded-full flex-shrink-0"
+                      style={{ background: 'var(--t-tertiary)' }} />
+                    <span className="text-[14px] leading-[1.65]"
+                      style={{ color: 'var(--t-secondary)' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Published work */}
+            {company.initiatives.filter(i => i.url).length > 0 && (
+              <div className="py-7"
+                style={{ borderBottom: company.initiatives.filter(i => !i.url).length > 0 ? '1px solid var(--t-border)' : undefined }}>
+                <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5 px-5"
+                  style={{ color: 'var(--t-tertiary)' }}>Published Work</p>
+                {company.initiatives.filter(i => i.url).map((init, idx, arr) => (
+                  <a key={init.id} href={init.url} target="_blank" rel="noopener noreferrer"
+                    className="flex items-start justify-between gap-3 px-5 py-4"
+                    style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}>
+                    <div className="min-w-0">
+                      <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1.5"
+                        style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                      <p className="text-[14px] font-medium leading-snug"
+                        style={{ color: 'var(--t-primary)' }}>{init.title}</p>
+                    </div>
+                    <span className="flex-shrink-0 mt-0.5" style={{ color: 'var(--t-tertiary)' }}>↗</span>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* Systems & process */}
+            {company.initiatives.filter(i => !i.url).length > 0 && (
+              <div className="py-7">
+                <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5 px-5"
+                  style={{ color: 'var(--t-tertiary)' }}>Systems & Process</p>
+                {company.initiatives.filter(i => !i.url).map((init, idx, arr) => (
+                  <div key={init.id} className="px-5 py-4"
+                    style={{ borderBottom: idx < arr.length - 1 ? '1px solid var(--t-divider)' : undefined }}>
+                    <p className="text-[10px] uppercase tracking-[0.1em] font-medium mb-1.5"
+                      style={{ color: 'var(--t-tertiary)' }}>{init.category}</p>
+                    <p className="text-[14px] font-medium leading-snug"
+                      style={{ color: 'var(--t-primary)' }}>{init.title}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
           </motion.div>
         </AnimatePresence>

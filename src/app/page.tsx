@@ -24,7 +24,11 @@ const STATS = [
 
 export default function Home() {
   const [m, setM] = useState(false);
-  useEffect(() => { setM(true); }, []);
+  useEffect(() => {
+    setM(true);
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
   return (
     <div style={{ background: 'var(--t-bg)' }}>

@@ -315,32 +315,32 @@ export default function Published() {
       style={{ background: 'var(--t-bg)' }}
     >
 
-      {/* ── Mobile layout — viewport-locked, accordion articles ── */}
-      <div className="md:hidden flex flex-col" style={{ height: 'calc(100vh - 52px)' }}>
+      {/* ── Mobile layout — fixed top category bar + scrollable articles ── */}
+      <div className="md:hidden">
 
-        {/* Category pills — fixed */}
-        <div className="flex-shrink-0 px-5 pt-5 pb-3 overflow-x-auto scrollbar-none flex items-center gap-2"
-          style={{ borderBottom: '1px solid var(--t-border)' }}>
-          {CATEGORIES.map((cat) => (
-            <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
-              className="flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium"
-              style={{
-                background: cat.id === activeCategory ? 'var(--t-primary)' : 'var(--t-surface)',
-                color: cat.id === activeCategory ? 'var(--t-bg)' : 'var(--t-secondary)',
-                border: '1px solid var(--t-border)',
-              }}>
-              {cat.label}
-            </button>
-          ))}
-        </div>
+        {/* Fixed top category bar — matches BottomNav style */}
+        <nav className="fixed left-0 right-0 z-40 flex"
+          style={{ top: 52, background: 'var(--t-nav)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--t-border)' }}>
+          {CATEGORIES.map((cat) => {
+            const active = cat.id === activeCategory;
+            return (
+              <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
+                className="flex-1 flex flex-col items-center justify-center py-2.5 relative gap-[3px]"
+                style={{ color: active ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
+                <span className="text-[9px] font-medium leading-tight text-center px-0.5">{cat.label}</span>
+                {active && <span className="absolute bottom-1 w-4 h-[2px] rounded-full" style={{ background: 'var(--t-primary)' }} />}
+              </button>
+            );
+          })}
+        </nav>
 
-        {/* Article accordion list — scrollable container */}
-        <div className="flex-1 overflow-y-auto scrollbar-none">
+        {/* Scrollable article list */}
+        <div className="overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
           <AnimatePresence mode="wait">
             <motion.div key={activeCategory}
               initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: EASE }}>
-              {category.articles.map((article, i) => {
+              {category.articles.map((article) => {
                 const isOpen = expandedId === article.title;
                 return (
                   <div key={article.title} id={article.slug}
