@@ -341,7 +341,7 @@ export default function Work() {
             <button key={c.id} onClick={() => { setSwipeDir(i > curIdx ? 1 : -1); selectCompany(c.id); }}
               className="flex-1 flex flex-col items-center justify-center py-2.5 relative gap-[3px]"
               style={{ color: active ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
-              <span className="text-[10px] font-medium">{c.name}</span>
+              <span className="text-[9px] font-medium whitespace-nowrap">{c.name}</span>
               {active && <span className="absolute bottom-1 w-4 h-[2px] rounded-full" style={{ background: 'var(--t-primary)' }} />}
             </button>
           );
@@ -387,12 +387,10 @@ export default function Work() {
 
       {/* ── Mobile: swipeable content ── */}
       <div ref={mobileContentRef} data-swipe-local className="md:hidden overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
-        <AnimatePresence mode="wait">
           <motion.div key={`m-${activeCompany}`}
-            initial={{ opacity: 0, x: swipeDir * 55 }}
+            initial={{ opacity: 0, x: swipeDir * 50 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: swipeDir * -55 }}
-            transition={{ duration: 0.22, ease: E }}>
+            transition={{ type: 'spring', damping: 26, stiffness: 280, mass: 0.8 }}>
 
             {/* Centered hero with swipe dot indicators */}
             <div className="flex flex-col items-center text-center px-6 py-8"
@@ -497,7 +495,6 @@ export default function Work() {
             )}
 
           </motion.div>
-        </AnimatePresence>
       </div>
 
       {/* Body — desktop only */}

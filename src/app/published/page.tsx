@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -275,10 +275,16 @@ const CATEGORIES: Category[] = [
   },
 ];
 
+const SHORT_LABELS: Record<string, string> = { platform: 'Platform', guides: 'Guides', narrative: 'Creator', editorial: 'Media' };
+
 export default function Published() {
   const [mounted, setMounted] = useState(false);
   const [activeCategory, setActiveCategory] = useState('platform');
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [swipeDir, setSwipeDir] = useState(0);
+  const mobileContentRef = useRef<HTMLDivElement>(null);
+  const activeCategoryRef = useRef(activeCategory);
+
   useEffect(() => {
     setMounted(true);
     const hash = window.location.hash.replace('#', '');
@@ -298,6 +304,56 @@ export default function Published() {
     }
   }, []);
 
+  useEffect(() => { activeCategoryRef.current = activeCategory; }, [activeCategory]);
+
+  // Scroll to top on category change
+  useEffect(() => {
+    if (!mounted) return;
+    const el = mobileContentRef.current;
+    if (el) el.scrollTop = 0;
+  }, [activeCategory, mounted]);
+
+  // Touch swipe — runs after mount
+  useEffect(() => {
+    if (!mounted) return;
+    const el = mobileContentRef.current;
+    if (!el) return;
+    let sx = 0, sy = 0, horiz: boolean | null = null;
+    const onStart = (e: TouchEvent) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; horiz = null; };
+    const onMove = (e: TouchEvent) => {
+      if (horiz === null) {
+        const dx = Math.abs(e.touches[0].clientX - sx);
+        const dy = Math.abs(e.touches[0].clientY - sy);
+        if (dx > 12 || dy > 12) horiz = dx > dy * 1.4;
+      }
+      if (horiz) e.preventDefault();
+    };
+    const onEnd = (e: TouchEvent) => {
+      if (!horiz) return;
+      const dx = e.changedTouches[0].clientX - sx;
+      horiz = null;
+      if (Math.abs(dx) < 45) return;
+      const idx = CATEGORIES.findIndex(c => c.id === activeCategoryRef.current);
+      if (dx < 0 && idx < CATEGORIES.length - 1) {
+        setSwipeDir(1);
+        setActiveCategory(CATEGORIES[idx + 1].id);
+        setExpandedId(null);
+      } else if (dx > 0 && idx > 0) {
+        setSwipeDir(-1);
+        setActiveCategory(CATEGORIES[idx - 1].id);
+        setExpandedId(null);
+      }
+    };
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd, { passive: true });
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+    };
+  }, [mounted]);
+
   const category = CATEGORIES.find(c => c.id === activeCategory) ?? CATEGORIES[0];
 
   const handleCategoryChange = (id: string) => {
@@ -315,87 +371,142 @@ export default function Published() {
       style={{ background: 'var(--t-bg)' }}
     >
 
-      {/* ── Mobile layout — fixed top category bar + scrollable articles ── */}
+      {/* ── Mobile layout — Work-style: fixed nav + swipe ── */}
       <div className="md:hidden">
 
-        {/* Fixed top category bar — matches BottomNav style */}
-        <nav className="fixed left-0 right-0 z-40 flex"
-          style={{ top: 52, background: 'var(--t-nav)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--t-border)' }}>
-          {CATEGORIES.map((cat) => {
+        {/* Fixed top category bar — matches Work nav style */}
+        <nav className="fixed left-0 right-0 z-40 flex md:hidden"
+          style={{ top: 52, background: 'var(--t-nav)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', borderBottom: '1px solid var(--t-border)' }}>
+          {CATEGORIES.map((cat, i) => {
             const active = cat.id === activeCategory;
+            const curIdx = CATEGORIES.findIndex(c => c.id === activeCategory);
             return (
-              <button key={cat.id} onClick={() => handleCategoryChange(cat.id)}
+              <button key={cat.id} onClick={() => { setSwipeDir(i > curIdx ? 1 : -1); handleCategoryChange(cat.id); }}
                 className="flex-1 flex flex-col items-center justify-center py-2.5 relative gap-[3px]"
                 style={{ color: active ? 'var(--t-primary)' : 'var(--t-tertiary)' }}>
-                <span className="text-[9px] font-medium leading-tight text-center px-0.5">{cat.label}</span>
+                <span className="text-[9px] font-medium whitespace-nowrap">{SHORT_LABELS[cat.id]}</span>
                 {active && <span className="absolute bottom-1 w-4 h-[2px] rounded-full" style={{ background: 'var(--t-primary)' }} />}
               </button>
             );
           })}
         </nav>
 
-        {/* Scrollable article list */}
-        <div className="overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
-          <AnimatePresence mode="wait">
-            <motion.div key={activeCategory}
-              initial={{ opacity: 0 }} animate={mounted ? { opacity: 1 } : {}} exit={{ opacity: 0 }}
-              transition={{ duration: 0.18, ease: EASE }}>
-              {category.articles.map((article) => {
-                const isOpen = expandedId === article.title;
-                return (
-                  <div key={article.title} id={article.slug}
-                    style={{ borderBottom: '1px solid var(--t-divider)' }}>
+        {/* Blinking swipe arrows */}
+        {(() => {
+          const curIdx = CATEGORIES.findIndex(c => c.id === activeCategory);
+          return (
+            <>
+              {curIdx > 0 && (
+                <motion.div
+                  key={`al-${activeCategory}`}
+                  className="fixed z-30 flex flex-col items-center gap-1.5 md:hidden"
+                  style={{ left: 8, top: '55%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0.12, 0.5, 0.12] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}>
+                  <span style={{ color: 'var(--t-secondary)', fontSize: 20, lineHeight: 1 }}>‹</span>
+                  <span style={{ color: 'var(--t-tertiary)', fontSize: 8, letterSpacing: '0.12em', textTransform: 'uppercase', writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+                    {SHORT_LABELS[CATEGORIES[curIdx - 1].id]}
+                  </span>
+                </motion.div>
+              )}
+              {curIdx < CATEGORIES.length - 1 && (
+                <motion.div
+                  key={`ar-${activeCategory}`}
+                  className="fixed z-30 flex flex-col items-center gap-1.5 md:hidden"
+                  style={{ right: 8, top: '55%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0.12, 0.5, 0.12] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}>
+                  <span style={{ color: 'var(--t-secondary)', fontSize: 20, lineHeight: 1 }}>›</span>
+                  <span style={{ color: 'var(--t-tertiary)', fontSize: 8, letterSpacing: '0.12em', textTransform: 'uppercase', writingMode: 'vertical-rl' }}>
+                    {SHORT_LABELS[CATEGORIES[curIdx + 1].id]}
+                  </span>
+                </motion.div>
+              )}
+            </>
+          );
+        })()}
 
-                    {/* Row header — always visible */}
-                    <button onClick={() => toggleExpanded(article.title)}
-                      className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] uppercase tracking-[0.1em] font-medium"
-                            style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
-                          {article.stat && (
-                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
-                              style={{ background: 'var(--t-surface)', color: 'var(--t-primary)', border: '1px solid var(--t-border)' }}>
-                              {article.stat}
-                            </span>
+        {/* Swipeable content */}
+        <div ref={mobileContentRef} data-swipe-local className="overflow-y-auto scrollbar-none" style={{ paddingTop: 104, paddingBottom: 80 }}>
+          <motion.div key={`cat-${activeCategory}`}
+            initial={{ opacity: 0, x: swipeDir * 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 280, mass: 0.8 }}>
+
+            {/* Category hero with dot indicators */}
+            <div className="flex flex-col items-center text-center px-6 py-8"
+              style={{ borderBottom: '1px solid var(--t-border)' }}>
+              <p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-3"
+                style={{ color: 'var(--t-tertiary)' }}>{category.articles.length} pieces</p>
+              <p className="text-[36px] font-semibold tracking-[-0.03em] leading-[1.1] mb-5"
+                style={{ color: 'var(--t-primary)' }}>{category.label}</p>
+              <div className="flex items-center gap-1.5">
+                {CATEGORIES.map((c) => (
+                  <span key={c.id} className="transition-all duration-300" style={{
+                    display: 'block',
+                    width: c.id === activeCategory ? 16 : 6,
+                    height: 6,
+                    borderRadius: 3,
+                    background: c.id === activeCategory ? 'var(--t-primary)' : 'var(--t-border)',
+                  }} />
+                ))}
+              </div>
+            </div>
+
+            {/* Article accordion list */}
+            {category.articles.map((article) => {
+              const isOpen = expandedId === article.title;
+              return (
+                <div key={article.title} id={article.slug}
+                  style={{ borderBottom: '1px solid var(--t-divider)' }}>
+                  <button onClick={() => toggleExpanded(article.title)}
+                    className="w-full text-left px-5 py-4 flex items-center justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] uppercase tracking-[0.1em] font-medium"
+                          style={{ color: 'var(--t-tertiary)' }}>{article.publication}</span>
+                        {article.stat && (
+                          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+                            style={{ background: 'var(--t-surface)', color: 'var(--t-primary)', border: '1px solid var(--t-border)' }}>
+                            {article.stat}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[14px] font-medium leading-snug"
+                        style={{ color: 'var(--t-primary)' }}>{article.title}</p>
+                    </div>
+                    <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22 }}
+                      style={{ color: 'var(--t-tertiary)', display: 'inline-block', flexShrink: 0, fontSize: 12 }}>↓</motion.span>
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.22 }}
+                        style={{ overflow: 'hidden' }}>
+                        <div className="px-5 pb-5">
+                          <p className="text-[13px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>
+                            {article.description}
+                          </p>
+                          {article.url && (
+                            <a href={article.url} target="_blank" rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-[13px] font-medium"
+                              style={{ color: 'var(--t-primary)' }}>
+                              {getLinkLabel(article.url)} ↗
+                            </a>
                           )}
                         </div>
-                        <p className="text-[14px] font-medium leading-snug"
-                          style={{ color: 'var(--t-primary)' }}>{article.title}</p>
-                      </div>
-                      <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.22, ease: EASE }}
-                        style={{ color: 'var(--t-tertiary)', display: 'inline-block', flexShrink: 0, fontSize: 12 }}>↓</motion.span>
-                    </button>
-
-                    {/* Expanded content */}
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.22, ease: EASE }}
-                          style={{ overflow: 'hidden' }}>
-                          <div className="px-5 pb-5">
-                            <p className="text-[13px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>
-                              {article.description}
-                            </p>
-                            {article.url && (
-                              <a href={article.url} target="_blank" rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-[13px] font-medium"
-                                style={{ color: 'var(--t-primary)' }}>
-                                {getLinkLabel(article.url)} ↗
-                              </a>
-                            )}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
 
