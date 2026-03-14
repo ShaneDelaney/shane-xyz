@@ -243,6 +243,7 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileContentRef = useRef<HTMLDivElement>(null);
   const activeCompanyRef = useRef(activeCompany);
+  const topDragStartY = useRef<number | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -259,7 +260,15 @@ export default function Work() {
         setSplitPct(pct);
       }
     };
-    const onUp = () => setIsDraggingDivider(false);
+    const onUp = (e: MouseEvent) => {
+      setIsDraggingDivider(false);
+      if (topDragStartY.current !== null) {
+        const dy = e.clientY - topDragStartY.current;
+        if (dy > 20) setTopOpen(true);
+        else if (dy < -20) setTopOpen(false);
+        topDragStartY.current = null;
+      }
+    };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
     return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
@@ -747,7 +756,11 @@ export default function Work() {
                     <div ref={containerRef} className="flex-1 min-h-0 overflow-hidden flex flex-col" style={{ userSelect: isDraggingDivider ? 'none' : undefined }}>
 
                       {/* Divider with More Context floating on it */}
-                      <div className="flex-shrink-0 relative flex items-center justify-center" style={{ height: '36px' }}>
+                      <div
+                        className="flex-shrink-0 relative flex items-center justify-center"
+                        style={{ height: '36px', cursor: topOpen ? 'n-resize' : 's-resize' }}
+                        onMouseDown={(e) => { topDragStartY.current = e.clientY; }}
+                      >
                         <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: 'var(--t-divider)' }} />
                         <button
                           onClick={() => setTopOpen(o => !o)}
