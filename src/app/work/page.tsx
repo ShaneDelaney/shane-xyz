@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, animate } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 
 const E = [0.16, 1, 0.3, 1] as const;
@@ -243,7 +243,7 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileContentRef = useRef<HTMLDivElement>(null);
   const activeCompanyRef = useRef(activeCompany);
-  const topDragStartY = useRef<number | null>(null);
+  const panelHeight = useMotionValue(0);
 
   useEffect(() => {
     setMounted(true);
@@ -260,20 +260,12 @@ export default function Work() {
         setSplitPct(pct);
       }
     };
-    const onUp = (e: MouseEvent) => {
-      setIsDraggingDivider(false);
-      if (topDragStartY.current !== null) {
-        const dy = e.clientY - topDragStartY.current;
-        if (dy > 20) setTopOpen(true);
-        else if (dy < -20) setTopOpen(false);
-        topDragStartY.current = null;
-      }
-    };
+    const onUp = () => setIsDraggingDivider(false);
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
     return () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
   }, [isDraggingDivider]);
-  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setPublishedOpen(true); setSystemsOpen(true); setTopOpen(false); setMobileSection('impact'); };
+  const selectCompany = (id: string) => { setActiveCompany(id); setActiveInitiative(null); setPublishedOpen(true); setSystemsOpen(true); setTopOpen(false); panelHeight.set(0); setMobileSection('impact'); };
 
   useEffect(() => { activeCompanyRef.current = activeCompany; }, [activeCompany]);
 
@@ -757,13 +749,49 @@ export default function Work() {
 
                       {/* Divider with More Context floating on it */}
                       <div
-                        className="flex-shrink-0 relative flex items-center justify-center"
+                        className="flex-shrink-0 relative flex items-center justify-center select-none"
                         style={{ height: '36px', cursor: topOpen ? 'n-resize' : 's-resize' }}
-                        onMouseDown={(e) => { topDragStartY.current = e.clientY; }}
+                        onMouseDown={(e) => {
+                          const startY = e.clientY;
+                          const wasOpen = topOpen;
+                          const MAX = 300;
+                          const THRESHOLD = 60;
+                          let dragged = false;
+                          let lastY = startY;
+
+                          const onMove = (ev: MouseEvent) => {
+                            lastY = ev.clientY;
+                            const dy = ev.clientY - startY;
+                            if (Math.abs(dy) > 4) dragged = true;
+                            panelHeight.set(wasOpen
+                              ? Math.max(0, Math.min(MAX, MAX + dy))
+                              : Math.max(0, Math.min(MAX, dy)));
+                          };
+
+                          const onUp = () => {
+                            window.removeEventListener('mousemove', onMove);
+                            window.removeEventListener('mouseup', onUp);
+                            const dy = lastY - startY;
+                            if (!dragged) {
+                              if (wasOpen) { animate(panelHeight, 0, { type: 'spring', damping: 28, stiffness: 300 }); setTopOpen(false); }
+                              else { animate(panelHeight, MAX, { type: 'spring', damping: 28, stiffness: 300 }); setTopOpen(true); }
+                            } else if (wasOpen) {
+                              if (dy < -THRESHOLD) { animate(panelHeight, 0, { type: 'spring', damping: 28, stiffness: 300 }); setTopOpen(false); }
+                              else { animate(panelHeight, MAX, { type: 'spring', damping: 28, stiffness: 300 }); }
+                            } else {
+                              if (dy > THRESHOLD) { animate(panelHeight, MAX, { type: 'spring', damping: 28, stiffness: 300 }); setTopOpen(true); }
+                              else { animate(panelHeight, 0, { type: 'spring', damping: 28, stiffness: 300 }); }
+                            }
+                          };
+
+                          window.addEventListener('mousemove', onMove);
+                          window.addEventListener('mouseup', onUp);
+                          e.preventDefault();
+                        }}
                       >
                         <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: 'var(--t-divider)' }} />
                         <button
-                          onClick={() => setTopOpen(o => !o)}
+                          onClick={() => {}}
                           className="relative z-10 flex items-center gap-[7px] px-3 group"
                           style={{ background: 'var(--t-bg)', outline: 'none' }}
                         >
@@ -788,30 +816,20 @@ export default function Work() {
                         </button>
                       </div>
 
-                      {/* Reveal panel */}
-                      <AnimatePresence>
-                        {topOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                            style={{ overflow: 'hidden', flexShrink: 0, borderBottom: '1px solid var(--t-divider)' }}
-                          >
-                            <div className="px-8 lg:px-14 py-5">
-                              <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}>Key Contributions</p>
-                              <ul className="flex flex-col gap-2.5 max-w-[720px]">
-                                {company.overview.map((point, i) => (
-                                  <li key={i} className="flex items-start gap-3 text-[13px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
-                                    <span className="mt-[7px] w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: 'var(--t-border-strong)' }} />
-                                    {point}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      {/* Reveal panel — height driven by drag/click */}
+                      <motion.div style={{ height: panelHeight, overflow: 'hidden', flexShrink: 0, borderBottom: '1px solid var(--t-divider)' }}>
+                        <div className="px-8 lg:px-14 py-5">
+                          <p className="text-[10px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}>Key Contributions</p>
+                          <ul className="flex flex-col gap-2.5 max-w-[720px]">
+                            {company.overview.map((point, i) => (
+                              <li key={i} className="flex items-start gap-3 text-[13px] leading-[1.65]" style={{ color: 'var(--t-secondary)' }}>
+                                <span className="mt-[7px] w-[5px] h-[5px] rounded-full flex-shrink-0" style={{ background: 'var(--t-border-strong)' }} />
+                                {point}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
 
                       {/* Columns wrapper */}
                       <div className="flex-1 min-h-0">
