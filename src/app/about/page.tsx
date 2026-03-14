@@ -100,7 +100,7 @@ export default function About() {
                   className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  Platform content strategist with experience at Meta and Snap Inc. I run editorial systems for creator-driven platforms — from story sourcing to XFN review to publication, with the data literacy to verify stats, interrogate metrics, and ground every editorial angle in fact.
+                  Platform content strategist with experience at Meta and Snap Inc. I run editorial systems for creator-driven platforms — from story sourcing to XFN review to publication, with the data fluency to verify claims, surface insights, and inform every editorial call.
                 </p>
                 <p
                   className="text-[15px] leading-[1.7] mb-8 max-w-sm"
