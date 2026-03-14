@@ -100,7 +100,7 @@ export default function About() {
                   className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  Platform content strategist with experience at Meta and Snap Inc. I build the editorial systems and story pipelines that help platforms surface the creators and products shaping their ecosystems.
+                  Platform content strategist with experience at Meta and Snap Inc. I facilitate the editorial systems and story pipelines that help platforms surface the creators and products shaping their ecosystems.
                 </p>
                 <p
                   className="text-[15px] leading-[1.7] mb-8 max-w-sm"

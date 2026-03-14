@@ -54,7 +54,7 @@ export default function Home() {
             style={{ color: 'var(--t-secondary)' }}
             initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.12, ease: E }}>
-            I build editorial systems that help platforms surface the creators shaping their ecosystems.
+            I facilitate the editorial systems that help platforms surface the creators shaping their ecosystems.
           </motion.p>
 
           {/* Stats */}
@@ -126,7 +126,7 @@ export default function Home() {
               </motion.h1>
               <motion.p className="text-[17px] leading-[1.65] mb-8 max-w-[420px]" style={{ color: 'var(--t-secondary)' }}
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
-                I build the storytelling systems that help platforms surface the creators shaping their ecosystems.
+                I facilitate the storytelling systems that help platforms surface the creators shaping their ecosystems.
               </motion.p>
               <motion.div className="flex items-center gap-3 mb-10"
                 initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.18, ease: E }}>
