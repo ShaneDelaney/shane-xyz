@@ -32,7 +32,7 @@ const COMPANIES: Company[] = [
   {
     id: 'meta', name: 'Meta', role: 'Content Marketing Coordinator II', period: 'Oct 2025 – Mar 2026',
     summary: 'Editorial DRI for the Developer Ecosystem Success team at Meta Horizon — the platform where developers build worlds, games, and apps for VR. In five months, I led production and owned the full content pipeline: sourcing creators, developing story angles, running multi-stage XFN review across product, analytics, and legal, and publishing 13 pieces. Alongside editorial, I built the Growth Systems Toolkit and a Horizon Creator Studio prototype presented to C-suite to inform future creator tooling.',
-    problem: 'Horizon had breakout developers building successful worlds — but no established editorial process to tell their stories publicly, and no internal tools to back the team\'s strategy work.',
+    problem: 'Horizon had breakout developers building successful worlds — with an early-stage editorial process for telling their stories publicly, and a growing set of internal tools to support the team\'s strategy work.',
     system: 'DRI across the full content pipeline: sourcing, interviews, 8-stage XFN review across five teams, and publication management for 13 pieces. In parallel: three AI-powered internal tools (the Growth Systems Toolkit) and a Creator Studio prototype taken to C-suite.',
     impact: '13 pieces out in 5 months. NRG whitepaper produced. Growth Systems Toolkit active in 2026 planning. Creator Studio prototype on the product roadmap.',
     stats: [
