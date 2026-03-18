@@ -54,7 +54,13 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`} style={{ background: 'var(--t-bg)', color: 'var(--t-primary)', transition: 'background 0.2s ease, color 0.2s ease' }}>
         <ThemeProvider>
           <Navigation />
-          <main className="flex-grow">
+          {/* Mobile ambient glows — visible site-wide in dark mode */}
+          <div className="sm:hidden fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <div className="mobile-glow-a" />
+            <div className="mobile-glow-b" />
+            <div className="mobile-glow-c" />
+          </div>
+          <main className="flex-grow relative z-10">
             {children}
           </main>
           <BottomNav />

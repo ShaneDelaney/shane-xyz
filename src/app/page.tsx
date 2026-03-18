@@ -17,9 +17,9 @@ const COMPANIES: [string, string][] = [
 ];
 
 const STATS = [
-  { value: '13', label: 'Published' },
+  { value: 'Meta', label: 'Currently' },
+  { value: 'Snap', label: 'Previously' },
   { value: '25M+', label: 'Views' },
-  { value: '900M+', label: 'MAU' },
 ];
 
 export default function Home() {
@@ -32,14 +32,7 @@ export default function Home() {
     <div style={{ background: 'var(--t-bg)' }}>
 
       {/* ── Mobile: scroll narrative ── */}
-      <div className="sm:hidden relative" style={{ background: 'var(--t-bg)' }}>
-
-        {/* Ambient background glows — dark mode only */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="mobile-glow-a" />
-          <div className="mobile-glow-b" />
-          <div className="mobile-glow-c" />
-        </div>
+      <div className="sm:hidden">
 
         {/* ── SCREEN 1: Hook ── */}
         <section className="relative z-10 min-h-[100dvh] flex flex-col px-6 pt-[52px]">
@@ -67,7 +60,7 @@ export default function Home() {
               style={{ color: 'var(--t-secondary)' }}
               initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.15, ease: E }}>
-              I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
+              I run editorial systems for large-scale tech platforms.
             </motion.p>
 
             {/* Stats */}
