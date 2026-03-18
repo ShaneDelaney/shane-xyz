@@ -14,9 +14,9 @@ const CARDS = [
 
 
 const QUICK_LINKS = [
-  { label: 'Experience', sub: 'Work history', href: '/work', external: false },
-  { label: 'Published', sub: 'Tech & creator platforms', href: '/published', external: false },
-  { label: 'Resume', sub: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
+  { label: 'Experience', meta: 'Meta · Snap · 5 companies', href: '/work', external: false },
+  { label: 'Published', meta: '22+ pieces · Tech platforms', href: '/published', external: false },
+  { label: 'Resume', meta: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
 ];
 
 const DESKTOP_STATS = [
@@ -92,24 +92,26 @@ export default function Home() {
               I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
             </motion.p>
 
-            {/* Quick-access buttons */}
-            <motion.div
-              className="flex rounded-2xl overflow-hidden"
-              style={{ border: '1px solid var(--t-border)' }}
-              initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.22, ease: E }}>
+            {/* Quick-access cards */}
+            <div className="flex flex-col gap-2">
               {QUICK_LINKS.map((q, i) => (
-                <Link
+                <motion.div
                   key={q.label}
-                  href={q.href}
-                  target={q.external ? '_blank' : undefined}
-                  rel={q.external ? 'noopener noreferrer' : undefined}
-                  className="flex-1 flex items-center justify-center py-4 active:opacity-60 transition-opacity"
-                  style={{ background: 'var(--t-surface)', borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
-                  <span className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
-                </Link>
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={m ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: 0.2 + i * 0.07, ease: E }}>
+                  <Link
+                    href={q.href}
+                    target={q.external ? '_blank' : undefined}
+                    rel={q.external ? 'noopener noreferrer' : undefined}
+                    className="flex items-center justify-between px-5 py-4 rounded-2xl active:opacity-60 transition-opacity"
+                    style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                    <span className="text-[15px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
+                    <span className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>{q.meta}</span>
+                  </Link>
+                </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Scroll prompt */}
