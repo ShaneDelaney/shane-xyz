@@ -72,15 +72,9 @@ export default function Home() {
                   href={q.href}
                   target={q.external ? '_blank' : undefined}
                   rel={q.external ? 'noopener noreferrer' : undefined}
-                  className="flex-1 flex flex-col justify-between p-4 active:opacity-60 transition-opacity"
+                  className="flex-1 flex items-center justify-center py-4 active:opacity-60 transition-opacity"
                   style={{ background: 'var(--t-surface)', borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
-                  <span className="text-[10px] self-end" style={{ color: 'var(--t-tertiary)' }}>
-                    {q.external ? '↓' : '→'}
-                  </span>
-                  <div>
-                    <span className="block text-[14px] font-semibold tracking-[-0.01em] leading-none mb-1.5" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
-                    <span className="block text-[10px] leading-snug" style={{ color: 'var(--t-tertiary)' }}>{q.sub}</span>
-                  </div>
+                  <span className="text-[13px] font-medium" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
                 </Link>
               ))}
             </motion.div>
