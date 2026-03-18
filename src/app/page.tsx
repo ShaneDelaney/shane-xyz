@@ -16,10 +16,10 @@ const COMPANIES: [string, string][] = [
   ['Meta', 'meta'], ['Snap Inc.', 'snap'], ['StockX', 'stockx'], ['Phony Content', 'phony'], ['Collider', 'collider'],
 ];
 
-const STATS = [
-  { value: 'Meta', label: 'Currently' },
-  { value: 'Snap', label: 'Previously' },
-  { value: '25M+', label: 'Views' },
+const QUICK_LINKS = [
+  { label: 'Experience', sub: 'Meta · Snap · more', href: '/work', external: false },
+  { label: 'Published', sub: '13 articles', href: '/published', external: false },
+  { label: 'Resume', sub: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
 ];
 
 export default function Home() {
@@ -63,18 +63,28 @@ export default function Home() {
               I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
             </motion.p>
 
-            {/* Stats */}
+            {/* Quick-access buttons */}
             <motion.div
               className="flex rounded-2xl overflow-hidden"
               style={{ border: '1px solid var(--t-border)' }}
               initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.22, ease: E }}>
-              {STATS.map((s, i) => (
-                <div key={s.label} className="flex-1 flex flex-col items-center py-[18px]"
+              {QUICK_LINKS.map((q, i) => (
+                <Link
+                  key={q.label}
+                  href={q.href}
+                  target={q.external ? '_blank' : undefined}
+                  rel={q.external ? 'noopener noreferrer' : undefined}
+                  className="flex-1 flex flex-col justify-between p-4 active:opacity-60 transition-opacity"
                   style={{ background: 'var(--t-surface)', borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
-                  <span className="text-[24px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
-                  <span className="text-[9px] mt-1.5 uppercase tracking-[0.1em]" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
-                </div>
+                  <span className="text-[10px] self-end" style={{ color: 'var(--t-tertiary)' }}>
+                    {q.external ? '↓' : '→'}
+                  </span>
+                  <div>
+                    <span className="block text-[14px] font-semibold tracking-[-0.01em] leading-none mb-1.5" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
+                    <span className="block text-[10px] leading-snug" style={{ color: 'var(--t-tertiary)' }}>{q.sub}</span>
+                  </div>
+                </Link>
               ))}
             </motion.div>
           </div>
