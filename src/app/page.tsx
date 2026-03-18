@@ -66,9 +66,12 @@ export default function Home() {
   const [openStat, setOpenStat] = useState<number | null>(null);
   const [openLink, setOpenLink] = useState<number | null>(null);
   const [openMobile, setOpenMobile] = useState<number | null>(null);
+  const [showMap, setShowMap] = useState(false);
+  const [showName, setShowName] = useState(false);
   const statRef = useRef<HTMLDivElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setM(true); }, []);
 
@@ -77,6 +80,7 @@ export default function Home() {
       if (statRef.current && !statRef.current.contains(e.target as Node)) setOpenStat(null);
       if (linkRef.current && !linkRef.current.contains(e.target as Node)) setOpenLink(null);
       if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) setOpenMobile(null);
+      if (nameRef.current && !nameRef.current.contains(e.target as Node)) setShowName(false);
     }
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
@@ -94,20 +98,42 @@ export default function Home() {
           {/* Main content */}
           <div className="flex-1 flex flex-col justify-center py-10">
             <motion.p
-              className="text-[10px] uppercase tracking-[0.22em] font-medium mb-5"
+              className="text-[10px] uppercase tracking-[0.22em] font-medium mb-5 flex items-center gap-2"
               style={{ color: 'var(--t-tertiary)' }}
               initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: E }}>
-              Los Angeles · Content Strategist
+              <button onClick={() => setShowMap(true)}
+                className="underline underline-offset-2 decoration-dotted transition-opacity active:opacity-50"
+                style={{ color: 'var(--t-tertiary)' }}>Los Angeles</button>
+              <span>· Content Strategist</span>
             </motion.p>
 
-            <motion.h1
-              className="text-[60px] font-semibold tracking-[-0.035em] leading-[0.86] mb-7"
-              style={{ color: 'var(--t-primary)' }}
-              initial={{ opacity: 0, y: 20 }} animate={m ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.65, delay: 0.06, ease: E }}>
-              Shane<br />Delaney
-            </motion.h1>
+            <div className="relative" ref={nameRef}>
+              <motion.h1
+                className="text-[60px] font-semibold tracking-[-0.035em] leading-[0.86] mb-7 cursor-pointer"
+                style={{ color: 'var(--t-primary)' }}
+                onClick={() => setShowName(v => !v)}
+                initial={{ opacity: 0, y: 20 }} animate={m ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.65, delay: 0.06, ease: E }}>
+                Shane<br />Delaney
+              </motion.h1>
+              <AnimatePresence>
+                {showName && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
+                    transition={{ duration: 0.18, ease: E }}
+                    className="absolute left-0 top-full mt-2 rounded-xl p-4 z-50 w-[260px]"
+                    style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                    <p className="text-[12px] leading-[1.6] mb-3" style={{ color: 'var(--t-secondary)' }}>
+                      Content Strategist based in Los Angeles. Currently Editorial DRI at Meta Horizon.
+                    </p>
+                    <Link href="/about" onClick={() => setShowName(false)}
+                      className="text-[11px] font-medium hover:opacity-60 transition-opacity"
+                      style={{ color: 'var(--t-primary)' }}>About me →</Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <motion.p
               className="text-[16px] leading-[1.62] mb-10 max-w-[300px]"
@@ -257,12 +283,35 @@ export default function Home() {
             <div className="flex-1 min-w-0">
               <motion.p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.05, ease: E }}>
-                Los Angeles · Content Strategist
+                <button onClick={() => setShowMap(true)}
+                  className="underline underline-offset-2 decoration-dotted transition-opacity hover:opacity-60"
+                  style={{ color: 'var(--t-tertiary)' }}>Los Angeles</button>
+                <span> · Content Strategist</span>
               </motion.p>
-              <motion.h1 className="text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5" style={{ color: 'var(--t-primary)' }}
-                initial={{ opacity: 0, y: 10 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.08, ease: E }}>
-                Shane Delaney
-              </motion.h1>
+              <div className="relative" ref={nameRef}>
+                <motion.h1 className="text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5 cursor-pointer w-fit"
+                  style={{ color: 'var(--t-primary)' }}
+                  onClick={() => setShowName(v => !v)}
+                  initial={{ opacity: 0, y: 10 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.08, ease: E }}>
+                  Shane Delaney
+                </motion.h1>
+                <AnimatePresence>
+                  {showName && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
+                      transition={{ duration: 0.18, ease: E }}
+                      className="absolute left-0 top-full -mt-3 rounded-xl p-4 z-50 w-[260px]"
+                      style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                      <p className="text-[12px] leading-[1.6] mb-3" style={{ color: 'var(--t-secondary)' }}>
+                        Content Strategist based in Los Angeles. Currently Editorial DRI at Meta Horizon.
+                      </p>
+                      <Link href="/about" onClick={() => setShowName(false)}
+                        className="text-[11px] font-medium hover:opacity-60 transition-opacity"
+                        style={{ color: 'var(--t-primary)' }}>About me →</Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <motion.p className="text-[17px] leading-[1.65] mb-8 max-w-[400px]" style={{ color: 'var(--t-secondary)' }}
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
                 I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
@@ -304,10 +353,8 @@ export default function Home() {
                         )}
                       </AnimatePresence>
                     </div>
-                    {i < MOBILE_LINKS.length - 1 && <span style={{ color: 'var(--t-border)' }}>·</span>}
                   </div>
                 ))}
-                <span style={{ color: 'var(--t-border)' }}>·</span>
                 <Link href="/about" className="text-[13px] font-medium transition-opacity hover:opacity-60"
                   style={{ color: 'var(--t-primary)' }}>About</Link>
               </motion.div>
@@ -343,7 +390,6 @@ export default function Home() {
                         )}
                       </AnimatePresence>
                     </div>
-                    {i < 2 && <span style={{ color: 'var(--t-border)' }}>·</span>}
                   </div>
                 ))}
               </motion.div>
@@ -366,6 +412,37 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* ── LA Map overlay ── */}
+      <AnimatePresence>
+        {showMap && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setShowMap(false)}
+            style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)' }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 8 }}
+              transition={{ duration: 0.22, ease: E }}
+              onClick={e => e.stopPropagation()}
+              className="relative rounded-2xl overflow-hidden"
+              style={{ maxWidth: 420, width: '100%', border: '1px solid var(--t-border)' }}>
+              <img src="/la-map.png" alt="Los Angeles" className="w-full block" />
+              <div className="absolute bottom-0 left-0 right-0 px-4 py-3"
+                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+                <p className="text-[12px] font-medium text-white">Los Angeles, CA</p>
+                <p className="text-[10px] text-white/60">Where the work gets made.</p>
+              </div>
+              <button onClick={() => setShowMap(false)}
+                className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center text-[12px] transition-opacity hover:opacity-70"
+                style={{ background: 'rgba(0,0,0,0.5)', color: '#fff' }}>✕</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
