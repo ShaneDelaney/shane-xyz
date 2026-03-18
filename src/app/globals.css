@@ -134,6 +134,63 @@
   }
 }
 
+/* ── Mobile ambient glows (dark mode only) ──────────────────── */
+.mobile-glow-a,
+.mobile-glow-b,
+.mobile-glow-c {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.dark .mobile-glow-a {
+  width: 85vw;
+  height: 85vw;
+  top: -15vw;
+  left: -20vw;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.065) 0%, transparent 65%);
+  opacity: 1;
+  animation: glow-drift-a 22s ease-in-out infinite;
+}
+
+.dark .mobile-glow-b {
+  width: 72vw;
+  height: 72vw;
+  top: 45%;
+  right: -22vw;
+  background: radial-gradient(circle, rgba(210, 220, 255, 0.05) 0%, transparent 65%);
+  opacity: 1;
+  animation: glow-drift-b 28s ease-in-out infinite;
+}
+
+.dark .mobile-glow-c {
+  width: 60vw;
+  height: 60vw;
+  bottom: 18%;
+  left: -12vw;
+  background: radial-gradient(circle, rgba(190, 205, 230, 0.04) 0%, transparent 65%);
+  opacity: 1;
+  animation: glow-drift-c 18s ease-in-out infinite;
+}
+
+@keyframes glow-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35%       { transform: translate(8vw, 6vh) scale(1.07); }
+  68%       { transform: translate(-5vw, 11vh) scale(0.96); }
+}
+
+@keyframes glow-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  38%       { transform: translate(-9vw, -8vh) scale(1.06); }
+  72%       { transform: translate(6vw, 6vh) scale(0.97); }
+}
+
+@keyframes glow-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(10vw, -7vh) scale(1.1); }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

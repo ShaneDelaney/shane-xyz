@@ -31,84 +31,146 @@ export default function Home() {
   return (
     <div style={{ background: 'var(--t-bg)' }}>
 
-      {/* ── Mobile: scrollable ── */}
-      <div className="sm:hidden">
-        {/* Hero — first screen */}
-        <div className="min-h-screen flex flex-col items-center justify-center text-center px-7 pt-[52px] pb-[72px]">
+      {/* ── Mobile: scroll narrative ── */}
+      <div className="sm:hidden relative" style={{ background: 'var(--t-bg)' }}>
 
-          <motion.p className="text-[10px] uppercase tracking-[0.18em] font-medium mb-5"
-            style={{ color: 'var(--t-tertiary)' }}
+        {/* Ambient background glows — dark mode only */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div className="mobile-glow-a" />
+          <div className="mobile-glow-b" />
+          <div className="mobile-glow-c" />
+        </div>
+
+        {/* ── SCREEN 1: Hook ── */}
+        <section className="relative z-10 min-h-[100dvh] flex flex-col px-6 pt-[52px]">
+
+          {/* Main content */}
+          <div className="flex-1 flex flex-col justify-center py-10">
+            <motion.p
+              className="text-[10px] uppercase tracking-[0.22em] font-medium mb-5"
+              style={{ color: 'var(--t-tertiary)' }}
+              initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, ease: E }}>
+              Los Angeles · Content Strategist
+            </motion.p>
+
+            <motion.h1
+              className="text-[60px] font-semibold tracking-[-0.035em] leading-[0.86] mb-7"
+              style={{ color: 'var(--t-primary)' }}
+              initial={{ opacity: 0, y: 20 }} animate={m ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.65, delay: 0.06, ease: E }}>
+              Shane<br />Delaney
+            </motion.h1>
+
+            <motion.p
+              className="text-[16px] leading-[1.62] mb-10 max-w-[300px]"
+              style={{ color: 'var(--t-secondary)' }}
+              initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.15, ease: E }}>
+              I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div
+              className="flex rounded-2xl overflow-hidden"
+              style={{ border: '1px solid var(--t-border)' }}
+              initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.22, ease: E }}>
+              {STATS.map((s, i) => (
+                <div key={s.label} className="flex-1 flex flex-col items-center py-[18px]"
+                  style={{ background: 'var(--t-surface)', borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
+                  <span className="text-[24px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
+                  <span className="text-[9px] mt-1.5 uppercase tracking-[0.1em]" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Scroll prompt */}
+          <motion.div
+            className="flex flex-col items-center gap-2 pb-8"
             initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.0, ease: E }}>
-            Los Angeles · Content Strategist
-          </motion.p>
-
-          <motion.h1 className="text-[54px] font-semibold tracking-[-0.03em] leading-[0.92] mb-6"
-            style={{ color: 'var(--t-primary)' }}
-            initial={{ opacity: 0, y: 14 }} animate={m ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.05, ease: E }}>
-            Shane<br />Delaney
-          </motion.h1>
-
-          <motion.p className="text-[15px] leading-[1.65] max-w-[265px] mb-9"
-            style={{ color: 'var(--t-secondary)' }}
-            initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.12, ease: E }}>
-            I run editorial systems for creator-driven platforms — from story sourcing to XFN review to publication, with the data fluency to verify claims, surface insights, and inform every editorial call.
-          </motion.p>
-
-          {/* Stats */}
-          <motion.div className="flex items-stretch w-full mb-9 rounded-2xl overflow-hidden"
-            style={{ border: '1px solid var(--t-border)' }}
-            initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.18, ease: E }}>
-            {STATS.map((s, i) => (
-              <div key={s.label} className="flex-1 flex flex-col items-center py-5"
-                style={{ background: 'var(--t-surface)', borderRight: i < 2 ? '1px solid var(--t-border)' : undefined }}>
-                <span className="text-[26px] font-semibold tracking-[-0.03em] leading-none" style={{ color: 'var(--t-primary)' }}>{s.value}</span>
-                <span className="text-[10px] mt-1.5 uppercase tracking-[0.1em]" style={{ color: 'var(--t-tertiary)' }}>{s.label}</span>
-              </div>
-            ))}
+            transition={{ duration: 0.6, delay: 0.55, ease: E }}>
+            <span className="text-[9px] uppercase tracking-[0.22em]" style={{ color: 'var(--t-tertiary)' }}>scroll</span>
+            <motion.div
+              className="w-px h-9"
+              style={{ background: 'linear-gradient(to bottom, var(--t-border), transparent)' }}
+              animate={{ opacity: [0.3, 0.9, 0.3] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }} />
           </motion.div>
+        </section>
 
-          {/* CTAs */}
-          <motion.div className="flex items-center gap-3"
-            initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.24, ease: E }}>
-            <Link href="/work" className="px-8 py-3.5 rounded-full text-[14px] font-medium transition-opacity active:opacity-70"
+        {/* ── STORY BEATS ── */}
+        {[
+          {
+            index: '01',
+            eyebrow: 'What I do',
+            heading: 'Editorial systems that scale',
+            body: 'From story sourcing and creator interviews through multi-stage XFN review to final publication — with data fluency to verify every claim and inform every editorial call.',
+          },
+          {
+            index: '02',
+            eyebrow: 'Meta Horizon · 2025–2026',
+            heading: 'Editorial DRI',
+            body: '13 pieces published in 5 months. 8-stage XFN review across 5 teams. Built the Growth Systems Toolkit and a Creator Studio prototype — taken to C-suite.',
+          },
+          {
+            index: '03',
+            eyebrow: 'Snap Inc. · 2025',
+            heading: 'Trend Producer',
+            body: 'Programming Lead for Spotlight — 500M+ monthly viewers. Managed 1,000+ pieces daily. Wrote and produced Tiny Texts: 25M+ views across the catalog.',
+          },
+          {
+            index: '04',
+            eyebrow: 'Earlier work',
+            heading: 'Collider · StockX · Phony',
+            body: 'SEO editorial at Collider. Brand campaign production at StockX. Content operations at Phony Content.',
+          },
+        ].map((beat) => (
+          <motion.section
+            key={beat.index}
+            className="relative z-10 px-6 py-16"
+            style={{ borderTop: '1px solid var(--t-border)' }}
+            initial={{ opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-12%' }}
+            transition={{ duration: 0.58, ease: E }}>
+            <span className="block text-[10px] font-medium tracking-[0.18em] uppercase mb-5"
+              style={{ color: 'var(--t-tertiary)' }}>
+              {beat.index} · {beat.eyebrow}
+            </span>
+            <h2 className="text-[32px] font-semibold tracking-[-0.025em] leading-[1.08] mb-5"
+              style={{ color: 'var(--t-primary)' }}>
+              {beat.heading}
+            </h2>
+            <p className="text-[15px] leading-[1.72]" style={{ color: 'var(--t-secondary)' }}>
+              {beat.body}
+            </p>
+          </motion.section>
+        ))}
+
+        {/* ── CTA ── */}
+        <motion.section
+          className="relative z-10 px-6 pt-12 pb-32"
+          style={{ borderTop: '1px solid var(--t-border)' }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10%' }}
+          transition={{ duration: 0.5, ease: E }}>
+          <div className="flex gap-3">
+            <Link href="/work"
+              className="flex-1 text-center py-[15px] rounded-full text-[14px] font-medium active:opacity-70 transition-opacity"
               style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}>
               Work
             </Link>
-            <Link href="/published" className="px-8 py-3.5 rounded-full text-[14px] font-medium transition-opacity active:opacity-70"
+            <Link href="/published"
+              className="flex-1 text-center py-[15px] rounded-full text-[14px] font-medium active:opacity-70 transition-opacity"
               style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>
               Published
             </Link>
-          </motion.div>
+          </div>
+        </motion.section>
 
-        </div>
-        {/* Highlights — revealed on scroll */}
-        <div className="px-6 pb-28 flex flex-col gap-0" style={{ borderTop: '1px solid var(--t-border)' }}>
-          {[
-            { label: 'Role', value: 'Platform Content Strategist' },
-            { label: 'Focus', value: 'Editorial systems that surface the creators shaping platform ecosystems.' },
-            { label: 'Recent', value: 'Meta Horizon — Editorial DRI. 13 pieces published. 5-team XFN review. 5 months.' },
-            { label: 'Before that', value: 'Snap Inc. — Wrote and produced Tiny Texts. 25M+ views across the catalog.' },
-            { label: 'Also', value: 'Collider, StockX, Phony Content. Editorial, production, and creator campaigns.' },
-          ].map((item, i) => (
-            <motion.div key={item.label}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col py-5"
-              style={{ borderBottom: '1px solid var(--t-border)' }}>
-              <span className="text-[10px] uppercase tracking-[0.15em] font-medium mb-2"
-                style={{ color: 'var(--t-tertiary)' }}>{item.label}</span>
-              <span className="text-[15px] leading-[1.6]"
-                style={{ color: 'var(--t-primary)' }}>{item.value}</span>
-            </motion.div>
-          ))}
-        </div>
       </div>
 
       {/* ── Desktop — unchanged ── */}
