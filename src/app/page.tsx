@@ -60,7 +60,7 @@ export default function Home() {
               style={{ color: 'var(--t-secondary)' }}
               initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.15, ease: E }}>
-              I run editorial systems for large-scale tech platforms.
+              I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
             </motion.p>
 
             {/* Stats */}
