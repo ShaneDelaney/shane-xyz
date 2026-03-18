@@ -40,18 +40,40 @@ const DESKTOP_STATS = [
   },
 ];
 
+const MOBILE_LINKS = [
+  {
+    label: 'Experience',
+    detail: 'Meta Horizon · Snap Inc. · Collider · StockX · Phony Content. Editorial DRI, trend production, brand campaigns, and content operations.',
+    href: '/work',
+    external: false,
+  },
+  {
+    label: 'Published',
+    detail: '22+ pieces live across Meta Horizon, Collider, and Snap — developer stories, GTM guides, scripted series, and creator spotlights.',
+    href: '/published',
+    external: false,
+  },
+  {
+    label: 'Resume',
+    detail: 'Content Marketing Coordinator II at Meta. Trend Producer at Snap. Full history available in the PDF.',
+    href: '/ShaneDelaney_Resume.pdf',
+    external: true,
+  },
+];
+
 export default function Home() {
   const [m, setM] = useState(false);
   const [openStat, setOpenStat] = useState<number | null>(null);
+  const [openMobile, setOpenMobile] = useState<number | null>(null);
   const statRef = useRef<HTMLDivElement>(null);
+  const mobileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setM(true); }, []);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (statRef.current && !statRef.current.contains(e.target as Node)) {
-        setOpenStat(null);
-      }
+      if (statRef.current && !statRef.current.contains(e.target as Node)) setOpenStat(null);
+      if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) setOpenMobile(null);
     }
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
@@ -92,26 +114,50 @@ export default function Home() {
               I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
             </motion.p>
 
-            {/* Quick-access cards */}
-            <div className="flex flex-col gap-2">
-              {QUICK_LINKS.map((q, i) => (
-                <motion.div
-                  key={q.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={m ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.45, delay: 0.2 + i * 0.07, ease: E }}>
-                  <Link
-                    href={q.href}
-                    target={q.external ? '_blank' : undefined}
-                    rel={q.external ? 'noopener noreferrer' : undefined}
-                    className="flex items-center justify-between px-5 py-4 rounded-2xl active:opacity-60 transition-opacity"
-                    style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                    <span className="text-[15px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--t-primary)' }}>{q.label}</span>
-                    <span className="text-[12px]" style={{ color: 'var(--t-tertiary)' }}>{q.meta}</span>
-                  </Link>
-                </motion.div>
+            {/* Quick-access dropdowns */}
+            <motion.div
+              ref={mobileRef}
+              className="flex flex-col"
+              initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: 0.22, ease: E }}>
+              {MOBILE_LINKS.map((item, i) => (
+                <div key={item.label} style={{ borderTop: '1px solid var(--t-border)' }}>
+                  <button
+                    onClick={() => setOpenMobile(openMobile === i ? null : i)}
+                    className="w-full flex items-center justify-between py-4 active:opacity-50 transition-opacity">
+                    <span className="text-[15px] font-semibold tracking-[-0.01em]" style={{ color: 'var(--t-primary)' }}>{item.label}</span>
+                    <motion.span
+                      animate={{ rotate: openMobile === i ? 180 : 0 }}
+                      transition={{ duration: 0.2, ease: E }}
+                      className="text-[10px]" style={{ color: 'var(--t-tertiary)' }}>▾</motion.span>
+                  </button>
+                  <AnimatePresence>
+                    {openMobile === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22, ease: E }}
+                        style={{ overflow: 'hidden' }}>
+                        <div className="pb-5">
+                          <p className="text-[13px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>{item.detail}</p>
+                          <Link
+                            href={item.href}
+                            target={item.external ? '_blank' : undefined}
+                            rel={item.external ? 'noopener noreferrer' : undefined}
+                            onClick={() => setOpenMobile(null)}
+                            className="text-[12px] font-medium transition-opacity active:opacity-50"
+                            style={{ color: 'var(--t-primary)' }}>
+                            {item.external ? 'Download ↓' : 'View →'}
+                          </Link>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ))}
-            </div>
+              <div style={{ borderTop: '1px solid var(--t-border)' }} />
+            </motion.div>
           </div>
 
           {/* Scroll prompt */}
