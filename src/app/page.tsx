@@ -64,10 +64,8 @@ const MOBILE_LINKS = [
 export default function Home() {
   const [m, setM] = useState(false);
   const [openStat, setOpenStat] = useState<number | null>(null);
-  const [openLink, setOpenLink] = useState<number | null>(null);
   const [openMobile, setOpenMobile] = useState<number | null>(null);
   const statRef = useRef<HTMLDivElement>(null);
-  const linkRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setM(true); }, []);
@@ -75,7 +73,6 @@ export default function Home() {
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (statRef.current && !statRef.current.contains(e.target as Node)) setOpenStat(null);
-      if (linkRef.current && !linkRef.current.contains(e.target as Node)) setOpenLink(null);
       if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) setOpenMobile(null);
     }
     document.addEventListener('mousedown', handleClick);
@@ -268,43 +265,12 @@ export default function Home() {
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
                 I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
               </motion.p>
-              <motion.div ref={linkRef} className="flex items-center gap-6 mb-8 relative"
+              <motion.div className="flex items-center gap-6 mb-8"
                 initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.18, ease: E }}>
-                {MOBILE_LINKS.map((item, i) => (
-                  <div key={item.label} className="flex items-center gap-6">
-                    <div className="relative">
-                      <button
-                        onClick={() => setOpenLink(openLink === i ? null : i)}
-                        className="group">
-                        <span className="text-[13px] font-medium transition-opacity group-hover:opacity-60" style={{ color: 'var(--t-primary)' }}>{item.label}</span>
-                      </button>
-                      <AnimatePresence>
-                        {openLink === i && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 4 }}
-                            transition={{ duration: 0.18, ease: E }}
-                            className="absolute top-full left-0 mt-3 w-[260px] rounded-xl p-4 z-50"
-                            style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
-                            <p className="text-[12px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>{item.detail}</p>
-                            <Link
-                              href={item.href}
-                              target={item.external ? '_blank' : undefined}
-                              rel={item.external ? 'noopener noreferrer' : undefined}
-                              onClick={() => setOpenLink(null)}
-                              className="text-[11px] font-medium transition-opacity hover:opacity-60"
-                              style={{ color: 'var(--t-primary)' }}>
-                              {item.external ? 'Download ↓' : 'View →'}
-                            </Link>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                ))}
-                <Link href="/about" className="text-[13px] font-medium transition-opacity hover:opacity-60"
-                  style={{ color: 'var(--t-primary)' }}>About</Link>
+                <Link href="/work" className="text-[13px] font-medium transition-opacity hover:opacity-60" style={{ color: 'var(--t-primary)' }}>Experience</Link>
+                <Link href="/published" className="text-[13px] font-medium transition-opacity hover:opacity-60" style={{ color: 'var(--t-primary)' }}>Published</Link>
+                <a href="/ShaneDelaney_Resume.pdf" target="_blank" rel="noopener noreferrer" className="text-[13px] font-medium transition-opacity hover:opacity-60" style={{ color: 'var(--t-primary)' }}>Resume</a>
+                <Link href="/about" className="text-[13px] font-medium transition-opacity hover:opacity-60" style={{ color: 'var(--t-primary)' }}>About</Link>
               </motion.div>
               <motion.div ref={statRef} className="flex items-center gap-6 relative"
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.26, ease: E }}>
