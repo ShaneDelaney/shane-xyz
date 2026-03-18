@@ -12,13 +12,10 @@ const CARDS = [
   { label: 'Meta Horizon', title: 'Develop a Marketing Plan for Your VR App', tag: 'GTM Series, Part 1', href: '/published#gtm-marketing-plan' },
 ];
 
-const COMPANIES: [string, string][] = [
-  ['Meta', 'meta'], ['Snap Inc.', 'snap'], ['StockX', 'stockx'], ['Phony Content', 'phony'], ['Collider', 'collider'],
-];
 
 const QUICK_LINKS = [
-  { label: 'Experience', sub: 'Meta · Snap · more', href: '/work', external: false },
-  { label: 'Published', sub: '13 articles', href: '/published', external: false },
+  { label: 'Experience', sub: 'Work history', href: '/work', external: false },
+  { label: 'Published', sub: 'Tech & creator platforms', href: '/published', external: false },
   { label: 'Resume', sub: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
 ];
 
@@ -176,42 +173,47 @@ export default function Home() {
 
       </div>
 
-      {/* ── Desktop — unchanged ── */}
+      {/* ── Desktop ── */}
       <div className="hidden sm:flex flex-col justify-center min-h-screen pt-[52px] pb-8">
         <div className="w-full px-10">
           <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-16">
             <div className="flex-1 min-w-0">
               <motion.p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.05, ease: E }}>
-                Los Angeles · Platform Content Strategist
+                Los Angeles · Content Strategist
               </motion.p>
               <motion.h1 className="text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5" style={{ color: 'var(--t-primary)' }}
                 initial={{ opacity: 0, y: 10 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.08, ease: E }}>
                 Shane Delaney
               </motion.h1>
-              <motion.p className="text-[17px] leading-[1.65] mb-8 max-w-[420px]" style={{ color: 'var(--t-secondary)' }}
+              <motion.p className="text-[17px] leading-[1.65] mb-8 max-w-[400px]" style={{ color: 'var(--t-secondary)' }}
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
-                I run editorial systems for creator-driven platforms — from story sourcing to XFN review to publication, with the data fluency to verify claims, surface insights, and inform every editorial call.
+                I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
               </motion.p>
-              <motion.div className="flex items-center gap-3 mb-10"
+              <motion.div className="flex items-center gap-3 mb-8"
                 initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.18, ease: E }}>
-                <Link href="/work" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
+                <Link href="/work" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
                   style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}>Work</Link>
-                <Link href="/published" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
+                <Link href="/published" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
                   style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>Published</Link>
-                <Link href="/about" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
+                <Link href="/about" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
                   style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>About</Link>
+                <a href="/ShaneDelaney_Resume.pdf" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
+                  style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>Resume ↓</a>
               </motion.div>
-              <motion.div className="flex items-center gap-2 flex-wrap"
+              <motion.div className="flex items-center gap-6"
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.26, ease: E }}>
-                {COMPANIES.map(([co, id]) => (
-                  <Link key={co} href={`/work?company=${id}`}
-                    className="text-[11px] px-2.5 py-1 rounded-full transition-colors"
-                    style={{ border: '1px solid var(--t-border)', color: 'var(--t-tertiary)' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = 'var(--t-primary)'; e.currentTarget.style.borderColor = 'var(--t-secondary)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'var(--t-tertiary)'; e.currentTarget.style.borderColor = 'var(--t-border)'; }}>
-                    {co}
-                  </Link>
+                {[
+                  { value: '22+', label: 'Pieces published' },
+                  { value: '25M+', label: 'Views' },
+                  { value: '900M+', label: 'Platform MAU' },
+                ].map((stat, i) => (
+                  <div key={stat.label} className="flex items-baseline gap-2">
+                    <span className="text-[15px] font-semibold tracking-tight" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
+                    <span className="text-[11px]" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
+                    {i < 2 && <span className="text-[11px] ml-4" style={{ color: 'var(--t-border)' }}>·</span>}
+                  </div>
                 ))}
               </motion.div>
             </div>
