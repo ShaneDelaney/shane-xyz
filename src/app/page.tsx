@@ -64,8 +64,10 @@ const MOBILE_LINKS = [
 export default function Home() {
   const [m, setM] = useState(false);
   const [openStat, setOpenStat] = useState<number | null>(null);
+  const [openLink, setOpenLink] = useState<number | null>(null);
   const [openMobile, setOpenMobile] = useState<number | null>(null);
   const statRef = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setM(true); }, []);
@@ -73,6 +75,7 @@ export default function Home() {
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (statRef.current && !statRef.current.contains(e.target as Node)) setOpenStat(null);
+      if (linkRef.current && !linkRef.current.contains(e.target as Node)) setOpenLink(null);
       if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) setOpenMobile(null);
     }
     document.addEventListener('mousedown', handleClick);
@@ -264,17 +267,49 @@ export default function Home() {
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
                 I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
               </motion.p>
-              <motion.div className="flex items-center gap-3 mb-8"
+              <motion.div ref={linkRef} className="flex items-center gap-6 mb-8 relative"
                 initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.18, ease: E }}>
-                <Link href="/work" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
-                  style={{ background: 'var(--t-primary)', color: 'var(--t-bg)' }}>Work</Link>
-                <Link href="/published" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
-                  style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>Published</Link>
-                <Link href="/about" className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
-                  style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>About</Link>
-                <a href="/ShaneDelaney_Resume.pdf" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
-                  style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>Resume ↓</a>
+                {MOBILE_LINKS.map((item, i) => (
+                  <div key={item.label} className="flex items-center gap-6">
+                    <div className="relative">
+                      <button
+                        onClick={() => setOpenLink(openLink === i ? null : i)}
+                        className="flex items-baseline gap-1.5 group">
+                        <span className="text-[13px] font-medium transition-opacity group-hover:opacity-60" style={{ color: 'var(--t-primary)' }}>{item.label}</span>
+                        <motion.span
+                          animate={{ rotate: openLink === i ? 180 : 0 }}
+                          transition={{ duration: 0.2, ease: E }}
+                          className="text-[9px]" style={{ color: 'var(--t-tertiary)' }}>▾</motion.span>
+                      </button>
+                      <AnimatePresence>
+                        {openLink === i && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 4 }}
+                            transition={{ duration: 0.18, ease: E }}
+                            className="absolute top-full left-0 mt-3 w-[260px] rounded-xl p-4 z-50"
+                            style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                            <p className="text-[12px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>{item.detail}</p>
+                            <Link
+                              href={item.href}
+                              target={item.external ? '_blank' : undefined}
+                              rel={item.external ? 'noopener noreferrer' : undefined}
+                              onClick={() => setOpenLink(null)}
+                              className="text-[11px] font-medium transition-opacity hover:opacity-60"
+                              style={{ color: 'var(--t-primary)' }}>
+                              {item.external ? 'Download ↓' : 'View →'}
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    {i < MOBILE_LINKS.length - 1 && <span style={{ color: 'var(--t-border)' }}>·</span>}
+                  </div>
+                ))}
+                <span style={{ color: 'var(--t-border)' }}>·</span>
+                <Link href="/about" className="text-[13px] font-medium transition-opacity hover:opacity-60"
+                  style={{ color: 'var(--t-primary)' }}>About</Link>
               </motion.div>
               <motion.div ref={statRef} className="flex items-center gap-6 relative"
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.26, ease: E }}>
