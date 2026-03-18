@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 
 const E = [0.16, 1, 0.3, 1] as const;
 
@@ -19,10 +19,42 @@ const QUICK_LINKS = [
   { label: 'Resume', sub: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
 ];
 
+const DESKTOP_STATS = [
+  {
+    value: '22+',
+    label: 'Pieces published',
+    detail: '13 at Meta Horizon (developer stories, GTM guides, success stories), 3 at Collider, plus Snap and brand campaigns. All live and externally published.',
+    href: '/published',
+  },
+  {
+    value: '25M+',
+    label: 'Views',
+    detail: 'Across the Tiny Texts scripted series at Snap Inc. Top story hit 6.3M views with a 39% completion rate — well above platform average.',
+    href: '/work?company=phony',
+  },
+  {
+    value: '900M+',
+    label: 'Platform MAU',
+    detail: 'Combined monthly active users across Meta Horizon and Snapchat — the platforms where Shane has led editorial operations and content strategy.',
+    href: '/work',
+  },
+];
+
 export default function Home() {
   const [m, setM] = useState(false);
+  const [openStat, setOpenStat] = useState<number | null>(null);
+  const statRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { setM(true); }, []);
+
   useEffect(() => {
-    setM(true);
+    function handleClick(e: MouseEvent) {
+      if (statRef.current && !statRef.current.contains(e.target as Node)) {
+        setOpenStat(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
   }, []);
 
   return (
@@ -196,17 +228,39 @@ export default function Home() {
                   className="inline-flex items-center px-5 py-2.5 rounded-full text-[13px] font-medium transition-opacity hover:opacity-75"
                   style={{ border: '1px solid var(--t-border)', color: 'var(--t-secondary)' }}>Resume ↓</a>
               </motion.div>
-              <motion.div className="flex items-center gap-6"
+              <motion.div ref={statRef} className="flex items-center gap-6 relative"
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.26, ease: E }}>
-                {[
-                  { value: '22+', label: 'Pieces published' },
-                  { value: '25M+', label: 'Views' },
-                  { value: '900M+', label: 'Platform MAU' },
-                ].map((stat, i) => (
-                  <div key={stat.label} className="flex items-baseline gap-2">
-                    <span className="text-[15px] font-semibold tracking-tight" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
-                    <span className="text-[11px]" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
-                    {i < 2 && <span className="text-[11px] ml-4" style={{ color: 'var(--t-border)' }}>·</span>}
+                {DESKTOP_STATS.map((stat, i) => (
+                  <div key={stat.label} className="flex items-center gap-6">
+                    <div className="relative">
+                      <button
+                        onClick={() => setOpenStat(openStat === i ? null : i)}
+                        className="flex items-baseline gap-2 group"
+                        style={{ cursor: 'pointer' }}>
+                        <span className="text-[15px] font-semibold tracking-tight transition-opacity group-hover:opacity-60" style={{ color: 'var(--t-primary)' }}>{stat.value}</span>
+                        <span className="text-[11px] transition-opacity group-hover:opacity-60" style={{ color: 'var(--t-tertiary)' }}>{stat.label}</span>
+                        <span className="text-[9px] transition-all" style={{ color: 'var(--t-tertiary)', transform: openStat === i ? 'rotate(180deg)' : 'none', display: 'inline-block' }}>▾</span>
+                      </button>
+                      <AnimatePresence>
+                        {openStat === i && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 4 }}
+                            transition={{ duration: 0.18, ease: E }}
+                            className="absolute top-full left-0 mt-3 w-[260px] rounded-xl p-4 z-50"
+                            style={{ background: 'var(--t-surface)', border: '1px solid var(--t-border)' }}>
+                            <p className="text-[12px] leading-[1.65] mb-3" style={{ color: 'var(--t-secondary)' }}>{stat.detail}</p>
+                            <Link href={stat.href} onClick={() => setOpenStat(null)}
+                              className="text-[11px] font-medium transition-opacity hover:opacity-60"
+                              style={{ color: 'var(--t-primary)' }}>
+                              See work →
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    {i < 2 && <span style={{ color: 'var(--t-border)' }}>·</span>}
                   </div>
                 ))}
               </motion.div>
