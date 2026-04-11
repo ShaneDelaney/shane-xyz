@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const PLATFORMS = ['Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
+const PLATFORMS = ['Apple', 'Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
 const FOCUS_AREAS = [
   'Editorial Judgment at Scale',
@@ -42,7 +42,7 @@ export default function About() {
             </h1>
             <p className="text-[14px] leading-[1.65] max-w-[265px]"
               style={{ color: 'var(--t-secondary)' }}>
-              Platform content strategist. Editorial systems and story pipelines at Meta, Snap, and beyond.
+              Editorial production and content systems at Apple, Meta, Snap, and beyond.
             </p>
           </div>
 
@@ -100,13 +100,13 @@ export default function About() {
                   className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  Platform content strategist with experience at Meta and Snap Inc. I run editorial systems for creator-driven platforms — from story sourcing to XFN review to publication, with the data fluency to verify claims, surface insights, and inform every editorial call.
+                  I run editorial production and content systems. Currently at Apple, owning the pipeline that moves content from concept to live placement across App Store surfaces. Previously at Meta Horizon and Snap Inc.
                 </p>
                 <p
                   className="text-[15px] leading-[1.7] mb-8 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  I operate across editorial, data, and cross-functional teams, verifying what's true, translating what's complex, and publishing what matters.
+                  I work across editorial, design, and cross-functional teams. Keeping content moving fast, landing accurately, and reaching the right audience at the right moment.
                 </p>
 
                 <div className="flex flex-col gap-2.5">

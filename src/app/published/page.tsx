@@ -63,7 +63,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'A creator spotlight on how Saydeechan built a cross-cultural community inside Horizon Worlds, expanding the platform\'s reach into Japan.',
         scope: 'Identified the creator independently. Developed the cross-cultural localization angle, conducted the editorial interview, wrote and edited the full piece, managed review and publication.',
-        impact: 'First Horizon creator story focused on Japanese market expansion — opened a new editorial lane for the team and the platform.',
+        impact: 'First Horizon creator story focused on Japanese market expansion. Opened a new editorial lane for the team and the platform.',
         url: 'https://developers.meta.com/horizon/blog/worlds/saydeechan-bringing-worlds-to-japan/',
       },
       {
@@ -72,7 +72,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon Blog', year: '2025', stat: 'Top 10 in 2 months',
         description: 'How an influencer-developer duo overcame the cold-start problem and reached the top 10 on Horizon Worlds within two months of launch.',
         scope: 'Sourced both creators, developed the platform accessibility narrative, conducted both editorial interviews, wrote the full feature, coordinated XFN review and publication.',
-        impact: 'Highlighted a world that hit the platform top 10 in two months — a key data point for Horizon\'s platform accessibility story.',
+        impact: 'Highlighted a world that hit the platform top 10 in two months, a key data point for Horizon\'s platform accessibility story.',
         url: 'https://developers.meta.com/horizon/blog/grow-a-farm-how-two-gaming-influencers-built-top-ranked-world/',
       },
       {
@@ -81,7 +81,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'A profile of the Flip Key Studios founder and his role in shaping the Horizon community through the Community Letters program.',
         scope: 'Identified the creator as an underrepresented story type. Developed the community-contribution angle, conducted the interview, wrote and edited the full profile.',
-        impact: 'Expanded the team\'s editorial definition of success beyond MAU and installs — established a precedent for community-contribution stories on the platform.',
+        impact: 'Expanded the team\'s editorial definition of success beyond MAU and installs. Established a precedent for community-contribution stories on the platform.',
         url: 'https://developers.meta.com/horizon/blog/matthiaos-pioneering-change-in-worlds-through-passion-and-community/',
       },
       {
@@ -90,7 +90,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon Blog', year: '2025',
         description: 'An annual roundup of the creators and developers who defined Horizon\'s growth in 2025, with key platform trends and takeaways.',
         scope: 'Synthesized platform data across 2025, developed the editorial framework, wrote and edited the full feature, coordinated multi-team review.',
-        impact: 'Definitive end-of-year record of Horizon\'s developer ecosystem momentum — used internally as a reference for 2026 strategy planning.',
+        impact: 'Definitive end-of-year record of Horizon\'s developer ecosystem momentum, used internally as a reference for 2026 strategy planning.',
         url: 'https://developers.meta.com/horizon/blog/year-in-review-insights-2025-breakout-creators-developers/',
       },
       {
@@ -99,7 +99,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025',
         description: 'A platform success story on how a distinctive visual identity and aesthetic commitment translate directly into audience growth on Horizon.',
         scope: 'Developed the visual-identity success story angle, conducted the creator interview, wrote the piece, managed publication on the Horizon platform.',
-        impact: 'Part of a creator success story suite used in developer recruitment and onboarding — positioned aesthetic-led creators as a distinct success archetype.',
+        impact: 'Part of a creator success story suite used in developer recruitment and onboarding. Positioned aesthetic-led creators as a distinct success archetype.',
         url: 'https://developers.meta.com/horizon/discover/success-stories/kawaii-creator/',
       },
     ],
@@ -114,7 +114,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 1',
         description: 'The anchor guide in the series. Strategy, audience research, channel selection, and the foundational thinking every VR developer needs before launch.',
         scope: 'Researched and outlined the full GTM marketing framework for VR developers. Wrote the anchor guide, coordinated accuracy review with Product and DevRel, published to the Horizon developer resource library.',
-        impact: 'Sets the strategic foundation all other guides build from — the primary entry point into the GTM series.',
+        impact: 'Sets the strategic foundation all other guides build from, the primary entry point into the GTM series.',
         url: 'https://developers.meta.com/horizon/resources/gtm-marketing-plan/',
       },
       {
@@ -123,7 +123,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 2',
         description: 'A practical framework for identifying, pitching, and activating creator partnerships to drive discovery and installs for VR apps.',
         scope: 'Researched influencer partnership models specific to VR and gaming. Wrote the full guide covering discovery, outreach, contracts, and measurement. Coordinated review with DevRel and marketing.',
-        impact: 'Practical framework for a GTM category most VR developers hadn\'t formalized — addresses a specific gap in available developer resources.',
+        impact: 'Practical framework for a GTM category most VR developers hadn\'t formalized. Addresses a specific gap in available developer resources.',
         url: 'https://developers.meta.com/horizon/resources/gtm-influencer-marketing/',
       },
       {
@@ -132,7 +132,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 3',
         description: 'Community-building and social media strategy for VR developers, covering pre-launch, launch, and post-launch audience development.',
         scope: 'Developed the community-building framework for VR developer needs, wrote the guide covering the full pre/launch/post-launch arc, coordinated cross-team review.',
-        impact: 'Most comprehensive guide in the series for organic growth — covers the full audience development lifecycle for developers without dedicated marketing support.',
+        impact: 'Most comprehensive guide in the series for organic growth. Covers the full audience development lifecycle for developers without dedicated marketing support.',
         url: 'https://developers.meta.com/horizon/resources/gtm-social-media/',
       },
       {
@@ -141,7 +141,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 4',
         description: 'How to build a complete asset library for a VR app launch, from screenshots and trailers to store page copy and press kits.',
         scope: 'Researched VR app store creative best practices. Wrote the guide covering screenshots, trailers, icons, and social assets. Coordinated review with Design and DevRel.',
-        impact: 'Addresses a consistent developer pain point — most VR developers manage their own visual identity without documented standards to follow.',
+        impact: 'Addresses a consistent developer pain point: most VR developers manage their own visual identity without documented standards to follow.',
         url: 'https://developers.meta.com/horizon/resources/gtm-marketing-assets/',
       },
       {
@@ -150,7 +150,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 5',
         description: 'A developer-focused PR playbook covering media outreach, press release structure, and how to earn coverage in a crowded VR market.',
         scope: 'Researched PR frameworks applicable to VR game launches. Wrote the full guide covering press outreach, media kits, and coverage amplification. Coordinated review with communications and DevRel.',
-        impact: 'Specifically addresses VR\'s niche press landscape — a segment most generic PR guides skip, and a consistent pain point in developer ecosystem research.',
+        impact: 'Specifically addresses VR\'s niche press landscape, a segment most generic PR guides skip and a consistent pain point in developer ecosystem research.',
         url: 'https://developers.meta.com/horizon/resources/gtm-pr-for-vr/',
       },
       {
@@ -159,7 +159,7 @@ const CATEGORIES: Category[] = [
         publication: 'Meta Horizon', year: '2025', stat: 'GTM Series, Part 6',
         description: 'How to design and deliver app demos that move users from curiosity to download, with specific guidance for VR\'s unique onboarding challenges.',
         scope: 'Researched demo design principles for VR app conversion. Wrote the final guide in the series with tactical best practices and worked examples. Coordinated review with Product and DevRel.',
-        impact: 'Closes the series with the most conversion-specific content — direct path from demo to install, addressing VR\'s uniquely high onboarding friction.',
+        impact: 'Closes the series with the most conversion-specific content: a direct path from demo to install, addressing VR\'s uniquely high onboarding friction.',
         url: 'https://developers.meta.com/horizon/resources/gtm-app-demos/',
       },
     ],
@@ -173,8 +173,8 @@ const CATEGORIES: Category[] = [
         slug: 'tiny-texts-cheer-squad',
         publication: 'Snapchat / Phony Content', year: '2024', stat: '6.3M views · 39% completion',
         description: 'The highest-performing episode in the Tiny Texts catalog. A story whose structure was deliberately engineered for audience hold.',
-        scope: 'Developed the concept, characters, and narrative arc. Wrote and revised the full script with structural techniques designed specifically to maximize completion — hook placement, pacing beats, and a calibrated ending.',
-        impact: '6.3M views. 39% completion rate — highest in the catalog. Became the benchmark for story architecture across the rest of the series.',
+        scope: 'Developed the concept, characters, and narrative arc. Wrote and revised the full script with structural techniques designed specifically to maximize completion: hook placement, pacing beats, and a calibrated ending.',
+        impact: '6.3M views. 39% completion rate, highest in the catalog. Became the benchmark for story architecture across the rest of the series.',
         url: 'https://snapchat.com/t/J2MP13US',
       },
       {
@@ -183,7 +183,7 @@ const CATEGORIES: Category[] = [
         publication: 'Snapchat / Phony Content', year: '2024', stat: '4.39M views · 20.3K followers',
         description: 'A story that converted viewers into subscribers at a rate well above series average, driven by a calibrated hook and ending structure.',
         scope: 'Developed the story concept and character dynamics. Wrote and edited the full script, specifically calibrating the ending structure for follower conversion rather than just completion.',
-        impact: '4.39M views, 20.3K followers added in one cycle — highest single-story follower conversion rate in the Tiny Texts catalog.',
+        impact: '4.39M views, 20.3K followers added in one cycle. Highest single-story follower conversion rate in the Tiny Texts catalog.',
         url: 'https://snapchat.com/t/wPotqUYw',
       },
       {
@@ -200,7 +200,7 @@ const CATEGORIES: Category[] = [
         publication: 'Snapchat / Phony Content', year: '2024', stat: '2.2M views · 9.4K followers',
         description: 'A story that consistently outperformed its view count in follower conversion, driven by a strong emotional hook and payoff.',
         scope: 'Developed the story concept and emotional hook. Designed the ending to drive above-average follower conversion, wrote and edited the full script.',
-        impact: '2.2M views, 9.4K followers. Consistently outperformed its view count in follower conversion — strong signal for the hook-and-payoff structure used.',
+        impact: '2.2M views, 9.4K followers. Consistently outperformed its view count in follower conversion, a strong signal for the hook-and-payoff structure used.',
       },
       {
         title: 'Tiny Texts: Snap Score',
@@ -223,7 +223,7 @@ const CATEGORIES: Category[] = [
         publication: 'Collider', year: '2022', stat: '125K readers · 4:23 avg time on page',
         description: 'A deep editorial feature that became a top-3 Google result for a competitive query and held audience attention well above site average.',
         scope: 'Identified the topic as a high-intent, under-served search opportunity. Researched and compiled the editorial content across a broad actor catalog. Wrote and optimized the full piece for both editorial quality and search performance.',
-        impact: '125K readers, 4:23 average time on page — well above site average. Top-3 Google result for a competitive query.',
+        impact: '125K readers, 4:23 average time on page, well above site average. Top-3 Google result for a competitive query.',
         url: 'https://collider.com/actors-and-their-favorite-movies/',
       },
       {
@@ -232,7 +232,7 @@ const CATEGORIES: Category[] = [
         publication: 'Collider', year: '2022', stat: '89K views · 22% social share rate',
         description: 'A piece timed to Succession\'s cultural peak that achieved a 22% social share rate, well above Collider\'s baseline.',
         scope: 'Identified the timing window during Succession\'s peak cultural moment. Developed the ranking framework and wrote the full editorial piece for Collider\'s film-literate audience.',
-        impact: '89K views. 22% social share rate — well above the Collider baseline. Editorial timing instinct translated directly into distribution.',
+        impact: '89K views. 22% social share rate, well above the Collider baseline. Editorial timing instinct translated directly into distribution.',
         url: 'https://collider.com/hardest-workers-in-succession-ranked/',
       },
       {
@@ -240,8 +240,8 @@ const CATEGORIES: Category[] = [
         slug: 'movies-for-fall',
         publication: 'Collider', year: '2022', stat: '76K readers · Google Discover',
         description: 'A seasonal editorial piece selected for Google Discover, demonstrating the intersection of editorial sensibility and search-surface optimization.',
-        scope: 'Developed the seasonal concept and editorial selection criteria. Wrote and optimized the feature for both search and Google Discover eligibility — structure, metadata, and quality all considered.',
-        impact: '76K readers. Selected for Google Discover — required meeting Google\'s strict editorial quality criteria. Seasonal timing drove distribution beyond search alone.',
+        scope: 'Developed the seasonal concept and editorial selection criteria. Wrote and optimized the feature for both search and Google Discover eligibility: structure, metadata, and quality all considered.',
+        impact: '76K readers. Selected for Google Discover, which required meeting Google\'s strict editorial quality criteria. Seasonal timing drove distribution beyond search alone.',
         url: 'https://collider.com/sweater-weather-movies-to-get-you-ready-for-fall/',
       },
       {
@@ -249,8 +249,8 @@ const CATEGORIES: Category[] = [
         slug: 'behind-the-streams-sydeon',
         publication: 'StockX', year: '2021',
         description: 'A creator partnership campaign at the intersection of gaming culture and resale culture, reaching audiences across both worlds.',
-        scope: 'On-set production support throughout the shoot. Talent coordination and creative logistics — bridging the gaming creator world and the StockX brand environment.',
-        impact: 'Campaign reached audiences at the intersection of gaming culture and the StockX resale marketplace — part of StockX\'s push into creator and gaming identity.',
+        scope: 'On-set production support throughout the shoot. Talent coordination and creative logistics, bridging the gaming creator world and the StockX brand environment.',
+        impact: 'Campaign reached audiences at the intersection of gaming culture and the StockX resale marketplace, part of StockX\'s push into creator and gaming identity.',
         url: 'https://www.youtube.com/watch?v=0uBuJh7sEjU',
       },
       {
@@ -258,8 +258,8 @@ const CATEGORIES: Category[] = [
         slug: 'briana-king-stockx',
         publication: 'StockX', year: '2021',
         description: 'A brand partnership announcement video positioning StockX within the gaming and creator economy space.',
-        scope: 'On-set production support for the brand campaign shoot. Talent coordination and shoot logistics — supporting a campaign at the intersection of skate identity and the StockX brand.',
-        impact: 'Positioned StockX within gaming and skate culture — connected the brand to a creator demographic that defines cultural credibility in that space.',
+        scope: 'On-set production support for the brand campaign shoot. Talent coordination and shoot logistics, supporting a campaign at the intersection of skate identity and the StockX brand.',
+        impact: 'Positioned StockX within gaming and skate culture, connecting the brand to a creator demographic that defines cultural credibility in that space.',
         url: 'https://www.youtube.com/watch?v=V8sx2CJ9x4s',
       },
       {
@@ -268,7 +268,7 @@ const CATEGORIES: Category[] = [
         publication: 'StockX', year: '2024',
         description: 'A creator profile exploring the intersection of athletic identity, personal brand, and platform culture.',
         scope: 'On-set production support across the campaign shoot. Creative direction and talent-facing logistics for a campaign built on authentic athlete storytelling.',
-        impact: 'Creator profile at the intersection of athletic identity and platform culture — positioned StockX within the creator athlete space.',
+        impact: 'Creator profile at the intersection of athletic identity and platform culture, positioning StockX within the creator athlete space.',
         url: 'https://www.youtube.com/watch?v=3-loqESOCMI',
       },
     ],

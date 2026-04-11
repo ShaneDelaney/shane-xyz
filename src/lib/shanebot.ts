@@ -4,22 +4,32 @@ export interface CacheEntry {
 }
 
 export const cache: CacheEntry[] = [
+  // --- APPLE ---
+  {
+    keywords: [['apple'], ['role', 'do', 'job', 'work', 'position', 'title', 'current']],
+    answer: "Editorial Production on the App Store team at Apple (Apr 2026 – Present), Culver City. Shane owns the operational pipeline that moves content from intake to live placement across high-visibility surfaces including the Today tab and in-app event activations. Work spans editorial coordination, timeline management, and distribution strategy.",
+  },
+  {
+    keywords: [['apple', 'app store'], ['editorial', 'content', 'pipeline', 'production']],
+    answer: "Shane is the Editorial Production coordinator for App Store content at Apple. He manages end-to-end production workflows: intake, coordination across editorial and design stakeholders, timeline management, and live execution. Supporting distribution logic that aligns content delivery with user behavior and engagement signals.",
+  },
+
   // --- META ---
   {
     keywords: [['meta'], ['role', 'do', 'job', 'work', 'position', 'title', 'current']],
-    answer: "Content Marketing Coordinator II at Meta (Oct 2025 – Mar 2026), Los Angeles. Shane owned the full editorial lifecycle for the Horizon Developer Blog — from creator sourcing and interviews through XFN coordination and publication. 13 pieces published total.",
+    answer: "Content Marketing Coordinator II at Meta (Oct 2025 – Apr 2026), Los Angeles. Shane owned the full editorial lifecycle for the Horizon Developer Blog: creator sourcing, interviews, XFN coordination, and publication. 13 pieces published total.",
   },
   {
     keywords: [['meta', 'horizon'], ['blog', 'developer', 'content', 'editorial']],
-    answer: "Shane was the sole DRI for the Meta Horizon Developer Blog — sourcing creators, conducting editorial interviews, writing developer stories and GTM guides, managing cross-functional review across Product, DevRel, Legal, Design, and Data Science, and publishing. He also built a formal stat-verification process with Data Science confirming 100% metric accuracy.",
+    answer: "Shane was the sole DRI for the Meta Horizon Developer Blog: sourcing creators, conducting editorial interviews, writing developer stories and GTM guides, managing cross-functional review across Product, DevRel, Legal, Design, and Data Science, and publishing. He also built a formal stat-verification process with Data Science confirming 100% metric accuracy.",
   },
   {
     keywords: [['gtm', 'go-to-market', 'developer guide']],
-    answer: "Shane wrote a 6-part GTM guide series for Meta Horizon — covering marketing planning, influencer partnerships, social and community strategy, marketing assets, PR, and app demos. He owned all copy and editorial direction, coordinated XFN review, and delivered the series on schedule.",
+    answer: "Shane wrote a 6-part GTM guide series for Meta Horizon: covering marketing planning, influencer partnerships, social and community strategy, marketing assets, PR, and app demos. He owned all copy and editorial direction, coordinated XFN review, and delivered the series on schedule.",
   },
   {
     keywords: [['xfn', 'cross-functional', 'stakeholder', 'coordination']],
-    answer: "Shane ran XFN review cycles across Product, DevRel, Design, Legal, and Data Science for every piece of Horizon content. He was the editorial bridge between teams — synthesizing feedback, managing stat verification, and producing internal status reports for leadership.",
+    answer: "Shane ran XFN review cycles across Product, DevRel, Design, Legal, and Data Science for every piece of Horizon content. He was the editorial bridge between teams: synthesizing feedback, managing stat verification, and producing internal status reports for leadership.",
   },
 
   // --- SNAP ---
@@ -155,4 +165,4 @@ function entry_count_check(bestScore: number, entries: CacheEntry[], q: string):
   return 999;
 }
 
-export const FALLBACK = "I don't have a specific answer for that — reach Shane directly at shanedelaney11@gmail.com.";
+export const FALLBACK = "I don't have a specific answer for that. Reach Shane directly at shanedelaney11@gmail.com.";

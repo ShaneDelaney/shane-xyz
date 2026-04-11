@@ -14,7 +14,7 @@ const CARDS = [
 
 
 const QUICK_LINKS = [
-  { label: 'Experience', meta: 'Meta · Snap · 5 companies', href: '/work', external: false },
+  { label: 'Experience', meta: 'Apple · Meta · Snap · 6 companies', href: '/work', external: false },
   { label: 'Published', meta: '22+ pieces · Tech platforms', href: '/published', external: false },
   { label: 'Resume', meta: 'Download PDF', href: '/ShaneDelaney_Resume.pdf', external: true },
 ];
@@ -29,13 +29,13 @@ const DESKTOP_STATS = [
   {
     value: '25M+',
     label: 'Views',
-    detail: 'Across the Tiny Texts scripted series at Snap Inc. Top story hit 6.3M views with a 39% completion rate — well above platform average.',
+    detail: 'Across the Tiny Texts scripted series at Snap Inc. Top story: 6.3M views with a 39% completion rate, well above platform average.',
     href: '/work?company=phony',
   },
   {
     value: '900M+',
     label: 'Platform MAU',
-    detail: 'Combined monthly active users across Meta Horizon and Snapchat — the platforms where Shane has led editorial operations and content strategy.',
+    detail: 'Combined monthly active users across the App Store, Meta Horizon, and Snapchat. The platforms where Shane has run editorial operations and content systems.',
     href: '/work',
   },
 ];
@@ -43,19 +43,19 @@ const DESKTOP_STATS = [
 const MOBILE_LINKS = [
   {
     label: 'Experience',
-    detail: 'Meta Horizon · Snap Inc. · Collider · StockX · Phony Content. Editorial DRI, trend production, brand campaigns, and content operations.',
+    detail: 'Apple · Meta Horizon · Snap Inc. · Collider · StockX · Phony Content. Editorial production, content systems, distribution, and trend programming.',
     href: '/work',
     external: false,
   },
   {
     label: 'Published',
-    detail: '22+ pieces live across Meta Horizon, Collider, and Snap — developer stories, GTM guides, scripted series, and creator spotlights.',
+    detail: '22+ pieces live across Meta Horizon, Collider, and Snap: developer stories, GTM guides, scripted series, and creator spotlights.',
     href: '/published',
     external: false,
   },
   {
     label: 'Resume',
-    detail: 'Content Marketing Coordinator II at Meta. Trend Producer at Snap. Full history available in the PDF.',
+    detail: 'Editorial Production at Apple. Content Marketing Coordinator II at Meta. Trend Producer at Snap. Full history available in the PDF.',
     href: '/ShaneDelaney_Resume.pdf',
     external: true,
   },
@@ -95,7 +95,7 @@ export default function Home() {
               style={{ color: 'var(--t-tertiary)' }}
               initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: E }}>
-              Los Angeles · Content Strategist
+              Los Angeles · Content Strategy & Editorial Systems
             </motion.p>
 
             <motion.h1
@@ -111,7 +111,7 @@ export default function Home() {
               style={{ color: 'var(--t-secondary)' }}
               initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.15, ease: E }}>
-              I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
+              I run the systems that move content from concept to live placement. High-visibility surfaces, timed to culture, aligned to how people actually engage.
             </motion.p>
 
             {/* Quick-access dropdowns */}
@@ -179,26 +179,26 @@ export default function Home() {
           {
             index: '01',
             eyebrow: 'What I do',
-            heading: 'Editorial systems that scale',
-            body: 'From story sourcing and creator interviews through multi-stage XFN review to final publication — with data fluency to verify every claim and inform every editorial call.',
+            heading: 'Content systems at scale',
+            body: 'I own the pipelines that move content from concept to live placement. High-visibility surfaces, timed to culture, aligned to how people actually engage.',
           },
           {
             index: '02',
-            eyebrow: 'Meta Horizon · 2025–2026',
-            heading: 'Editorial DRI',
-            body: '13 pieces published in 5 months. 8-stage XFN review across 5 teams. Built the Growth Systems Toolkit and a Creator Studio prototype — taken to C-suite.',
+            eyebrow: 'Apple · 2026–Present',
+            heading: 'Editorial Production, App Store',
+            body: 'Running the operational pipeline that activates and ships content across App Store surfaces: Today tab placements, in-app event activations, and time-sensitive editorial features seen by millions.',
           },
           {
             index: '03',
-            eyebrow: 'Snap Inc. · 2025',
-            heading: 'Trend Producer',
-            body: 'Programming Lead for Spotlight — 500M+ monthly viewers. Managed 1,000+ pieces daily. Wrote and produced Tiny Texts: 25M+ views across the catalog.',
+            eyebrow: 'Meta Horizon · 2025–2026',
+            heading: 'Editorial DRI',
+            body: '13 pieces published in 5 months. 8-stage XFN review across 5 teams. Built the Growth Systems Toolkit and a Creator Studio prototype, presented to C-suite.',
           },
           {
             index: '04',
-            eyebrow: 'Earlier work',
-            heading: 'Collider · StockX · Phony',
-            body: 'SEO editorial at Collider. Brand campaign production at StockX. Content operations at Phony Content.',
+            eyebrow: 'Snap Inc. · 2025',
+            heading: 'Trend Producer',
+            body: 'Programming Lead for Spotlight, 500M+ monthly viewers. Managed 1,000+ pieces daily. Wrote and produced Tiny Texts: 25M+ views across the catalog.',
           },
         ].map((beat) => (
           <motion.section
@@ -254,7 +254,7 @@ export default function Home() {
             <div className="flex-1 min-w-0">
               <motion.p className="text-[11px] uppercase tracking-[0.12em] font-medium mb-4" style={{ color: 'var(--t-tertiary)' }}
                 initial={{ opacity: 0 }} animate={m ? { opacity: 1 } : {}} transition={{ duration: 0.4, delay: 0.05, ease: E }}>
-                Los Angeles · Content Strategist
+                Los Angeles · Content Strategy & Editorial Systems
               </motion.p>
               <motion.h1 className="text-[60px] font-semibold tracking-[-0.03em] leading-[1.02] mb-5"
                 style={{ color: 'var(--t-primary)' }}
@@ -263,7 +263,7 @@ export default function Home() {
               </motion.h1>
               <motion.p className="text-[17px] leading-[1.65] mb-8 max-w-[400px]" style={{ color: 'var(--t-secondary)' }}
                 initial={{ opacity: 0, y: 8 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.14, ease: E }}>
-                I run editorial systems for creator-driven platforms — story sourcing to publication, with the data fluency to back every call.
+                I run the systems that move content from concept to live placement. High-visibility surfaces, timed to culture, aligned to how people actually engage.
               </motion.p>
               <motion.div className="flex items-center gap-6 mb-8"
                 initial={{ opacity: 0, y: 6 }} animate={m ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.18, ease: E }}>
