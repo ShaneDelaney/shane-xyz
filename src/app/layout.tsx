@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
-import Footer from "@/components/portfolio/Footer";
+
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 
@@ -18,12 +18,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.shanedelaney.xyz"),
-  title: "Shane Delaney | Find the story. Make it happen.",
-  description: "Creative judgment and careful execution. Follow the work of Shane Delaney, from storytelling and content programming to global sports campaigns at TikTok.",
+  title: "Shane Delaney | Campaigns, Content & Editorial",
+  description: "Campaign operations, content production, and editorial work at TikTok, Apple, Meta, Snap, and beyond.",
   keywords: ["TikTok", "campaign operations", "content strategy", "content marketing", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
   openGraph: {
-    title: "Shane Delaney | Find the story. Make it happen.",
-    description: "From storytelling and content programming to global sports campaigns. Creative judgment, careful execution, and the next chapter.",
+    title: "Shane Delaney | Campaigns, Content & Editorial",
+    description: "Campaign operations, content production, and editorial. Currently at TikTok.",
     url: "https://shanedelaney.xyz",
     siteName: "Shane Delaney",
     locale: "en_US",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Delaney | Find the story. Make it happen.",
-    description: "From storytelling and content programming to global sports campaigns. Creative judgment, careful execution, and the next chapter.",
+    title: "Shane Delaney | Campaigns, Content & Editorial",
+    description: "Campaign operations, content production, and editorial. Currently at TikTok.",
   },
 };
 
@@ -58,7 +58,7 @@ export default function RootLayout({
           <main id="main-content">
             {children}
           </main>
-          <Footer />
+
         </ThemeProvider>
       </body>
     </html>
