@@ -4,14 +4,18 @@ export interface CacheEntry {
 }
 
 export const cache: CacheEntry[] = [
+  {
+    keywords: [['tiktok', 'current role', 'currently', 'sports']],
+    answer: "Shane works in Global Sports Operations at TikTok, starting June 2026. He owns campaign workstreams, coordinates launch approvals across global teams, and executes sports content amplification and targeted notifications. He also helps deliver new campaign formats and test AI assisted content filtering.",
+  },
   // --- APPLE ---
   {
     keywords: [['apple'], ['role', 'do', 'job', 'work', 'position', 'title', 'current']],
-    answer: "Editorial Production on the App Store team at Apple (Apr 2026 – Present), Culver City. Shane owns the operational pipeline that moves content from intake to live placement across high-visibility surfaces including the Today tab and in-app event activations. Work spans editorial coordination, timeline management, and distribution strategy.",
+    answer: "Editorial Production on the App Store team at Apple (Apr 2026 to May 2026), Culver City. Shane owns the operational pipeline that moves content from intake to live placement across high-visibility surfaces including the Today tab and in-app event activations. Work spans editorial coordination, timeline management, and distribution strategy.",
   },
   {
     keywords: [['apple', 'app store'], ['editorial', 'content', 'pipeline', 'production']],
-    answer: "Shane is the Editorial Production coordinator for App Store content at Apple. He manages end-to-end production workflows: intake, coordination across editorial and design stakeholders, timeline management, and live execution. Supporting distribution logic that aligns content delivery with user behavior and engagement signals.",
+    answer: "Shane was the Editorial Production coordinator for App Store content at Apple. He manages end-to-end production workflows: intake, coordination across editorial and design stakeholders, timeline management, and live execution. Supporting distribution logic that aligns content delivery with user behavior and engagement signals.",
   },
 
   // --- META ---
@@ -46,7 +50,7 @@ export const cache: CacheEntry[] = [
     answer: "Shane curated personalized content feeds for Snapchat's New User Experience targeting teens 13–17, reviewing 300+ pieces per cohort. His selections contributed to 10% higher retention than platform averages.",
   },
   {
-    keywords: [['times square', 'campaign', 'say it in a snap']],
+    keywords: [['times square', 'say it in a snap']],
     answer: "Shane sourced creator content for Snap's Times Square and NYC subway brand campaign — Say It in a Snap — contributing selections that generated 500K+ daily impressions.",
   },
   {
@@ -113,7 +117,7 @@ export const cache: CacheEntry[] = [
   // --- BACKGROUND / OVERVIEW ---
   {
     keywords: [['who is', 'background', 'about shane', 'summary', 'overview', 'tell me']],
-    answer: "Shane Delaney is a content strategist based in Los Angeles. He's spent the last few years building editorial programs and content pipelines at companies like Meta, Snap Inc., Phony Content, StockX, and Collider — working at the intersection of storytelling, platform operations, and emerging technology.",
+    answer: "Shane Delaney is a content strategist based in Los Angeles. He's spent the last few years building editorial programs and content pipelines at TikTok, Apple, Meta, Snap Inc., Phony Content, StockX, and Collider — working at the intersection of storytelling, platform operations, and emerging technology.",
   },
   {
     keywords: [['distinctive', 'stand out', 'unique', 'different', 'why hire', 'strengths', 'what makes']],
@@ -121,7 +125,7 @@ export const cache: CacheEntry[] = [
   },
   {
     keywords: [['how long', 'years', 'experience', 'career', 'history']],
-    answer: "Shane has been building since 2021 — starting with StockX and Collider, then Phony Content, Snap Inc., and most recently Meta. Full-time in content operations since May 2024, LMU grad in 2023.",
+    answer: "Shane has been building since 2021 — starting with StockX and Collider, then Phony Content, Snap Inc., followed by Meta and Apple, and now TikTok. Full-time in content operations since May 2024, LMU grad in 2023.",
   },
 
   // --- LOCATION ---

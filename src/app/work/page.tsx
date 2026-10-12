@@ -30,33 +30,110 @@ interface Company {
 
 const COMPANIES: Company[] = [
   {
-    id: 'apple', name: 'Apple', role: 'Editorial Production, App Store', period: 'Apr 2026 – Present',
-    summary: 'Editorial Production on the App Store team, owning the operational pipeline that moves content from intake to live placement across high-visibility surfaces. Work spans the Today tab, in-app event activations, and time-sensitive editorial features tied to launches, trends, and culturally relevant moments. Supporting distribution systems that surface the right content to the right audience at scale.',
+  "id": "tiktok",
+  "name": "TikTok",
+  "role": "Global Sports Operations",
+  "period": "June 2026 to Present",
+  "summary": "I turn global sports campaign plans into live experiences on TikTok. I own campaign workstreams, coordinate launch approvals across partnerships, search, design, and content teams, and execute content amplification and targeted notifications around major sports moments.",
+  "problem": "Live sports campaigns bring together fixed event dates, partner assets, product surfaces, and teams across time zones. Each launch needs clear ownership and coordinated delivery.",
+  "system": "I define scope, owners, milestones, and dependencies; collect assets; route design and launch approvals; and resolve delivery blockers with teams in China and Europe. During live campaigns, I select publisher and athlete content for amplification and troubleshoot notification delivery.",
+  "impact": "Delivered sports activations across search and content hubs, publisher and athlete content promotion, and targeted notifications. Helped launch a new sports and drama format with the Chicago Cubs and contribute to testing AI assisted content filtering.",
+  "stats": [
+    {
+      "value": "Global",
+      "label": "Campaign operations"
+    },
+    {
+      "value": "Live",
+      "label": "Content delivery"
+    },
+    {
+      "value": "Launch",
+      "label": "Workstream ownership"
+    }
+  ],
+  "overview": [
+    "Own sports campaign workstreams from kickoff through launch, defining scope, owners, deadlines, and dependencies.",
+    "Coordinate assets, design reviews, and launch approvals across partnerships, search, design, and content teams.",
+    "Select and track publisher and athlete videos for amplification during live sports moments.",
+    "Execute targeted notifications and troubleshoot delivery across campaign audiences and markets.",
+    "Help deliver new sports formats and test AI assisted workflows for content selection."
+  ],
+  "initiatives": [
+    {
+      "id": "tiktok-launch",
+      "category": "Campaign Operations",
+      "title": "Global sports campaign delivery",
+      "description": "The operating work behind live sports activations: turning a campaign brief into assigned work, approved assets, and a coordinated launch.",
+      "responsibilities": [
+        "Set campaign scope, workback schedules, owners, and launch milestones",
+        "Coordinate asset collection and design and launch approvals",
+        "Resolve dependencies with global stakeholders, including teams in China and Europe"
+      ]
+    },
+    {
+      "id": "tiktok-live",
+      "category": "Live Content",
+      "title": "Content amplification and notifications",
+      "description": "Hands on delivery of publisher and athlete content promotion and targeted notifications around major sports moments, including World Cup workflows.",
+      "responsibilities": [
+        "Identify and track qualifying publisher and athlete content",
+        "Maintain delivery trackers and submit content for amplification",
+        "Execute audience notifications and troubleshoot campaign pushes"
+      ]
+    },
+    {
+      "id": "tiktok-formats",
+      "category": "New Formats",
+      "title": "Sports storytelling beyond the game",
+      "description": "Helped launch a Chicago Cubs sports and drama miniseries through search and an in app content hub. This is one example within a broader global sports campaign portfolio.",
+      "responsibilities": [
+        "Coordinate search and content hub delivery",
+        "Move assets and approvals through the launch process",
+        "Work across teams to bring a new sports storytelling format live"
+      ]
+    },
+    {
+      "id": "tiktok-ai",
+      "category": "Workflow Improvement",
+      "title": "AI assisted content filtering",
+      "description": "Collaborate on testing a filtering workflow that helps identify sports videos suitable for amplification.",
+      "responsibilities": [
+        "Stress test content filtering with teammates",
+        "Evaluate candidate content against amplification criteria",
+        "Contribute feedback and iteration to the selection workflow"
+      ]
+    }
+  ]
+},
+  {
+    id: 'apple', name: 'Apple', role: 'Editorial Production, App Store', period: 'Apr 2026 to May 2026',
+    summary: 'Editorial Production on the App Store team, managing the operational pipeline that moves content from intake to live placement across high-visibility surfaces. Work spanned the Today tab, in-app event activations, and time-sensitive editorial features tied to launches, trends, and culturally relevant moments. Coordinated assets, schedules, and approvals for editorial publishing.',
     problem: 'The App Store publishes at volume and speed. Editorial placements tied to launches, live events, and trending moments require a production pipeline that can move fast without sacrificing accuracy, coordination, or quality.',
-    system: 'Own the end-to-end production workflow for editorial content: intake, coordination across editorial and design stakeholders, timeline management, and live execution. Supporting distribution logic that aligns content delivery with user behavior and engagement signals.',
-    impact: 'Content reaches millions of users across App Store surfaces. Supporting high-visibility placements on the Today tab and in-app event activations tied to major launches and culturally relevant moments.',
+    system: 'Owned the end-to-end production workflow for editorial content: intake, coordination across editorial and design stakeholders, timeline management, and live execution. Supporting distribution logic that aligns content delivery with user behavior and engagement signals.',
+    impact: 'Delivered App Store editorial features and event placements by validating partner assets, coordinating approvals, and maintaining publishing schedules across devices and regions.',
     stats: [
       { value: 'Today Tab', label: 'Editorial Surface' },
       { value: 'In-App Events', label: 'Activation Type' },
-      { value: 'Millions', label: 'Users Reached' },
+      { value: 'Fast Track', label: 'Editorial Workflow' },
     ],
     overview: [
-      'Own the operational pipeline for App Store editorial content: from intake through live execution across high-visibility surfaces',
-      'Coordinate cross-functional workflows across editorial, design, and programming stakeholders',
-      'Drive activation of in-app events and editorial features tied to launches, updates, and live experiences',
-      'Support fast-moving content tracks focused on trending, timely, and culturally relevant moments',
-      'Maintain tracking systems that ensure accuracy, speed, and visibility across all stages of production',
-      'Contribute to distribution strategies that align content placement with user behavior and engagement signals',
+      'Owned the operational pipeline for App Store editorial content: from intake through live execution across high-visibility surfaces',
+      'Coordinated cross-functional workflows across editorial, design, and programming stakeholders',
+      'Drove activation of in-app events and editorial features tied to launches, updates, and live experiences',
+      'Supported fast-moving content tracks focused on trending, timely, and culturally relevant moments',
+      'Maintained tracking systems that ensure accuracy, speed, and visibility across all stages of production',
+      'Contributed to distribution strategies that align content placement with user behavior and engagement signals',
     ],
     initiatives: [
       { id: 'apple-pipeline', category: 'Production Operations', title: 'Editorial Content Pipeline', description: 'End-to-end ownership of the production workflow that activates and ships App Store editorial content. From intake to live placement: managing timelines, coordinating stakeholders, and keeping content moving across every stage of production.',
-        responsibilities: ['Own the full production lifecycle for editorial content from intake to live execution', 'Manage timelines across concurrent content tracks and stakeholder dependencies', 'Maintain tracking systems that surface status, blockers, and accuracy at every stage', 'Ensure editorial placements ship on time across high-visibility App Store surfaces'] },
+        responsibilities: ['Owned the full production lifecycle for editorial content from intake to live execution', 'Managed timelines across concurrent content tracks and stakeholder dependencies', 'Maintained tracking systems that surface status, blockers, and accuracy at every stage', 'Ensured editorial placements ship on time across high-visibility App Store surfaces'] },
       { id: 'apple-events', category: 'In-App Activations', title: 'In-App Event & Feature Activations', description: 'Driving the activation of in-app events and editorial features tied to app launches, updates, and live experiences. Coordinating production to hit launch windows and align with platform priorities.',
-        responsibilities: ['Coordinate production for in-app event activations tied to launches and live experiences', 'Align editorial delivery with launch windows and platform priorities', 'Support fast-turnaround execution on time-sensitive and culturally relevant activations', 'Ensure accuracy and consistency across all live placement content'] },
+        responsibilities: ['Coordinated production for in-app event activations tied to launches and live experiences', 'Aligned editorial delivery with launch windows and platform priorities', 'Supported fast-turnaround execution on time-sensitive and culturally relevant activations', 'Ensured accuracy and consistency across all live placement content'] },
       { id: 'apple-fasttrack', category: 'Content Programming', title: 'Trending & Time-Sensitive Content Tracks', description: 'Supporting fast-moving content tracks focused on trending moments, timely releases, and culturally relevant events. Production speed and editorial judgment working in parallel.',
-        responsibilities: ['Support rapid content production for trending, timely, and culturally relevant moments', 'Apply editorial judgment to prioritize and sequence time-sensitive work', 'Coordinate across teams to hit tight windows without sacrificing quality', 'Maintain production velocity across multiple concurrent content tracks'] },
+        responsibilities: ['Supported rapid content production for trending, timely, and culturally relevant moments', 'Applied editorial judgment to prioritize and sequence time-sensitive work', 'Coordinated across teams to hit tight windows without sacrificing quality', 'Maintained production velocity across multiple concurrent content tracks'] },
       { id: 'apple-distribution', category: 'Distribution & Programming', title: 'Content Distribution & Surface Programming', description: 'Contributing to how editorial content is surfaced and distributed across the App Store, supporting initiatives that tailor visibility based on user behavior, engagement patterns, and platform priorities.',
-        responsibilities: ['Support distribution strategies that align content with user behavior and engagement signals', 'Contribute to programming decisions for high-visibility surfaces including the Today tab', 'Help ensure the right content reaches the right audience at the right moment', 'Align content delivery with performance goals and platform priorities'] },
+        responsibilities: ['Supported distribution strategies that align content with user behavior and engagement signals', 'Contributed to programming decisions for high-visibility surfaces including the Today tab', 'Helped ensure the right content reaches the right audience at the right moment', 'Aligned content delivery with performance goals and platform priorities'] },
     ],
   },
   {
@@ -261,7 +338,7 @@ function getUrlLabel(url: string) {
 
 export default function Work() {
   const [mounted, setMounted] = useState(false);
-  const [activeCompany, setActiveCompany] = useState('meta');
+  const [activeCompany, setActiveCompany] = useState('tiktok');
   const [activeInitiative, setActiveInitiative] = useState<string | null>(null);
   const [publishedOpen, setPublishedOpen] = useState(true);
   const [systemsOpen, setSystemsOpen] = useState(true);

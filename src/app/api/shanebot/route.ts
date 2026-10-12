@@ -16,7 +16,7 @@ RULES:
 - Never make up information or fabricate metrics.
 
 ABOUT SHANE:
-Shane Delaney is a content strategist based in Los Angeles. He works at the intersection of editorial operations, platform content, and emerging technology.
+Shane Delaney works in Global Sports Operations at TikTok and is based in Los Angeles. He works at the intersection of editorial operations, platform content, and emerging technology.
 Email: shanedelaney11@gmail.com
 LinkedIn: linkedin.com/in/shane-delaney-546445179
 
@@ -25,8 +25,13 @@ Shane's work spans the full editorial lifecycle: sourcing and interviewing, writ
 
 EXPERIENCE:
 
+TikTok | Global Sports Operations (Contract)
+Los Angeles | June 2026 to Present
+
+Owns sports campaign workstreams from kickoff to launch: scope, owners, deadlines, assets, and approvals. Coordinates partnerships, search, design, and content teams across China and Europe. Executes publisher and athlete content amplification and targeted notifications. Helped launch a Chicago Cubs sports and drama miniseries as one example of a broader portfolio. Collaborates on testing AI assisted sports content filtering. No verified TikTok reach, revenue, or growth metrics are available; do not invent them.
+
 Apple — Editorial Production, App Store
-Culver City | April 2026 – Present
+Culver City | April 2026 to May 2026
 
 Owns the operational pipeline that moves App Store editorial content from intake to live placement across high-visibility surfaces including the Today tab and in-app event activations. Coordinates across editorial, design, and programming stakeholders. Supports fast-moving content tracks tied to launches, trends, and culturally relevant moments. Contributes to distribution strategies that align content with user behavior and engagement signals.
 
@@ -64,7 +69,7 @@ EDUCATION:
 LMU (Loyola Marymount University), B.A. English & Screenwriting, 2023.
 
 AVAILABILITY:
-Currently at Apple. Open to conversations about future opportunities in content strategy, editorial operations, or content marketing, especially at companies building at the intersection of content and technology. Based in Los Angeles. Reach him at shanedelaney11@gmail.com.`;
+Currently at TikTok. Open to conversations about future opportunities in content strategy, editorial operations, or content marketing, especially at companies building at the intersection of content and technology. Based in Los Angeles. Reach him at shanedelaney11@gmail.com.`;
 
 const client = new Anthropic();
 

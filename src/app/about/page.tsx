@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const PLATFORMS = ['Apple', 'Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
+const PLATFORMS = ['TikTok', 'Apple', 'Meta', 'Snap Inc.', 'Phony Content', 'StockX', 'Collider'];
 
 const FOCUS_AREAS = [
   'Editorial Judgment at Scale',
@@ -42,7 +42,7 @@ export default function About() {
             </h1>
             <p className="text-[14px] leading-[1.65] max-w-[265px]"
               style={{ color: 'var(--t-secondary)' }}>
-              Editorial production and content systems at Apple, Meta, Snap, and beyond.
+              Global sports campaigns at TikTok. Previously Apple, Meta, and Snap.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function About() {
             {[
               { label: 'Email', href: 'mailto:shanedelaney11@gmail.com', right: '↗', external: false },
               { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shane-delaney-546445179/', right: '↗', external: true },
-              { label: 'Resume', href: '/ShaneDelaneyResume.pdf', right: 'PDF ↓', external: false, download: true },
+              { label: 'Resume', href: '/ShaneDelaney_Resume.pdf', right: 'PDF ↓', external: false, download: true },
             ].map((item, i, arr) => (
               <a key={item.label}
                 href={item.href}
@@ -100,13 +100,13 @@ export default function About() {
                   className="text-[15px] leading-[1.7] mb-3 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  I run editorial production and content systems. Currently at Apple, owning the pipeline that moves content from concept to live placement across App Store surfaces. Previously at Meta Horizon and Snap Inc.
+                  I work in Global Sports Operations at TikTok, turning campaign ideas into live audience experiences. I combine editorial judgment with the planning and coordination that gets work launched.
                 </p>
                 <p
                   className="text-[15px] leading-[1.7] mb-8 max-w-sm"
                   style={{ color: 'var(--t-secondary)' }}
                 >
-                  I work across editorial, design, and cross-functional teams. Keeping content moving fast, landing accurately, and reaching the right audience at the right moment.
+                  At TikTok, I bring partnerships, search, design, and content teams together to launch global sports campaigns. My background spans App Store editorial production, developer storytelling at Meta, and content programming at Snap.
                 </p>
 
                 <div className="flex flex-col gap-2.5">
@@ -139,7 +139,7 @@ export default function About() {
                     <span className="text-[13px]" style={{ color: 'var(--t-tertiary)' }}>↗</span>
                   </a>
                   <a
-                    href="/ShaneDelaneyResume.pdf"
+                    href="/ShaneDelaney_Resume.pdf"
                     download
                     className="flex items-center justify-between px-4 py-3.5 rounded-xl transition-all group max-w-xs"
                     style={{ border: '1px solid var(--t-border)' }}

@@ -18,12 +18,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Shane Delaney | Content Strategy",
-  description: "Content strategist working at the intersection of platforms, creators, and emerging technology. Most recently at Meta and Snap Inc.",
-  keywords: ["content strategy", "content marketing", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
+  metadataBase: new URL("https://www.shanedelaney.xyz"),
+  title: "Shane Delaney | Campaign & Content Operations",
+  description: "Global Sports Operations at TikTok. Campaign launches, content delivery, and editorial production, with experience at Apple, Meta, and Snap.",
+  keywords: ["TikTok", "campaign operations", "content strategy", "content marketing", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
   openGraph: {
-    title: "Shane Delaney | Content Strategy",
-    description: "Content strategist at the intersection of platforms, creators, and emerging technology.",
+    title: "Shane Delaney | Campaign & Content Operations",
+    description: "Global sports campaigns at TikTok. Previously Apple, Meta, and Snap.",
     url: "https://shanedelaney.xyz",
     siteName: "Shane Delaney",
     locale: "en_US",
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Delaney | Content Strategy",
-    description: "Content strategist at the intersection of platforms, creators, and emerging technology.",
+    title: "Shane Delaney | Campaign & Content Operations",
+    description: "Global sports campaigns at TikTok. Previously Apple, Meta, and Snap.",
   },
 };
 

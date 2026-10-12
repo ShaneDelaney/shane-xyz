@@ -41,7 +41,7 @@ export default async function Image() {
             Editorial operations<br />and content strategy.
           </div>
           <div style={{ color: '#9ca3af', fontSize: '22px', fontWeight: '400' }}>
-            Content Marketing · Meta · Los Angeles, CA
+            Global Sports Operations · TikTok · Los Angeles
           </div>
         </div>
 
@@ -49,7 +49,7 @@ export default async function Image() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ color: '#374151', fontSize: '18px', fontWeight: '600' }}>Shane Delaney</span>
           <div style={{ display: 'flex', gap: '8px' }}>
-            {['Meta', 'Snap Inc.', 'Collider', 'StockX'].map((co) => (
+            {['TikTok', 'Apple', 'Meta', 'Snap Inc.'].map((co) => (
               <span
                 key={co}
                 style={{
