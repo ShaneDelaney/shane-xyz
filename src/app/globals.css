@@ -182,3 +182,53 @@ a.current-panel:hover{background:var(--t-surface-hover);border-color:var(--t-bor
 @media(max-width:700px) and (min-height:531px) and (max-height:700px){
  .dashboard{grid-template-rows:210px 88px minmax(0,1fr)}
 }
+
+/* One quiet introduction, with the work one click away. */
+.home-intro {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  padding: clamp(24px, 5vw, 72px);
+  scrollbar-width: thin;
+}
+.home-intro-content {
+  width: 100%;
+  max-width: 960px;
+  margin-block: auto;
+}
+.home-intro .eyebrow { display: block; margin-bottom: 22px; }
+.home-intro h1 { font-size: clamp(44px, 7vw, 96px); text-wrap: initial; }
+.home-focus {
+  margin-top: 24px;
+  color: var(--t-primary);
+  font-size: clamp(22px, 2.8vw, 36px);
+  line-height: 1.35;
+  letter-spacing: -.035em;
+  text-wrap: pretty;
+}
+.home-direction {
+  max-width: 570px;
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+.home-intro .actions { margin-top: 32px; }
+.home-intro .button { min-height: 44px; gap: 8px; }
+@media (max-width: 700px) {
+  .home-intro { padding: 28px 14px; }
+  .home-intro .eyebrow { font-size: 10px; margin-bottom: 18px; }
+  .home-intro h1 { font-size: clamp(38px, 10vw, 64px); }
+  .home-focus { margin-top: 22px; font-size: clamp(22px, 5.6vw, 30px); max-width: 440px; }
+  .home-direction { margin-top: 16px; font-size: 14px; max-width: 420px; }
+  .home-intro .actions { margin-top: 28px; }
+}
+@media (max-height: 530px) {
+  .home-intro { padding-block: 16px; }
+  .home-intro .eyebrow { margin-bottom: 12px; }
+  .home-intro h1 { font-size: clamp(36px, 6vw, 60px); }
+  .home-focus { margin-top: 14px; font-size: 22px; }
+  .home-direction { margin-top: 12px; font-size: 14px; }
+  .home-intro .actions { margin-top: 20px; }
+}
