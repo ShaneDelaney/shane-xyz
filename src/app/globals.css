@@ -106,3 +106,68 @@
 @media(max-width:1000px){.publication-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site-header{padding:0 24px}#main-content{padding:8px 24px 24px}.workspace{grid-template-columns:215px 1fr}.detail-panel{padding:28px}.intro-panel,.current-panel{padding:24px}.about-copy{padding:28px}}
 @media(max-width:700px){.site-header{height:100px;padding:12px 18px;display:grid;grid-template-columns:1fr auto;gap:10px}.site-header nav{grid-row:2;grid-column:1/-1;justify-content:space-between;gap:2px}.site-header nav a{padding:7px 10px;font-size:11px}.theme-toggle{grid-column:2;grid-row:1;width:28px;height:28px}#main-content{height:calc(100dvh - 100px);padding:8px 14px 16px}.panel{border-radius:16px}.dashboard{grid-template-columns:1fr;grid-template-rows:minmax(0,1.3fr) minmax(0,.75fr) minmax(0,.8fr);gap:10px}.intro-panel{padding:20px;gap:10px}.intro-panel h1{font-size:34px}.intro-panel .lead{font-size:16px}.intro-panel .lead br{display:none}.intro-panel p{font-size:12px}.button{padding:8px 12px;min-height:34px;font-size:11px}.current-panel{padding:16px 20px;gap:8px}.current-panel h2{font-size:24px}.current-panel .role{font-size:12px;margin:4px 0}.current-panel div>p:last-child:not(.role){display:none}.pill{font-size:9px}.selected-panel{grid-column:auto;padding:16px;gap:12px}.panel-label h2{font-size:16px}.selected-grid{grid-template-columns:repeat(3,minmax(145px,1fr));overflow:auto;gap:8px}.selected-grid .mini-card{padding:12px;gap:5px}.selected-grid h3{font-size:14px}.selected-grid p{font-size:10px}.selected-grid .mini-card>span:last-child{display:none}.eyebrow{font-size:9px}.workspace{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:10px}.sidebar-heading{display:none}.role-sidebar nav{display:flex;gap:4px;overflow:auto;padding:7px}.role-sidebar a{padding:10px 14px;flex-shrink:0}.role-sidebar a strong{font-size:12px}.role-sidebar a span{display:none}.detail-panel{padding:24px}.detail-header h1{font-size:38px}.example-grid{grid-template-columns:1fr}.collection-header{padding:20px}.collection-header h1{font-size:30px}.category-nav{gap:5px;margin-top:14px}.category-nav a{font-size:10px;padding:6px 8px}.publication-scroll{padding:20px}.publication-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr;grid-template-rows:24% minmax(0,1fr);gap:10px}.portrait img{object-position:center 35%}.about-copy{padding:24px}.about-copy h1{font-size:34px;margin-bottom:18px}.about-copy .lead{font-size:19px}.contact-panel{padding:24px}.contact-panel h1{font-size:36px}.contact-panel .button{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Mobile refinement: fixed canvas, readable panels, and full card targets. */
+:root{--t-secondary:#595959}.dark{--t-secondary:#a0a0a0}
+h1,h2,h3,.lead{text-wrap:balance}p{overflow-wrap:break-word}
+.intro-panel .lead{max-width:460px}.career-note{font-size:13px;letter-spacing:.015em}
+.current-panel{position:relative;justify-content:center;gap:16px;transition:border-color .18s ease,background .18s ease}
+a.current-panel:hover{background:var(--t-surface-hover);border-color:var(--t-border-strong)}
+.current-panel .role{margin:6px 0 0}.current-link{font-size:12px;font-weight:500;margin-top:8px}.current-link span{margin-left:8px}
+.portrait img{object-position:57% center}
+.scroll-panel{-webkit-overflow-scrolling:touch}.role-sidebar nav{scroll-padding:12px}
+@media(max-width:700px){
+ .site-header{height:112px;padding:8px 14px 0;gap:0;grid-template-rows:44px 52px}
+ .site-header nav a{min-height:44px;display:flex;align-items:center;justify-content:center;padding:8px 10px;font-size:12px}
+ .theme-toggle{width:44px;height:44px;border:0}
+ #main-content{height:calc(100dvh - 112px);padding:4px 12px max(12px,env(safe-area-inset-bottom))}
+ .dashboard{grid-template-rows:minmax(174px,1fr) 100px minmax(0,1.15fr);gap:10px}
+ .intro-panel{padding:20px;gap:10px;justify-content:center;scrollbar-width:thin}
+ .intro-panel h1{font-size:clamp(30px,8.5vw,40px)}
+ .intro-panel .lead{font-size:17px;line-height:1.35;text-wrap:initial}
+ .intro-panel .career-note{font-size:12px}.intro-panel .eyebrow{display:none}
+ .actions{gap:8px}.button{min-height:44px;padding:10px 14px;font-size:12px}
+ .current-panel{padding:15px 20px;gap:4px;overflow:hidden}
+ .current-panel .eyebrow{font-size:9px}
+ .current-title{padding-right:26px}.current-panel h2{font-size:24px}
+ .current-panel .role{font-size:12px;margin:3px 0 0}
+ .current-description{display:none}
+ .current-link{font-size:0;position:absolute;right:20px;top:50%;margin:0;transform:translateY(-50%)}
+ .current-link span{font-size:20px;margin:0}
+ .selected-panel{padding:12px 16px;gap:4px}
+ .selected-panel .panel-label{flex-shrink:0;min-height:38px}
+ .selected-panel .text-link{min-height:44px;display:flex;align-items:center;font-size:12px}
+ .selected-grid{display:flex;flex-direction:column;gap:0;overflow:auto;scrollbar-width:thin}
+ .selected-grid .mini-card{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;border:0;border-radius:0;border-bottom:1px solid var(--t-border);padding:10px 0;gap:3px 12px;flex-shrink:0;min-height:58px}
+ .selected-grid .mini-card:last-child{border-bottom:0}
+ .selected-grid .mini-card .eyebrow{font-size:9px;grid-column:1;grid-row:1}
+ .selected-grid .mini-card h3{font-size:15px;grid-column:1;grid-row:2}
+ .selected-grid .mini-card p{display:none}
+ .selected-grid .mini-card>.card-arrow:last-child{display:block;grid-column:2;grid-row:1/3;align-self:center;margin:0;font-size:18px}
+ .role-sidebar a{min-height:44px;justify-content:center}
+ .category-nav{flex-wrap:nowrap;overflow:auto;scrollbar-width:thin;padding-bottom:3px;gap:6px}
+ .category-nav a{min-height:44px;display:flex;align-items:center;flex-shrink:0;font-size:11px;padding:8px 12px}
+ .collection-header{padding:18px 20px 12px}
+ .detail-panel{padding:24px 20px}.detail-header>p:last-child{font-size:14px}
+ .contributions{font-size:14px}.mini-card p{font-size:13px}
+ .publication .text-link,.example-grid .text-link{min-height:44px;display:flex;align-items:center}
+ .about-grid{grid-template-rows:clamp(125px,23dvh,190px) minmax(0,1fr)}
+ .portrait img{object-position:54% 23%}
+ .about-copy{padding:22px}.about-copy .lead{font-size:20px}.about-copy>p{font-size:14px}
+ .contact-panel .button{max-width:100%;overflow-wrap:anywhere;font-size:12px}
+}
+@media(max-width:700px) and (max-height:700px){
+ .dashboard{grid-template-rows:174px 88px minmax(0,1fr);gap:8px}
+ .intro-panel{padding:14px 18px;gap:8px}.intro-panel h1{font-size:30px}
+ .intro-panel .lead{font-size:15px}.intro-panel .career-note{font-size:11px}
+ .selected-panel{padding:6px 14px}.selected-grid .mini-card{padding:8px 0;min-height:54px}
+ .current-panel{padding:12px 18px}
+ .about-grid{grid-template-rows:110px minmax(0,1fr)}
+}
+@media(max-width:700px) and (max-height:530px){
+ .dashboard{grid-template-rows:minmax(0,1fr);grid-template-columns:1fr 1fr}
+ .intro-panel{grid-column:1;grid-row:1}.current-panel{display:none}
+ .selected-panel{grid-column:2;grid-row:1}.intro-panel .actions{flex-direction:column}
+ .about-grid{grid-template-columns:130px minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+ .portrait img{object-position:57% center}
+}

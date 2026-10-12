@@ -1,2 +1,34 @@
 import Link from 'next/link';
-export default function Home(){return <div className="dashboard"><section className="panel intro-panel"><span className="eyebrow">Los Angeles · Portfolio</span><h1>Shane Delaney</h1><p className="lead">Campaign operations.<br/>Content production. Editorial.</p><p>Currently in Global Sports Operations at TikTok.<br/>Previously Apple, Meta, and Snap.</p><div className="actions"><Link className="button primary" href="/work">Explore experience ↗</Link><a className="button" href="mailto:shanedelaney11@gmail.com">Get in touch</a></div></section><section className="panel current-panel"><div className="panel-label"><span className="eyebrow">Current role</span><span className="pill">2026 to present</span></div><div><h2>TikTok</h2><p className="role">Global Sports Operations</p><p>I coordinate campaign workstreams, content, and launches across global sports teams.</p></div><Link className="text-link" href="/work/tiktok">View contributions ↗</Link></section><section className="panel selected-panel"><div className="panel-label"><h2>Selected work</h2><Link className="text-link" href="/published">View all ↗</Link></div><div className="selected-grid"><Link className="mini-card" href="/published#vail-vr-part-one"><span className="eyebrow">Meta Horizon</span><h3>VAIL VR</h3><p>Developer stories</p><span aria-hidden="true">↗</span></Link><Link className="mini-card" href="/work/phony"><span className="eyebrow">Phony Content</span><h3>Tiny Texts</h3><p>Scriptwriting & production</p><span aria-hidden="true">↗</span></Link><Link className="mini-card" href="/work/snap"><span className="eyebrow">Snap Inc.</span><h3>Spotlight</h3><p>Content programming</p><span aria-hidden="true">↗</span></Link></div></section></div>}
+
+const selected = [
+  { company: 'Meta Horizon', title: 'VAIL VR', detail: 'Developer stories', href: '/published#vail-vr-part-one' },
+  { company: 'Phony Content', title: 'Tiny Texts', detail: 'Scriptwriting & production', href: '/work/phony' },
+  { company: 'Snap Inc.', title: 'Spotlight', detail: 'Content programming', href: '/work/snap' },
+];
+
+export default function Home() {
+  return <div className="dashboard">
+    <section className="panel intro-panel">
+      <span className="eyebrow">Los Angeles</span>
+      <h1>Shane Delaney</h1>
+      <p className="lead">Campaigns, content & editorial.</p>
+      <p className="career-note">TikTok · Apple · Meta · Snap</p>
+      <div className="actions">
+        <Link className="button primary" href="/work">Explore my work ↗</Link>
+        <a className="button" href="mailto:shanedelaney11@gmail.com">Get in touch</a>
+      </div>
+    </section>
+    <Link className="panel current-panel" href="/work/tiktok">
+      <span className="eyebrow">Currently at</span>
+      <div className="current-title"><h2>TikTok</h2><p className="role">Global Sports Operations</p></div>
+      <p className="current-description">Campaign coordination, content delivery, and global launches.</p>
+      <span className="current-link">View role <span aria-hidden="true">↗</span></span>
+    </Link>
+    <section className="panel selected-panel">
+      <div className="panel-label"><h2>Selected work</h2><Link className="text-link" href="/published">View all ↗</Link></div>
+      <div className="selected-grid">{selected.map(item => <Link className="mini-card" key={item.title} href={item.href}>
+        <span className="eyebrow">{item.company}</span><h3>{item.title}</h3><p>{item.detail}</p><span className="card-arrow" aria-hidden="true">↗</span>
+      </Link>)}</div>
+    </section>
+  </div>;
+}
