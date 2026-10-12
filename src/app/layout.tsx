@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/navigation/Navigation";
-import BottomNav from "@/components/navigation/BottomNav";
+import Footer from "@/components/portfolio/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { SwipeRouter } from "@/components/SwipeRouter";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,17 +14,16 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.shanedelaney.xyz"),
-  title: "Shane Delaney | Campaign & Content Operations",
-  description: "Global Sports Operations at TikTok. Campaign launches, content delivery, and editorial production, with experience at Apple, Meta, and Snap.",
+  title: "Shane Delaney | Find the story. Make it happen.",
+  description: "Creative judgment and careful execution. Follow the work of Shane Delaney, from storytelling and content programming to global sports campaigns at TikTok.",
   keywords: ["TikTok", "campaign operations", "content strategy", "content marketing", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
   openGraph: {
-    title: "Shane Delaney | Campaign & Content Operations",
-    description: "Global sports campaigns at TikTok. Previously Apple, Meta, and Snap.",
+    title: "Shane Delaney | Find the story. Make it happen.",
+    description: "From storytelling and content programming to global sports campaigns. Creative judgment, careful execution, and the next chapter.",
     url: "https://shanedelaney.xyz",
     siteName: "Shane Delaney",
     locale: "en_US",
@@ -32,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Delaney | Campaign & Content Operations",
-    description: "Global sports campaigns at TikTok. Previously Apple, Meta, and Snap.",
+    title: "Shane Delaney | Find the story. Make it happen.",
+    description: "From storytelling and content programming to global sports campaigns. Creative judgment, careful execution, and the next chapter.",
   },
 };
 
@@ -55,17 +54,11 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`} style={{ background: 'var(--t-bg)', color: 'var(--t-primary)', transition: 'background 0.2s ease, color 0.2s ease' }}>
         <ThemeProvider>
           <Navigation />
-          {/* Mobile ambient glows — visible site-wide in dark mode */}
-          <div className="sm:hidden fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-            <div className="mobile-glow-a" />
-            <div className="mobile-glow-b" />
-            <div className="mobile-glow-c" />
-          </div>
-          <main className="flex-grow relative z-10">
+          <a className="skip-link" href="#main-content">Skip to content</a>
+          <main id="main-content">
             {children}
           </main>
-          <BottomNav />
-          <SwipeRouter />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
