@@ -11,8 +11,8 @@ export default function Home() {
     <section className="panel intro-panel">
       <span className="eyebrow">Los Angeles</span>
       <h1>Shane Delaney</h1>
-      <p className="lead">Campaigns, content & editorial.</p>
-      <p className="career-note">TikTok · Apple · Meta · Snap</p>
+      <p className="lead">Project management. Global operations.</p>
+      <p className="career-note">Leading campaign workstreams at TikTok. Building toward broader leadership in tech and product.</p>
       <div className="actions">
         <Link className="button primary" href="/work">Explore my work ↗</Link>
         <a className="button" href="mailto:shanedelaney11@gmail.com">Get in touch</a>

@@ -18,12 +18,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.shanedelaney.xyz"),
-  title: "Shane Delaney | Campaigns, Content & Editorial",
-  description: "Campaign operations, content production, and editorial work at TikTok, Apple, Meta, Snap, and beyond.",
-  keywords: ["TikTok", "campaign operations", "content strategy", "content marketing", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
+  title: "Shane Delaney | Project Management & Global Operations",
+  description: "Project management and global operations. Leading campaign workstreams at TikTok, with experience at Apple, Meta, and Snap.",
+  keywords: ["TikTok", "campaign operations", "project management", "cross functional coordination", "Meta", "Snap Inc", "editorial operations", "creator ecosystems", "platform growth"],
   openGraph: {
-    title: "Shane Delaney | Campaigns, Content & Editorial",
-    description: "Campaign operations, content production, and editorial. Currently at TikTok.",
+    title: "Shane Delaney | Project Management & Global Operations",
+    description: "Project management. Global operations. Leading campaign workstreams at TikTok.",
     url: "https://shanedelaney.xyz",
     siteName: "Shane Delaney",
     locale: "en_US",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shane Delaney | Campaigns, Content & Editorial",
-    description: "Campaign operations, content production, and editorial. Currently at TikTok.",
+    title: "Shane Delaney | Project Management & Global Operations",
+    description: "Project management. Global operations. Leading campaign workstreams at TikTok.",
   },
 };
 
