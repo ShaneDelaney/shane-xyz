@@ -6,7 +6,7 @@ export interface CacheEntry {
 export const cache: CacheEntry[] = [
   {
     keywords: [['tiktok', 'current role', 'currently', 'sports']],
-    answer: "Shane works in Global Sports Operations at TikTok, starting June 2026. He owns campaign workstreams, coordinates launch approvals across global teams, and executes sports content amplification and targeted notifications. He also helps deliver new campaign formats and test AI assisted content filtering.",
+    answer: "Shane is a Content Delivery Associate on TikTok’s Global Sports Operations team, starting June 2026. He owns campaign workstreams, coordinates launch approvals across global teams, and executes sports content amplification and targeted notifications. He also helps deliver new campaign formats and test AI assisted content filtering.",
   },
   // --- APPLE ---
   {

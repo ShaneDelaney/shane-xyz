@@ -7,19 +7,24 @@ export type WorkStory = {
 
 export const work: WorkStory[] = [
   {
-    id: 'tiktok', company: 'TikTok', role: 'Global Sports Operations', period: 'June 2026 to present', chapter: 'Bring it live',
-    title: 'Turning sports moments into live experiences.',
-    summary: "Global sports campaigns across search, content hubs, and notifications.",
-    context: 'A sports campaign has a fixed moment to meet. Partner content, search experiences, design, notifications, and approvals all need to arrive together, across teams and time zones.',
-    contribution: ["Own campaign scope, timelines, and launch coordination.", "Coordinate assets and approvals across partnerships, search, design, and regional teams.", "Select publisher and athlete content for amplification and deliver targeted notifications.", "Support new sports formats and test AI assisted content selection."],
-    delivered: 'Sports activations spanning search, content hubs, promoted publisher and athlete videos, and targeted notifications. My responsibility is the operational work that gets these experiences ready and live.',
-    throughline: 'Editorial judgment becomes launch judgment: deciding what needs to happen, who needs to be involved, and how to carry an idea all the way to its audience.',
+    id: 'tiktok', company: 'TikTok', role: 'Content Delivery Associate · Global Sports Operations', period: 'June 2026 to present', chapter: 'Bring it live',
+    title: 'Coordinating global sports campaigns from planning through launch.',
+    summary: 'I coordinate the teams, content, and approvals behind sports campaigns on TikTok, helping fans discover relevant videos and experiences across the app.',
+    context: 'Sports campaigns run against fixed event schedules. I coordinate content, design, search experiences, and approvals across time zones so each part is ready for launch.',
+    contribution: [
+      'Own campaign delivery workflows, translating scope into timelines, responsibilities, and launch requirements.',
+      'Coordinate partnerships, search, design, and regional teams across China and Europe to move assets and approvals through delivery.',
+      'Prioritize urgent launch issues and coordinate troubleshooting across the teams responsible.',
+      'Select publisher and athlete videos for wider distribution and deliver targeted notifications that connect viewers with campaign content.',
+    ],
+    delivered: 'Coordinated delivery of sports content across search, dedicated content pages, video distribution, and audience notifications.',
+    throughline: 'Connect teams and priorities to bring audience experiences from planning into the app.',
     collaborators: 'Sports partnerships, search, design, content, and regional operations teams.',
     examples: [
-      { title: 'Global campaign workstreams', description: 'Set up the people, assets, deadlines, and approvals behind sports activations. NASCAR campaign coordination is one example within a broader portfolio.' },
-      { title: 'Live content and notifications', description: 'Publisher and athlete amplification, including World Cup content workflows, alongside audience notification delivery and troubleshooting.' },
-      { title: 'Sports meets scripted storytelling', description: 'Helped deliver a Chicago Cubs drama miniseries through search and a content hub, bringing a new storytelling format into a sports campaign.' },
-      { title: 'Better content selection', description: 'Collaborate with teammates to test and refine AI assisted filtering of sports videos suitable for amplification.' },
+      { title: 'Campaign delivery', description: 'Coordinate deadlines, assets, and approvals for sports experiences across search and dedicated content pages.' },
+      { title: 'Content distribution', description: 'Select relevant publisher and athlete videos, deliver audience notifications, and troubleshoot delivery issues.' },
+      { title: 'New content formats', description: 'Help bring scripted sports content into search and dedicated content pages, extending how fans engage with a campaign.' },
+      { title: 'Workflow improvement', description: 'Collaborate on testing AI assisted video filtering to support content selection for wider distribution.' },
     ],
   },
   {
@@ -64,7 +69,7 @@ export const work: WorkStory[] = [
     delivered: 'A catalog of published Tiny Texts episodes, supported by a repeatable process for writing, editing, and production.',
     throughline: 'This is where the creative and operational parts of my work started coming together: make a story worth following, then build a way to keep making it.',
     collaborators: 'Writers, editors, production teammates, and company leadership.',
-    examples: [{ title: 'Tiny Texts: Cheer Squad', description: 'A scripted story built for the rhythm of a text conversation.', href: 'https://snapchat.com/t/J2MP13US', label: 'Watch on Snapchat' }, { title: 'Tiny Texts: Inhaler', description: 'Character, tension, and a mobile storytelling format.', href: 'https://snapchat.com/t/wPotqUYw', label: 'Watch on Snapchat' }],
+    examples: [{ title: 'Tiny Texts: Cheer Squad', description: 'A scripted story built for the rhythm of a text conversation.' }, { title: 'Tiny Texts: Inhaler', description: 'Character, tension, and a mobile storytelling format.' }],
   },
   {
     id: 'stockx', company: 'StockX', role: 'Brand Creative Production · Freelance', period: '2021 and 2024', chapter: 'Pay attention to culture',

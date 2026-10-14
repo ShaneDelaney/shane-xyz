@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import groups from '@/data/published.json';
 
 export const metadata = { title: 'Published work | Shane Delaney' };
@@ -23,6 +22,7 @@ export default function Published() {
             <h2>{labels[group.id]}</h2>
             <div className="publication-list">
               {group.articles.map(article => {
+                const url = 'url' in article ? article.url : undefined;
                 const contribution = article.publication.includes('StockX') ? 'Production support'
                   : article.publication.includes('Collider') ? 'Editorial writing'
                   : group.id === 'narrative' ? 'Scriptwriting & production' : 'Writing & editorial production';
@@ -30,15 +30,15 @@ export default function Published() {
                   <div className="publication-info">
                     <span className="eyebrow">{article.publication} · {article.year}</span>
                     <h3>{article.title}</h3>
-                    <p>{contribution}{!article.url && ' · Series overview'}</p>
+                    <p>{contribution}</p>
                   </div>
-                  <span className="publication-arrow" aria-hidden="true">↗</span>
+                  {url && <span className="publication-arrow" aria-hidden="true">↗</span>}
                 </>;
                 return (
                   <article id={article.slug} key={article.slug} className="publication publication-entry">
-                    {article.url
-                      ? <a className="publication-link" href={article.url} target="_blank" rel="noopener noreferrer">{content}<span className="sr-only"> (opens in a new tab)</span></a>
-                      : <Link className="publication-link" href="/work/phony">{content}</Link>}
+                    {url
+                      ? <a className="publication-link" href={url} target="_blank" rel="noopener noreferrer">{content}<span className="sr-only"> (opens in a new tab)</span></a>
+                      : <div className="publication-link publication-static">{content}</div>}
                   </article>
                 );
               })}

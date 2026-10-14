@@ -16,7 +16,7 @@ RULES:
 - Never make up information or fabricate metrics.
 
 ABOUT SHANE:
-Shane Delaney works in Global Sports Operations at TikTok and is based in Los Angeles. He works at the intersection of editorial operations, platform content, and emerging technology.
+Shane Delaney is a Content Delivery Associate on the Global Sports Operations team at TikTok and is based in Los Angeles. He works at the intersection of editorial operations, platform content, and emerging technology.
 Email: shanedelaney11@gmail.com
 LinkedIn: linkedin.com/in/shane-delaney-546445179
 
@@ -25,10 +25,10 @@ Shane's work spans the full editorial lifecycle: sourcing and interviewing, writ
 
 EXPERIENCE:
 
-TikTok | Global Sports Operations (Contract)
+TikTok | Content Delivery Associate · Global Sports Operations (Contract)
 Los Angeles | June 2026 to Present
 
-Owns sports campaign workstreams from kickoff to launch: scope, owners, deadlines, assets, and approvals. Coordinates partnerships, search, design, and content teams across China and Europe. Executes publisher and athlete content amplification and targeted notifications. Helped launch a Chicago Cubs sports and drama miniseries as one example of a broader portfolio. Collaborates on testing AI assisted sports content filtering. No verified TikTok reach, revenue, or growth metrics are available; do not invent them.
+Owns sports campaign workstreams from kickoff to launch: scope, owners, deadlines, assets, and approvals. Coordinates partnerships, search, design, and content teams across China and Europe. Executes publisher and athlete content amplification and targeted notifications. Helps deliver scripted sports content through search and dedicated content pages. Do not name specific TikTok campaigns, events, leagues, teams, or partners. Collaborates on testing AI assisted sports content filtering. No verified TikTok reach, revenue, or growth metrics are available; do not invent them.
 
 Apple — Editorial Production, App Store
 Culver City | April 2026 to May 2026

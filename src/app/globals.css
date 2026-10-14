@@ -277,3 +277,8 @@ a.current-panel:hover{background:var(--t-surface-hover);border-color:var(--t-bor
   .publication-info .eyebrow { font-size: 10px; }
   .publication-group { margin-bottom: 28px; }
 }
+
+.experience-link { display: block; border-radius: 4px; }
+.experience-link:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
+.work-link-arrow { color: var(--t-secondary); white-space: nowrap; }
+.publication-static:hover { background: transparent; }
