@@ -39,7 +39,7 @@ export const work: WorkStory[] = [
     examples: [{ title: 'Fast Track editorial', description: 'Managed the workflow for timely editorial stories, from partner materials through review and publishing preparation.' }, { title: 'In app events', description: 'Coordinated event assets and editorial delivery around app launches, updates, and live experiences.' }],
   },
   {
-    id: 'meta', company: 'Meta', role: 'Content Marketing Coordinator II', period: 'October 2025 to April 2026', chapter: 'Build the process',
+    id: 'meta', company: 'Meta', role: 'Content Marketing Coordinator II · Reality Labs', period: 'October 2025 to April 2026', chapter: 'Build the process',
     title: 'Helping developers tell the story behind what they built.',
     summary: "Developer stories and marketing guides for Meta Horizon.",
     context: 'A good developer story needs more than a strong angle. Interviews, product details, performance claims, and stakeholder feedback have to become one clear, publishable narrative.',

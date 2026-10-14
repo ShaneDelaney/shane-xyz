@@ -282,3 +282,8 @@ a.current-panel:hover{background:var(--t-surface-hover);border-color:var(--t-bor
 .experience-link:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
 .work-link-arrow { color: var(--t-secondary); white-space: nowrap; }
 .publication-static:hover { background: transparent; }
+
+/* Hash navigation must never move the fixed page shell. */
+html, body, #main-content { overflow: clip; }
+.collection { overflow: clip; }
+.publication-scroll { min-height: 0; overflow-y: auto; overflow-x: hidden; }

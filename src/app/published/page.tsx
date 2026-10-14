@@ -1,3 +1,4 @@
+import PublishedPanel from '@/components/portfolio/PublishedPanel';
 import groups from '@/data/published.json';
 
 export const metadata = { title: 'Published work | Shane Delaney' };
@@ -8,7 +9,7 @@ const labels: Record<string, string> = {
 
 export default function Published() {
   return (
-    <div className="collection panel">
+    <PublishedPanel>
       <header className="collection-header">
         <span className="eyebrow">Read &amp; watch</span>
         <h1>Published work</h1>
@@ -46,6 +47,6 @@ export default function Published() {
           </section>
         ))}
       </div>
-    </div>
+    </PublishedPanel>
   );
 }
