@@ -1,5 +1,51 @@
 import Link from 'next/link';
 import groups from '@/data/published.json';
-export const metadata={title:'Published work | Shane Delaney'};
-const labels:Record<string,string>={platform:'Developer stories',guides:'Marketing guides',narrative:'Scripted series',editorial:'Culture & campaigns'};
-export default function Published(){return <div className="collection panel"><header className="collection-header"><div><span className="eyebrow">Read & watch</span><h1>Published work</h1></div><nav className="category-nav" aria-label="Categories">{groups.map(g=><a key={g.id} href={`#${g.id}`}>{labels[g.id]}</a>)}</nav></header><div className="scroll-panel publication-scroll" tabIndex={0} aria-label="Published work collection">{groups.map(g=><section key={g.id} id={g.id} className="publication-group"><h2>{labels[g.id]}</h2><div className="publication-grid">{g.articles.map(a=><article id={a.slug} key={a.slug} className="mini-card publication"><span className="eyebrow">{a.publication} · {a.year}</span><h3>{a.title}</h3><p>{a.publication.includes('StockX')?'Production support':a.publication.includes('Collider')?'Editorial writing':g.id==='narrative'?'Scriptwriting & production':'Writing & editorial production'}</p>{a.url?<a className="text-link" href={a.url} target="_blank" rel="noopener noreferrer">Open work ↗</a>:<Link className="text-link" href="/work/phony">View series ↗</Link>}</article>)}</div></section>)}</div></div>}
+
+export const metadata = { title: 'Published work | Shane Delaney' };
+const labels: Record<string, string> = {
+  platform: 'Developer stories', guides: 'Marketing guides',
+  narrative: 'Scripted series', editorial: 'Culture & campaigns',
+};
+
+export default function Published() {
+  return (
+    <div className="collection panel">
+      <header className="collection-header">
+        <span className="eyebrow">Read &amp; watch</span>
+        <h1>Published work</h1>
+        <nav className="category-nav" aria-label="Categories">
+          {groups.map(group => <a key={group.id} href={`#${group.id}`}>{labels[group.id]}</a>)}
+        </nav>
+      </header>
+      <div className="scroll-panel publication-scroll" tabIndex={0} aria-label="Published work collection">
+        {groups.map(group => (
+          <section key={group.id} id={group.id} className="publication-group">
+            <h2>{labels[group.id]}</h2>
+            <div className="publication-list">
+              {group.articles.map(article => {
+                const contribution = article.publication.includes('StockX') ? 'Production support'
+                  : article.publication.includes('Collider') ? 'Editorial writing'
+                  : group.id === 'narrative' ? 'Scriptwriting & production' : 'Writing & editorial production';
+                const content = <>
+                  <div className="publication-info">
+                    <span className="eyebrow">{article.publication} · {article.year}</span>
+                    <h3>{article.title}</h3>
+                    <p>{contribution}{!article.url && ' · Series overview'}</p>
+                  </div>
+                  <span className="publication-arrow" aria-hidden="true">↗</span>
+                </>;
+                return (
+                  <article id={article.slug} key={article.slug} className="publication publication-entry">
+                    {article.url
+                      ? <a className="publication-link" href={article.url} target="_blank" rel="noopener noreferrer">{content}<span className="sr-only"> (opens in a new tab)</span></a>
+                      : <Link className="publication-link" href="/work/phony">{content}</Link>}
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}
