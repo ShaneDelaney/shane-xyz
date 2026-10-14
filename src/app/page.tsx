@@ -6,9 +6,9 @@ export default function Home() {
       <div className="home-intro-content">
         <span className="eyebrow">Los Angeles</span>
         <h1 id="home-title">Shane Delaney</h1>
-        <p className="home-focus">Project management. Global operations.</p>
+        <p className="home-focus">Currently @ TikTok, delivering in-app sports campaigns and creator reward programs.</p>
         <p className="home-direction">
-          Leading campaign workstreams at TikTok. Building toward broader leadership in tech and product.
+          I bring global teams together and manage campaign setup, launch, and closeout.
         </p>
         <div className="actions">
           <Link className="button primary" href="/work">Explore my work <span aria-hidden="true">↗</span></Link>
