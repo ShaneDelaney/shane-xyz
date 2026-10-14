@@ -13,7 +13,7 @@ export const work: WorkStory[] = [
     context: 'Each campaign brings together partnerships, search, design, technical teams, and regional operations. I bring the responsible people together and manage the setup, launch, and closeout of assigned campaigns.',
     contribution: [
       'Kick off assigned campaigns with partnerships, search, design, technical, and regional teams. Coordinate responsibilities, assets, approvals, and launch timing across markets.',
-      'Configure search hubs and event pages with schedules and broadcaster links. Work with Search on relevant queries and manage content distribution and temporary campaign placements.',
+      'Work with Search on relevant queries and configure campaign hubs with event information, selected videos, and official accounts. Program event detail pages with schedules and broadcaster links.',
       'Set up creator campaign pages with program details, rewards, video examples, and approved legal terms for opt-in. Coordinate with creator content teams throughout delivery.',
       'Maintain weekly participation reports, refine audience selection with other program leads, and work with technical teams to resolve launch and delivery issues.',
     ],
@@ -21,7 +21,8 @@ export const work: WorkStory[] = [
     throughline: 'Bring the right people together, configure the experience, and follow delivery through launch and closeout.',
     collaborators: 'Partnerships, search, design, technical teams, creator content teams, and regional operations.',
     examples: [
-      { title: 'Sports discovery', description: 'Configure search hubs and event pages so fans can find relevant content, schedules, and broadcaster coverage. Coordinate launch and remove temporary placements when campaigns end.' },
+      { title: 'Search hubs', description: 'Bring event information, selected videos, and official accounts into relevant search results. Coordinate with Search on which queries should display the campaign experience.' },
+      { title: 'Event detail pages', description: 'Program dedicated pages with event schedules, related accounts, and official content. Coordinate broadcaster links and launch timing with partner and regional teams.' },
       { title: 'Creator reward programs', description: 'Build campaign pages that explain what to post, available rewards, and participation terms. Track participation and coordinate delivery with creator content teams.' },
       { title: 'Reporting and issue resolution', description: 'Update weekly sports program reports, work across program teams on audience selection, and escalate technical issues through resolution.' },
       { title: 'AI tool testing', description: 'Test and critique AI assisted video selection with technical teams, providing feedback to refine how content is identified for wider distribution.' },
